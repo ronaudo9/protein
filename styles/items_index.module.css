@@ -1,0 +1,46 @@
+.item {
+    list-style: none;
+}
+
+.items_list1 {
+    display: flex;
+    justify-content: space-between;
+    margin: 10%;
+}
+
+.items_list2 {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10% 0 10%;
+}
+
+.category1 {
+    display: flex;
+    margin-right: 2%;
+}
+
+.category2 {
+    display: flex;
+    margin-right: 2%;
+}
+
+.category3 {
+    display: flex;
+    margin-right: 2%;
+}
+
+.category {
+    display: flex;
+    justify-content: right;
+    margin-right: 5%;
+}
+
+.next_page {
+    text-align: right;
+}
+
+.next_list {
+    display: flex;
+    list-style: none;
+    justify-content: right;
+}
