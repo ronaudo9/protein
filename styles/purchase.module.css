@@ -4,7 +4,7 @@
 
 .main {
   min-height: 100vh;
-  padding: 4rem 0;
+  padding: 3rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -19,6 +19,43 @@
   text-align: center;
 }
 
+.purchased_title {
+  margin: 20;
+  line-height: 2.15;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.purchased_h2 {
+  line-height: 2.15;
+  font-size: 1.5rem;
+
+  position: relative;
+
+  padding: 0 45px;
+}
+.purchased_h2:before,
+.purchased_h2:after {
+  content: '';
+  position: relative;
+  top: 50%;
+  display: inline-block;
+  width: 44px;
+  height: 2px;
+  background-color: #27acd9;
+}
+.purchased_h2:before {
+  left: 0;
+  transform: rotate(60deg);
+}
+.purchased_h2:after {
+  right: 0;
+  transform: rotate(-60deg);
+}
+
+.purchased_p {
+  text-align: center;
+}
 .purchase_main {
   min-height: 30vh;
   padding: 1rem 0;
@@ -33,6 +70,36 @@
   color: white;
   background-color: blue;
   border-radius: 100vh;
+}
+
+.purchased_button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 1em 2em;
+  width: 300px;
+  color: #333;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: #cccccc;
+  box-shadow: 0 5px 0 #aaaaaa;
+  transition: 0.3s;
+}
+
+.purchased_button:after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 3px solid #333333;
+  border-right: 3px solid #333333;
+  transform: rotate(45deg);
+}
+
+.purchased_button:hover {
+  transform: translateY(3px);
+  text-decoration: none;
+  box-shadow: 0 2px 0 #aaaaaa;
 }
 
 .purchase_h2 {
@@ -56,4 +123,20 @@
     #5de1d6 0%,
     #1ed6ee 100%
   );
+}
+
+.box1 {
+  padding: 2em 1em;
+  margin: 3em 0;
+  font-weight: bold;
+  color: #00050b; /*文字色*/
+  background: #fff;
+  border: solid 3px #6091d3; /*線*/
+  border-radius: 10px; /*角の丸み*/
+  width: 60%;
+  height: 70%;
+  text-align: center;
+
+  justify-content: center;
+  align-items: center;
 }
