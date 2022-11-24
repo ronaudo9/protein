@@ -1,0 +1,55 @@
+@charset "utf-8";
+
+.header{
+  margin-top: 30px;
+  color: #43A047;
+}
+.hr{
+  border-width: 3px;
+  border-color: #43A047;
+}
+ .h1{
+  font-size: 25px;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+}
+.align-light{
+    text-align: right;
+}
+.formGroup{
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.input{
+  background: #ffcdd2;
+}
+
+.inputEmail{
+  background: #ffcdd2;
+  width: 20%;
+}
+.btnPrimary{
+  text-align: center;
+}
+.card {
+  margin: 1rem;
+  padding: 1.5rem;
+  color: #0000FF;
+  text-decoration: none;
+   /* border: 1px solid #0000FF; */
+  /* border-radius: 10px; */
+  /* transition: color 0.15s ease, border-color 0.15s ease; */
+  max-width: 300px;
+  text-align: center;
+}
+/* input[type="email"]:invalid{
+  background: #ffcdd2;
+}
+input:valid{
+  background: transparent;
+}
+input:focus{
+  background: #DCEDC8;
+} */
