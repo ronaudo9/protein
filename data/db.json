@@ -2,7 +2,7 @@
   "items": [
     {
       "id": 1,
-      "imageUrl": "/images/impact_whey_protein.webp",
+      "imageUrl": "/images/impact_whey_protein.jpg",
       "name": "Impact ホエイ プロテイン",
       "category": "whey",
       "flavor": ["チョコ", "ミルクティー", "抹茶"],
@@ -12,7 +12,7 @@
     },
     {
       "id": 2,
-      "imageUrl": "/images/impact_whey_aisolate.webp",
+      "imageUrl": "/images/impact_whey_aisolate.jpg",
       "name": "Impact ホエイ アイソレート",
       "category": "whey",
       "flavor": ["チョコ", "ストロベリー", "ミルクティー"],
@@ -22,7 +22,7 @@
     },
     {
       "id": 3,
-      "imageUrl": "/images/probiotech_whey_protein.webp",
+      "imageUrl": "/images/probiotech_whey_protein.jpg",
       "name": "プロバイオティック ホエイ プロテイン",
       "category": "whey",
       "flavor": ["ミルクティー", "チョコ"],
@@ -32,7 +32,7 @@
     },
     {
       "id": 4,
-      "imageUrl": "/images/cofee_burst_whey.webp",
+      "imageUrl": "/images/cofee_burst_whey.jpg",
       "name": "コーヒー ブースト ホエイ",
       "category": "whey",
       "flavor": ["ココナッツ", "バニラ"],
@@ -42,7 +42,7 @@
     },
     {
       "id": 5,
-      "imageUrl": "/images/impact_whey_stroberry.webp",
+      "imageUrl": "/images/impact_whey_stroberry.jpg",
       "name": "Impact ホエイ プロテイン-ストロベリーヨーグルトフレーバー",
       "category": "whey",
       "flavor": "ヨーグルト-ストロベリー-",
@@ -52,7 +52,7 @@
     },
     {
       "id": 6,
-      "imageUrl": "/images/impact_protein_brend.webp",
+      "imageUrl": "/images/impact_protein_brend.jpg",
       "name": "Impact プロテイン ブレンド",
       "category": "whey",
       "flavor": ["ミルクティー", "チョコ", "バナナ"],
@@ -62,7 +62,7 @@
     },
     {
       "id": 7,
-      "imageUrl": "/images/Essencial_whey_protein.webp",
+      "imageUrl": "/images/Essencial_whey_protein.jpg",
       "name": "エッセンシャル ホエイ プロテイン",
       "category": "whey",
       "flavor": ["ノンフレーバー", "チョコ", "バニラ"],
@@ -72,7 +72,7 @@
     },
     {
       "id": 8,
-      "imageUrl": "/images/impact_nativewhey.webp",
+      "imageUrl": "/images/impact_nativewhey.jpg",
       "name": "Impact ネイティブホエイ",
       "category": "whey",
       "flavor": "バナナ＆シナモン",
@@ -82,7 +82,7 @@
     },
     {
       "id": 9,
-      "imageUrl": "/images/organic_whey_protein.webp",
+      "imageUrl": "/images/organic_whey_protein.jpg",
       "name": "オーガニック ホエイプロテイン",
       "category": "whey",
       "flavor": "ノンフレーバー",
@@ -92,7 +92,7 @@
     },
     {
       "id": 10,
-      "imageUrl": "/images/clear_whey_gainer.webp",
+      "imageUrl": "/images/clear_whey_gainer.jpg",
       "name": "クリア ホエイ アイソレート",
       "category": "whey",
       "flavor": [
@@ -108,7 +108,7 @@
     },
     {
       "id": 11,
-      "imageUrl": "/images/slow_release.webp",
+      "imageUrl": "/images/slow_release.jpg",
       "name": "スロー リリース カゼイン",
       "category": "casein",
       "flavor": [
@@ -124,7 +124,7 @@
     },
     {
       "id": 12,
-      "imageUrl": "/images/protein_mocha.webp",
+      "imageUrl": "/images/protein_mocha.jpg",
       "name": "プロテイン モカ",
       "category": "casein",
       "flavor": ["チョコ", "ミルクティー", "抹茶"],
@@ -134,7 +134,7 @@
     },
     {
       "id": 13,
-      "imageUrl": "/images/clear_whey_gainer.webp",
+      "imageUrl": "/images/clear_whey_gainer.jpg",
       "name": "クリア ホエイ ゲイナー",
       "category": "casein",
       "flavor": ["アップル", "ラズベリーレモネード", "パイナップル"],
@@ -144,7 +144,7 @@
     },
     {
       "id": 14,
-      "imageUrl": "/images/low_calorie_meal.webp",
+      "imageUrl": "/images/low_calorie_meal.jpg",
       "name": "ローカロリー ミール リプレイスメント ブレンド",
       "category": "casein",
       "flavor": ["チョコ", "バニラ", "キャラメル"],
@@ -154,7 +154,7 @@
     },
     {
       "id": 15,
-      "imageUrl": "/images/peptopro_casein.webp",
+      "imageUrl": "/images/peptopro_casein.jpg",
       "name": "ペプトプロ カゼイン （加水分解カゼイン）",
       "category": "casein",
       "flavor": "ノンフレーバー",
@@ -164,7 +164,7 @@
     },
     {
       "id": 16,
-      "imageUrl": "/images/the_whey.webp",
+      "imageUrl": "/images/the_whey.jpg",
       "name": "THE ホエイ",
       "category": "whey",
       "flavor": "ミルクチョコレート",
@@ -174,7 +174,7 @@
     },
     {
       "id": 17,
-      "imageUrl": "/images/wheight_gainer.webp",
+      "imageUrl": "/images/wheight_gainer.jpg",
       "name": "ウエイト ゲイナー ブレンド",
       "category": "whey",
       "flavor": ["アイスラテ", "北海道ミルク", "ストロベリー"],
@@ -184,7 +184,7 @@
     },
     {
       "id": 18,
-      "imageUrl": "/images/over_nigth.webp",
+      "imageUrl": "/images/over_nigth.jpg",
       "name": "オーバーナイト リカバリー ブレンド",
       "category": "casein",
       "flavor": ["チョコレートスムーズ", "ストロベリークリーム"],
