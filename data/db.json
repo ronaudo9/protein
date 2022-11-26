@@ -1,11 +1,183 @@
 {
   "items": [
     {
-      "name":"カボチャ"
+      "name": "カボチャ"
     }
   ],
-  "users":[],
-  "purchaseHistories":[],
-  "favorites":[]
+  "users": [
+    {
+      "name": "早川修平",
+      "nameKana": "はやかわしゅうへい",
+      "middleName": "リオネル",
+      "email": "nao.koji@rakus-partners.co.jp",
+      "password": "qq112233",
+      "address": "群馬県高崎市前町9番6号",
+      "tel": "09012347766",
+      "deleted": false,
+      "id": 1
+    },
+    {
+      "name": "ああ",
+      "nameKana": "ああ",
+      "middleName": "ああ",
+      "email": "naoi.koj@rakus-partners.co.jp",
+      "password": "",
+      "address": "群馬県前町",
+      "tel": "090776655",
+      "deleted": false,
+      "id": 2
+    },
+    {
+      "name": "qq",
+      "nameKana": "qq",
+      "middleName": "qq",
+      "email": "nauki.ka@rakus-partners.co.jp",
+      "password": "",
+      "address": "群馬県高崎市前町",
+      "tel": "09033332222",
+      "deleted": false,
+      "id": 3
+    },
+    {
+      "name": "qq",
+      "nameKana": "qq",
+      "middleName": "qq",
+      "email": "naoi.koj@rakus-partners.co.jp",
+      "password": "password",
+      "address": "群馬県前町",
+      "tel": "33445566",
+      "deleted": false,
+      "id": 4
+    },
+    {
+      "name": "aaa",
+      "nameKana": "aaaa",
+      "middleName": "",
+      "email": "nao.ko.04@gmail.com",
+      "password": "aaaaaaaaaaa",
+      "address": "群馬県前ちょう",
+      "tel": "09088887777",
+      "deleted": false,
+      "id": 5
+    },
+    {
+      "name": "aaa",
+      "nameKana": "aaa",
+      "middleName": "aaa",
+      "email": "nao.ko.04@gmail.com",
+      "password": "awsedr",
+      "passwordConfirmation": "awsedr",
+      "postCode": "1122334",
+      "address": "群馬県前橋市",
+      "tel": "09088776655",
+      "deleted": false,
+      "id": 6
+    },
+    {
+      "name": "aaaa",
+      "nameKana": "eeee",
+      "middleName": "",
+      "email": "nao.ko.04@gmail.com",
+      "password": "11111111",
+      "passwordConfirmation": "ssssssdd",
+      "postCode": "1122334",
+      "address": "群馬県前橋市",
+      "tel": "09088776655",
+      "deleted": false,
+      "id": 7
+    },
+    {
+      "name": "aaaaaaa",
+      "nameKana": "ssssssss",
+      "middleName": "",
+      "email": "naoyuki.kojima@rakus-partners.co.jp",
+      "password": "awsedrft",
+      "passwordConfirmation": "awsedrgg",
+      "postCode": "2233112",
+      "address": "群馬県前橋市",
+      "tel": "33443323322",
+      "deleted": false,
+      "id": 8
+    },
+    {
+      "name": "aaa",
+      "nameKana": "eee",
+      "middleName": "",
+      "email": "nao.ko.04@gmail.com",
+      "password": "aaaaaa",
+      "passwordConfirmation": "ssssssss",
+      "postCode": "33333333",
+      "address": "aaaaaaaa",
+      "tel": "333333333333",
+      "deleted": false,
+      "id": 9
+    },
+    {
+      "name": "aaaa",
+      "nameKana": "aaaaa",
+      "middleName": "",
+      "email": "nao.ko.04@gmail.com",
+      "password": "aaaaaaaa",
+      "passwordConfirmation": "aaaaaaaa",
+      "postCode": "222-3333",
+      "address": "aaaaaaaa",
+      "tel": "0273-0099-8877",
+      "deleted": false,
+      "id": 10
+    },
+    {
+      "name": "安田優斗",
+      "nameKana": "やすだゆうと",
+      "middleName": "ゆう",
+      "email": "naoyuki.kojima@rakus-partners.co.jp",
+      "password": "aaqqwwss",
+      "passwordConfirmation": "aaqqwwss",
+      "postCode": "164-0012",
+      "prefecture": "東京都",
+      "city": "中野区",
+      "aza": "本町５丁目",
+      "building": "エターナル　305",
+      "tel": "0275-4322-1111",
+      "deleted": false,
+      "id": 11
+    },
+    {
+      "firstName": "安田",
+      "lastName": "優斗",
+      "firstNameKana": "やすだ",
+      "lastNameKana": "ゆうと",
+      "middleName": "ゆう",
+      "email": "nao.ko.04@gmail.com",
+      "password": "aaqqwwss",
+      "passwordConfirmation": "aaqqwwss",
+      "postCode": "370-1301",
+      "prefecture": "群馬県",
+      "city": "高崎市",
+      "aza": "新町",
+      "building": "",
+      "tel": "080-9977-5544",
+      "deleted": false,
+      "id": 12
+    },
+    {
+      "firstName": "小島",
+      "lastName": "尚之",
+      "firstNameKana": "こじま",
+      "lastNameKana": "なおゆき",
+      "middleName": "",
+      "email": "nao.ko.04@gmail.com",
+      "password": "aaaaaaaa",
+      "passwordConfirmation": "aaaaaaaa",
+      "postCode": "164-0012",
+      "prefecture": "東京都",
+      "city": "中野区",
+      "aza": "本町",
+      "building": "",
+      "tel": "090-5566-4433",
+      "deleted": false,
+      "id": 13
+    }
+  ],
+  "purchaseHistories": [],
+  "favorites": []
 }
-
