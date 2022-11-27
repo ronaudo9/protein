@@ -1,4 +1,4 @@
-import styles from '../../styles/users.edit.module.css'
+import styles from '../../styles/users.edit.module.css';
 import Link from 'next/link';
 
 
