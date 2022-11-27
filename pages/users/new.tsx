@@ -1,4 +1,4 @@
-import styles from '/Users/kojimanaoyuki/src/protein/styles/users.new.module.css';
+import styles from '../../styles/users.new.module.css'
 
 function UsersNew() {
   return (

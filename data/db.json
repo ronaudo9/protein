@@ -1,11 +1,70 @@
 {
   "items": [
     {
-      "name":"カボチャ"
+      "name": "カボチャ"
     }
   ],
-  "users":[],
-  "purchaseHistories":[],
-  "favorites":[]
-}
+  "users": [
+    {
+      "email": "1@1.com",
+      "password": "111",
+      "id": 1,
+      "name": "早川修平",
+      "nameKana": "はやかわしゅうへい",
+      "middleName": "リオネル"
 
+    },
+    {
+      "444": "444",
+      "4@4.com": "4@4.com",
+      "id": 2
+    },
+    {
+      "555": "555",
+      "email": "5@5.com",
+      "id": 3
+    },
+    {
+      "email": "6@6.com",
+      "password": "666",
+      "id": 4
+    },
+    {
+      "email": "6@6.com",
+      "password": "666",
+      "id": 5
+    },
+    {
+      "email": "7@7.com",
+      "password": "777",
+      "id": 6
+    },
+    {
+      "email": "7@7.com",
+      "password": "777",
+      "id": 7
+    },
+    {
+      "email": "7@7.com",
+      "password": "777",
+      "id": 8
+    },
+    {
+      "email": "8@8.com",
+      "password": "888",
+      "id": 9
+    },
+    {
+      "email": "9@9.com",
+      "password": "999",
+      "id": 10
+    },
+    {
+      "email": "11@11.com",
+      "password": "11111111",
+      "id": 11
+    }
+  ],
+  "purchaseHistories": [],
+  "favorites": []
+}
