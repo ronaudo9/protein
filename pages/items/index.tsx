@@ -5,6 +5,7 @@ import { NextPage } from 'next';
 import styles from '../../styles/items_index.module.css';
 import ItemDisplayNew from '../../components/itemDisplayNew';
 import Head from 'next/head';
+import CategoryTypeSearch from 'components/categoryTypeSearch.tsx';
 
 const ItemDisplay: NextPage = () => {
   return (
@@ -14,17 +15,9 @@ const ItemDisplay: NextPage = () => {
           自分にあったプロテインを見つけよう
         </h2>
       </Head>
+      <CategoryTypeSearch />
 
       <section className={styles.category}>
-        <div className={styles.category1}>
-          <p>種類</p>
-          <select className={styles.select}>
-            <option value="ホエイプロテイン">選択してください</option>
-            <option>ホエイプロテイン</option>
-            <option>カゼインプロテイン</option>
-          </select>
-        </div>
-
         <div className={styles.category2}>
           <p>フレーバー</p>
           <select>
