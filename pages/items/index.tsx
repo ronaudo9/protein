@@ -5,15 +5,17 @@ import { NextPage } from 'next';
 import styles from '../../styles/items_index.module.css';
 import ItemDisplayNew from '../../components/itemDisplayNew';
 import Head from 'next/head';
+import Header from '../layout/header'
 
 const ItemDisplay: NextPage = () => {
   return (
     <>
-      <Head>
+    <Header></Header>
+      {/* <Head>
         <h2 className={styles.title}>
           自分にあったプロテインを見つけよう
         </h2>
-      </Head>
+      </Head> */}
 
       <section className={styles.category}>
         <div className={styles.category1}>

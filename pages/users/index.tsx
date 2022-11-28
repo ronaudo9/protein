@@ -1,12 +1,14 @@
 import Head from 'next/head';
 import styles from '../../styles/detail_user.module.css';
-
 import Image from 'next/image';
 import Link from 'next/link';
+import Header from '../layout/header'
+
 
 export default function UserDetails() {
   return (
     <>
+      <Header></Header>
       <Head>
         <title>ユーザー情報</title>
       </Head>
