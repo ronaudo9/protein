@@ -2,65 +2,83 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { NextPage } from 'next';
 import styles from '../../styles/item_detail.module.css';
+import { GetStaticPaths, GetStaticProps,GetStaticPropsContext } from 'next';
+import React, { useState } from 'react';
 
-const ItemDetail: NextPage = () => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await fetch(`http://localhost:8000/items/`);
+  const items = await res.json();
+  const paths = items.map((item: any) => ({
+    params: {
+      // idをdb.jsonファイルの文字列に合わせる
+      id: item.id.toString(),
+    },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({params}: GetStaticPropsContext) => {
+  const res = await fetch(`http://localhost:8000/items/${params!.id}`);
+  const detail = await res.json();
+
+  return {
+    props: { detail },
+    revalidate: 10,
+  };
+};
+
+// detail getStaticPropsから取得
+const ItemDetail: NextPage = ({ detail,clickHandler,count,total }: any) => {
   return (
     <>
       <div className={styles.detail_page}>
         <div>
           <Image
             className={styles.detail_img}
-            src={''}
+            src={detail.imageUrl}
             alt="商品画像"
-            width={50}
-            height={50}
+            width={300}
+            height={300}
           />
         </div>
         <div className={styles.details}>
           <div className={styles.detail_title}>
-            <h4>商品名</h4>
+            <h4>{detail.name}</h4>
           </div>
           <div className={styles.explain}>
             <p className={styles.explain_title}>商品説明</p>
             <p className={styles.explain_text}>
-              テキストテキストテキストテキストテキスト
-              <br />
-              テキストテキストテキストテキストテキスト
+              {detail.description}
             </p>
           </div>
           <div className={styles.ingredient}>
             <p className={styles.ingredient_title}>成分</p>
             <p className={styles.ingredient_text}>
-              テキストテキストテキストテキストテキスト
-              <br />
-              テキストテキストテキストテキストテキスト
-              <br />
-              テキストテキストテキストテキストテキスト
+              {detail.content}
             </p>
           </div>
           <div className={styles.flavor}>
             <p className={styles.flavor_title}>フレーバー</p>
             <select className={styles.select}>
-              <option>ココア</option>
-              <option></option>
-              <option></option>
-              <option></option>
-              <option></option>
+              <option>{detail.flavor[0]}</option>
+              <option>{detail.flavor[1]}</option>
+              <option>{detail.flavor[2]}</option>
             </select>
           </div>
           <div className={styles.quantity}>
             <p className={styles.quantity_title}>数量</p>
-            <select className={styles.select}>
-              <option>1</option>
-              <option></option>
-              <option></option>
-              <option></option>
-              <option></option>
-            </select>
+            <button type="button" onClick={clickHandler}>
+              +
+             </button>
+             <p>&nbsp;{count}個&nbsp;</p>
           </div>
           <div className={styles.total}>
             <p className={styles.total_title}>合計金額</p>
-            <p>円</p>
+            <p>{total}円</p>
           </div>
           <div className={styles.cart}>
             <button className={styles.cart_button}>

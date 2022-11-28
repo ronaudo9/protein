@@ -267,3 +267,22 @@
   "purchaseHistories": [],
   "favorites": []
 }
+      "id": 1,
+      "name": "楽々楽子"
+    }
+  ],
+  "purchaseHistories": [],
+  "favorites": [
+    {
+      "userID": 1,
+      "itemId": 1
+    }
+  ],
+  "carts": [
+    {
+      "userId": 1,
+      "id": 1,
+      "items": [{ "itemId": 1, "coutity": 2, "flavor": "チョコ" }]
+    }
+  ]
+}
