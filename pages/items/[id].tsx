@@ -31,17 +31,6 @@ export const getStaticProps: GetStaticProps = async ({params}: GetStaticPropsCon
   };
 };
 
-/*
-export const OrderTotal: NextPage = ({ detail }: any) => {
-  return (
-    <>
-    <div>{detail.name}</div>
-    </>
-  );
-};
-*/
-
-
 // detail getStaticPropsから取得
 const ItemDetail: NextPage = ({ detail }: any) => {
   const [count, setCount] = React.useState(0);
@@ -52,7 +41,11 @@ const ItemDetail: NextPage = ({ detail }: any) => {
   };
 
   const addHandlerPrev = (sub:any) => {
-    setTotal(total - sub);
+    if(total <= 0){
+      setTotal(0)
+    }else{
+      setTotal(total - sub);
+    }
   };
 
   const clickHandlerNext = () => {
@@ -67,18 +60,15 @@ const ItemDetail: NextPage = ({ detail }: any) => {
 
   const clickHandlerPrev = () => {
     const prevCount = count - 1;
-    setCount(prevCount);
-
-    const prevTotal = detail.price - prevCount;
-    setTotal(prevTotal);
-
-    
-
-    if (detail.price < 0) {
-      prevTotal === 0
+    if (prevCount <= 0) {
+      setCount(0);
+    } else {
+      setCount(prevCount);
     }
 
-
+    const prevTotal = detail.price * count;
+    setTotal(prevTotal);
+    
     addHandlerPrev(detail.price);
   }
 
@@ -123,14 +113,15 @@ const ItemDetail: NextPage = ({ detail }: any) => {
             <button type="button" onClick={clickHandlerNext}>
               +
              </button>
+             <p>&nbsp;{count}&nbsp;</p>
              <button type='button' onClick={clickHandlerPrev}>
               -
               </button>
-             <p>&nbsp;{count}個&nbsp;</p>
+              <p>&nbsp;個&nbsp;</p>
           </div>
           <div className={styles.total}>
             <p className={styles.total_title}>合計金額</p>
-            <p>{total}円</p>
+            <p>{total.toLocaleString()}円</p>
           </div>
           <div className={styles.cart}>
             <button className={styles.cart_button}>
