@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from '../../styles/detail_user.module.css';
-import AnchorLink from 'react-anchor-link-smooth-scroll';
+// import AnchorLink from 'react-anchor-link-smooth-scroll';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -15,15 +15,15 @@ export default function UserDetails() {
         <div className={styles.indent}>
           <h3>目次</h3>
           <p className={styles.index_text}>
-            <AnchorLink href="#user_element">基本情報</AnchorLink>
+            <Link href="#user_element">基本情報</Link>
           </p>
           <p className={styles.index_text}>
-            <AnchorLink href="#favorite_list">
+            <Link href="#favorite_list">
               お気に入りリスト
-            </AnchorLink>
+            </Link>
           </p>
           <p className={styles.index_text}>
-            <AnchorLink href="#user_purchased">ご購入履歴</AnchorLink>
+            <Link href="#user_purchased">ご購入履歴</Link>
           </p>
         </div>
 
