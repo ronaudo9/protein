@@ -1,11 +1,13 @@
-// import Image from 'next/image';
 import Link from "next/link";
 import style from './header.module.css';
 
 const logOut = () => {
-    if (document.cookie) {
-        console.log(document.cookie);
-        console.log("ok")
+    if (document.cookie !== "") {
+        var date = new Date('1999-12-31T23:59:59Z');
+        document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
+        alert('ログアウトしました');
+    } else {
+        alert('ログインをしてください')
     }
 }
 
@@ -41,6 +43,7 @@ export default function Header() {
         </div>
     );
 }
+
 {/* Header End */ }
 
 {/* <div className={style.headerLogo}>
