@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { NextPage } from 'next';
 import styles from '../../styles/item_detail.module.css';
 import { GetStaticPaths, GetStaticProps,GetStaticPropsContext } from 'next';
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(`http://localhost:8000/items/`);
@@ -32,7 +32,46 @@ export const getStaticProps: GetStaticProps = async ({params}: GetStaticPropsCon
 };
 
 // detail getStaticPropsから取得
-const ItemDetail: NextPage = ({ detail,clickHandler,count,total }: any) => {
+const ItemDetail: NextPage = ({ detail }: any) => {
+  const [count, setCount] = React.useState(0);
+  const [total, setTotal] = React.useState(0);
+
+  const addHandlerNext = (sub:any) => {
+    setTotal(total + sub);
+  };
+
+  const addHandlerPrev = (sub:any) => {
+    if(total <= 0){
+      setTotal(0)
+    }else{
+      setTotal(total - sub);
+    }
+  };
+
+  const clickHandlerNext = () => {
+    const nextCount = count + 1;
+    setCount(nextCount);
+
+    const nextTotal = detail.price * nextCount;
+    setTotal(nextTotal);
+
+    addHandlerNext(detail.price);
+  };
+
+  const clickHandlerPrev = () => {
+    const prevCount = count - 1;
+    if (prevCount <= 0) {
+      setCount(0);
+    } else {
+      setCount(prevCount);
+    }
+
+    const prevTotal = detail.price * count;
+    setTotal(prevTotal);
+    
+    addHandlerPrev(detail.price);
+  }
+
   return (
     <>
       <div className={styles.detail_page}>
@@ -71,14 +110,18 @@ const ItemDetail: NextPage = ({ detail,clickHandler,count,total }: any) => {
           </div>
           <div className={styles.quantity}>
             <p className={styles.quantity_title}>数量</p>
-            <button type="button" onClick={clickHandler}>
+            <button type="button" onClick={clickHandlerNext}>
               +
              </button>
-             <p>&nbsp;{count}個&nbsp;</p>
+             <p>&nbsp;{count}&nbsp;</p>
+             <button type='button' onClick={clickHandlerPrev}>
+              -
+              </button>
+              <p>&nbsp;個&nbsp;</p>
           </div>
           <div className={styles.total}>
             <p className={styles.total_title}>合計金額</p>
-            <p>{total}円</p>
+            <p>{total.toLocaleString()}円</p>
           </div>
           <div className={styles.cart}>
             <button className={styles.cart_button}>
