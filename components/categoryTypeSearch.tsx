@@ -1,44 +1,48 @@
 import useSWR from 'swr';
 import styles from 'styles/items_index.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { setTokenSourceMapRange } from 'typescript';
 
-const fetcher = (resource, init) =>
+const fetcher = (resource: any, init: any) =>
   fetch(resource, init).then((res) => res.json());
 
-export default function CategoryTypeSearch() {
-  const { data, error } = useSWR('/api/items', fetcher);
-  if (error) return <div>Failed to Load</div>;
-  if (!data) return <div>Loading...</div>;
-
-  //   useEffect(() => {
-  //     fetch(`/api/items/`)
+export default function CategoryTypeSearch({
+  category,
+  categoryHandler,
+}: {
+  category: any;
+  categoryHandler: any;
+}) {
+  //   onselectコールバック関数
+  //     fetch(`/api/items/?category=whey`)
   //       .then((res) => res.json())
   //       .then((data) => {
-  //         console.log(data, setId(data.item.category));
+  //         setItems(data)
   //       })
   //       .catch((error) => {
   //         console.error(error);
   //       });
-  //   }, [data]);
-  function SearchTextField() {
-    const [category, setCategory] = useState('');
-    // itemsのlistを表示・非表示を切り替え、onClickでtrueを渡して表示させる
-    const [filterItems, setFilterItems] = useState(items);
-    useEffect(() => {});
-  }
+  //
 
   // useEffectで検索をクリックしたらAPIにデータを送信する
-  // useStateで取得データを表示する
+  // useStateで取得データを表示する,ここで行うuseState('/api/items'）,onSelect={(e)=>setCategory(e.target.value))
+  //   catogoryのStateがこのコンポーネント（一番上）
+  // resorce（一番下）のstateがSWR行ってdataだして、商品一覧を表示させるコンポーネントに渡すitems={data}
 
   return (
     <div className={styles.category1}>
       <p>種類</p>
-      <select className={styles.select}>
+      <select
+        className={styles.select}
+        onChange={categoryHandler}
+        value={category}
+      >
+        {/* {(e) => setCategory(e.target.value)} */}
         <option value="catogory">選択してください</option>
-        <option onClick={}>ホエイプロテイン</option>
-        <option onClick={}>カゼインプロテイン</option>
+        <option value="whey">ホエイプロテイン</option>
+        <option value="casein">カゼインプロテイン</option>
       </select>
+      {/* stateをvalue */}
     </div>
   );
 }
