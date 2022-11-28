@@ -4,7 +4,7 @@ import styles from '../styles/purchase.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const fetcher = (resource, init) =>
+const fetcher = (resource :any, init:any) =>
   fetch(resource, init).then((res) => res.json());
 
 export default function ItemData() {
