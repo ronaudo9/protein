@@ -193,7 +193,24 @@
       "content": "エネルギー（1食あたり）: 209kcal, 脂質: 0.4g, 炭水化物: 5.7g, タンパク質: 43g, 食塩相当量: 0.06g"
     }
   ],
-  "users": [],
+  "users": [
+    {
+      "id": 1,
+      "name": "楽々楽子"
+    }
+  ],
   "purchaseHistories": [],
-  "favorites": []
+  "favorites": [
+    {
+      "userID": 1,
+      "itemId": 1
+    }
+  ],
+  "carts": [
+    {
+      "userId": 1,
+      "id": 1,
+      "items": [{ "itemId": 1, "coutity": 2, "flavor": "チョコ" }]
+    }
+  ]
 }
