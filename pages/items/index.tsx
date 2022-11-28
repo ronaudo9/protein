@@ -19,7 +19,7 @@ const ItemDisplay: NextPage = () => {
         <div className={styles.category1}>
           <p>種類</p>
           <select className={styles.select}>
-            <option value="ホエイプロテイン">選択肢</option>
+            <option value="ホエイプロテイン">選択してください</option>
             <option>ホエイプロテイン</option>
             <option>カゼインプロテイン</option>
           </select>
@@ -28,14 +28,31 @@ const ItemDisplay: NextPage = () => {
         <div className={styles.category2}>
           <p>フレーバー</p>
           <select>
-            <option value="チョコ">選択肢</option>
+            <option value="チョコ">選択してください</option>
             <option>チョコ</option>
             <option>バニラ</option>
             <option>抹茶</option>
             <option>バナナ</option>
             <option>ミルクティー</option>
-            <option>選択肢サンプル6</option>
-            <option>選択肢サンプル7</option>
+            <option>ストロベリー</option>
+            <option>ココナッツ</option>
+            <option>ヨーグルト-ストロベリー-</option>
+            <option>ノンフレーバー</option>
+            <option>バナナ＆シナモン</option>
+            <option>ピーチティー</option>
+            <option>オレンジ</option>
+            <option>パイナップル</option>
+            <option>アイスレモンティー</option>
+            <option>マスカット</option>
+            <option>アイスラテ</option>
+            <option>黒糖ミルクティー</option>
+            <option>アップル</option>
+            <option>ラズベリーレモネード</option>
+            <option>キャラメル</option>
+            <option>ミルクチョコレート</option>
+            <option>北海道ミルク</option>
+            <option>チョコレートスムーズ</option>
+            <option>ストロベリークリーム</option>
           </select>
         </div>
       </section>

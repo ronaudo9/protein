@@ -72,19 +72,17 @@ function UsersNew() {
     } else if (values.password.length > 16) {
       errors.password =
         'パスワードは８文字以上１６文字以内で設定してください';
-    }
-    else if (!passwordReg.test(values.password)) {
+    } else if (!passwordReg.test(values.password)) {
       errors.password = 'パスワードは半角英数字で記載してください';
     }
 
     if (values.password !== values.passwordConfirmation) {
       errors.passwordConfirmation =
         'パスワードと確認用パスワードが不一致です';
-    }
-    else if (!passwordReg.test(values.passwordConfirmation)) {
+    } else if (!passwordReg.test(values.passwordConfirmation)) {
       errors.passwordConfirmation =
         '確認用パスワードは半角英数字で記載してください';
-     }
+    }
     if (!postCodeReg.test(values.postCode)) {
       errors.postCode = '郵便番号はXXX-XXXXの形式で入力してください';
     }

@@ -247,15 +247,21 @@
   "users": [
     {
       "id": 1,
-      "email": "1@1.com",
-      "password": "11111111"
-    },
-    {
-      "id": 2,
-      "email": "2@2.com",
-      "password": "22222222"
+      "name": "楽々楽子"
     }
   ],
   "purchaseHistories": [],
-  "favorites": []
+  "favorites": [
+    {
+      "userID": 1,
+      "itemId": 1
+    }
+  ],
+  "carts": [
+    {
+      "userId": 1,
+      "id": 1,
+      "items": [{ "itemId": 1, "coutity": 2, "flavor": "チョコ" }]
+    }
+  ]
 }
