@@ -21,7 +21,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({params}: GetStaticPropsContext) => {
+export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
   const res = await fetch(`http://localhost:8000/items/${params!.id}`);
   const detail = await res.json();
 
@@ -84,6 +84,8 @@ const ItemDetail: NextPage = ({ detail }: any) => {
             height={300}
           />
         </div>
+
+
         <div className={styles.details}>
           <div className={styles.detail_title}>
             <h4>{detail.name}</h4>
@@ -100,6 +102,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
               {detail.content}
             </p>
           </div>
+
           <div className={styles.flavor}>
             <p className={styles.flavor_title}>フレーバー</p>
             <select className={styles.select}>
@@ -109,6 +112,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
             </select>
           </div>
           <div className={styles.quantity}>
+
             <p className={styles.quantity_title}>数量</p>
             <button type="button" onClick={clickHandlerNext}>
               +
@@ -138,5 +142,6 @@ const ItemDetail: NextPage = ({ detail }: any) => {
     </>
   );
 };
+
 
 export default ItemDetail;
