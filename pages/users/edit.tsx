@@ -5,31 +5,31 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await fetch(`http://localhost:8000/users?id=${document.cookie}`);
+  const users = await res.json();
+  return {
+    paths: users.map((users: any) => {
+      return { params: { id: users.id.toString() } };
+    }),
+    fallback: false,
+  };
+};
 
-//   const res = await fetch(`http://localhost:8000/users?id={cookie()}`);
-//   const users = await res.json();
-//   return {
-//     paths: users.map((users: any) => {
-//       return { params: { id: users.id.toString() } };
-//     }),
-//     fallback: false,
-//   };
-// };
-
-// export const getStaticProps = async ({
-//   params,
-// }: {
-//   params: { id: number };
-// }) => {
-//   const res = await fetch(`http://localhost:8000/users/${params.id}`);
-//   const user = await res.json();
-//   return {
-//     props: { user },
-//   };
-// };
+export const getStaticProps = async ({
+  params,
+}: {
+  params: { id: number };
+}) => {
+  const res = await fetch(`http://localhost:8000/users/${params.id}`);
+  const user = await res.json();
+  return {
+    props: { user },
+  };
+};
 
 
-function UsersEdit() {
+function UsersEdit({user}:any) {
   const router = useRouter();
 
   const initialValues = {

@@ -262,13 +262,42 @@
       "tel": "090-7766-0099",
       "deleted": false,
       "id": 1
-    }
-  ],
-  "purchaseHistories": [],
-  "favorites": []
-}
-      "id": 1,
-      "name": "楽々楽子"
+    },
+    {
+      "firstName": "中村",
+      "lastName": "獅童",
+      "firstNameKana": "なかむら",
+      "lastNameKana": "しどう",
+      "middleName": "しどう",
+      "email": "nao.04@gmail.com",
+      "password": "kkiiooll",
+      "passwordConfirmation": "kkiiooll",
+      "postCode": "154-0143",
+      "prefecture": "東京都",
+      "city": "板橋区",
+      "aza": "板橋本町４−９",
+      "building": "板橋ビル２２５",
+      "tel": "090-4433-1122",
+      "deleted": false,
+      "id": 2
+    },
+    {
+      "firstName": "坂本",
+      "lastName": "龍馬",
+      "firstNameKana": "さかもと",
+      "lastNameKana": "りょうま",
+      "middleName": "りょうま",
+      "email": "nao@gmail.com",
+      "password": "qqwweerr",
+      "passwordConfirmation": "qqwweerr",
+      "postCode": "123-0099",
+      "prefecture": "東京都",
+      "city": "港区",
+      "aza": "新橋",
+      "building": "新橋ビル559",
+      "tel": "070-3311-5566",
+      "deleted": false,
+      "id": 3
     }
   ],
   "purchaseHistories": [],
@@ -282,7 +311,19 @@
     {
       "userId": 1,
       "id": 1,
-      "items": [{ "itemId": 1, "coutity": 2, "flavor": "チョコ" }]
+      "items": [
+        {
+          "itemId": 1,
+          "coutity": 2,
+          "flavor": "チョコ"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "email": "nao.ko.04@gmail.com",
+      "password": "aaqqwwss"
     }
   ]
 }

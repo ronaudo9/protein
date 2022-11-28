@@ -48,7 +48,7 @@ function UsersNew() {
         },
         body: JSON.stringify(formValues),
       }).then(() => {
-        router.push('/items/');
+        router.push('/');
       });
     }
   };

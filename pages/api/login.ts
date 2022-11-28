@@ -7,7 +7,7 @@ export default async function handler(req: any, res: any) {
     const user = data[0]
     console.log(data[0]);
     res.setHeader('Set-Cookie', [
-        `id=${user.id}`
+        `id=${user.id}; path=/`
     ])
     res.status(200).json(user)
 }
