@@ -21,6 +21,7 @@ export default function PurchaseDisplay({user}:{user:any}) {
   return (
     <div className={styles.container}>
       <Header />
+      <hr className={styles.hr}></hr>
       <Head>
         <title>ご注文内容確認</title>
       </Head>

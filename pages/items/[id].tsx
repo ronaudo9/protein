@@ -2,9 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { NextPage } from 'next';
 import styles from '../../styles/item_detail.module.css';
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
+import {
+  GetStaticPaths,
+  GetStaticProps,
+  GetStaticPropsContext,
+} from 'next';
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import Header from '../layout/header';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(`http://localhost:8000/items/`);
@@ -22,8 +26,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
-  const res = await fetch(`http://localhost:8000/items/${params!.id}`);
+export const getStaticProps: GetStaticProps = async ({
+  params,
+}: GetStaticPropsContext) => {
+  const res = await fetch(
+    `http://localhost:8000/items/${params!.id}`
+  );
   const detail = await res.json();
 
   return {
@@ -41,14 +49,13 @@ const ItemDetail: NextPage = ({ detail }: any) => {
   const [userId, setUserId] = React.useState("");
   const [flavor, setFlavor] = React.useState("");
 
-
   const addHandlerNext = (sub: any) => {
     setTotal(total + sub);
   };
 
   const addHandlerPrev = (sub: any) => {
     if (total <= 0) {
-      setTotal(0)
+      setTotal(0);
     } else {
       setTotal(total - sub);
     }
@@ -76,7 +83,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
     setTotal(prevTotal);
 
     addHandlerPrev(detail.price);
-  }
+  };
 
   const carts = {
     userId: Number(userId),
@@ -111,6 +118,8 @@ const ItemDetail: NextPage = ({ detail }: any) => {
 
   return (
     <>
+      <Header />
+      <hr className={styles.hr}></hr>
       <div className={styles.detail_page}>
         <div>
           <Image
@@ -121,7 +130,6 @@ const ItemDetail: NextPage = ({ detail }: any) => {
             height={300}
           />
         </div>
-
 
         <div className={styles.details}>
           <div className={styles.detail_title}>
@@ -135,9 +143,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
           </div>
           <div className={styles.ingredient}>
             <p className={styles.ingredient_title}>成分</p>
-            <p className={styles.ingredient_text}>
-              {detail.content}
-            </p>
+            <p className={styles.ingredient_text}>{detail.content}</p>
           </div>
 
           <div className={styles.flavor}>
@@ -151,13 +157,13 @@ const ItemDetail: NextPage = ({ detail }: any) => {
             </select>
           </div>
           <div className={styles.quantity}>
-
             <p className={styles.quantity_title}>数量</p>
             <button type="button" onClick={clickHandlerNext}>
               +
             </button>
             <p>&nbsp;{count}&nbsp;</p>
-            <button type='button' onClick={clickHandlerPrev}>
+            <button type="button" onClick={clickHandlerPrev}>
+
               -
             </button>
             <p>&nbsp;個&nbsp;</p>
@@ -181,6 +187,5 @@ const ItemDetail: NextPage = ({ detail }: any) => {
     </>
   );
 };
-
 
 export default ItemDetail;

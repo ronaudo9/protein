@@ -1,20 +1,22 @@
 import styles from '../../styles/users.edit.module.css';
 import Link from 'next/link';
-
+import Header from '../layout/header';
 
 
 
 const UsersEdit = () => {
   return (
-    <div>
-      <div className="container">
-        <header className={styles.header}>
-          <div className="row">
-            <h1 className={styles.h1}>ユーザー情報編集</h1>
-          </div>
-        </header>
-      </div>
+    <>
+      <Header />
       <hr className={styles.hr}></hr>
+      <div>
+        <div className="container">
+          <header className={styles.header}>
+            <div className="row">
+              <h1 className={styles.h1}>ユーザー情報編集</h1>
+            </div>
+          </header>
+        </div>
 
       <div className="container">
           <div className="col-sm-8 col-sm-offset-2">
@@ -116,7 +118,7 @@ const UsersEdit = () => {
             </div>
           </div>
       </div>
-    </div>
+    </>
   );
 };
 export default UsersEdit;
