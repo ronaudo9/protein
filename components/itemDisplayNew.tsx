@@ -23,7 +23,7 @@ export default function ItemDisplayNew({ data }: any) {
           }
 
           return (
-            <div　key={item.id}　className={styles.items_list1}>
+            <div key={item.id} className={styles.items_list1}>
               <a href={`./items/${encodeURIComponent(item.id)}`} className={styles.a}>
                 <Image
                   priority
