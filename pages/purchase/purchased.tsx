@@ -7,6 +7,7 @@ export default function PurchaseCompletion() {
   return (
     <div className={styles.container}>
       <Header />
+      <hr className={styles.hr}></hr>
       <Head>
         <title>購入完了</title>
       </Head>
