@@ -4,7 +4,7 @@ import styles from '../styles/purchase.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const fetcher = (resource :any, init:any) =>
+const fetcher = (resource: any, init: any) =>
   fetch(resource, init).then((res) => res.json());
 
 export default function ItemData() {
@@ -19,7 +19,7 @@ export default function ItemData() {
     <>
       <section className={styles.itemdata_main}>
         <main className="purchase_main">
-          <h1 className={styles.title}>ご注文内容確認画面</h1>
+          <h1 className={styles.title}>ご注文内容確認</h1>
         </main>
         <div>
           <h2 className={styles.purchase_h2}>配送先住所</h2>
@@ -109,7 +109,7 @@ export default function ItemData() {
           </Link>
           <Link href="./purchased">
             <button className={styles.btnB}>
-              <span>ご注文を確定する</span>
+              <span>ご注文を確定</span>
             </button>
           </Link>
         </section>

@@ -39,7 +39,7 @@ const ItemDisplay: NextPage = () => {
   return (
     <>
       <Header />
-
+      <hr className={styles.hr}></hr>
       <section className={styles.searchList}>
         <CategoryTypeSearch
           category={category}

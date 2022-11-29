@@ -1,44 +1,44 @@
 @charset "utf-8";
 
-.header{
+.header {
   margin-top: 30px;
-  color: #43A047;
+  color: #43a047;
 }
-.hr{
+.hr {
   border-width: 3px;
-  border-color: #43A047;
+  border-color: #e8e9e8;
 }
- .h1{
+.h1 {
   font-size: 25px;
-    font-weight: bold;
-    margin: 0;
-    text-align: center;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
 }
-.align-light{
-    text-align: right;
+.align-light {
+  text-align: right;
 }
-.formGroup{
+.formGroup {
   margin-bottom: 10px;
   text-align: center;
 }
 
-.input{
+.input {
   background: #ffcdd2;
 }
 
-.inputEmail{
+.inputEmail {
   background: #ffcdd2;
   width: 20%;
 }
-.btnPrimary{
+.btnPrimary {
   text-align: center;
 }
 .card {
   margin: 1rem;
   padding: 1.5rem;
-  color: #0000FF;
+  color: #0000ff;
   text-decoration: none;
-   /* border: 1px solid #0000FF; */
+  /* border: 1px solid #0000FF; */
   /* border-radius: 10px; */
   /* transition: color 0.15s ease, border-color 0.15s ease; */
   max-width: 300px;

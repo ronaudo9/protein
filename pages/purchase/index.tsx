@@ -7,6 +7,7 @@ export default function PurchaseDisplay() {
   return (
     <div className={styles.container}>
       <Header />
+      <hr className={styles.hr}></hr>
       <Head>
         <title>購入画面</title>
       </Head>
