@@ -6,6 +6,7 @@ function UsersNew() {
   const router = useRouter();
 
   const initialValues = {
+    id:'',
     firstName: '',
     lastName: '',
     firstNameKana: '',
