@@ -68,7 +68,7 @@ const Cart: NextPage = ({ user }: any) => {
           <p>数量</p>
           <p>価格(税込み)</p>
         </ul>
-
+        {user.map((item: any) => (
         <section className={styles.cart_content}>
           <Image
             className={styles.cart_img}
@@ -77,13 +77,14 @@ const Cart: NextPage = ({ user }: any) => {
             width={300}
             height={300}
           />
-          <p>{user.name}</p>
+          <p>{item.name}</p>
           <button type="button" onClick={clickHandlerNext}>+</button>
-          <p>{user.countity}</p>
+          <p>{item.countity}</p>
           <button type='button' onClick={clickHandlerPrev}>-</button>
-          <p>{user.price}</p>
+          <p>{item.price}</p>
           <button>削除</button>
         </section>
+        ))}
 
         <section>
           <div className={styles.cart_total}>
@@ -91,8 +92,9 @@ const Cart: NextPage = ({ user }: any) => {
             <p className={styles.total}>{total.toLocaleString()}</p>
             <button className={styles.purchase}>購入する</button>
           </div>
-        </section>
-      </div>
+        </section> 
+        </div>
+      
     </>
   );
 };
