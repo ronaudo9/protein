@@ -12,8 +12,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   const res = await fetch(
     `http://localhost:8000/carts?userId=${cookies.id}`
   );
-  const users = await res.json();
-  const user = users[0];
+  const user = await res.json();
+  // const user = users[0];
   console.log(user);
   return {
     props: { user },
