@@ -2,7 +2,9 @@ import styles from '../../styles/users.edit.module.css';
 import Link from 'next/link';
 
 
-function UsersEdit() {
+
+
+const UsersEdit = () => {
   return (
     <div>
       <div className="container">
@@ -15,175 +17,106 @@ function UsersEdit() {
       <hr className={styles.hr}></hr>
 
       <div className="container">
-        <form action="#" method="get" className="row">
           <div className="col-sm-8 col-sm-offset-2">
             <div className={styles.formGroup}>
               <label htmlFor="name">
-                <span className="label label-danger">・お名前</span>
-                （必須）
+                <span className="label label-danger">
+                  ・姓・名の編集
+                </span>
               </label>
               <div>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className={styles.input}
-                  placeholder="例:お名前"
-                  required
-                />
+                <Link href="/users/nameEdit" legacyBehavior>
+                  <p className={styles.Current}>
+                    <button type="submit">姓・名</button>
+                  </p>
+                </Link>
               </div>
             </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="name">
-                <span className="label label-danger">・ふりがな</span>
-                （必須）
-              </label>
-              <div>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className={styles.input}
-                  placeholder="例:ふりがな"
-                  required
-                />
-              </div>
-            </div>
+
             <div className={styles.formGroup}>
               <label htmlFor="name">
                 <span className="label label-danger">
-                  ・ミドルネーム
+                  ・ミドルネームの編集
                 </span>
-                （任意）
               </label>
               <div>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className="form-control"
-                  placeholder="例:ミドルネーム"
-                  required
-                />
+                <Link href="/users/middleNameEdit" legacyBehavior>
+                  <p className={styles.Current}>
+                    <button type="submit">ミドルネーム</button>
+                  </p>
+                </Link>
               </div>
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="email">
                 <span className="label label-danger">
-                  ・Eメールアドレス
+                  ・Eメールアドレスの編集
                 </span>
-                （必須）
               </label>
+
               <div>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className={styles.inputEmail}
-                  placeholder="例:raffaello@jungleocean.com"
-                  required
-                />
+                <Link href="/users/emailEdit" legacyBehavior>
+                  <p className={styles.Current}>
+                    <button type="submit">Eメールアドレス</button>
+                  </p>
+                </Link>
               </div>
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="password">
                 <span className="label label-danger">
-                  ・パスワード
+                  ・パスワードの編集
                 </span>
-                （必須）
               </label>
               <div>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  className={styles.input}
-                  placeholder="例:半角英数でご入力ください"
-                  required
-                />
+                <Link href="/users/passwordEdit" legacyBehavior>
+                  <p className={styles.Current}>
+                    <button type="submit">パスワード</button>
+                  </p>
+                </Link>
               </div>
             </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="password">
-                <span className="label label-danger">
-                  ・確認用パスワード
-                </span>
-                （必須）
-              </label>
-              <div>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  className={styles.input}
-                  placeholder="例:もう一度パスワードをご入力ください"
-                  required
-                />
-              </div>
-            </div>
+
             <div className={styles.formGroup}>
               <label htmlFor="postCode">
-                <span className="label label-danger">・郵便番号</span>
-                （必須）
+                <span className="label label-danger">
+                  ・郵便番号・住所変更の編集
+                </span>
               </label>
+
               <div>
-                <input
-                  type="postCode"
-                  id="postCode"
-                  name="postCode"
-                  className={styles.input}
-                  placeholder="例:〒●●●-●●●●"
-                  required
-                />
+                <Link href="/users/postCodeEdit" legacyBehavior>
+                  <p className={styles.Current}>
+                    <button type="submit">郵便番号・住所</button>
+                  </p>
+                </Link>
               </div>
             </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="address">
-                <span className="label label-danger">・住所</span>
-                （必須）
-              </label>
-              <div>
-                <input
-                  type="address"
-                  id="address"
-                  name="address"
-                  className={styles.inputEmail}
-                  placeholder="例:●●県●●市●町●番地●号"
-                  required
-                />
-              </div>
-            </div>
+
             <div className={styles.formGroup}>
               <label htmlFor="tel">
-                <span className="label label-danger">・電話番号</span>
-                （必須）
+                <span className="label label-danger">・電話番号の編集</span>
               </label>
               <div>
-                <input
-                  type="tel"
-                  id="tel"
-                  name="tel"
-                  className={styles.input}
-                  placeholder="例:●●●-●●●●-●●●●"
-                  required
-                />
+                <Link href="/users/telEdit" legacyBehavior>
+                  <p className={styles.Current}>
+                    <button type="submit">電話番号</button>
+                  </p>
+                </Link>
               </div>
             </div>
-            <div className={styles.btnPrimary}>
-              <button type="submit">編集完了</button>
-            </div>
+
             <div className={styles.btnPrimary}>
               <Link href="/users/new" legacyBehavior>
-                <a className={styles.card}>
+                <a className={styles.credit}>
                   <h2>クレジットカード情報変更はこちら &rarr;</h2>
                   <p></p>
                 </a>
               </Link>
             </div>
           </div>
-        </form>
       </div>
     </div>
   );
-}
+};
 export default UsersEdit;

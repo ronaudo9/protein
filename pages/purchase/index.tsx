@@ -2,6 +2,7 @@ import Head from 'next/head';
 import ItemData from '../../components/itemData';
 import styles from '../../styles/purchase.module.css';
 import { GetServerSideProps } from "next";
+import Header from '../layout/header';
 
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
@@ -19,10 +20,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 export default function PurchaseDisplay({user}:{user:any}) {
   return (
     <div className={styles.container}>
+      <Header />
       <Head>
         <title>購入画面</title>
       </Head>
-
       <ItemData user={user} />
     </div>
   );

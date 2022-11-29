@@ -1,10 +1,12 @@
 import styles from '../../styles/purchase.module.css';
 import Head from 'next/head';
 import Link from 'next/link';
+import Header from '../layout/header';
 
 export default function PurchaseCompletion() {
   return (
     <div className={styles.container}>
+      <Header />
       <Head>
         <title>購入完了</title>
       </Head>
