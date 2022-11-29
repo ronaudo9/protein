@@ -13,36 +13,23 @@ export default function CategoryTypeSearch({
   category: any;
   categoryHandler: any;
 }) {
-  //   onselectコールバック関数
-  //     fetch(`/api/items/?category=whey`)
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         setItems(data)
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  //
-
-  // useEffectで検索をクリックしたらAPIにデータを送信する
-  // useStateで取得データを表示する,ここで行うuseState('/api/items'）,onSelect={(e)=>setCategory(e.target.value))
-  //   catogoryのStateがこのコンポーネント（一番上）
-  // resorce（一番下）のstateがSWR行ってdataだして、商品一覧を表示させるコンポーネントに渡すitems={data}
+  // useStateで取得データを表示する
 
   return (
-    <div className={styles.category1}>
-      <p>種類</p>
+    <div className={styles.cp_ipselect}>
+      <label className={styles.category1_selectlabel}>種類</label>
       <select
-        className={styles.select}
+        className={styles.category1}
         onChange={categoryHandler}
         value={category}
+        required
       >
-        {/* {(e) => setCategory(e.target.value)} */}
-        <option value="catogory">選択してください</option>
+        <option value="" hidden disabled selected></option>
         <option value="whey">ホエイプロテイン</option>
         <option value="casein">カゼインプロテイン</option>
       </select>
-      {/* stateをvalue */}
+      <span className={styles.category1_highlight}></span>
+      <span className={styles.category1_selectbar}></span>
     </div>
   );
 }

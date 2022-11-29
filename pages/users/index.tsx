@@ -1,19 +1,30 @@
+import useSWR from 'swr';
 import Head from 'next/head';
 import styles from '../../styles/detail_user.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import Header from '../layout/header'
+import Header from '../layout/header';
+
+// const fetcher = (resource:any, init:any) =>
+//   fetch(resource, init).then((res) => res.json());
+
 
 
 export default function UserDetails() {
+  // const cookies = document.cookie;
+  // const num = cookies.substring(3);
+  // const { data, error } = useSWR(`http://localhost:8000/users?id=${num}`, fetcher);
+  // if (error) return <div>Failed to Load</div>;
+  // if (!data) return <div>Loading...</div>;
   return (
     <>
-      <Header></Header>
+      <Header />
       <Head>
         <title>ユーザー情報</title>
       </Head>
       <h1 className={styles.title}>ユーザー情報</h1>
       <div className={styles.main}>
+
         <div className={styles.indent}>
           <h3>目次</h3>
           <p className={styles.index_text}>
@@ -32,6 +43,7 @@ export default function UserDetails() {
             基本情報
           </h2>
           <div className={styles.element_p}>
+
             <div className={styles.element_p1}>
               ID(Email) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
@@ -40,6 +52,7 @@ export default function UserDetails() {
             </span>
             <div className={styles.element_p1}>
               お名前 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
             </div>
             <span className={styles.style}>&nbsp;楽々楽子&nbsp;</span>
             &nbsp;&nbsp;&nbsp;ミドルネーム　&nbsp;
@@ -72,6 +85,7 @@ export default function UserDetails() {
                 </span>
               </li>
             </ul>
+
           </div>
           <div>
             <div className={styles.element_p1}>
@@ -81,6 +95,7 @@ export default function UserDetails() {
               &nbsp;090-1234-5678&nbsp;
             </span>
           </div>
+
         </div>
 
         <section className={styles.favorite}>
@@ -129,6 +144,7 @@ export default function UserDetails() {
             </div>
           </div>
         </section>
+
       </div>
     </>
   );

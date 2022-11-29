@@ -16,7 +16,7 @@ export default function ItemDisplayNew({ data }: any) {
     <>
       <div className={styles.side}>
         {data.map((item: any) => {
-          const MAX_LENGTH = 20;
+          const MAX_LENGTH = 25;
           let modStr = '';
           if (item.description.length > MAX_LENGTH) {
             modStr = item.description.substr(0, MAX_LENGTH) + '...';
@@ -24,7 +24,10 @@ export default function ItemDisplayNew({ data }: any) {
 
           return (
             <div key={item.id} className={styles.items_list1}>
-              <a href={`./items/${encodeURIComponent(item.id)}`} className={styles.a}>
+              <a
+                href={`./items/${encodeURIComponent(item.id)}`}
+                className={styles.a}
+              >
                 <Image
                   priority
                   src={item.imageUrl}
