@@ -9,18 +9,19 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const cookies = req.cookies;
   console.log(cookies.id);
-  const res = await fetch(
-    `http://localhost:8000/carts?userId=${cookies.id}`
-  );
+  const res = await fetch(`http://localhost:8000/carts?userId=${cookies.id}`);
   const user = await res.json();
   // const user = users[0];
   console.log(user);
+  // const paths = user.map((db:any) => {
+  //   params: {itemid: db.itemid.toString() }
+  // })
   return {
     props: { user },
   };
 };
 
-const Cart: NextPage = ({ user }: any) => {
+const Cart = ({ user }: any) => {
   const [count, setCount] = React.useState(0);
   const [total, setTotal] = React.useState(0);
 
@@ -59,42 +60,86 @@ const Cart: NextPage = ({ user }: any) => {
 
     addHandlerPrev(user.price);
   };
+
   return (
     <>
-      <div>
-        <h4 className={styles.cart_title}>カート</h4>
-        <ul className={styles.cart_menu}>
-          <p>アイテム</p>
-          <p>数量</p>
-          <p>価格(税込み)</p>
-        </ul>
+      <h4 className={styles.cart_title}>カート</h4>
+      <ul className={styles.cart_menu}>
+        <p>アイテム</p>
+        <p>数量</p>
+        <p>価格(税込み)</p>
+      </ul>
 
-        <section className={styles.cart_content}>
-          <Image
-            className={styles.cart_img}
-            src={''}
-            alt="商品画像"
-            width={300}
-            height={300}
-          />
-          <p>{user.name}</p>
-          <button type="button" onClick={clickHandlerNext}>+</button>
-          <p>{user.countity}</p>
-          <button type='button' onClick={clickHandlerPrev}>-</button>
-          <p>{user.price}</p>
-          <button>削除</button>
-        </section>
+      <section className={styles.cart_content}>
+        {user.map((cart: any) => {
+          return (
+            <div key={cart.id}>
+              <Image
+                className={styles.cart_img}
+                src={''}
+                alt="商品画像"
+                width={300}
+                height={300}
+              />
+              <p>{cart.name}</p>
+              <button type="button" onClick={clickHandlerNext}>+</button>
+              <p>{cart.countity}</p>
+              <button type='button' onClick={clickHandlerPrev}>-</button>
+              <p>{cart.price}</p>
+              <button>削除</button>
+            </div>
+          )
+        })}
+      </section>
 
-        <section>
-          <div className={styles.cart_total}>
-            <p>購入金額:</p>
-            <p className={styles.total}>{total.toLocaleString()}</p>
-            <button className={styles.purchase}>購入する</button>
-          </div>
-        </section>
-      </div>
+      <section>
+        <div className={styles.cart_total}>
+          <p>購入金額:</p>
+          <p className={styles.total}>{total.toLocaleString()}</p>
+          <button className={styles.purchase}>購入する</button>
+        </div>
+      </section>
     </>
-  );
-};
+  )
+}
+
+
+//   return (
+//     <>
+//       <div>
+//         <h4 className={styles.cart_title}>カート</h4>
+//         <ul className={styles.cart_menu}>
+//           <p>アイテム</p>
+//           <p>数量</p>
+//           <p>価格(税込み)</p>
+//         </ul>
+
+//         <section className={styles.cart_content}>
+//           <Image
+//             className={styles.cart_img}
+//             src={''}
+//             alt="商品画像"
+//             width={300}
+//             height={300}
+//           />
+//           <p>{user.name}</p>
+//           <button type="button" onClick={clickHandlerNext}>+</button>
+//           <p>{user.countity}</p>
+//           <button type='button' onClick={clickHandlerPrev}>-</button>
+//           <p>{user.price}</p>
+//           <button>削除</button>
+//         </section>
+
+//         <section>
+//           <div className={styles.cart_total}>
+//             <p>購入金額:</p>
+//             <p className={styles.total}>{total.toLocaleString()}</p>
+//             <button className={styles.purchase}>購入する</button>
+//           </div>
+//         </section>
+//       </div>
+//     </>
+//   );
+// };
 
 export default Cart;
