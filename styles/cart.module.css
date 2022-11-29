@@ -1,0 +1,23 @@
+.cart_menu {
+    display: flex;
+    justify-content: space-around;
+}
+
+.cart_content {
+    display: flex;
+    justify-content: space-around;
+}
+
+.cart_total {
+    display: flex;
+
+}
+
+.total {
+    margin-left: 25%;
+}
+
+.purchase {
+    margin-left: 25%;
+    padding: 0 3% 0 3%;
+}

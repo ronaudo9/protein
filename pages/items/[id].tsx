@@ -2,8 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { NextPage } from 'next';
 import styles from '../../styles/item_detail.module.css';
-import { GetStaticPaths, GetStaticProps,GetStaticPropsContext } from 'next';
-import React, {useState, useEffect} from 'react';
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(`http://localhost:8000/items/`);
@@ -33,17 +34,22 @@ export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsC
 
 // detail getStaticPropsから取得
 const ItemDetail: NextPage = ({ detail }: any) => {
+  console.log(detail)
+  const router = useRouter();
   const [count, setCount] = React.useState(0);
   const [total, setTotal] = React.useState(0);
+  const [userId, setUserId] = React.useState("");
+  const [flavor, setFlavor] = React.useState("");
 
-  const addHandlerNext = (sub:any) => {
+
+  const addHandlerNext = (sub: any) => {
     setTotal(total + sub);
   };
 
-  const addHandlerPrev = (sub:any) => {
-    if(total <= 0){
+  const addHandlerPrev = (sub: any) => {
+    if (total <= 0) {
       setTotal(0)
-    }else{
+    } else {
       setTotal(total - sub);
     }
   };
@@ -68,8 +74,39 @@ const ItemDetail: NextPage = ({ detail }: any) => {
 
     const prevTotal = detail.price * count;
     setTotal(prevTotal);
-    
+
     addHandlerPrev(detail.price);
+  }
+
+  const carts = {
+    userId: Number(userId),
+    itemid: detail.id,
+    imageUrl: detail.imageUrl,
+    name: detail.name,
+    flavor: flavor,
+    price: detail.price,
+    countity: count
+  }
+
+  useEffect(() => {
+    const user = document.cookie;
+    const userId = user.slice(3);
+    console.log(userId);
+    setUserId(userId)
+  });
+
+  const handler = (event: any) => {
+    event.preventDefault();
+    fetch('http://localhost:8000/carts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(carts),
+    })
+    // .then(() => {
+    //   router.push('/');
+    // });
   }
 
   return (
@@ -105,10 +142,12 @@ const ItemDetail: NextPage = ({ detail }: any) => {
 
           <div className={styles.flavor}>
             <p className={styles.flavor_title}>フレーバー</p>
-            <select className={styles.select}>
+            <select className={styles.select} onChange={(e) => setFlavor(e.target.value)}>
               <option>{detail.flavor[0]}</option>
               <option>{detail.flavor[1]}</option>
               <option>{detail.flavor[2]}</option>
+              <option>{detail.flavor[3]}</option>
+              <option>{detail.flavor[4]}</option>
             </select>
           </div>
           <div className={styles.quantity}>
@@ -116,19 +155,19 @@ const ItemDetail: NextPage = ({ detail }: any) => {
             <p className={styles.quantity_title}>数量</p>
             <button type="button" onClick={clickHandlerNext}>
               +
-             </button>
-             <p>&nbsp;{count}&nbsp;</p>
-             <button type='button' onClick={clickHandlerPrev}>
+            </button>
+            <p>&nbsp;{count}&nbsp;</p>
+            <button type='button' onClick={clickHandlerPrev}>
               -
-              </button>
-              <p>&nbsp;個&nbsp;</p>
+            </button>
+            <p>&nbsp;個&nbsp;</p>
           </div>
           <div className={styles.total}>
             <p className={styles.total_title}>合計金額</p>
             <p>{total.toLocaleString()}円</p>
           </div>
           <div className={styles.cart}>
-            <button className={styles.cart_button}>
+            <button className={styles.cart_button} onClick={handler}>
               カートに追加
             </button>
             <div>
