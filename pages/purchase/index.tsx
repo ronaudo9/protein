@@ -22,7 +22,7 @@ export default function PurchaseDisplay({user}:{user:any}) {
     <div className={styles.container}>
       <Header />
       <Head>
-        <title>購入画面</title>
+        <title>ご注文内容確認</title>
       </Head>
       <ItemData user={user} />
     </div>
