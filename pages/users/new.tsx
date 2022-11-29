@@ -7,6 +7,7 @@ function UsersNew() {
   const router = useRouter();
 
   const initialValues = {
+    id:'',
     firstName: '',
     lastName: '',
     firstNameKana: '',
@@ -49,7 +50,7 @@ function UsersNew() {
         },
         body: JSON.stringify(formValues),
       }).then(() => {
-        router.push('/items/');
+        router.push('/');
       });
     }
   };

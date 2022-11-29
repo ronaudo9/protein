@@ -28,7 +28,7 @@ export default function PurchaseCompletion() {
           </button>
           {/* </Link> */}
           <br />
-          <Link href="../item">
+          <Link href="/items">
             <button className={styles.purchased_button}>
               買い物を続ける
             </button>

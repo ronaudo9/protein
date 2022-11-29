@@ -1,10 +1,28 @@
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import styles from '../../styles/detail_user.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import Header from '../layout/header';
 
-export default function UserDetails() {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+}) => {
+  const cookies = req.cookies;
+  console.log(cookies.id);
+  const res = await fetch(
+    `http://localhost:8000/users?id=${cookies.id}`
+  );
+  const users = await res.json();
+  const user = users[0];
+  return {
+    props: { user },
+  };
+};
+
+
+
+const UserDetails = ({ user }: any) => {
   return (
     <>
       <Header />
@@ -14,6 +32,7 @@ export default function UserDetails() {
       </Head>
       <h1 className={styles.title}>ユーザー情報</h1>
       <div className={styles.main}>
+
         <div className={styles.indent}>
           <h3>目次</h3>
           <p className={styles.index_text}>
@@ -32,28 +51,30 @@ export default function UserDetails() {
             基本情報
           </h2>
           <div className={styles.element_p}>
+
             <div className={styles.element_p1}>
               ID(Email) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <span className={styles.style}>
-              rakusrakusu@rakus-partners.co.jp
+              {user.email}
             </span>
             <div className={styles.element_p1}>
               お名前 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
             </div>
-            <span className={styles.style}>&nbsp;楽々楽子&nbsp;</span>
+            <span className={styles.style}>&nbsp;{user.firstName}&nbsp;{user.lastName}&nbsp;</span>
             &nbsp;&nbsp;&nbsp;ミドルネーム　&nbsp;
-            <span className={styles.style}>&nbsp;ミドル&nbsp;</span>
+            <span className={styles.style}>&nbsp;{user.middleName}&nbsp;</span>
             <div className={styles.element_p1}>
               ふりがな &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <span className={styles.style}>
-              &nbsp;みょうじなまえ&nbsp;
+              &nbsp;{user.firstNameKana}&nbsp;{user.lastNameKana}&nbsp;
             </span>
             &nbsp;&nbsp;&nbsp;
-            <span className={styles.style}>
+            {/* <span className={styles.style}>
               &nbsp;みどるねーむ&nbsp;
-            </span>
+            </span> */}
             <div className={styles.element_p1}>
               住所 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
@@ -62,25 +83,33 @@ export default function UserDetails() {
                 {' '}
                 郵便番号 &nbsp;&nbsp;&nbsp;&nbsp;
                 <span className={styles.style}>
-                  &nbsp;664-0095&nbsp;
+                  &nbsp;{user.postCode}&nbsp;
                 </span>
               </li>
               <li className={styles.li}>
                 住所 &nbsp;&nbsp;&nbsp;&nbsp;
                 <span className={styles.style}>
-                  &nbsp;東京都ほげほげ&nbsp;
+                  &nbsp;{user.prefecture}{user.city}{user.aza}{user.building}&nbsp;
                 </span>
               </li>
             </ul>
+
           </div>
           <div>
             <div className={styles.element_p1}>
               電話番号 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <span className={styles.style}>
-              &nbsp;090-1234-5678&nbsp;
+              &nbsp;{user.tel}&nbsp;
             </span>
           </div>
+           <div>
+           <Link href="/users/edit" legacyBehavior>
+                  <p className={styles.button}>
+                    <button type="submit" className={styles.color}>ユーザー情報編集画面へ</button>
+                  </p>
+            </Link>
+           </div>
         </div>
 
         <section className={styles.favorite}>
@@ -129,7 +158,10 @@ export default function UserDetails() {
             </div>
           </div>
         </section>
+
       </div>
     </>
   );
 }
+
+export default UserDetails;

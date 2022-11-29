@@ -122,3 +122,11 @@
 .itemDetail {
   float: right;
 }
+
+.button{
+  text-align: center;
+}
+
+.color{
+  background: #F8F8FF;
+}

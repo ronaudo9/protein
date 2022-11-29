@@ -42,8 +42,12 @@ export const getStaticProps: GetStaticProps = async ({
 
 // detail getStaticPropsから取得
 const ItemDetail: NextPage = ({ detail }: any) => {
+  console.log(detail)
+  const router = useRouter();
   const [count, setCount] = React.useState(0);
   const [total, setTotal] = React.useState(0);
+  const [userId, setUserId] = React.useState("");
+  const [flavor, setFlavor] = React.useState("");
 
   const addHandlerNext = (sub: any) => {
     setTotal(total + sub);
@@ -81,6 +85,37 @@ const ItemDetail: NextPage = ({ detail }: any) => {
     addHandlerPrev(detail.price);
   };
 
+  const carts = {
+    userId: Number(userId),
+    itemid: detail.id,
+    imageUrl: detail.imageUrl,
+    name: detail.name,
+    flavor: flavor,
+    price: detail.price,
+    countity: count
+  }
+
+  useEffect(() => {
+    const user = document.cookie;
+    const userId = user.slice(3);
+    console.log(userId);
+    setUserId(userId)
+  });
+
+  const handler = (event: any) => {
+    event.preventDefault();
+    fetch('http://localhost:8000/carts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(carts),
+    })
+    // .then(() => {
+    //   router.push('/');
+    // });
+  }
+
   return (
     <>
       <Header />
@@ -113,10 +148,12 @@ const ItemDetail: NextPage = ({ detail }: any) => {
 
           <div className={styles.flavor}>
             <p className={styles.flavor_title}>フレーバー</p>
-            <select className={styles.select}>
+            <select className={styles.select} onChange={(e) => setFlavor(e.target.value)}>
               <option>{detail.flavor[0]}</option>
               <option>{detail.flavor[1]}</option>
               <option>{detail.flavor[2]}</option>
+              <option>{detail.flavor[3]}</option>
+              <option>{detail.flavor[4]}</option>
             </select>
           </div>
           <div className={styles.quantity}>
@@ -126,6 +163,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
             </button>
             <p>&nbsp;{count}&nbsp;</p>
             <button type="button" onClick={clickHandlerPrev}>
+
               -
             </button>
             <p>&nbsp;個&nbsp;</p>
@@ -135,7 +173,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
             <p>{total.toLocaleString()}円</p>
           </div>
           <div className={styles.cart}>
-            <button className={styles.cart_button}>
+            <button className={styles.cart_button} onClick={handler}>
               カートに追加
             </button>
             <div>

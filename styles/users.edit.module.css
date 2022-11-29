@@ -33,16 +33,29 @@
 .btnPrimary {
   text-align: center;
 }
-.card {
+.credit {
   margin: 1rem;
-  padding: 1.5rem;
-  color: #0000ff;
+  color: #0000FF;
   text-decoration: none;
   /* border: 1px solid #0000FF; */
   /* border-radius: 10px; */
   /* transition: color 0.15s ease, border-color 0.15s ease; */
   max-width: 300px;
   text-align: center;
+}
+.card {
+  margin-top: 2rem;
+  color: #0000FF;
+  text-decoration: none;
+  /* border: 1px solid #0000FF; */
+  /* border-radius: 10px; */
+  /* transition: color 0.15s ease, border-color 0.15s ease; */
+  max-width: 300px;
+  text-align: center;
+}
+.Current{
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 /* input[type="email"]:invalid{
   background: #ffcdd2;
