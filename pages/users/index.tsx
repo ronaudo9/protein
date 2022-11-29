@@ -3,6 +3,7 @@ import Head from 'next/head';
 import styles from '../../styles/detail_user.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
+import Header from '../layout/header';
 
 // const fetcher = (resource:any, init:any) =>
 //   fetch(resource, init).then((res) => res.json());
@@ -17,6 +18,7 @@ export default function UserDetails() {
   // if (!data) return <div>Loading...</div>;
   return (
     <>
+      <Header />
       <Head>
         <title>ユーザー情報</title>
       </Head>
