@@ -7,7 +7,7 @@ import styles from '../../styles/items_index.module.css';
 import ItemDisplayNew from '../../components/itemDisplayNew';
 import Head from 'next/head';
 import Header from '../layout/header'
-import CategoryTypeSearch from 'components/categoryTypeSearch';
+import CategoryTypeSearch from '../../components/categoryTypeSearch';
 import useSWR from 'swr';
 import { ChangeEvent, useState } from 'react';
 
