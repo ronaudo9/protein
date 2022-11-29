@@ -5,6 +5,8 @@ import { GetServerSideProps } from "next";
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
+const fetcher = (resource: any, init: any) =>
+  fetch(resource, init).then((res) => res.json());
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const cookies = req.cookies;
@@ -47,7 +49,7 @@ const ItemData: React.FunctionComponent<{ user: any }> = ({ user }) => {
     <>
       <section className={styles.itemdata_main}>
         <main className="purchase_main">
-          <h1 className={styles.title}>ご注文内容確認画面</h1>
+          <h1 className={styles.title}>ご注文内容確認</h1>
         </main>
         <div>
           <h2 className={styles.purchase_h2}>配送先住所</h2>
@@ -137,11 +139,13 @@ const ItemData: React.FunctionComponent<{ user: any }> = ({ user }) => {
               <span>キャンセル</span>
             </button>
           </Link>
+          
           {/* <Link href="/purchase/purchased"> */}
           <button className={styles.btnB} onClick={handler}>
             <span>ご注文を確定する</span>
           </button>
           {/* </Link> */}
+          
         </section>
       </section>
     </>

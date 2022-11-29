@@ -26,6 +26,7 @@ const UserDetails = ({ user }: any) => {
   return (
     <>
       <Header />
+      <hr className={styles.hr}></hr>
       <Head>
         <title>ユーザー情報</title>
       </Head>

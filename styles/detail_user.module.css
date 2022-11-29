@@ -2,6 +2,11 @@
   list-style: none;
 }
 
+.hr {
+  border-width: 1px;
+  border-color: #e8e9e8;
+}
+
 .style {
   background-color: rgb(250, 249, 249);
 }
