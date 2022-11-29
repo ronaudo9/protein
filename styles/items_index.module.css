@@ -1,10 +1,119 @@
+.head {
+  margin: 1% 5% 0 5%;
+}
+
+.img {
+  width: 100%;
+  height: 60%;
+}
+
+.searchList {
+  background-color: rgb(243, 239, 239);
+  padding: 0.5%;
+  display: flex;
+}
+
+.cp_ipselect {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  padding: 1%;
+}
+.category1 {
+  font-family: inherit;
+  background-color: transparent;
+  width: 40%;
+
+  font-size: 15px;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  margin: 0 10% 0 50%;
+}
+.category1:focus {
+  outline: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+}
+.cp_ipselect .category1 {
+  appearance: none;
+  -webkit-appearance: none;
+}
+.cp_ipselect select::-ms-expand {
+  display: none;
+}
+.cp_ipselect:after {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  width: 0;
+  height: 0;
+  padding: 0;
+  content: '';
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+.category1_selectlabel {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 15px;
+  font-weight: normal;
+  pointer-events: none;
+  left: 0;
+  top: 10px;
+  transition: 0.2s ease all;
+}
+.category1:focus ~ .category1_selectlabel,
+.category1:valid ~ .category1_selectlabel {
+  color: #021b2b;
+  top: -20px;
+  transition: 0.2s ease all;
+  font-size: 14px;
+}
+.category1_selectbar {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.category1_selectbar:before,
+.category1_selectbar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #21b7e0;
+  transition: 0.2s ease all;
+}
+.category1_selectbar:before {
+  left: 50%;
+}
+.category1_selectbar:after {
+  right: 50%;
+}
+.category1:focus ~ .category1_selectbar:before,
+.category16:focus ~ .category1_selectbar:after {
+  width: 50%;
+}
+.category1_highlight {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.category2 {
+  margin: 0 0 0 5%;
+}
+
 .item {
   list-style: none;
 }
 .itemA {
   list-style: none;
   font-weight: bold;
-  background: linear-gradient(transparent 60%, #9eceff 60%);
+
   font-size: large;
 }
 .itemB {
@@ -48,17 +157,7 @@
 .items_list2 {
   display: flex;
   justify-content: space-between;
-  margin: 0 10% 0 10%;
-}
-
-.category1 {
-  display: flex;
-  margin-right: 2%;
-}
-
-.category2 {
-  display: flex;
-  margin-right: 2%;
+  padding: 10%;
 }
 
 .category3 {
