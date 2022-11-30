@@ -33,27 +33,27 @@
 
 .purchased_h2 {
   line-height: 2.15;
-  font-size: 1.5rem;
 
-  position: relative;
-  word-break: break-all;
-  padding: 0 45px;
+  background-color: blue;
+
+  white-space: nowrap;
+  margin: 5%;
 }
-.purchased_h2:before,
-.purchased_h2:after {
+.purchased_h2font:before,
+.purchased_h2font:after {
   content: '';
-  position: relative;
+
   top: 50%;
   display: inline-block;
   width: 44px;
   height: 2px;
   background-color: #27acd9;
 }
-.purchased_h2:before {
+.purchased_h2font:before {
   left: 0;
   transform: rotate(60deg);
 }
-.purchased_h2:after {
+.purchased_h2font:after {
   right: 0;
   transform: rotate(-60deg);
 }
@@ -69,36 +69,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.purchased_button {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-  padding: 1em 2em;
-  width: 300px;
-  color: #333;
-  font-size: 18px;
-  font-weight: 700;
-  background-color: #cccccc;
-  box-shadow: 0 5px 0 #aaaaaa;
-  transition: 0.3s;
-}
-
-.purchased_button:after {
-  content: '';
-  width: 5px;
-  height: 5px;
-  border-top: 3px solid #333333;
-  border-right: 3px solid #333333;
-  transform: rotate(45deg);
-}
-
-.purchased_button:hover {
-  transform: translateY(3px);
-  text-decoration: none;
-  box-shadow: 0 2px 0 #aaaaaa;
 }
 
 .purchase_h2 {
@@ -125,18 +95,20 @@
 }
 
 .box1 {
-  padding: 2em 1em;
-  margin: 3em 0;
+  padding: 2%;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 5%;
+  margin-bottom: 10%;
   font-weight: bold;
-  color: #00050b; /*文字色*/
+  color: #00050b;
   background: #fff;
-  border: solid 3px #6091d3; /*線*/
-  border-radius: 10px; /*角の丸み*/
+  border: solid 3px #2ab6d9;
+  border-radius: 10px;
   width: 60%;
   height: 70%;
   text-align: center;
 
-  justify-content: center;
   align-items: center;
 }
 
@@ -198,7 +170,7 @@
   padding: 1em 1em;
   width: 10vw;
   color: white;
-  font-size: 1vw;
+  font-size: 0.5%;
   font-weight: 700;
   background-image: -webkit-gradient(
     linear,
@@ -259,4 +231,79 @@
   justify-content: space-around;
 
   bottom: 10%;
+}
+
+.purchased_buttons {
+  display: flex;
+  background-color: blue;
+}
+
+.purchased_button {
+  margin: 10%;
+  padding: 1em 2em;
+  width: 200;
+
+  color: #333;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: #cccccc;
+  box-shadow: 0 5px 0 #aaaaaa;
+  transition: 0.3s;
+  background-image: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#5de1d6),
+    to(#1ed6ee)
+  );
+  background-image: -webkit-linear-gradient(
+    right,
+    #5de1d6 0%,
+    #1ed6ee 100%
+  );
+  background-image: linear-gradient(
+    to left,
+    #5de1d6 0%,
+    #1ed6ee 100%
+  );
+}
+
+.purchased_button:after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 3px solid #333333;
+  border-right: 3px solid #333333;
+  transform: rotate(45deg);
+}
+
+.purchased_button:hover {
+  transform: translateY(3px);
+  text-decoration: none;
+  box-shadow: 0 2px 0 #aaaaaa;
+}
+
+.purchased_button::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  content: '';
+  background-image: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#6bdcf0),
+    to(#62fcd5)
+  );
+  border-radius: 5px;
+  transform-origin: right top;
+  transform: scale(0, 1);
+  transition: transform 0.3s;
+}
+.purchased_button:hover::before {
+  transform-origin: left top;
+  transform: scale(1, 1);
 }
