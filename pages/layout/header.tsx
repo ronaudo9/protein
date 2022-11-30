@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import style from './header.module.css';
 import Image from 'next/image';
-import { maxHeaderSize } from 'http';
 
 const logOut = () => {
   if (document.cookie !== '') {
@@ -15,31 +14,25 @@ const logOut = () => {
 
 export default function Header() {
   return (
-    // Header Start
 
     <div className={style.all}>
-      {/* <header className={style.header}>
-                    <div>
-                        <h1>Logo</h1>
-                    </div> */}
-
       <div className={style.logo}>
         <Link href="/items/">
           <Image
             src="/images/rakutein.jpg"
-            width={200}
-            height={100}
+            width={170}
+            height={80}
             alt="logout"
           />
         </Link>
       </div>
-      <div className={style.iconlist}>
+      <section className={style.iconlist}>
         <div className={style.icon}>
-          <Link href="#">
+          <Link href="/cart">
             <Image
               src="/images/cart.jpg"
-              width={55}
-              height={55}
+              width={50}
+              height={50}
               alt="cart"
             />
           </Link>
@@ -48,8 +41,8 @@ export default function Header() {
           <Link href="/users/">
             <Image
               src="/images/human.jpg"
-              width={50}
-              height={50}
+              width={45}
+              height={45}
               alt="user"
             />
           </Link>
@@ -58,14 +51,13 @@ export default function Header() {
           <Link href="/">
             <Image
               src="/images/logout.jpg"
-              width={49}
-              height={49}
+              width={40}
+              height={40}
               alt="logout"
             />
           </Link>
         </div>
-      </div>
-      {/* </header> */}
+      </section>
     </div>
   );
 }
