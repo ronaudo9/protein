@@ -89,7 +89,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
 
   const carts = {
     userId: Number(userId),
-    itemid: detail.id,
+    itemId: detail.id,
     imageUrl: detail.imageUrl,
     name: detail.name,
     flavor: flavor,

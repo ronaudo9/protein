@@ -15,14 +15,8 @@ const logOut = () => {
 
 export default function Header() {
   return (
-    // Header Start
 
     <div className={style.all}>
-      {/* <header className={style.header}>
-                    <div>
-                        <h1>Logo</h1>
-                    </div> */}
-
       <div className={style.logo}>
         <Link href="/items/">
           <Image
@@ -35,7 +29,7 @@ export default function Header() {
       </div>
       <div className={style.iconlist}>
         <div className={style.icon}>
-          <Link href="#">
+          <Link href="/cart">
             <Image
               src="/images/cart.jpg"
               width={55}
@@ -65,7 +59,6 @@ export default function Header() {
           </Link>
         </div>
       </div>
-      {/* </header> */}
     </div>
   );
 }

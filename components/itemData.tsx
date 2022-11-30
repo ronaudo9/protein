@@ -6,57 +6,60 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 
-// export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-//   const cookies = req.cookies;
-
-//   return {
-//     props: { carts },
-//   };
-// };
-
-// const purchaseHistories: any = {
-//   date: (new Date()).toUTCString(),
-//   imageUrl: carts.url,
-//   name: carts.name,
-//   flavor: carts.flavor,
-//   price: carts.price,
-//   countity: carts.countity
-// }
-
 const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, carts }) => {
   const router = useRouter();
 
-  const priceArray: any[] = [];
+  console.log(carts)
 
+  carts.forEach((cart: any) => {
+    cart.date = (new Date()).toLocaleString('ja-JP');
+  })
+
+  console.log(carts)
+
+  // const purchaseHistories = {
+  //   date: (new Date()).toLocaleString('ja-JP'),
+  //   userId: carts.userId,
+  //   itemId: carts.itemId,
+  //   imageUrl: carts.imageUrl,
+  //   name: carts.name,
+  //   flavor: carts.flavor,
+  //   price: carts.price,
+  //   countity: carts.countity
+  // }
+
+
+  // 購入履歴jsonサーバーに購入商品を追加する処理[始まり]
+  const handler = (event: any) => {
+    event.preventDefault();
+    fetch('http://localhost:8000/purchaseHistories', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(carts),
+    })
+      .then(() => {
+        router.push('/purchase/purchased');
+      });
+  }
+  // 購入履歴jsonサーバーに購入商品を追加する処理[終わり]
+
+
+  // 合計金額を算出する処理[始まり]
+  const priceArray: any[] = [];
   carts.forEach((element: any) => {
     const multiPrice = element.price * element.countity;
     console.log(multiPrice);
     priceArray.push(multiPrice)
-  }
-  )
-
+  })
   const initialValue = 0;
   const sumPrice = priceArray.reduce(
     (accumulator, currentPrice) => accumulator + currentPrice,
     initialValue
   );
+  // 合計金額を算出する処理[終わり]
 
-  console.log(sumPrice);
-
-  // const [carts, setCarts] = useState("purchaseHistories");
-
-  // const handler = (event: any) => {
-  //   event.preventDefault();
-  //   fetch('/api/purchaseHistories', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(purchaseHistories),
-  //   }).then(() => {
-  //     router.push('/purchase/purchased');
-  //   });
-  // }
 
   return (
     <>
@@ -117,7 +120,6 @@ const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, ca
                     height={64}
                     alt="商品画像"
                   />
-                  {/* <div className={styles.itemDetail} key={cart.id}> */}
                   <h4 className={styles.index_text}>商品名</h4>
                   {cart.name}
                   <p>
@@ -160,13 +162,11 @@ const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, ca
           </Link>
 
 
-          {/* <Link href="/purchase/purchased"> */}
           <button className={styles.btnB}
-          // onClick={handler}
+            onClick={handler}
           >
             <span>ご注文を確定する</span>
           </button>
-          {/* </Link> */}
 
         </section>
       </section>
