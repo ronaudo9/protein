@@ -44,6 +44,7 @@ export const getStaticProps: GetStaticProps = async ({
 const ItemDetail: NextPage = ({ detail }: any) => {
   console.log(detail)
   // const router = useRouter();
+  
   const [count, setCount] = React.useState(0);
   const [total, setTotal] = React.useState(0);
   const [userId, setUserId] = React.useState("");

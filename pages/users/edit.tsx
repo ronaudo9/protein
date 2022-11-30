@@ -7,9 +7,8 @@ import Header from '../layout/header';
 const UsersEdit = () => {
   return (
     <>
-      <Header />
+      <Header/>
       <hr className={styles.hr}></hr>
-      <div>
         <div className="container">
           <header className={styles.header}>
             <div className="row">
@@ -118,7 +117,8 @@ const UsersEdit = () => {
             </div>
           </div>
       </div>
-    </>
+   </>
   );
 };
+
 export default UsersEdit;
