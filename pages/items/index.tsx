@@ -52,8 +52,11 @@ const ItemDisplay: NextPage = () => {
         />
       </section>
       <section className={styles.head}>
+
         <Image
           className={styles.img}
+          width={200}
+          height={200}
           src="/images/strong.jpg"
           alt="画像"
         />
@@ -63,7 +66,7 @@ const ItemDisplay: NextPage = () => {
         <ItemDisplayNew data={data} />
       </section>
 
-      <section>
+      {/* <section>
         <ul className={styles.next_list}>
           <li>
             <a href="">
@@ -86,7 +89,7 @@ const ItemDisplay: NextPage = () => {
             </a>
           </li>
         </ul>
-      </section>
+      </section> */}
     </>
   );
 };
