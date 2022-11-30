@@ -52,7 +52,7 @@ const ItemDisplay: NextPage = () => {
         />
       </section>
       <section className={styles.head}>
-        <Image
+        <img
           className={styles.img}
           src="/images/strong.jpg"
           alt="画像"

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styles from 'styles/cart.module.css';
 import type { GetServerSideProps, NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -13,52 +14,62 @@ export const getServerSideProps: GetServerSideProps = async ({
     `http://localhost:8000/carts?userId=${cookies.id}`
   );
   const users = await res.json();
-  const user = users[0];
-  console.log(user);
+  // const user = users[0];
+  // console.log(user);
+
   return {
-    props: { user },
+    props: { users },
   };
 };
 
-const Cart: NextPage = ({ user }: any) => {
+const Cart: NextPage<{ users: any }> = ({ users }) => {
+  const [countity, setCountity] = useState('');
   const [count, setCount] = React.useState(0);
-  const [total, setTotal] = React.useState(0);
+  const router = useRouter();
 
-  const addHandlerNext = (sub: any) => {
-    setTotal(total + sub);
+  const data = {
+    countity: countity,
   };
 
-  const addHandlerPrev = (sub: any) => {
-    if (total <= 0) {
-      setTotal(0);
-    } else {
-      setTotal(total - sub);
-    }
-  };
+  // 数量変更
+  function countItem(item: any) {
+    fetch(`http://localhost:8000/carts/${users.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    router.reload();
+  }
 
-  const clickHandlerNext = () => {
+  const clickHandlerNext = (item:any) => {
     const nextCount = count + 1;
     setCount(nextCount);
-
-    const nextTotal = user.price * nextCount;
-    setTotal(nextTotal);
-
-    addHandlerNext(user.price);
   };
 
-  const clickHandlerPrev = () => {
+  const clickHandlerPrev = (item:any) => {
     const prevCount = count - 1;
     if (prevCount <= 0) {
       setCount(0);
     } else {
       setCount(prevCount);
     }
-
-    const prevTotal = user.price * count;
-    setTotal(prevTotal);
-
-    addHandlerPrev(user.price);
   };
+
+
+  // 削除
+  function deleteItem(users: any) {
+    fetch(`http://localhost:8000/carts/${users.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    router.reload();
+  }
+
   return (
     <>
       <div>
@@ -68,33 +79,41 @@ const Cart: NextPage = ({ user }: any) => {
           <p>数量</p>
           <p>価格(税込み)</p>
         </ul>
-        {user.map((item: any) => (
         <section className={styles.cart_content}>
-          <Image
-            className={styles.cart_img}
-            src={''}
-            alt="商品画像"
-            width={300}
-            height={300}
-          />
-          <p>{item.name}</p>
-          <button type="button" onClick={clickHandlerNext}>+</button>
-          <p>{item.countity}</p>
-          <button type='button' onClick={clickHandlerPrev}>-</button>
-          <p>{item.price}</p>
-          <button>削除</button>
+          {users.map((item: any) => (
+            <div key={item.id}>
+              <Image
+                className={styles.cart_img}
+                src={''}
+                alt="商品画像"
+                width={300}
+                height={300}
+              />
+              <p>{item.name}</p>
+              <button type="button" onClick={() => clickHandlerNext(item)}>
+                +
+              </button>
+              <p>&nbsp;{count}&nbsp;</p>
+              <button type="button" onClick={() => clickHandlerPrev(item)}>
+                -
+              </button>
+              <p>{item.countity}</p>
+              <p>{item.price}</p>
+              <button type="button" onClick={() => deleteItem(item)}>
+                削除
+              </button>
+            </div>
+          ))}
         </section>
-        ))}
 
         <section>
           <div className={styles.cart_total}>
             <p>購入金額:</p>
-            <p className={styles.total}>{total.toLocaleString()}</p>
+            <p className={styles.total}></p>
             <button className={styles.purchase}>購入する</button>
           </div>
-        </section> 
-        </div>
-      
+        </section>
+      </div>
     </>
   );
 };
