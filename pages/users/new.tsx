@@ -7,7 +7,7 @@ function UsersNew() {
   const router = useRouter();
 
   const initialValues = {
-    id:'',
+    id: '',
     firstName: '',
     lastName: '',
     firstNameKana: '',
@@ -143,257 +143,282 @@ function UsersNew() {
                 <h1 className={styles.title}>新規会員登録</h1>
                 <section className={styles.category}>
                   <label htmlFor="name" className={styles.centerText}>
-                    お名前（必須）
+                    <div>お名前（必須）</div>
                   </label>
                   <div className={styles.formset}>
-                    <input
-                      type="text"
-                      name="firstName"
-                      className={styles.input}
-                      placeholder="例:姓"
-                      value={formValues.firstName}
-                      onChange={handleChange}
-                      required
-                    />
-                    &nbsp;
-                    <input
-                      type="text"
-                      name="lastName"
-                      className={styles.input}
-                      placeholder="例:名"
-                      value={formValues.lastName}
-                      onChange={handleChange}
-                      required
-                    />
-                    {/* <p>{formErrors?.name}</p> */}
+                    <div>
+                      <input
+                        type="text"
+                        name="firstName"
+                        className={styles.input}
+                        placeholder="例:姓"
+                        value={formValues.firstName}
+                        onChange={handleChange}
+                        required
+                      />
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <input
+                        type="text"
+                        name="lastName"
+                        className={styles.input}
+                        placeholder="例:名"
+                        value={formValues.lastName}
+                        onChange={handleChange}
+                        required
+                      />
+                      {/* <p>{formErrors?.name}</p> */}
+                    </div>
                   </div>
                 </section>
               </div>
               <section className={styles.category}>
-                <label htmlFor="name">
-                  <span className={styles.centerText}>
-                    ふりがな（必須）
-                  </span>
+                <label htmlFor="name" className={styles.centerText}>
+                  <div>ふりがな（必須）</div>
                 </label>
-                <div>
-                  <input
-                    type="text"
-                    name="firstNameKana"
-                    className={styles.input}
-                    placeholder="例:ふりがな（姓）"
-                    value={formValues.firstNameKana}
-                    onChange={handleChange}
-                    required
-                  />
-                  &nbsp;
-                  <span>
+                <div className={styles.formset}>
+                  <div>
                     <input
                       type="text"
-                      name="lastNameKana"
+                      name="firstNameKana"
                       className={styles.input}
-                      placeholder="例:ふりがな（名）"
-                      value={formValues.lastNameKana}
+                      placeholder="例:ふりがな（姓）"
+                      value={formValues.firstNameKana}
                       onChange={handleChange}
                       required
                     />
-                  </span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>
+                      <input
+                        type="text"
+                        name="lastNameKana"
+                        className={styles.input}
+                        placeholder="例:ふりがな（名）"
+                        value={formValues.lastNameKana}
+                        onChange={handleChange}
+                        required
+                      />
+                    </span>
+                  </div>
                 </div>
               </section>
               <section className={styles.category}>
-                <label htmlFor="name">
-                  <span className={styles.centerText}>
-                    ミドルネーム（任意）
-                  </span>
+                <label htmlFor="name" className={styles.centerText}>
+                  <div>ミドルネーム（任意）</div>
                 </label>
-                <div>
-                  <input
-                    type="text"
-                    name="middleName"
-                    //   className={styles.input}
-                    value={formValues.middleName}
-                    placeholder="例:ミドルネーム"
-                    onChange={handleChange}
-                    className={styles.input}
-                  />
+                <div className={styles.formset}>
+                  <div>
+                    <input
+                      type="text"
+                      name="middleName"
+                      //   className={styles.input}
+                      value={formValues.middleName}
+                      placeholder="例:ミドルネーム"
+                      onChange={handleChange}
+                      className={styles.input}
+                    />
+                  </div>
                 </div>
               </section>
               <section className={styles.category}>
-                <label htmlFor="email">
-                  <span className={styles.centerText}>
-                    Eメールアドレス（必須）
-                  </span>
+                <label htmlFor="email" className={styles.centerText}>
+                  <div>Eメールアドレス（必須）</div>
                 </label>
-                <div>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formValues.email}
-                    placeholder="例:raffaello@jungleocean.com"
-                    onChange={handleChange}
-                    className={styles.input}
-                    required
-                  />
-                  <p>{formErrors?.email}</p>
+                <div className={styles.formset}>
+                  <div>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formValues.email}
+                      placeholder="例:raffaello@jungleocean.com"
+                      onChange={handleChange}
+                      className={styles.input}
+                      required
+                    />
+                  </div>
                 </div>
+                <div>{formErrors?.email}</div>
               </section>
               <section className={styles.category}>
-                <label htmlFor="password">
-                  <span className={styles.centerText}>
-                    パスワード（必須）
-                  </span>
+                <label
+                  htmlFor="password"
+                  className={styles.centerText}
+                >
+                  <div>パスワード（必須）</div>
                 </label>
-                <div>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={formValues.password}
-                    onChange={handleChange}
-                    className={styles.input}
-                    placeholder="例:半角英数でご入力ください"
-                    required
-                  />
-                  <p>{formErrors?.password}</p>
+                <div className={styles.formset}>
+                  <div>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      value={formValues.password}
+                      onChange={handleChange}
+                      className={styles.input}
+                      placeholder="例:半角英数でご入力ください"
+                      required
+                    />
+                  </div>
                 </div>
+                <div>{formErrors?.password}</div>
               </section>
               <section className={styles.category}>
-                <label htmlFor="password">
-                  <span className={styles.centerText}>
-                    確認用パスワード（必須）
-                  </span>
+                <label
+                  htmlFor="password"
+                  className={styles.centerText}
+                >
+                  <div>確認用パスワード（必須）</div>
                 </label>
-                <div>
-                  <input
-                    type="password"
-                    id="passwordConfirmation"
-                    name="passwordConfirmation"
-                    value={formValues.passwordConfirmation}
-                    onChange={handleChange}
-                    className={styles.input}
-                    placeholder="例:もう一度パスワードをご入力ください"
-                    required
-                  />
-                  <p>{formErrors?.passwordConfirmation}</p>
+                <div className={styles.formset}>
+                  <div>
+                    <input
+                      type="password"
+                      id="passwordConfirmation"
+                      name="passwordConfirmation"
+                      value={formValues.passwordConfirmation}
+                      onChange={handleChange}
+                      className={styles.input}
+                      placeholder="例:もう一度パスワードをご入力ください"
+                      required
+                    />
+                  </div>
                 </div>
+                <div>{formErrors?.passwordConfirmation}</div>
               </section>
 
               <section className={styles.category}>
-                <label htmlFor="postCode">
-                  <span className={styles.centerText}>
-                    郵便番号（必須）
-                  </span>
-                </label>
-                <button
-                  type="button"
-                  onClick={setAuto}
-                  className={styles.btnA}
+                <label
+                  htmlFor="postCode"
+                  className={styles.centerText}
                 >
-                  住所検索
-                </button>
-                <span>{addressErrors}</span>
-                <div>
-                  <input
-                    type="text"
-                    name="postCode"
-                    className={styles.input}
-                    value={formValues.postCode}
-                    placeholder="例:●●●-●●●●"
-                    onChange={handleChange}
-                    required
-                  />
-                  <p>{formErrors?.postCode}</p>
+                  <div>郵便番号（必須）</div>
+                </label>
+
+                <div className={styles.formset}>
+                  <div>
+                    &nbsp;&nbsp;&nbsp;
+                    <input
+                      type="text"
+                      name="postCode"
+                      className={styles.input}
+                      value={formValues.postCode}
+                      placeholder="例:●●●-●●●●"
+                      onChange={handleChange}
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={setAuto}
+                      className={styles.btnA}
+                    >
+                      住所検索
+                    </button>
+                  </div>
                 </div>
+                <div>{formErrors?.postCode}</div>
+                <span>{addressErrors}</span>
               </section>
               <section className={styles.category}>
-                <div>
-                  <label
-                    htmlFor="prefecture"
-                    className={styles.centerText}
-                  >
-                    住所1(都道府県)
+                <div className={styles.centerText}>
+                  <label htmlFor="prefecture">
+                    <div>住所1(都道府県)</div>
                   </label>
                 </div>
-                <input
-                  type="text"
-                  name="prefecture"
-                  id="prefecture"
-                  placeholder="都道府県"
-                  value={formValues.prefecture}
-                  onChange={handleChange}
-                  className={styles.input}
-                  required
-                />
+                <div className={styles.formset}>
+                  <div>
+                    <input
+                      type="text"
+                      name="prefecture"
+                      id="prefecture"
+                      placeholder="都道府県"
+                      value={formValues.prefecture}
+                      onChange={handleChange}
+                      className={styles.input}
+                      required
+                    />
+                  </div>
+                </div>
                 {/* <p>{formErrors?.prefecture}</p> */}
-                <div>
-                  <label htmlFor="city" className={styles.centerText}>
-                    住所2(市区町村)
+                <div className={styles.centerText}>
+                  <label htmlFor="city">
+                    <div>住所2(市区町村)</div>
                   </label>
                 </div>
-                <input
-                  type="text"
-                  name="city"
-                  id="city"
-                  placeholder="市区町村"
-                  value={formValues.city}
-                  onChange={handleChange}
-                  className={styles.input}
-                  required
-                />
+                <div className={styles.formset}>
+                  <div>
+                    <input
+                      type="text"
+                      name="city"
+                      id="city"
+                      placeholder="市区町村"
+                      value={formValues.city}
+                      onChange={handleChange}
+                      className={styles.input}
+                      required
+                    />
+                  </div>
+                </div>
                 {/* <p>{formErrors?.city}</p> */}
-                <div>
-                  <label htmlFor="aza" className={styles.centerText}>
-                    住所3(字丁目)
+                <div className={styles.centerText}>
+                  <label htmlFor="aza">
+                    <div>住所3(字丁目)</div>
                   </label>
                 </div>
-                <input
-                  type="text"
-                  name="aza"
-                  id="aza"
-                  placeholder="字丁目"
-                  value={formValues.aza}
-                  onChange={handleChange}
-                  className={styles.input}
-                  required
-                />
+                <div className={styles.formset}>
+                  <div>
+                    <input
+                      type="text"
+                      name="aza"
+                      id="aza"
+                      placeholder="字丁目"
+                      value={formValues.aza}
+                      onChange={handleChange}
+                      className={styles.input}
+                      required
+                    />
+                  </div>
+                </div>
                 {/* <p>{formErrors?.aza}</p> */}
-                <div>
-                  <label
-                    htmlFor="building"
-                    className={styles.centerText}
-                  >
-                    住所4(建物名)
+                <div className={styles.centerText}>
+                  <label htmlFor="building">
+                    <div>住所4(建物名)</div>
                   </label>
                 </div>
-                <input
-                  type="text"
-                  name="building"
-                  id="building"
-                  placeholder="建物名"
-                  value={formValues.building}
-                  className={styles.input}
-                  onChange={handleChange}
-                />
+                <div className={styles.formset}>
+                  <div>
+                    <input
+                      type="text"
+                      name="building"
+                      id="building"
+                      placeholder="建物名"
+                      value={formValues.building}
+                      className={styles.input}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
                 {/* <p>{formErrors?.building}</p> */}
               </section>
               <section className={styles.category}>
-                <label htmlFor="tel">
-                  <span className={styles.centerText}>
-                    電話番号（必須）
-                  </span>
+                <label htmlFor="tel" className={styles.centerText}>
+                  <div>電話番号（必須）</div>
                 </label>
-                <div>
-                  <input
-                    type="tel"
-                    name="tel"
-                    className={styles.input}
-                    value={formValues.tel}
-                    placeholder="例:●●●-●●●●-●●●●（半角数字）"
-                    onChange={handleChange}
-                    required
-                  />
-                  <p>{formErrors?.tel}</p>
+                <div className={styles.formset}>
+                  <div>
+                    <input
+                      type="tel"
+                      name="tel"
+                      className={styles.input}
+                      value={formValues.tel}
+                      placeholder="例:●●●-●●●●-●●●●（半角数字）"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
                 </div>
+                <div>{formErrors?.tel}</div>
               </section>
+              <br />
+              <br />
               <div className={styles.btnPrimary}>
                 <button type="submit" className={styles.btnB}>
                   登録

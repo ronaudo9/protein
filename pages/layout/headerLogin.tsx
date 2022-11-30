@@ -7,8 +7,8 @@ export default function HeaderLogin() {
       <div className={style.logo}>
         <Image
           src="/images/rakutein.jpg"
-          width={200}
-          height={100}
+          width={170}
+          height={80}
           alt="logout"
         />
       </div>
