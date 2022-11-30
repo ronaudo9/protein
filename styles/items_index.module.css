@@ -133,7 +133,9 @@
 
 .side {
   display: flex;
+  flex-wrap: wrap;
 }
+
 @media (min-width: 600px) {
   .side div {
     width: 48%;
@@ -158,10 +160,10 @@
   transform: translateY(-0.1875em);
 }
 
-.items_list1 {
-  display: flex;
+.side .items_list1 {
+  width: 25%;
   justify-content: space-between;
-  margin: 10%;
+  margin: 4%;
 }
 
 .items_list2 {
