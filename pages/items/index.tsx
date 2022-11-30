@@ -54,6 +54,8 @@ const ItemDisplay: NextPage = () => {
       <section className={styles.head}>
         <Image
           className={styles.img}
+          width={200}
+          height={200}
           src="/images/strong.jpg"
           alt="画像"
         />
