@@ -43,8 +43,9 @@ export const getStaticProps: GetStaticProps = async ({
 
 // detail getStaticPropsから取得
 const ItemDetail: NextPage = ({ detail }: any) => {
-  console.log(detail);
-
+  console.log(detail)
+  // const router = useRouter();
+  
   const [count, setCount] = React.useState(0);
   const [total, setTotal] = React.useState(0);
   const [userId, setUserId] = React.useState('');
@@ -88,7 +89,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
 
   const carts = {
     userId: Number(userId),
-    itemid: detail.id,
+    itemId: detail.id,
     imageUrl: detail.imageUrl,
     name: detail.name,
     flavor: flavor,
