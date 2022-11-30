@@ -9,6 +9,7 @@ import {
 } from 'next';
 import React, { useState, useEffect } from 'react';
 import Header from '../layout/header';
+import { useRouter } from 'next/router';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(`http://localhost:8000/items/`);
@@ -47,8 +48,8 @@ const ItemDetail: NextPage = ({ detail }: any) => {
   
   const [count, setCount] = React.useState(0);
   const [total, setTotal] = React.useState(0);
-  const [userId, setUserId] = React.useState("");
-  const [flavor, setFlavor] = React.useState("");
+  const [userId, setUserId] = React.useState('');
+  const [flavor, setFlavor] = React.useState(detail.flavor[0]);
 
   const addHandlerNext = (sub: any) => {
     setTotal(total + sub);
@@ -93,14 +94,14 @@ const ItemDetail: NextPage = ({ detail }: any) => {
     name: detail.name,
     flavor: flavor,
     price: detail.price,
-    countity: count
-  }
+    countity: count,
+  };
 
   useEffect(() => {
     const user = document.cookie;
     const userId = user.slice(3);
     console.log(userId);
-    setUserId(userId)
+    setUserId(userId);
   });
 
   const handler = (event: any) => {
@@ -111,11 +112,11 @@ const ItemDetail: NextPage = ({ detail }: any) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(carts),
-    })
+    });
     // .then(() => {
-    //   router.push('/');
+    //   router.push('/cart');
     // });
-  }
+  };
 
   return (
     <>
@@ -149,7 +150,10 @@ const ItemDetail: NextPage = ({ detail }: any) => {
 
           <div className={styles.flavor}>
             <p className={styles.flavor_title}>フレーバー</p>
-            <select className={styles.select} onChange={(e) => setFlavor(e.target.value)}>
+            <select
+              className={styles.select}
+              onChange={(e) => setFlavor(e.target.value)}
+            >
               <option>{detail.flavor[0]}</option>
               <option>{detail.flavor[1]}</option>
               <option>{detail.flavor[2]}</option>
@@ -164,7 +168,6 @@ const ItemDetail: NextPage = ({ detail }: any) => {
             </button>
             <p>&nbsp;{count}&nbsp;</p>
             <button type="button" onClick={clickHandlerPrev}>
-
               -
             </button>
             <p>&nbsp;個&nbsp;</p>

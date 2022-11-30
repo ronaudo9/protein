@@ -7,17 +7,28 @@ import Header from '../layout/header';
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const cookies = req.cookies;
-  console.log(cookies.id)
   const res = await fetch(`http://localhost:8000/users?id=${cookies.id}`);
   const users = await res.json();
   const user = users[0];
   console.log(user)
+
+  const resCarts = await fetch(`http://localhost:8000/carts?userId=${cookies.id}`);
+  const carts = await resCarts.json();
+  console.log(carts)
+
   return {
-    props: { user }
+    props: {
+      user: user,
+      carts: carts
+    }
   };
 };
 
-export default function PurchaseDisplay({user}:{user:any}) {
+export default function PurchaseDisplay({ user, carts }: { user: any, carts: any }) {
+  // const {user,carts} = props
+  console.log(user)
+  console.log(carts)
+
   return (
     <div className={styles.container}>
       <Header />
@@ -25,7 +36,8 @@ export default function PurchaseDisplay({user}:{user:any}) {
       <Head>
         <title>ご注文内容確認</title>
       </Head>
-      <ItemData user={user} />
+      <ItemData user={user} carts={carts}
+      />
     </div>
   );
 }

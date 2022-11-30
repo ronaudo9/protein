@@ -5,46 +5,59 @@ import { GetServerSideProps } from "next";
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
-const fetcher = (resource: any, init: any) =>
-  fetch(resource, init).then((res) => res.json());
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const cookies = req.cookies;
-  console.log(cookies.id)
-  const res = await fetch(`http://localhost:8000/users?id=${cookies.id}`);
-  const users = await res.json();
-  const user = users[0];
-  console.log(user)
-  return {
-    props: { user }
-  };
-};
+// export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+//   const cookies = req.cookies;
 
-const purchaseHistories: any = {
-  date: (new Date()).toUTCString(),
-  // imageUrl: carts.url,
-  // name: carts.name,
-  // flavor: carts.flavor,
-  // price: carts.price,
-  // countity: carts.countity
-}
+//   return {
+//     props: { carts },
+//   };
+// };
 
-const ItemData: React.FunctionComponent<{ user: any }> = ({ user }) => {
+// const purchaseHistories: any = {
+//   date: (new Date()).toUTCString(),
+//   imageUrl: carts.url,
+//   name: carts.name,
+//   flavor: carts.flavor,
+//   price: carts.price,
+//   countity: carts.countity
+// }
+
+const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, carts }) => {
   const router = useRouter();
-  const [carts, setCarts] = useState("purchaseHistories");
 
-  const handler = (event: any) => {
-    event.preventDefault();
-    fetch('/api/purchaseHistories', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(purchaseHistories),
-    }).then(() => {
-      router.push('/purchase/purchased');
-    });
+  const priceArray: any[] = [];
+
+  carts.forEach((element: any) => {
+    const multiPrice = element.price * element.countity;
+    console.log(multiPrice);
+    priceArray.push(multiPrice)
   }
+  )
+
+  const initialValue = 0;
+  const sumPrice = priceArray.reduce(
+    (accumulator, currentPrice) => accumulator + currentPrice,
+    initialValue
+  );
+
+  console.log(sumPrice);
+
+  // const [carts, setCarts] = useState("purchaseHistories");
+
+  // const handler = (event: any) => {
+  //   event.preventDefault();
+  //   fetch('/api/purchaseHistories', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(purchaseHistories),
+  //   }).then(() => {
+  //     router.push('/purchase/purchased');
+  //   });
+  // }
+
   return (
     <>
       <section className={styles.itemdata_main}>
@@ -85,67 +98,76 @@ const ItemData: React.FunctionComponent<{ user: any }> = ({ user }) => {
                 name="paymentMethod"
                 value="代引き"
                 id="cash_delivery"
-                checked
+                defaultChecked
               />
               <label htmlFor="cash_delivery">代引き</label>
             </p>
           </form>
         </div>
+
         <div>
           <h2 className={styles.purchase_h2}>ご注文内容</h2>
           <section className={styles.purchase_display}>
-            <Image
-              src="/public/whey.webp"
-              width={64}
-              height={64}
-              alt="商品画像"
-            />
-            <div className={styles.itemDetail}>
-              <h4 className={styles.index_text}>商品名</h4>
-              {/* 1つ前の画面のcartで選択された同じ情報表示carts.name*/}
-              <p>
-                フレーバー &nbsp;&nbsp;&nbsp;&nbsp;
-                <span className={styles.style}>
-                  &nbsp;チョコ&nbsp;
-                  {/* 1つ前の画面のcartで選択された同じ情報表示carts.flavor*/}
-                </span>
-              </p>
+            {carts.map((cart: any) => {
+              return (
+                <div className={styles.itemDetail} key={cart.id}>
+                  <Image
+                    src={cart.imageUrl}
+                    width={64}
+                    height={64}
+                    alt="商品画像"
+                  />
+                  {/* <div className={styles.itemDetail} key={cart.id}> */}
+                  <h4 className={styles.index_text}>商品名</h4>
+                  {cart.name}
+                  <p>
+                    フレーバー &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span className={styles.style}>
+                      &nbsp;{cart.flavor}&nbsp;
+                    </span>
+                  </p>
 
-              <p>
-                数量 &nbsp;&nbsp;&nbsp;&nbsp;
-                <span className={styles.style}>
-                  &nbsp;2&nbsp;
-                  {/* 1つ前の画面のcartで選択された同じ情報表示carts.flavor*/}
-                </span>
-              </p>
-              <p>
-                合計金額 &nbsp;&nbsp;&nbsp;&nbsp; ¥
-                <span className={styles.style}>
-                  &nbsp;1,290&nbsp;
-                  {/* 1つ前の画面のcartで選択された同じ情報表示carts.flavor*/}
-                </span>
-              </p>
-            </div>
+                  <p>
+                    数量 &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span className={styles.style}>
+                      &nbsp;{cart.countity}&nbsp;
+                    </span>
+                  </p>
+                  <p>
+                    小計 &nbsp;&nbsp;&nbsp;&nbsp; ¥
+                    <span className={styles.style}>
+                      &nbsp;{cart.price * cart.countity}&nbsp;
+                    </span>
+                  </p>
+                </div>
+              )
+            })}
           </section>
         </div>
         <br />
         <br />
         <br />
 
+        <div style={{ textAlign: "right" }}><u>合計金額:{sumPrice}円</u></div>
+        <br />
+        <br />
+
         <section className={styles.button_display}>
-          {/* キャンセルだったらカートに戻らせる */}
-          <Link href="">
+          <Link href="/cart">
             <button className={styles.btnA}>
               <span>キャンセル</span>
             </button>
           </Link>
-          
+
+
           {/* <Link href="/purchase/purchased"> */}
-          <button className={styles.btnB} onClick={handler}>
+          <button className={styles.btnB}
+          // onClick={handler}
+          >
             <span>ご注文を確定する</span>
           </button>
           {/* </Link> */}
-          
+
         </section>
       </section>
     </>
