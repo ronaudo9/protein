@@ -9,6 +9,8 @@ import {
 } from 'next';
 import React, { useState, useEffect } from 'react';
 import Header from '../layout/header';
+import { useRouter } from 'next/router'
+
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(`http://localhost:8000/items/`);
@@ -47,7 +49,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
   const [count, setCount] = React.useState(0);
   const [total, setTotal] = React.useState(0);
   const [userId, setUserId] = React.useState("");
-  const [flavor, setFlavor] = React.useState("");
+  const [flavor, setFlavor] = React.useState(detail.flavor[0]);
 
   const addHandlerNext = (sub: any) => {
     setTotal(total + sub);
@@ -111,9 +113,9 @@ const ItemDetail: NextPage = ({ detail }: any) => {
       },
       body: JSON.stringify(carts),
     })
-    // .then(() => {
-    //   router.push('/');
-    // });
+    .then(() => {
+      router.push('/cart');
+    });
   }
 
   return (
