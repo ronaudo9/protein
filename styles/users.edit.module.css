@@ -5,7 +5,7 @@
   color: #43a047;
 }
 .hr {
-  border-width: 3px;
+  border-width: 1px;
   border-color: #e8e9e8;
 }
 .h1 {
@@ -35,7 +35,7 @@
 }
 .credit {
   margin: 1rem;
-  color: #0000FF;
+  color: #0000ff;
   text-decoration: none;
   /* border: 1px solid #0000FF; */
   /* border-radius: 10px; */
@@ -45,7 +45,7 @@
 }
 .card {
   margin-top: 2rem;
-  color: #0000FF;
+  color: #0000ff;
   text-decoration: none;
   /* border: 1px solid #0000FF; */
   /* border-radius: 10px; */
@@ -53,7 +53,7 @@
   max-width: 300px;
   text-align: center;
 }
-.Current{
+.Current {
   margin-top: 1%;
   margin-bottom: 1%;
 }
