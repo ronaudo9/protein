@@ -9,13 +9,18 @@ import React, { useState } from 'react';
 const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, carts }) => {
   const router = useRouter();
 
-  console.log(carts)
-
   carts.forEach((cart: any) => {
     cart.date = (new Date()).toLocaleString('ja-JP');
   })
 
   console.log(carts)
+
+  const purchaseHistories = {
+    userId : user.id,
+    items : carts
+  }
+
+  console.log(purchaseHistories)
 
   // const purchaseHistories = {
   //   date: (new Date()).toLocaleString('ja-JP'),
@@ -37,7 +42,7 @@ const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, ca
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(carts),
+      body: JSON.stringify(purchaseHistories),
     })
       .then(() => {
         router.push('/purchase/purchased');

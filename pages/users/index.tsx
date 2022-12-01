@@ -5,22 +5,41 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Header from '../layout/header';
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req,
-}) => {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const cookies = req.cookies;
   console.log(cookies.id);
-  const res = await fetch(
-    `http://localhost:8000/users?id=${cookies.id}`
-  );
+  const res = await fetch(`http://localhost:8000/users?id=${cookies.id}`);
   const users = await res.json();
   const user = users[0];
+
+  const resHistories = await fetch(`http://localhost:8000/purchaseHistories?userId=${cookies.id}`);
+  const history = await resHistories.json();
+  // history配列　[ { userId: 2, items: [ [Object] ], id: 2 } ][ { userId: 2, items: [ [Object] ], id: 2 } ]
+  console.log(history)
+
+  const itemsArray: any[] = [];
+
+  //element { userId: 2, items: [ [Object] ], id: 2 } { userId: 2, items: [ [Object] ], id: 2 }
+  history.forEach((element: any) => {
+    const items = element.items
+    //items配列 [{userId: 2,itemId: 1,imageUrl: '/images/impact_whey_protein.jpg',name: 'Impact ホエイ プロテイン',flavor: 'チョコ',price: 1990,countity: 1,id: 2,date: '2022/12/1 11:12:47'}]
+    console.log(items)
+
+    items.forEach((item: any) => {
+      itemsArray.push(item)
+    })
+  })
+
+  console.log(itemsArray)
+
   return {
-    props: { user },
+    props: { user, itemsArray }
   };
 };
 
-const UserDetails = ({ user }: any) => {
+const UserDetails = ({ user, itemsArray }: any) => {
+  console.log(itemsArray)
+
   function asteriskPass() {
     let asterisk = '';
     for (let i = 0; i <= user.password.length; i++) {
@@ -28,6 +47,7 @@ const UserDetails = ({ user }: any) => {
     }
     console.log(asterisk);
   }
+
   return (
     <>
       <Header />
@@ -169,7 +189,7 @@ const UserDetails = ({ user }: any) => {
                 <span className={styles.element_p1}>
                   パスワード &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </span>
-                <span>&nbsp;{asteriskPass}&nbsp;</span>
+                {/* <span>&nbsp;{asteriskPass}&nbsp;</span> */}
               </div>
               <div>
                 <Link href="/users/passwordEdit" legacyBehavior>
@@ -223,99 +243,70 @@ const UserDetails = ({ user }: any) => {
             <hr />
           </div>
         </section>
-
         <section className={styles.purchased}>
-          <h2 className={styles.title_purchased} id="user_purchased">
+          <h2 className={styles.title_purchased} id="user_purchased" >
             ご購入履歴
           </h2>
-          <div>
-            <h3>2022/11/21（購入日時を表示する）</h3>
-            <div>
-              <div className={styles.list}>
-                <Image
-                  src=""
-                  width={64}
-                  height={64}
-                  alt="商品画像"
-                  className={styles.img}
-                />
-                <div className={styles.itemDetail}>
-                  <Link href="">
-                    <h4>商品名</h4>
-                  </Link>
-                  <p>
-                    フレーバー &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span className={styles.style}>
-                      &nbsp;チョコ&nbsp;
-                    </span>
-                  </p>
-                  <p>
-                    価格 &nbsp;&nbsp;&nbsp;&nbsp; ¥
-                    <span className={styles.style}>
-                      &nbsp;1,290&nbsp;
-                    </span>
-                  </p>
-                  <p>
-                    数量&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span className={styles.style}>
-                      &nbsp; 1 &nbsp;
-                    </span>
-                  </p>
-                  <p>
-                    定期購入 &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span className={styles.style}>
-                      &nbsp; あり &nbsp;
-                    </span>
-                  </p>
+          {itemsArray.map((item: any) => {
+            return (
+              <div key={item.id}>
+                <div>
+                  <h3>{item.date}</h3>
+                  <div>
+                    <div className={styles.list}>
+                      <Image
+                        src={item.imageUrl}
+                        width={64}
+                        height={64}
+                        alt="商品画像"
+                        className={styles.img}
+                      />
+                      <div className={styles.itemDetail}>
+                        <Link
+                          href={`./items/${encodeURIComponent(item.itemId)}`}
+                        >
+                          <h4>{item.name}</h4>
+                        </Link>
+                        <p>
+                          フレーバー &nbsp;&nbsp;&nbsp;&nbsp;
+                          <span className={styles.style}>
+                            &nbsp;{item.flavor}&nbsp;
+                          </span>
+                        </p>
+                        <p>
+                          価格 &nbsp;&nbsp;&nbsp;&nbsp; ¥
+                          <span className={styles.style}>
+                            &nbsp;{item.price}&nbsp;
+                          </span>
+                        </p>
+                        <p>
+                          数量&nbsp;&nbsp;&nbsp;&nbsp;
+                          <span className={styles.style}>
+                            &nbsp;{item.countity}&nbsp;
+                          </span>
+                        </p>
+                        <p>
+                          小計 &nbsp;&nbsp;&nbsp;&nbsp; ¥
+                          <span className={styles.style}>
+                            &nbsp;{item.price * item.countity}&nbsp;
+                          </span>
+                        </p>
+                        <p>
+                          定期購入 &nbsp;&nbsp;&nbsp;&nbsp;
+                          <span className={styles.style}>
+                            &nbsp; あり &nbsp;
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <hr />
+                  </div>
                 </div>
               </div>
-              <hr />
-            </div>
-          </div>
-
-          <div>
-            <div className={styles.list}>
-              <Image
-                src=""
-                width={64}
-                height={64}
-                alt="商品画像"
-                className={styles.img}
-              />
-              <div className={styles.itemDetail}>
-                <Link href="">
-                  <h4>商品名</h4>
-                </Link>
-                <p>
-                  フレーバー &nbsp;&nbsp;&nbsp;&nbsp;
-                  <span className={styles.style}>
-                    &nbsp;チョコ&nbsp;
-                  </span>
-                </p>
-                <p>
-                  価格 &nbsp;&nbsp;&nbsp;&nbsp; ¥
-                  <span className={styles.style}>
-                    &nbsp;1,290&nbsp;
-                  </span>
-                </p>
-                <p>
-                  数量&nbsp;&nbsp;&nbsp;&nbsp;
-                  <span className={styles.style}>
-                    &nbsp; 1 &nbsp;
-                  </span>
-                </p>
-                <p>
-                  定期購入 &nbsp;&nbsp;&nbsp;&nbsp;
-                  <span className={styles.style}>
-                    &nbsp; あり &nbsp;
-                  </span>
-                </p>
-              </div>
-            </div>
-            <hr />
-          </div>
+            )
+          })}
         </section>
-      </div>
+      </div >
     </>
   );
 };
