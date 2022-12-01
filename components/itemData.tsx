@@ -15,13 +15,18 @@ const ItemData: React.FunctionComponent<{
 }> = ({ user, carts }) => {
   const router = useRouter();
 
-  console.log(carts);
-
   carts.forEach((cart: any) => {
     cart.date = new Date().toLocaleString('ja-JP');
   });
 
   console.log(carts);
+
+  const purchaseHistories = {
+    userId : user.id,
+    items : carts
+  }
+
+  console.log(purchaseHistories)
 
   // const purchaseHistories = {
   //   date: (new Date()).toLocaleString('ja-JP'),
@@ -42,11 +47,12 @@ const ItemData: React.FunctionComponent<{
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(carts),
-    }).then(() => {
-      router.push('/purchase/purchased');
-    });
-  };
+      body: JSON.stringify(purchaseHistories),
+    })
+      .then(() => {
+        router.push('/purchase/purchased');
+      });
+  }
   // 購入履歴jsonサーバーに購入商品を追加する処理[終わり]
 
   // 合計金額を算出する処理[始まり]

@@ -44,13 +44,14 @@ export const getStaticProps: GetStaticProps = async ({
 // detail getStaticPropsから取得
 const ItemDetail: NextPage = ({ detail }: any) => {
   console.log(detail)
-  // const router = useRouter();
-  
+  const router = useRouter();
+
   const [count, setCount] = React.useState(0);
   const [total, setTotal] = React.useState(0);
   const [userId, setUserId] = React.useState('');
   const [flavor, setFlavor] = React.useState(detail.flavor[0]);
 
+  //　数量変更
   const addHandlerNext = (sub: any) => {
     setTotal(total + sub);
   };
@@ -87,6 +88,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
     addHandlerPrev(detail.price);
   };
 
+  // カートへ追加
   const carts = {
     userId: Number(userId),
     itemId: detail.id,
@@ -102,9 +104,13 @@ const ItemDetail: NextPage = ({ detail }: any) => {
     const userId = user.slice(3);
     console.log(userId);
     setUserId(userId);
-  });
+  }, []);
 
+  
   const handler = (event: any) => {
+    if(count === 0){
+      ; // 数量0の場合はカートへ入れない
+    } else {
     event.preventDefault();
     fetch('http://localhost:8000/carts', {
       method: 'POST',
@@ -112,11 +118,15 @@ const ItemDetail: NextPage = ({ detail }: any) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(carts),
-    });
-    // .then(() => {
-    //   router.push('/cart');
-    // });
-  };
+
+    })
+    .then(() => {
+      if (count > 0){
+        router.push('/cart');}
+      } 
+    );}
+  }
+
 
   return (
     <>
