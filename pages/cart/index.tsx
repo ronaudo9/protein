@@ -22,9 +22,9 @@ export const getServerSideProps: GetServerSideProps = async ({
   };
 };
 
-const data={}
+const data = {};
 
-const Cart = ({ user }: any) => {
+const Cart = ({ users }: any) => {
   const router = useRouter();
 
   // 削除
@@ -39,46 +39,61 @@ const Cart = ({ user }: any) => {
     router.reload();
   }
 
+  // 小計・合計
+
+  const priceArray: any[] = [];
+
+  users.forEach((element: any) => {
+    const multiPrice = element.price * element.countity;
+    console.log(multiPrice);
+    priceArray.push(multiPrice);
+  });
+
+  const initialValue = 0;
+  const sumPrice = priceArray.reduce(
+    (accumulator, currentPrice) => accumulator + currentPrice,
+    initialValue
+  );
+
+  console.log(sumPrice);
+
   return (
     <>
-     
-          <h4 className={styles.cart_title}>カート</h4>
-          <ul className={styles.cart_menu}>
-            <p>アイテム</p>
-            <p>数量</p>
-            <p>価格(税込み)</p>
-          </ul>
-          <section className={styles.cart_content}>
-            {user.map((cart: any) => (
-              <div key={cart.id}>
-                <Image
-                  className={styles.cart_img}
-                  src={''}
-                  alt="商品画像"
-                  width={300}
-                  height={300}
-                />
-                <p>{cart.name}</p>
-                <p>{cart.countity}</p>
-                <p>{cart.price}</p>
-                <button>削除</button>
-              </div>
-            )
-          )}
-        </section>
-
-
-        <section>
-          <div className={styles.cart_total}>
-            <p>購入金額:</p>
-            <p className={styles.total}></p>
-            <Link href="/purchase">
-              <button className={styles.purchase}>購入する</button>
-            </Link>
+      <h4 className={styles.cart_title}>カート</h4>
+      <ul className={styles.cart_menu}>
+        <p>アイテム</p>
+        <p>数量</p>
+        <p>価格(税込み)</p>
+      </ul>
+      <section className={styles.cart_content}>
+        {users.map((cart: any) => (
+          <div key={cart.id}>
+            <Image
+              className={styles.cart_img}
+              src={''}
+              alt="商品画像"
+              width={300}
+              height={300}
+            />
+            <p>{cart.name}</p>
+            <p>{cart.countity}</p>
+            <p>{cart.price * cart.countity}</p>
+            <button onClick={() => deleteItem(cart)}>削除</button>
           </div>
-        </section>
-    </>
-  )}
+        ))}
+      </section>
 
+      <section>
+        <div className={styles.cart_total}>
+          <p>購入金額:</p>
+          <p className={styles.total}>{sumPrice}</p>
+          <Link href="/purchase">
+            <button className={styles.purchase}>購入する</button>
+          </Link>
+        </div>
+      </section>
+    </>
+  );
+};
 
 export default Cart;
