@@ -8,13 +8,19 @@ export default async function handler(req:any, res:any) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1M9jYsIkNMnSmKxPX7T5jcDM',
+            price_data: {
+              currency: 'jpy',
+              product_data: {
+                name: 'プロテイン',
+              },
+              unit_amount: req.body.price,
+            },
             quantity: 1,
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/items/`,
-        cancel_url: `${req.headers.origin}/items/`,
+        success_url: `${req.headers.origin}/api/purchaseHistories`,
+        cancel_url: `${req.headers.origin}/purchase/`,
       });
       res.redirect(303, session.url);
     } catch (err:any) {
