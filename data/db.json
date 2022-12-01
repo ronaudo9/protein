@@ -308,34 +308,6 @@
   ],
   "purchaseHistories": [
     {
-      "id": 1,
-      "userId": 1,
-      "items": [
-        {
-          "userId": 1,
-          "itemId": 2,
-          "imageUrl": "/images/impact_whey_aisolate.jpg",
-          "name": "Impact ホエイ アイソレート",
-          "flavor": "チョコ",
-          "price": 4390,
-          "countity": 0,
-          "id": 6,
-          "date": "2022/12/1 10:09:25"
-        },
-        {
-          "userId": 1,
-          "itemId": 2,
-          "imageUrl": "/images/impact_whey_aisolate.jpg",
-          "name": "Impact ホエイ アイソレート",
-          "flavor": "チョコ",
-          "price": 4390,
-          "countity": 1,
-          "id": 7,
-          "date": "2022/12/1 10:09:25"
-        }
-      ]
-    },
-    {
       "userId": 2,
       "items": [
         {
@@ -524,29 +496,26 @@
         }
       ],
       "id": 7
+    },
+    {
+      "userId": 1,
+      "items": [
+        {
+          "userId": 1,
+          "itemId": 4,
+          "imageUrl": "/images/cofee_burst_whey.jpg",
+          "name": "コーヒー ブースト ホエイ",
+          "flavor": "ココナッツ",
+          "price": 2590,
+          "countity": 2,
+          "id": 7,
+          "date": "2022/12/1 14:05:54"
+        }
+      ],
+      "id": 8
     }
   ],
   "carts": [
-    {
-      "userId": 4,
-      "itemId": 3,
-      "imageUrl": "/images/probiotech_whey_protein.jpg",
-      "name": "プロバイオティック ホエイ プロテイン",
-      "flavor": "チョコ",
-      "price": 2190,
-      "countity": 3,
-      "id": 1
-    },
-    {
-      "userId": 4,
-      "itemId": 2,
-      "imageUrl": "/images/probiotech_whey_protein.jpg",
-      "name": "プロバイオティック ホエイ プロテイン",
-      "flavor": "チョコ",
-      "price": 2190,
-      "countity": 3,
-      "id": 1
-    },
     {
       "userId": 2,
       "itemId": 1,
@@ -576,7 +545,6 @@
     {
       "userId": 2,
       "itemId": 1,
-
       "imageUrl": "/images/impact_whey_protein.jpg",
       "name": "Impact ホエイ プロテイン",
       "flavor": "チョコ",
@@ -585,7 +553,7 @@
       "id": 6
     },
     {
-      "userId": 2,
+      "userId": 1,
       "itemId": 4,
       "imageUrl": "/images/cofee_burst_whey.jpg",
       "name": "コーヒー ブースト ホエイ",

@@ -28,7 +28,7 @@ const Cart = ({ users }: any) => {
   const router = useRouter();
 
   // 削除
-  function deleteItem(users: any) {
+  function deleteItem() {
     fetch(`http://localhost:8000/carts/${users.id}`, {
       method: 'DELETE',
       headers: {
