@@ -148,7 +148,7 @@
   white-space: nowrap;
   word-break: break-all;
   border-radius: 5px;
-  border: 1px solid #1aaada;
+  border: 1px solid #fafdfe;
 }
 
 .btnA:hover {
@@ -161,7 +161,7 @@
     from(#5de1d6),
     to(#1ed6ee)
   );
-  border-bottom: 2px solid #1897c1;
+  border-bottom: 2px solid #f1f5f6;
 }
 
 .btnB {
@@ -169,6 +169,7 @@
   margin: 0.5em;
   padding: 1em 1em;
   width: 10vw;
+  height: 4vw;
   color: white;
   font-size: 0.5%;
   font-weight: 700;
@@ -184,7 +185,7 @@
   word-break: break-all;
   text-align: center;
   border-radius: 5px;
-  border: 1px solid #1aaada;
+  border: 1px solid #f1f3f4;
 }
 
 .btnB:hover {
@@ -197,7 +198,7 @@
     from(#5de1d6),
     to(#1ed6ee)
   );
-  border-bottom: 2px solid #1aa4d1;
+  border-bottom: 2px solid #f6f8f8;
   transform: scale(1.1);
 }
 
@@ -233,16 +234,19 @@
   bottom: 10%;
 }
 
+/* .purchasedBottonsDisplay {
+} */
 .purchased_buttons {
   display: flex;
   background-color: blue;
+  margin: 0 auto;
 }
 
 .purchased_button {
   margin: 10%;
   padding: 1em 2em;
   width: 200;
-
+  height: 100px;
   color: #333;
   font-size: 18px;
   font-weight: 700;
@@ -258,13 +262,13 @@
   );
   background-image: -webkit-linear-gradient(
     right,
-    #5de1d6 0%,
-    #1ed6ee 100%
+    #16a6ff 0%,
+    #1fdef7 100%
   );
   background-image: linear-gradient(
     to left,
-    #5de1d6 0%,
-    #1ed6ee 100%
+    #16a6ff 0%,
+    #1fdef7 100%
   );
 }
 
@@ -272,8 +276,7 @@
   content: '';
   width: 5px;
   height: 5px;
-  border-top: 3px solid #333333;
-  border-right: 3px solid #333333;
+
   transform: rotate(45deg);
 }
 
