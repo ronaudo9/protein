@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   };
 };
 
-const UserDetails = ({ user }: any) => {
+const UserDetails = ({ user, itemsArray }: any) => {
   return (
     <>
       <Header />
