@@ -213,7 +213,7 @@
   word-break: break-all;
   text-align: center;
   border-radius: 5px;
-  border: 1px solid #1aaada;
+  border: 1px solid #f5f8f9;
 }
 
 .btnB:hover {
@@ -223,10 +223,10 @@
     linear,
     right top,
     left top,
-    from(#5de1d6),
+    from(#c79bfa),
     to(#1ed6ee)
   );
-  border-bottom: 2px solid #1aa4d1;
+  border-bottom: 2px solid #f7f8f8;
   transform: scale(1.1);
 }
 
@@ -242,8 +242,8 @@
     linear,
     right top,
     left top,
-    from(#6b95f0),
-    to(#1e90ee)
+    from(#90b3ff),
+    to(#1fb1f9)
   );
   border-radius: 5px;
   transform-origin: right top;
@@ -255,9 +255,76 @@
   transform: scale(1, 1);
 }
 
+.btnB_black {
+  position: relative;
+  margin: 0.5em;
+  padding: 0.5em 0;
+  width: 10em;
+  height: 2.5em;
+  color: white;
+  font-size: 1.5vw;
+  font-weight: 600;
+  background-image: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#5de1d6),
+    to(#1ed6ee)
+  );
+  transition: 0.2s cubic-bezier(0.5, 1, 0.8, 1);
+  white-space: nowrap;
+  word-break: break-all;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #e6f0f3;
+}
+
+.btnB_black:hover {
+  margin-top: 1px;
+  color: rgb(6, 6, 6);
+  background-image: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#baf1ec),
+    to(#1ed6ee)
+  );
+  border-bottom: 2px solid #1aa4d1;
+  transform: scale(1.1);
+}
+
+.btnB_black::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  content: '';
+  background-image: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#bbf8da),
+    to(#48edff)
+  );
+  border-radius: 5px;
+  transform-origin: right top;
+  transform: scale(0, 1);
+  transition: transform 0.3s;
+}
+.btnB_black:hover::before {
+  transform-origin: left top;
+  transform: scale(1, 1);
+}
+
 .elementCategory {
-  margin-bottom: 5%;
-  display: flex;
+  justify-content: space-between;
+  padding: 1%;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  background-color: blue;
+  margin: 1%;
 }
 
 .btnA {
@@ -296,11 +363,14 @@
   border-bottom: 2px solid #1897c1;
 }
 
-.font {
-  font-size: 20px;
-}
-
 .list {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.formGroup {
+  margin-bottom: 10px;
+  text-align: center;
+  background-color: yellow;
+  padding: 1%;
 }

@@ -39,6 +39,9 @@ const ItemDisplay: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>RAKUTEIN</title>
+      </Head>
       <Header />
       <hr className={styles.hr}></hr>
       <section className={styles.searchList}>
@@ -46,7 +49,7 @@ const ItemDisplay: NextPage = () => {
           category={category}
           categoryHandler={categoryHandler}
         />
-
+        &nbsp;&nbsp;&nbsp;
         <CategoryFlavorSearch
           flavor={flavor}
           flavorHandler={flavorHandler}
@@ -63,32 +66,15 @@ const ItemDisplay: NextPage = () => {
       </section>
 
       <section>
-        <ItemDisplayNew data={data} />
-      </section>
+        <p className={styles.titlesCenter}>
+          <span className={styles.titleCenter}>ITEMS</span>
+          <br />
+          商品一覧
+        </p>
 
-      <section>
-        <ul className={styles.next_list}>
-          <li>
-            <a href="">
-              <span>1</span>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <span>2</span>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <span>3</span>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <span>次へ</span>
-            </a>
-          </li>
-        </ul>
+        <div className={styles.displayCenter}>
+          <ItemDisplayNew data={data} />
+        </div>
       </section>
 
       <body className={styles.form}>
@@ -98,7 +84,13 @@ const ItemDisplay: NextPage = () => {
           の違いとは？
         </h2>
         <br />
-        <img src="/images/powder.jpg" alt="powder" />
+        <Image
+          src="/images/powder.jpg"
+          alt="powder"
+          width={800}
+          height={1000}
+          className={styles.imgCenter}
+        />
         <h2>原材料の違い</h2>
         <hr></hr>
         <p>

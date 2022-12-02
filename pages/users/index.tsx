@@ -4,6 +4,9 @@ import styles from '../../styles/detail_user.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import Header from '../layout/header';
+import useSWR from 'swr';
+import EmailEdit from '../../components/emailEdit';
+import UsersElements from '../../components/usersElements';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -21,13 +24,14 @@ export const getServerSideProps: GetServerSideProps = async ({
 };
 
 const UserDetails = ({ user }: any) => {
-  function asteriskPass() {
-    let asterisk = '';
-    for (let i = 0; i <= user.password.length; i++) {
-      asterisk += '*';
-    }
-    console.log(asterisk);
-  }
+  // function asteriskPass() {
+  //   let asterisk = '';
+  //   for (let i = 0; i <= user.password.length; i++) {
+  //     asterisk += '*';
+  //   }
+  //   console.log(asterisk);
+  // }
+
   return (
     <>
       <Header />
@@ -57,171 +61,7 @@ const UserDetails = ({ user }: any) => {
             基本情報
           </h2>
 
-          <div className={styles.font}>
-            <div className={styles.elementCategory}>
-              <div>
-                <span className={styles.element_p1}>
-                  ID(Email) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span>
-                <span className={styles.style}>{user.email}</span>
-
-                <Link href="/users/emailEdit" legacyBehavior>
-                  <button type="submit" className={styles.btnA}>
-                    編集
-                  </button>
-                </Link>
-              </div>
-            </div>
-
-            <div className={styles.elementCategory}>
-              <div>
-                <div>
-                  <span className={styles.element_p1}>
-                    お名前 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </span>
-                  <span className={styles.style}>
-                    &nbsp;{user.firstName}&nbsp;{user.lastName}&nbsp;
-                  </span>
-                </div>
-                <div>
-                  <span className={styles.element_p1}>
-                    ふりがな &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </span>
-                  <span className={styles.style}>
-                    &nbsp;{user.firstNameKana}&nbsp;
-                    {user.lastNameKana}
-                    &nbsp;
-                  </span>
-                  <Link href="/users/nameEdit" legacyBehavior>
-                    <button type="submit" className={styles.btnA}>
-                      編集
-                    </button>
-                  </Link>
-                </div>
-
-                <div>
-                  &nbsp;&nbsp;&nbsp;ミドルネーム　&nbsp;
-                  <span className={styles.style}>
-                    &nbsp;{user.middleName}&nbsp;
-                  </span>
-                  <Link href="/users/middleNameEdit" legacyBehavior>
-                    <button type="submit" className={styles.btnA}>
-                      編集
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.elementCategory}>
-              <div></div>
-            </div>
-
-            <div className={styles.elementCategory}>
-              <div>
-                <span className={styles.element_p1}>
-                  住所 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span>
-                <ul>
-                  <li className={styles.li}>
-                    {' '}
-                    郵便番号 &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span className={styles.style}>
-                      &nbsp;{user.postCode}&nbsp;
-                    </span>
-                  </li>
-                  <li className={styles.li}>
-                    住所 &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span className={styles.style}>
-                      &nbsp;{user.prefecture}
-                      {user.city}
-                      {user.aza}
-                      {user.building}&nbsp;
-                    </span>
-                  </li>
-                  <Link href="/users/postCodeEdit" legacyBehavior>
-                    <button type="submit" className={styles.btnA}>
-                      編集
-                    </button>
-                  </Link>
-                </ul>
-              </div>
-            </div>
-
-            <div className={styles.elementCategory}>
-              <div>
-                <span className={styles.element_p1}>
-                  電話番号 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span>
-                <span className={styles.style}>
-                  &nbsp;{user.tel}&nbsp;
-                </span>
-              </div>
-              <Link href="/users/telEdit" legacyBehavior>
-                <button type="submit" className={styles.btnA}>
-                  編集
-                </button>
-              </Link>
-            </div>
-
-            <div className={styles.elementCategory}>
-              <div>
-                <span className={styles.element_p1}>
-                  パスワード &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </span>
-                <span>&nbsp;{asteriskPass}&nbsp;</span>
-              </div>
-              <div>
-                <Link href="/users/passwordEdit" legacyBehavior>
-                  <button type="submit" className={styles.btnA}>
-                    編集
-                  </button>
-                </Link>
-              </div>
-            </div>
-
-            <Link href="/users/new" legacyBehavior>
-              <p className={styles.credit}>
-                <button type="submit" className={styles.btnB}>
-                  クレジットカード情報変更はこちら &rarr;
-                </button>
-              </p>
-            </Link>
-          </div>
-        </section>
-        <section className={styles.favorite}>
-          <h2 className={styles.title_favorite} id="favorite_list">
-            お気に入りリスト
-          </h2>
-          <div>
-            <div className={styles.list}>
-              <Image
-                src=""
-                width={64}
-                height={64}
-                alt="商品画像"
-                className={styles.img}
-              />
-              <div className={styles.itemDetail}>
-                <Link href="">
-                  <h4>商品名</h4>
-                </Link>
-                <p>
-                  フレーバー &nbsp;&nbsp;&nbsp;&nbsp;
-                  <span className={styles.style}>
-                    &nbsp;チョコ&nbsp;
-                  </span>
-                </p>
-                <p>
-                  価格 &nbsp;&nbsp;&nbsp;&nbsp; ¥
-                  <span className={styles.style}>
-                    &nbsp;1,290&nbsp;
-                  </span>
-                </p>
-              </div>
-            </div>
-            <hr />
-          </div>
+          <UsersElements user={user} />
         </section>
 
         <section className={styles.purchased}>
