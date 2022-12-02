@@ -21,10 +21,6 @@ const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, ca
 
   console.log(carts)
 
-  const cartPatch = {
-    deleted: true
-  }
-
 
   // 購入履歴jsonサーバーに購入商品を追加する処理[始まり]
   const handler = (event: any) => {
