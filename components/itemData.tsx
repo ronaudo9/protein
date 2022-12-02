@@ -1,21 +1,19 @@
 import styles from '../styles/purchase.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
-import { GetServerSideProps } from "next";
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
-
-const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, carts }) => {
+const ItemData: React.FunctionComponent<{
+  user: any;
+  carts: any;
+}> = ({ user, carts }) => {
   const router = useRouter();
 
-  console.log(carts)
-
   carts.forEach((cart: any) => {
-    cart.date = (new Date()).toLocaleString('ja-JP');
-  })
-
-  console.log(carts)
+    cart.date = new Date().toLocaleString('ja-JP');
+  });
 
   // const purchaseHistories = {
   //   date: (new Date()).toLocaleString('ja-JP'),
@@ -28,7 +26,6 @@ const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, ca
   //   countity: carts.countity
   // }
 
-
   // 購入履歴jsonサーバーに購入商品を追加する処理[始まり]
   const handler = (event: any) => {
     event.preventDefault();
@@ -38,28 +35,43 @@ const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, ca
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(carts),
-    })
-      .then(() => {
-        router.push('/purchase/purchased');
-      });
-  }
+    }).then(() => {
+      deleteCarts(event);
+      router.push('/purchase/purchased');
+    });
+  };
   // 購入履歴jsonサーバーに購入商品を追加する処理[終わり]
 
+  // カート内の商品を消去[始まり]
+  // fetch(`/api/cats/${cartItem.id})
+  const deleteCarts = (event: any) => {
+    // const data = { deleted: true };
+    event.preventDefault();
+    const data = {};
+    carts.forEach((cart: any) => {
+      fetch(`http://localhost:8000/carts/${cart.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+    });
+  };
+  // カート内の商品を消去[終わり]
 
   // 合計金額を算出する処理[始まり]
   const priceArray: any[] = [];
   carts.forEach((element: any) => {
     const multiPrice = element.price * element.countity;
-    console.log(multiPrice);
-    priceArray.push(multiPrice)
-  })
+    priceArray.push(multiPrice);
+  });
   const initialValue = 0;
   const sumPrice = priceArray.reduce(
     (accumulator, currentPrice) => accumulator + currentPrice,
     initialValue
   );
   // 合計金額を算出する処理[終わり]
-
 
   return (
     <>
@@ -71,16 +83,17 @@ const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, ca
           <h2 className={styles.purchase_h2}>配送先住所</h2>
 
           <p>
-            お名前：{user.firstName}{user.lastName}&nbsp;({user.firstNameKana}{user.lastNameKana})
+            お名前：{user.firstName}
+            {user.lastName}&nbsp;({user.firstNameKana}
+            {user.lastNameKana})
           </p>
+          <p>電話番号：{user.tel}</p>
+          <p>郵便番号：{user.postCode}</p>
           <p>
-            電話番号：{user.tel}
-          </p>
-          <p>
-            郵便番号：{user.postCode}
-          </p>
-          <p>
-            住所：{user.prefecture}{user.city}{user.aza}{user.building}
+            住所：{user.prefecture}
+            {user.city}
+            {user.aza}
+            {user.building}
           </p>
         </div>
         <div>
@@ -142,7 +155,7 @@ const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, ca
                     </span>
                   </p>
                 </div>
-              )
+              );
             })}
           </section>
         </div>
@@ -150,7 +163,9 @@ const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, ca
         <br />
         <br />
 
-        <div style={{ textAlign: "right" }}><u>合計金額:{sumPrice}円</u></div>
+        <div style={{ textAlign: 'right' }}>
+          <u>合計金額:{sumPrice}円</u>
+        </div>
         <br />
         <br />
 
@@ -160,18 +175,13 @@ const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, ca
               <span>キャンセル</span>
             </button>
           </Link>
-
-
-          <button className={styles.btnB}
-            onClick={handler}
-          >
+          <button className={styles.btnB} onClick={handler}>
             <span>ご注文を確定する</span>
           </button>
-
         </section>
       </section>
     </>
   );
-}
+};
 
 export default ItemData;
