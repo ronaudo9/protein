@@ -26,8 +26,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
 export default function PurchaseDisplay({ user, carts }: { user: any, carts: any }) {
   // const {user,carts} = props
-  console.log(user)
-  console.log(carts)
 
   return (
     <div className={styles.container}>
@@ -36,8 +34,7 @@ export default function PurchaseDisplay({ user, carts }: { user: any, carts: any
       <Head>
         <title>ご注文内容確認</title>
       </Head>
-      <ItemData user={user} carts={carts}
-      />
+      <ItemData user={user} carts={carts}/>
     </div>
   );
 }
