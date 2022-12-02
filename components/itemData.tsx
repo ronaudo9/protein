@@ -15,6 +15,15 @@ const ItemData: React.FunctionComponent<{
     cart.date = new Date().toLocaleString('ja-JP');
   });
 
+  const purchaseHistories = {
+    userId : user.id,
+    items : carts
+  }
+
+  console.log(purchaseHistories)
+
+  
+
   // const purchaseHistories = {
   //   date: (new Date()).toLocaleString('ja-JP'),
   //   userId: carts.userId,

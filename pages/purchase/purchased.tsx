@@ -23,22 +23,21 @@ export default function PurchaseCompletion() {
           <p className={styles.purchased_p}>
             詳細はユーザー情報のご購入履歴をご確認ください。
           </p>
-          {/* <Link href=> */}
-
-          <div className={styles.purchased_buttons}>
-            <button className={styles.purchased_button}>
-              ご購入履歴を確認する
-            </button>
-            {/* </Link> */}
-            <br />
-            <Link href="/items">
+          <Link href="/users#user_purchased">
+            <div className={styles.purchased_buttons}>
               <button className={styles.purchased_button}>
-                買い物を続ける
+                ご購入履歴を確認する
               </button>
-            </Link>
-          </div>
+            </div>
+          </Link>
+          <br />
+          <Link href="/items">
+            <button className={styles.purchased_button}>
+              買い物を続ける
+            </button>
+          </Link>
         </div>
-      </main>
+      </main >
     </div>
   );
 }
