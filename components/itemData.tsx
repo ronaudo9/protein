@@ -19,8 +19,6 @@ const ItemData: React.FunctionComponent<{
     cart.date = new Date().toLocaleString('ja-JP');
   });
 
-  console.log(carts);
-
   const purchaseHistories = {
     userId : user.id,
     items : carts
@@ -47,19 +45,36 @@ const ItemData: React.FunctionComponent<{
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(purchaseHistories),
-    })
-      .then(() => {
-        router.push('/purchase/purchased');
-      });
-  }
+      body: JSON.stringify(carts),
+    }).then(() => {
+      deleteCarts(event);
+      router.push('/purchase/purchased');
+    });
+  };
   // 購入履歴jsonサーバーに購入商品を追加する処理[終わり]
+
+  // カート内の商品を消去[始まり]
+  // fetch(`/api/cats/${cartItem.id})
+  const deleteCarts = (event: any) => {
+    // const data = { deleted: true };
+    event.preventDefault();
+    const data = {};
+    carts.forEach((cart: any) => {
+      fetch(`http://localhost:8000/carts/${cart.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+    });
+  };
+  // カート内の商品を消去[終わり]
 
   // 合計金額を算出する処理[始まり]
   const priceArray: any[] = [];
   carts.forEach((element: any) => {
     const multiPrice = element.price * element.countity;
-    console.log(multiPrice);
     priceArray.push(multiPrice);
   });
   const initialValue = 0;
@@ -180,7 +195,6 @@ const ItemData: React.FunctionComponent<{
               <span>キャンセル</span>
             </button>
           </Link>
-
           <button className={styles.btnB} onClick={handler}>
             <span>ご注文を確定する</span>
           </button>
