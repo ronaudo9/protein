@@ -4,6 +4,7 @@ import styles from 'styles/cart.module.css';
 import type { GetServerSideProps, NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Header from '../layout/header';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -59,6 +60,7 @@ const Cart = ({ users }: any) => {
 
   return (
     <>
+      <Header />
       <h4 className={styles.cart_title}>カート</h4>
       <ul className={styles.cart_menu}>
         <p>アイテム</p>
@@ -70,15 +72,17 @@ const Cart = ({ users }: any) => {
           <div key={cart.id}>
             <Image
               className={styles.cart_img}
-              src={''}
+              src={cart.imageUrl}
               alt="商品画像"
               width={300}
               height={300}
             />
-            <p>{cart.name}</p>
-            <p>{cart.countity}</p>
-            <p>{cart.price * cart.countity}</p>
-            <button onClick={() => deleteItem(cart)}>削除</button>
+            <div className={styles.text_content}>
+              <p>{cart.name}</p>
+              <p>{cart.countity}</p>
+              <p>{cart.price * cart.countity}</p>
+              <button onClick={() => deleteItem(cart)}>削除</button>
+            </div>
           </div>
         ))}
       </section>

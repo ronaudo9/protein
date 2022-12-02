@@ -8,9 +8,13 @@
     justify-content: space-around;
 }
 
+.text_content {
+    display: flex;
+    justify-content: space-between;
+}
+
 .cart_total {
     display: flex;
-
 }
 
 .total {

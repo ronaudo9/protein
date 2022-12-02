@@ -41,7 +41,7 @@ const ItemData: React.FunctionComponent<{
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(carts),
+      body: JSON.stringify(purchaseHistories),
     }).then(() => {
       deleteCarts(event);
       router.push('/purchase/purchased');
@@ -50,7 +50,7 @@ const ItemData: React.FunctionComponent<{
   // 購入履歴jsonサーバーに購入商品を追加する処理[終わり]
 
   // カート内の商品を消去[始まり]
-  // fetch(`/api/cats/${cartItem.id})
+  // fetch(`/api/carts/${cartItem.id})
   const deleteCarts = (event: any) => {
     // const data = { deleted: true };
     event.preventDefault();
