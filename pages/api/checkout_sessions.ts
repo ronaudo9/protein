@@ -19,7 +19,7 @@ export default async function handler(req:any, res:any) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/api/purchaseHistories`,
+        success_url: `${req.headers.origin}/purchase/purchased`,
         cancel_url: `${req.headers.origin}/purchase/`,
       });
       res.redirect(303, session.url);

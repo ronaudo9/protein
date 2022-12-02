@@ -2,10 +2,52 @@ import styles from '../../styles/purchase.module.css';
 import Head from 'next/head';
 import Link from 'next/link';
 import Header from '../layout/header';
+import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 
-export default function PurchaseCompletion() {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = context.req.cookies;
+  console.log(`cookie:${cookies.id}`)
+  const res = await fetch(
+    `http://localhost:8000/carts?userId=${cookies.id}`
+  );
+  const carts = await res.json();
+  const purchaseHistories = {
+    userId : cookies.id,
+    items:carts
+  }
+  await fetch(
+    `http://localhost:8000/purchaseHistories`,{
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify( purchaseHistories),
+    })
+    return {
+      props: { carts },
+    };
+  }
+
+
+export default function PurchaseCompletion(carts: any) {
+  // const router = useRouter();
+  // function post(carts: any) {
+  // const purchaseHistories = {
+  //   userId : carts.userId,
+  //   items:carts
+  // }
+  // fetch(`http://localhost:8000/carts/purchaseHistories`, {
+  //   method: 'POST',
+  //   headers: {'Content-Type': 'application/json'},
+  //   body: JSON.stringify( purchaseHistories ),
+  // });
+  // router.reload();
+  // }
+
+
+
   return (
     <div className={styles.container}>
+
       <Header />
       <hr className={styles.hr}></hr>
       <Head>

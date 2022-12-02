@@ -9,7 +9,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
 }) => {
   const cookies = req.cookies;
-  console.log(cookies.id);
   const res = await fetch(
     `http://localhost:8000/carts?userId=${cookies.id}`
   );
@@ -55,7 +54,7 @@ const Cart = ({ users }: any) => {
     initialValue
   );
 
-  console.log(sumPrice);
+
 
   return (
     <>

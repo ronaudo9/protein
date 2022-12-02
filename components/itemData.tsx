@@ -100,7 +100,6 @@ const ItemData: React.FunctionComponent<{
                   <button type="submit">
                     Checkout
                   </button>
-                  console.log({sumPrice})
               </form>
 
           <form>
