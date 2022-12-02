@@ -7,7 +7,6 @@ import Header from '../layout/header';
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const cookies = req.cookies;
-  console.log(cookies.id);
   const res = await fetch(`http://localhost:8000/users?id=${cookies.id}`);
   const users = await res.json();
   const user = users[0];
@@ -15,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const resHistories = await fetch(`http://localhost:8000/purchaseHistories?userId=${cookies.id}`);
   const history = await resHistories.json();
   // history配列　[ { userId: 2, items: [ [Object] ], id: 2 } ][ { userId: 2, items: [ [Object] ], id: 2 } ]
-  console.log(history)
+
 
   const itemsArray: any[] = [];
 
@@ -30,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     })
   })
 
-  console.log(itemsArray)
+
 
   return {
     props: { user, itemsArray }
@@ -38,14 +37,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 };
 
 const UserDetails = ({ user, itemsArray }: any) => {
-  console.log(itemsArray)
+
 
   function asteriskPass() {
     let asterisk = '';
     for (let i = 0; i <= user.password.length; i++) {
       asterisk += '*';
     }
-    console.log(asterisk);
+   
   }
 
   return (

@@ -34,8 +34,7 @@ export default function PurchaseDisplay({ user, carts }: { user: any, carts: any
       <Head>
         <title>ご注文内容確認</title>
       </Head>
-      <ItemData user={user} carts={carts}
-      />
+      <ItemData user={user} carts={carts}/>
     </div>
   );
 }
