@@ -28,7 +28,7 @@ const Cart = ({ users }: any) => {
   const router = useRouter();
 
   // 削除
-  function deleteItem() {
+  function deleteItem(users: any) {
     fetch(`http://localhost:8000/carts/${users.id}`, {
       method: 'DELETE',
       headers: {
@@ -40,7 +40,6 @@ const Cart = ({ users }: any) => {
   }
 
   // 小計・合計
-
   const priceArray: any[] = [];
 
   users.forEach((element: any) => {
@@ -55,7 +54,15 @@ const Cart = ({ users }: any) => {
     initialValue
   );
 
-  console.log(sumPrice);
+
+  const routerHandler = () => {
+    if (users[0]) {
+      router.push('/purchase')
+    } else {
+      alert('商品一覧から商品を選んでカートに入れてください')
+      router.push('/items')
+    }
+  }
 
   return (
     <>
@@ -87,9 +94,7 @@ const Cart = ({ users }: any) => {
         <div className={styles.cart_total}>
           <p>購入金額:</p>
           <p className={styles.total}>{sumPrice}</p>
-          <Link href="/purchase">
-            <button className={styles.purchase}>購入する</button>
-          </Link>
+          <button className={styles.purchase} onClick={routerHandler}>購入する</button>
         </div>
       </section>
     </>

@@ -13,25 +13,17 @@ const ItemData: React.FunctionComponent<{ user: any, carts: any }> = ({ user, ca
     cart.date = (new Date()).toLocaleString('ja-JP');
   })
 
-  console.log(carts)
 
   const purchaseHistories = {
-    userId : user.id,
-    items : carts
+    userId: user.id,
+    items: carts
   }
 
-  console.log(purchaseHistories)
+  console.log(carts)
 
-  // const purchaseHistories = {
-  //   date: (new Date()).toLocaleString('ja-JP'),
-  //   userId: carts.userId,
-  //   itemId: carts.itemId,
-  //   imageUrl: carts.imageUrl,
-  //   name: carts.name,
-  //   flavor: carts.flavor,
-  //   price: carts.price,
-  //   countity: carts.countity
-  // }
+  const cartPatch = {
+    deleted: true
+  }
 
 
   // 購入履歴jsonサーバーに購入商品を追加する処理[始まり]
