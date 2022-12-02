@@ -21,29 +21,23 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify( purchaseHistories),
-    })
+    }).then(() => {
+      carts.forEach((cart: any) => {
+      fetch(`http://localhost:8000/carts/${cart.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(purchaseHistories),
+      })});
+    });
     return {
       props: { carts },
     };
   }
 
 
-export default function PurchaseCompletion(carts: any) {
-  // const router = useRouter();
-  // function post(carts: any) {
-  // const purchaseHistories = {
-  //   userId : carts.userId,
-  //   items:carts
-  // }
-  // fetch(`http://localhost:8000/carts/purchaseHistories`, {
-  //   method: 'POST',
-  //   headers: {'Content-Type': 'application/json'},
-  //   body: JSON.stringify( purchaseHistories ),
-  // });
-  // router.reload();
-  // }
-
-
+export default function PurchaseCompletion() {
 
   return (
     <div className={styles.container}>
