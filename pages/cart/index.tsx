@@ -55,43 +55,52 @@ const Cart = ({ users }: any) => {
     initialValue
   );
 
-
-
   return (
     <>
       <Header />
-      <h4 className={styles.cart_title}>カート</h4>
-      <ul className={styles.cart_menu}>
-        <p>アイテム</p>
-        <p>数量</p>
-        <p>価格(税込み)</p>
-      </ul>
-      <section className={styles.cart_content}>
-        {users.map((cart: any) => (
-          <div key={cart.id}>
-            <Image
-              className={styles.cart_img}
-              src={cart.imageUrl}
-              alt="商品画像"
-              width={300}
-              height={300}
-            />
-            <div className={styles.text_content}>
-              <p>{cart.name}</p>
-              <p>{cart.countity}</p>
-              <p>{cart.price * cart.countity}</p>
-              <button onClick={() => deleteItem(cart)}>削除</button>
+      <hr className={styles.hr}></hr>
+      <div className={styles.item_list}>
+        <h4 className={styles.cart_title}>カート</h4>
+        <section className={styles.cart_content}>
+          {users.map((cart: any) => (
+            <div key={cart.id} className={styles.cart_content2}>
+              <Image
+                className={styles.cart_img}
+                src={cart.imageUrl}
+                alt="商品画像"
+                width={260}
+                height={260}
+              />
+              <div className={styles.text_content}>
+                <p>{cart.name}</p>
+                <p>
+                  <span className={styles.quantity}>数量</span>
+                  {cart.countity}個
+                </p>
+                <p>
+                  <span>価格(税込)</span>¥
+                  {(cart.price * cart.countity).toLocaleString()}
+                </p>
+                <button onClick={() => deleteItem(cart)}>削除</button>
+              </div>
             </div>
-          </div>
-        ))}
-      </section>
+          ))}
+        </section>
+      </div>
 
       <section>
         <div className={styles.cart_total}>
-          <p>購入金額:</p>
-          <p className={styles.total}>{sumPrice}</p>
+          <p>合計金額:</p>
+          <p className={styles.total}>¥&ensp;{sumPrice.toLocaleString()}</p>
+        </div>
+        <div className={styles.buttons}>
           <Link href="/purchase">
             <button className={styles.purchase}>購入する</button>
+          </Link>
+          <Link href="/items">
+            <button className={styles.shopping}>
+              買い物を続ける
+            </button>
           </Link>
         </div>
       </section>
