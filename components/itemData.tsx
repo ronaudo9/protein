@@ -4,7 +4,11 @@ import Image from 'next/image';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
 
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+);
 const ItemData: React.FunctionComponent<{
   user: any;
   carts: any;
@@ -93,6 +97,14 @@ const ItemData: React.FunctionComponent<{
         </div>
         <div>
           <h2 className={styles.purchase_h2}>決済方法</h2>
+
+          <form action="/api/checkout_sessions" method="POST">
+          <input type="hidden" name="price" value={sumPrice} />
+                  <button type="submit">
+                    Checkout
+                  </button>
+          </form>
+
           <form>
             <p>
               <input
@@ -102,6 +114,7 @@ const ItemData: React.FunctionComponent<{
                 id="pay_credit"
               />
               <label htmlFor="pay_credit">クレジットカード</label>
+
             </p>
             <p>
               <input

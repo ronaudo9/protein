@@ -17,15 +17,14 @@ export default function CategoryFlavorSearch({
 
   return (
     <div className={styles.cp_ipselect}>
-      <label className={styles.category1_selectlabel}>
-        フレーバー
-      </label>
       <select
         className={styles.category1}
         onChange={flavorHandler}
         value={flavor}
       >
-        <option value="" hidden disabled selected></option>
+        <option value="" hidden>
+          フレーバー
+        </option>
         <option value="チョコ">チョコ</option>
         <option value="バニラ">バニラ</option>
         <option value="抹茶">抹茶</option>
@@ -58,8 +57,6 @@ export default function CategoryFlavorSearch({
         <option value="ストロベリークリーム">
           ストロベリークリーム
         </option>
-        <span className={styles.category1_highlight}></span>
-        <span className={styles.category1_selectbar}></span>
       </select>
     </div>
   );

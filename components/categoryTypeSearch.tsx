@@ -17,14 +17,15 @@ export default function CategoryTypeSearch({
 
   return (
     <div className={styles.cp_ipselect}>
-      <label className={styles.category1_selectlabel}>種類</label>
       <select
         className={styles.category1}
         onChange={categoryHandler}
         value={category}
         required
       >
-        <option value="" hidden disabled selected></option>
+        <option value="" hidden>
+          種類
+        </option>
         <option value="whey">ホエイプロテイン</option>
         <option value="casein">カゼインプロテイン</option>
       </select>

@@ -2,6 +2,41 @@ import styles from '../../styles/purchase.module.css';
 import Head from 'next/head';
 import Link from 'next/link';
 import Header from '../layout/header';
+import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+
+export const getServerSideProps: GetServerSideProps = async (
+  context
+) => {
+  const cookies = context.req.cookies;
+  console.log(`cookie:${cookies.id}`);
+  const res = await fetch(
+    `http://localhost:8000/carts?userId=${cookies.id}`
+  );
+  const carts = await res.json();
+  const purchaseHistories = {
+    userId: cookies.id,
+    items: carts,
+  };
+  await fetch(`http://localhost:8000/purchaseHistories`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(purchaseHistories),
+  }).then(() => {
+    carts.forEach((cart: any) => {
+      fetch(`http://localhost:8000/carts/${cart.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(purchaseHistories),
+      });
+    });
+  });
+  return {
+    props: { carts },
+  };
+};
 
 export default function PurchaseCompletion() {
   return (
@@ -23,6 +58,25 @@ export default function PurchaseCompletion() {
           <p className={styles.purchased_p}>
             詳細はユーザー情報のご購入履歴をご確認ください。
           </p>
+          {/* <Link href=> */}
+          <div className={styles.purchasedBottonsDisplay}>
+            <div className={styles.purchased_buttons}>
+              <div>
+                <Link href="/users">
+                  <button className={styles.purchased_button}>
+                    ご購入履歴を確認する
+                  </button>
+                </Link>
+              </div>
+              <div>
+                <Link href="/items">
+                  <button className={styles.purchased_button}>
+                    買い物を続ける
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
           <Link href="/users#user_purchased">
             <div className={styles.purchased_buttons}>
               <button className={styles.purchased_button}>
@@ -37,7 +91,7 @@ export default function PurchaseCompletion() {
             </button>
           </Link>
         </div>
-      </main >
+      </main>
     </div>
   );
 }
