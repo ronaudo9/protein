@@ -8,6 +8,14 @@
   height: 100%;
 }
 
+.category1 {
+  border-radius: 7px;
+  width: 200px;
+  height: 40px;
+  background-color: rgb(243, 239, 239);
+  border: 3px solid #ffffff;
+  margin: 1% 5%;
+}
 .head {
   padding-top: 2%;
   padding-left: 7%;
@@ -18,99 +26,7 @@
 .searchList {
   background-color: rgb(243, 239, 239);
   padding: 0.5%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  text-align: center;
-}
-
-.cp_ipselect {
-  position: relative;
-  width: 100%;
-  text-align: center;
-  padding: 1%;
-}
-.category1 {
-  font-family: inherit;
-  background-color: transparent;
-  width: 40%;
-
-  font-size: 15px;
-  border-radius: 0;
-  border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  margin: 0 10% 0 50%;
-}
-.category1:focus {
-  outline: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0);
-}
-.cp_ipselect .category1 {
-  appearance: none;
-  -webkit-appearance: none;
-}
-.cp_ipselect select::-ms-expand {
-  display: none;
-}
-.cp_ipselect:after {
-  position: absolute;
-  top: 30px;
-  right: 50px;
-  width: 0;
-  height: 0;
-  padding: 0;
-  content: '';
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid rgba(0, 0, 0, 0.3);
-  pointer-events: none;
-}
-.category1_selectlabel {
-  color: rgba(0, 0, 0, 0.5);
-  font-size: 15px;
-  font-weight: normal;
-  pointer-events: none;
-  left: 0;
-  top: 10px;
-  transition: 0.2s ease all;
-}
-.category1:focus ~ .category1_selectlabel,
-.category1:valid ~ .category1_selectlabel {
-  color: #021b2b;
-  top: -20px;
-  transition: 0.2s ease all;
-  font-size: 14px;
-}
-.category1_selectbar {
-  position: relative;
-  display: block;
-  width: 100%;
-}
-.category1_selectbar:before,
-.category1_selectbar:after {
-  content: '';
-  height: 2px;
-  width: 0;
-  bottom: 1px;
-  position: absolute;
-  background: #21b7e0;
-  transition: 0.2s ease all;
-}
-.category1_selectbar:before {
-  left: 50%;
-}
-.category1_selectbar:after {
-  right: 50%;
-}
-.category1:focus ~ .category1_selectbar:before,
-.category16:focus ~ .category1_selectbar:after {
-  width: 50%;
-}
-.category1_highlight {
-  position: absolute;
-  top: 25%;
-  left: 0;
-  pointer-events: none;
-  opacity: 0.5;
+  display: flex;
 }
 
 .category2 {
@@ -129,6 +45,7 @@
 .itemB {
   list-style: none;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .side {
@@ -136,7 +53,7 @@
   flex-wrap: wrap;
 }
 
-@media (min-width: 600px) {
+/* @media (min-width: 600px) {
   .side div {
     width: 48%;
   }
@@ -154,16 +71,65 @@
   .side div:nth-child(3n + 1) {
     clear: both;
   }
+} */
+
+.a {
+  position: relative;
 }
 
-.a:hover {
-  transform: translateY(-0.1875em);
+.a::after {
+  position: absolute; /*親要素であるaタグを基準に位置を指定*/
+  left: 0; /*アンダーラインを各メニュー（aタグ）の左端に指定*/
+  content: ''; /*本来は、擬似要素に入るテキストなどを’’内に指定。今回はアンダーラインなので何も記載しない*/
+  width: 100%; /*アンダーラインを各aタグの幅に合わせる*/
+  height: 4px; /*アンダーラインの高さ（太さ）*/
+  background: #95ffe1; /*アンダーラインの色*/
 }
+
+.a::after {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 4px;
+  background: #95ffe1;
+  bottom: -1px; /*アンダーラインが位置する、各リストの下端からの高さ　ヘッダーの下端に合わせています*/
+  visibility: hidden; /*ホバー前に、アンダーラインを可視化しない*/
+  transition: 0.3s;
+  bottom: 7px; /*アンダーラインが現れ始める位置*/
+}
+
+.a:hover::after {
+  visibility: visible; /*ホバー後、アンダーラインを可視化する*/
+  opacity: 1; /*アンダーラインが透明な状態からアニメーションが開始され、ホバーを話して終了する際も、徐々に透明な状態に戻る。*/
+  transition: 0.3s; /*変形の時間*/
+  bottom: 1px;
+}
+
+.itemsImg {
+  justify-content: space-between;
+
+  margin: 0 auto;
+  width: 260px;
+}
+
+.ul {
+  margin: 0 auto;
+
+  width: 260px;
+}
+
+/* .imgPro {
+  width: 250px;
+  margin: auto;
+} */
 
 .side .items_list1 {
-  width: 25%;
-  justify-content: space-between;
-  margin: 4%;
+  margin: 2% auto;
+  padding: 2%;
+  background-color: rgb(245, 245, 242);
+  border-radius: 5px;
 }
 
 .items_list2 {
@@ -237,4 +203,29 @@
     transparent 60%,
     rgb(167, 249, 119) 60%
   );
+}
+
+.imgCenter {
+  width: 90%;
+  height: 70%;
+  margin-bottom: 2%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.displayCenter {
+  display: grid;
+  padding: 0 auto;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+.titleCenter {
+  font-size: 60px;
+}
+
+.titlesCenter {
+  text-align: center;
+  margin-bottom: 2%;
+  margin-top: 5%;
 }
