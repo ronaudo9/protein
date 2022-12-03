@@ -20,22 +20,10 @@ const ItemData: React.FunctionComponent<{
   });
 
   const purchaseHistories = {
-    userId : user.id,
-    items : carts
+    userId: user.id,
+    items: carts
   }
 
-  console.log(purchaseHistories)
-
-  // const purchaseHistories = {
-  //   date: (new Date()).toLocaleString('ja-JP'),
-  //   userId: carts.userId,
-  //   itemId: carts.itemId,
-  //   imageUrl: carts.imageUrl,
-  //   name: carts.name,
-  //   flavor: carts.flavor,
-  //   price: carts.price,
-  //   countity: carts.countity
-  // }
 
   // 購入履歴jsonサーバーに購入商品を追加する処理[始まり]
   const handler = (event: any) => {
@@ -111,10 +99,10 @@ const ItemData: React.FunctionComponent<{
           <h2 className={styles.purchase_h2}>決済方法</h2>
 
           <form action="/api/checkout_sessions" method="POST">
-          <input type="hidden" name="price" value={sumPrice} />
-                  <button type="submit">
-                    Checkout
-                  </button>
+            <input type="hidden" name="price" value={sumPrice} />
+            <button type="submit">
+              Checkout
+            </button>
           </form>
 
           <form>
@@ -141,49 +129,71 @@ const ItemData: React.FunctionComponent<{
           </form>
         </div>
 
-        <div>
-          <h2 className={styles.purchase_h2}>ご注文内容</h2>
-          <section className={styles.purchase_display}>
-            {carts.map((cart: any) => {
-              return (
-                <div className={styles.itemDetail} key={cart.id}>
-                  <Image
-                    src={cart.imageUrl}
-                    width={64}
-                    height={64}
-                    alt="商品画像"
-                  />
-                  <h4 className={styles.index_text}>商品名</h4>
-                  {cart.name}
-                  <p>
-                    フレーバー &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span className={styles.style}>
-                      &nbsp;{cart.flavor}&nbsp;
-                    </span>
-                  </p>
-
-                  <p>
-                    数量 &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span className={styles.style}>
-                      &nbsp;{cart.countity}&nbsp;
-                    </span>
-                  </p>
-                  <p>
-                    小計 &nbsp;&nbsp;&nbsp;&nbsp; ¥
-                    <span className={styles.style}>
-                      &nbsp;{cart.price * cart.countity}&nbsp;
-                    </span>
-                  </p>
+        <section className={styles.purchased}>
+          <h2 className={styles.purchase_h2} id="user_purchased">
+            ご注文内容
+          </h2>
+          {carts.map((cart: any) => {
+            return (
+              <div key={cart.id}>
+                {/* <div> */}
+                {/* <h3>購入日時：{item.date}</h3> */}
+                <div>
+                  <div className={styles.list}>
+                    <Image
+                      src={cart.imageUrl}
+                      width={260}
+                      height={260}
+                      alt="商品画像"
+                      className={styles.img}
+                    />
+                    <div className={styles.itemDetail}>
+                      {/* <Link
+                          href={`./items/${encodeURIComponent(
+                            item.itemId
+                          )}`}
+                        > */}
+                      <h4 className={styles.itemA}>{cart.name}</h4>
+                      {/* </Link> */}
+                      <p>
+                        フレーバー &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span className={styles.style}>
+                          &nbsp;{cart.flavor}&nbsp;
+                        </span>
+                      </p>
+                      <p>
+                        価格 &nbsp;&nbsp;&nbsp;&nbsp; ¥
+                        <span className={styles.style}>
+                          &nbsp;{cart.price}&nbsp;
+                        </span>
+                      </p>
+                      <p>
+                        数量&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span className={styles.style}>
+                          &nbsp;{cart.countity}&nbsp;
+                        </span>
+                      </p>
+                      <p>
+                        小計 &nbsp;&nbsp;&nbsp;&nbsp; ¥
+                        <span className={styles.style}>
+                          &nbsp;{cart.price * cart.countity}&nbsp;
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  <hr />
                 </div>
-              );
-            })}
-          </section>
-        </div>
+                {/* </div> */}
+              </div>
+            );
+          })}
+        </section>
+
         <br />
         <br />
         <br />
 
-        <div style={{ textAlign: 'right' }}>
+        <div style={{ textAlign: 'right' }} className={styles.sumPrice}>
           <u>合計金額:{sumPrice}円</u>
         </div>
         <br />
@@ -196,10 +206,10 @@ const ItemData: React.FunctionComponent<{
             </button>
           </Link>
           <button className={styles.btnB} onClick={handler}>
-            <span>ご注文を確定する</span>
+            <span>確定する</span>
           </button>
         </section>
-      </section>
+      </section >
     </>
   );
 };

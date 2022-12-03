@@ -40,7 +40,6 @@ const Cart = ({ users }: any) => {
   }
 
   // 小計・合計
-
   const priceArray: any[] = [];
 
   users.forEach((element: any) => {
@@ -54,6 +53,16 @@ const Cart = ({ users }: any) => {
     (accumulator, currentPrice) => accumulator + currentPrice,
     initialValue
   );
+
+
+  const routerHandler = () => {
+    if (users[0]) {
+      router.push('/purchase')
+    } else {
+      alert('商品一覧から商品を選んでカートに入れてください')
+      router.push('/items')
+    }
+  }
 
   return (
     <>

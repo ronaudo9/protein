@@ -11,6 +11,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../layout/header';
 import { useRouter } from 'next/router';
 
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(`http://localhost:8000/items/`);
   const items = await res.json();
@@ -105,25 +106,31 @@ const ItemDetail: NextPage = ({ detail }: any) => {
     console.log(userId);
     setUserId(userId);
   }, []);
-  
+
+
   const handler = (event: any) => {
-    if(count === 0){
+    if (count === 0) {
       ; // 数量0の場合はカートへ入れない
     } else {
-    event.preventDefault();
-    fetch('http://localhost:8000/carts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(carts),
+      event.preventDefault();
+      fetch('http://localhost:8000/carts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(carts),
 
-    })
-    .then(() => {
-      if (count > 0){
-        router.push('/cart');}
-      } 
-    );}
+      })
+        .then(() => {
+          if (document.cookie !== '') {
+            router.push('/cart')
+          } else {
+            alert('カートに追加するにはログインが必要です');
+            router.push('/')
+          }
+        }
+        );
+    }
   }
 
 

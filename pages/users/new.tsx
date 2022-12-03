@@ -51,6 +51,7 @@ function UsersNew() {
         body: JSON.stringify(formValues),
       }).then(() => {
         router.push('/');
+        alert("ご登録ありがとうございます！ログインをしてお買い物を続けてください")
       });
     }
   };
@@ -139,38 +140,37 @@ function UsersNew() {
         <div className={styles.form}>
           <form action="" method="post" onSubmit={Handler}>
             <div className="col-sm-8 col-sm-offset-2">
-              <div className={styles.formGroup}>
-                <h1 className={styles.title}>新規会員登録</h1>
-                <section className={styles.category}>
-                  <label htmlFor="name" className={styles.centerText}>
-                    <div>お名前（必須）</div>
-                  </label>
-                  <div className={styles.formset}>
-                    <div>
-                      <input
-                        type="text"
-                        name="firstName"
-                        className={styles.input}
-                        placeholder="例:姓"
-                        value={formValues.firstName}
-                        onChange={handleChange}
-                        required
-                      />
-                      &nbsp;&nbsp;&nbsp;&nbsp;
-                      <input
-                        type="text"
-                        name="lastName"
-                        className={styles.input}
-                        placeholder="例:名"
-                        value={formValues.lastName}
-                        onChange={handleChange}
-                        required
-                      />
-                      {/* <p>{formErrors?.name}</p> */}
-                    </div>
+              <h1 className={styles.title}>新規会員登録</h1>
+              <section className={styles.category}>
+                <label htmlFor="name" className={styles.centerText}>
+                  <div>お名前（必須）</div>
+                </label>
+                <div className={styles.formset}>
+                  <div>
+                    <input
+                      type="text"
+                      name="firstName"
+                      className={styles.input}
+                      placeholder="姓"
+                      value={formValues.firstName}
+                      onChange={handleChange}
+                      required
+                    />
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input
+                      type="text"
+                      name="lastName"
+                      className={styles.input}
+                      placeholder="名"
+                      value={formValues.lastName}
+                      onChange={handleChange}
+                      required
+                    />
+                    {/* <p>{formErrors?.name}</p> */}
                   </div>
-                </section>
-              </div>
+                </div>
+              </section>
+
               <section className={styles.category}>
                 <label htmlFor="name" className={styles.centerText}>
                   <div>ふりがな（必須）</div>
@@ -181,7 +181,7 @@ function UsersNew() {
                       type="text"
                       name="firstNameKana"
                       className={styles.input}
-                      placeholder="例:ふりがな（姓）"
+                      placeholder="ふりがな（姓）"
                       value={formValues.firstNameKana}
                       onChange={handleChange}
                       required
@@ -192,7 +192,7 @@ function UsersNew() {
                         type="text"
                         name="lastNameKana"
                         className={styles.input}
-                        placeholder="例:ふりがな（名）"
+                        placeholder="ふりがな（名）"
                         value={formValues.lastNameKana}
                         onChange={handleChange}
                         required
@@ -212,7 +212,7 @@ function UsersNew() {
                       name="middleName"
                       //   className={styles.input}
                       value={formValues.middleName}
-                      placeholder="例:ミドルネーム"
+                      placeholder="ミドルネーム"
                       onChange={handleChange}
                       className={styles.input}
                     />
@@ -229,7 +229,7 @@ function UsersNew() {
                       type="email"
                       name="email"
                       value={formValues.email}
-                      placeholder="例:raffaello@jungleocean.com"
+                      placeholder="raffaello@jungleocean.com"
                       onChange={handleChange}
                       className={styles.input}
                       required
@@ -254,7 +254,7 @@ function UsersNew() {
                       value={formValues.password}
                       onChange={handleChange}
                       className={styles.input}
-                      placeholder="例:半角英数でご入力ください"
+                      placeholder="半角英数でご入力ください"
                       required
                     />
                   </div>
@@ -277,7 +277,7 @@ function UsersNew() {
                       value={formValues.passwordConfirmation}
                       onChange={handleChange}
                       className={styles.input}
-                      placeholder="例:もう一度パスワードをご入力ください"
+                      placeholder="もう一度パスワードをご入力ください"
                       required
                     />
                   </div>

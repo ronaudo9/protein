@@ -1,9 +1,5 @@
 @charset "utf-8";
 
-.header {
-  margin-top: 30px;
-  color: #43a047;
-}
 .hr {
   border-width: 1px;
   border-color: #e8e9e8;
@@ -17,13 +13,39 @@
 .align-light {
   text-align: right;
 }
+
+.group {
+  background-color: #1897c1;
+  display: flex;
+  padding: 1%;
+
+  margin: 1%;
+}
 .formGroup {
   margin-bottom: 10px;
   text-align: center;
+  background-color: yellow;
+  padding: 1%;
+}
+.grid {
+  display: flex;
+
+  background-color: pink;
+  padding: 1%;
+}
+
+.lables {
+  background-color: green;
+  white-space: nowrap;
 }
 
 .input {
-  background: #ffcdd2;
+  background: #fcfbfb;
+  width: 100%;
+}
+
+.inputs {
+  background-color: white;
 }
 
 .inputEmail {
@@ -66,3 +88,43 @@ input:valid{
 input:focus{
   background: #DCEDC8;
 } */
+
+.element_p1 {
+  font-weight: bold;
+}
+
+.btnA {
+  position: relative;
+  margin: 0.5em;
+
+  width: 4.5em;
+  height: 1.9em;
+  color: white;
+  font-size: 1vw;
+  font-weight: 300;
+  background-image: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#5de1d6),
+    to(#1ed6ee)
+  );
+  transition: 0.3s;
+  white-space: nowrap;
+  word-break: break-all;
+  border-radius: 5px;
+  border: 1px solid #f3f6f7;
+}
+
+.btnA:hover {
+  margin-top: 1px;
+  color: white;
+  background-image: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#5de1d6),
+    to(#1ed6ee)
+  );
+  border-bottom: 2px solid #eff2f4;
+}

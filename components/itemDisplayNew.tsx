@@ -24,27 +24,29 @@ export default function ItemDisplayNew({ data }: any) {
 
           return (
             <div key={item.id} className={styles.items_list1}>
-              <a
-                href={`./items/${encodeURIComponent(item.id)}`}
-                className={styles.a}
-              >
+              <div className={styles.itemsImg}>
                 <Image
                   priority
                   src={item.imageUrl}
                   alt="商品画像"
-                  width={250}
-                  height={250}
+                  width={260}
+                  height={260}
+                  className={styles.imgPro}
                 />
-                <li className={styles.itemA}>
-                  {item.name}
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <span>☆</span>
-                </li>
-                <li className={styles.itemB}>
+              </div>
+
+              <div className={styles.ul}>
+                <Link
+                  href={`./items/${encodeURIComponent(item.id)}`}
+                  className={styles.a}
+                >
+                  <p className={styles.itemA}>{item.name}</p>
+                </Link>
+                <p className={styles.itemB}>
                   価格 &nbsp;¥{item.price.toLocaleString()}
-                </li>
-                <li className={styles.item}>{modStr}</li>
-              </a>
+                </p>
+                <p className={styles.item}>{modStr}</p>
+              </div>
             </div>
           );
         })}
