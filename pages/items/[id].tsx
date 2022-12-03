@@ -11,6 +11,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../layout/header';
 import { useRouter } from 'next/router';
 
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(`http://localhost:8000/items/`);
   const items = await res.json();
@@ -124,7 +125,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
           if (document.cookie !== '') {
             router.push('/cart')
           } else {
-            alert('ログインをしてお買い物を続けてください');
+            alert('カートに追加するにはログインが必要です');
             router.push('/')
           }
         }

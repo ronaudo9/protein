@@ -20,7 +20,6 @@ const ItemData: React.FunctionComponent<{
     items: carts
   }
 
-  console.log(carts)
 
   // 購入履歴jsonサーバーに購入商品を追加する処理[始まり]
   const handler = (event: any) => {

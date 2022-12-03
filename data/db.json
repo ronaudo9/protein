@@ -734,25 +734,79 @@
       "items": [
         {
           "userId": 2,
-          "deleted": false,
-          "items": [
-            {
-              "itemId": 1,
-              "imageUrl": "/images/impact_whey_protein.jpg",
-              "name": "Impact ホエイ プロテイン",
-              "flavor": "チョコ",
-              "price": 1990,
-              "countity": 1
-            }
-          ],
+          "itemId": 2,
+          "imageUrl": "/images/impact_whey_aisolate.jpg",
+          "name": "Impact ホエイ アイソレート",
+          "flavor": "チョコ",
+          "price": 4390,
+          "countity": 1,
           "id": 1,
-          "date": "2022/12/2 11:00:49"
+          "date": "2022/12/2 13:38:38"
         }
       ],
       "id": 17
     }
   ],
   "carts": [
-    {}
+    {
+      "userId": 2,
+      "itemId": 2,
+      "imageUrl": "/images/impact_whey_aisolate.jpg",
+      "name": "Impact ホエイ アイソレート",
+      "flavor": "チョコ",
+      "price": 4390,
+      "countity": 1,
+      "id": 1
+    },
+    {
+      "userId": 0,
+      "itemId": 2,
+      "imageUrl": "/images/impact_whey_aisolate.jpg",
+      "name": "Impact ホエイ アイソレート",
+      "flavor": "チョコ",
+      "price": 4390,
+      "countity": 1,
+      "id": 2
+    },
+    {
+      "userId": 0,
+      "itemId": 2,
+      "imageUrl": "/images/impact_whey_aisolate.jpg",
+      "name": "Impact ホエイ アイソレート",
+      "flavor": "チョコ",
+      "price": 4390,
+      "countity": 1,
+      "id": 3
+    },
+    {
+      "userId": 0,
+      "itemId": 2,
+      "imageUrl": "/images/impact_whey_aisolate.jpg",
+      "name": "Impact ホエイ アイソレート",
+      "flavor": "チョコ",
+      "price": 4390,
+      "countity": 1,
+      "id": 4
+    },
+    {
+      "userId": 0,
+      "itemId": 2,
+      "imageUrl": "/images/impact_whey_aisolate.jpg",
+      "name": "Impact ホエイ アイソレート",
+      "flavor": "チョコ",
+      "price": 4390,
+      "countity": 1,
+      "id": 5
+    },
+    {
+      "userId": 0,
+      "itemId": 2,
+      "imageUrl": "/images/impact_whey_aisolate.jpg",
+      "name": "Impact ホエイ アイソレート",
+      "flavor": "チョコ",
+      "price": 4390,
+      "countity": 1,
+      "id": 6
+    }
   ]
 }

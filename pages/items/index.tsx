@@ -13,10 +13,10 @@ import { ChangeEvent, useState } from 'react';
 import CategoryFlavorSearch from '../../components/categoryFlavorSearch';
 import Image from 'next/image';
 
+const fetcher = (resource: any, init: any) =>
+  fetch(resource, init).then((res) => res.json());
 
 const ItemDisplay: NextPage = () => {
-  const fetcher = (resource: any, init: any) =>
-    fetch(resource, init).then((res) => res.json());
   const [resource, setResource] = useState('/api/items');
   const [category, setCategory] = useState('');
   const [flavor, setFlavor] = useState('');

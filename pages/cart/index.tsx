@@ -77,7 +77,7 @@ const Cart = ({ users }: any) => {
           <div key={cart.id}>
             <Image
               className={styles.cart_img}
-              src={''}
+              src={cart.imageUrl}
               alt="商品画像"
               width={300}
               height={300}
