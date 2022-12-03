@@ -28,9 +28,9 @@
   border-color: #e8e9e8;
 }
 
-.style {
+/* .style {
   background-color: rgb(250, 249, 249);
-}
+} */
 
 .index_text {
   text-decoration: underline;
@@ -47,10 +47,12 @@
 }
 
 .style {
-  background-color: white;
+  /* background-color: white; */
   border-radius: 5px;
   padding: 0.2rem 1prem;
   margin: 5rem 5;
+  font-weight: bold;
+  white-space: nowrap;
 }
 
 .title {
@@ -373,4 +375,9 @@
   text-align: center;
   background-color: yellow;
   padding: 1%;
+}
+
+.itemA {
+  font-weight: bold;
+  font-size: large;
 }

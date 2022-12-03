@@ -54,7 +54,6 @@ const Cart = ({ users }: any) => {
   );
 
 
-<<<<<<< HEAD
   const routerHandler = () => {
     if (users[0]) {
       router.push('/purchase')
@@ -63,8 +62,6 @@ const Cart = ({ users }: any) => {
       router.push('/items')
     }
   }
-=======
->>>>>>> main
 
   return (
     <>
