@@ -74,6 +74,8 @@ const UserDetails = ({ user, itemsArray }: any) => {
 
           <UsersElements user={user} />
         </section>
+
+
         <section className={styles.purchased}>
           <h2 className={styles.title_purchased} id="user_purchased">
             ご購入履歴
@@ -82,13 +84,13 @@ const UserDetails = ({ user, itemsArray }: any) => {
             return (
               <div key={item.id}>
                 <div>
-                  <h3>{item.date}</h3>
+                  <h3>購入日時：{item.date}</h3>
                   <div>
                     <div className={styles.list}>
                       <Image
                         src={item.imageUrl}
-                        width={64}
-                        height={64}
+                        width={260}
+                        height={260}
                         alt="商品画像"
                         className={styles.img}
                       />
@@ -98,7 +100,7 @@ const UserDetails = ({ user, itemsArray }: any) => {
                             item.itemId
                           )}`}
                         >
-                          <h4>{item.name}</h4>
+                          <h4 className={styles.itemA}>{item.name}</h4>
                         </Link>
                         <p>
                           フレーバー &nbsp;&nbsp;&nbsp;&nbsp;
@@ -122,12 +124,6 @@ const UserDetails = ({ user, itemsArray }: any) => {
                           小計 &nbsp;&nbsp;&nbsp;&nbsp; ¥
                           <span className={styles.style}>
                             &nbsp;{item.price * item.countity}&nbsp;
-                          </span>
-                        </p>
-                        <p>
-                          定期購入 &nbsp;&nbsp;&nbsp;&nbsp;
-                          <span className={styles.style}>
-                            &nbsp; あり &nbsp;
                           </span>
                         </p>
                       </div>

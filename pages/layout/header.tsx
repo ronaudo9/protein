@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import style from './header.module.css';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 const logOut = () => {
   if (document.cookie !== '') {
@@ -12,12 +13,33 @@ const logOut = () => {
   }
 };
 
-export default function Header() {
-  return (
 
+export default function Header() {
+  const router = useRouter();
+
+  const moveToCart = () => {
+    if (document.cookie !== '') {
+      router.push('/cart')
+    } else {
+      alert('ログインをしてください');
+      router.push('/')
+    }
+  };
+
+  const moveToUsers = () => {
+    if (document.cookie !== '') {
+      router.push('/users')
+    } else {
+      alert('ログインをしてください');
+      router.push('/')
+    }
+  };
+
+
+  return (
     <div className={style.all}>
       <div className={style.logo}>
-        <Link href="/items/">
+        <Link href="/items">
           <Image
             src="/images/rakutein.jpg"
             width={170}
@@ -27,25 +49,21 @@ export default function Header() {
         </Link>
       </div>
       <section className={style.iconlist}>
-        <div className={style.icon}>
-          <Link href="/cart">
-            <Image
-              src="/images/cart.jpg"
-              width={50}
-              height={50}
-              alt="cart"
-            />
-          </Link>
+        <div className={style.icon} onClick={moveToCart}>
+          <Image
+            src="/images/cart.jpg"
+            width={50}
+            height={50}
+            alt="cart"
+          />
         </div>
-        <div className={style.icon}>
-          <Link href="/users/">
-            <Image
-              src="/images/human.jpg"
-              width={45}
-              height={45}
-              alt="user"
-            />
-          </Link>
+        <div className={style.icon} onClick={moveToUsers}>
+          <Image
+            src="/images/human.jpg"
+            width={45}
+            height={45}
+            alt="user"
+          />
         </div>
         <div className={style.icon} onClick={logOut}>
           <Link href="/">

@@ -62,7 +62,7 @@ export default function PurchaseCompletion() {
           <div className={styles.purchasedBottonsDisplay}>
             <div className={styles.purchased_buttons}>
               <div>
-                <Link href="/users">
+                <Link href="/users#user_purchased">
                   <button className={styles.purchased_button}>
                     ご購入履歴を確認する
                   </button>
@@ -77,19 +77,6 @@ export default function PurchaseCompletion() {
               </div>
             </div>
           </div>
-          <Link href="/users#user_purchased">
-            <div className={styles.purchased_buttons}>
-              <button className={styles.purchased_button}>
-                ご購入履歴を確認する
-              </button>
-            </div>
-          </Link>
-          <br />
-          <Link href="/items">
-            <button className={styles.purchased_button}>
-              買い物を続ける
-            </button>
-          </Link>
         </div>
       </main>
     </div>

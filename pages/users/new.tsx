@@ -51,6 +51,7 @@ function UsersNew() {
         body: JSON.stringify(formValues),
       }).then(() => {
         router.push('/');
+        alert("ご登録ありがとうございます！ログインをしてお買い物を続けてください")
       });
     }
   };

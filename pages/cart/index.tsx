@@ -39,7 +39,6 @@ const Cart = ({ users }: any) => {
   }
 
   // 小計・合計
-
   const priceArray: any[] = [];
 
   users.forEach((element: any) => {
@@ -55,6 +54,14 @@ const Cart = ({ users }: any) => {
   );
 
 
+  const routerHandler = () => {
+    if (users[0]) {
+      router.push('/purchase')
+    } else {
+      alert('商品一覧から商品を選んでカートに入れてください')
+      router.push('/items')
+    }
+  }
 
   return (
     <>
@@ -69,7 +76,7 @@ const Cart = ({ users }: any) => {
           <div key={cart.id}>
             <Image
               className={styles.cart_img}
-              src={''}
+              src={cart.imageUrl}
               alt="商品画像"
               width={300}
               height={300}
@@ -86,9 +93,7 @@ const Cart = ({ users }: any) => {
         <div className={styles.cart_total}>
           <p>購入金額:</p>
           <p className={styles.total}>{sumPrice}</p>
-          <Link href="/purchase">
-            <button className={styles.purchase}>購入する</button>
-          </Link>
+          <button className={styles.purchase} onClick={routerHandler}>購入する</button>
         </div>
       </section>
     </>
