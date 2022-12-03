@@ -179,28 +179,23 @@ const ItemDetail: NextPage = ({ detail }: any) => {
           </div>
           <div className={styles.quantity}>
             <p className={styles.quantity_title}>数量</p>
-            <button type="button" onClick={clickHandlerNext}>
+            <button className={styles.plus} type="button" onClick={clickHandlerNext}>
               +
             </button>
             <p>&nbsp;{count}&nbsp;</p>
-            <button type="button" onClick={clickHandlerPrev}>
+            <button className={styles.minus} type="button" onClick={clickHandlerPrev}>
               -
             </button>
             <p>&nbsp;個&nbsp;</p>
           </div>
           <div className={styles.total}>
             <p className={styles.total_title}>合計金額</p>
-            <p>{total.toLocaleString()}円</p>
+            <p>¥{total.toLocaleString()}</p>
           </div>
           <div className={styles.cart}>
             <button className={styles.cart_button} onClick={handler}>
               カートに追加
             </button>
-            <div>
-              <p>
-                お気に入り登録<span>☆</span>
-              </p>
-            </div>
           </div>
         </div>
       </div>

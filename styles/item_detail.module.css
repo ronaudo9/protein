@@ -44,6 +44,7 @@
 .flavor {
   display: flex;
   margin-right: 10%;
+  margin-bottom:3%;
 }
 
 .ingredient {
@@ -70,12 +71,45 @@
 
 .cart {
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   margin-top: 5%;
+  margin-right: 10%;
 }
 
 .cart_button {
   background-color: lightgray;
+  position: relative;
+  margin: 0.5em;
+  padding: 1em 2em;
+  width: 10vw;
+  color: white;
+  font-size: 1vw;
+  font-weight: 700;
+  background-image: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#5de1d6),
+    to(#1ed6ee)
+  );
+  transition: 0.3s;
+  white-space: nowrap;
+  word-break: break-all;
+  border-radius: 5px;
+  border: 1px solid #1aaada;
+}
+
+.cart_button:hover {
+  margin-top: 1px;
+  color: white;
+  background-image: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#5de1d6),
+    to(#1ed6ee)
+  );
+  border-bottom: 2px solid #1897c1;
 }
 
 .select {
@@ -103,4 +137,19 @@
 
 .total_title {
   margin-right: 10%;
+}
+
+.plus {
+  height: 15%;
+  margin-top: 1.5%;
+  font-size: 1rem;
+  margin-right: 1%;
+}
+
+.minus {
+  height: 15%;
+  margin-top: 1.5%;
+  font-size: 1rem;
+  margin-left: 1%;
+  margin-right: 1%;
 }
