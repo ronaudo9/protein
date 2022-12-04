@@ -11,6 +11,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../layout/header';
 import { useRouter } from 'next/router';
 
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(`http://localhost:8000/items/`);
   const items = await res.json();
@@ -106,25 +107,30 @@ const ItemDetail: NextPage = ({ detail }: any) => {
     setUserId(userId);
   }, []);
 
-  
+
   const handler = (event: any) => {
-    if(count === 0){
+    if (count === 0) {
       ; // 数量0の場合はカートへ入れない
     } else {
-    event.preventDefault();
-    fetch('http://localhost:8000/carts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(carts),
+      event.preventDefault();
+      fetch('http://localhost:8000/carts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(carts),
 
-    })
-    .then(() => {
-      if (count > 0){
-        router.push('/cart');}
-      } 
-    );}
+      })
+        .then(() => {
+          if (document.cookie !== '') {
+            router.push('/cart')
+          } else {
+            alert('カートに追加するにはログインが必要です');
+            router.push('/')
+          }
+        }
+        );
+    }
   }
 
 
@@ -173,28 +179,23 @@ const ItemDetail: NextPage = ({ detail }: any) => {
           </div>
           <div className={styles.quantity}>
             <p className={styles.quantity_title}>数量</p>
-            <button type="button" onClick={clickHandlerNext}>
+            <button className={styles.plus} type="button" onClick={clickHandlerNext}>
               +
             </button>
             <p>&nbsp;{count}&nbsp;</p>
-            <button type="button" onClick={clickHandlerPrev}>
+            <button className={styles.minus} type="button" onClick={clickHandlerPrev}>
               -
             </button>
             <p>&nbsp;個&nbsp;</p>
           </div>
           <div className={styles.total}>
             <p className={styles.total_title}>合計金額</p>
-            <p>{total.toLocaleString()}円</p>
+            <p>¥{total.toLocaleString()}</p>
           </div>
           <div className={styles.cart}>
             <button className={styles.cart_button} onClick={handler}>
               カートに追加
             </button>
-            <div>
-              <p>
-                お気に入り登録<span>☆</span>
-              </p>
-            </div>
           </div>
         </div>
       </div>

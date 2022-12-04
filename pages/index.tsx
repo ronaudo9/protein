@@ -4,8 +4,11 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import HeaderLogin from './layout/headerLogin';
+import { isGeneratorFunction } from 'util/types';
+import ItemDisplay from './items/';
+import { GetServerSideProps } from 'next';
 
-export default function UserLogin() {
+export default function UserLogin(cookieData: any) {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,7 +21,6 @@ export default function UserLogin() {
 
   const handler = (event: any) => {
     event.preventDefault();
-    console.log(event);
     fetch('/api/login', {
       method: 'POST',
       headers: {
@@ -27,7 +29,6 @@ export default function UserLogin() {
       body: JSON.stringify(data),
     })
       .then((response) => {
-        console.log(response);
         response.json();
         if (response.status !== 200) {
           setVisible(true);
@@ -44,7 +45,7 @@ export default function UserLogin() {
   };
 
   return (
-    <>
+    <div>
       <HeaderLogin />
       <hr className={style.hr}></hr>
       <div className={style.all}>
@@ -120,6 +121,6 @@ export default function UserLogin() {
           </form>
         </main>
       </div>
-    </>
+    </div>
   );
 }
