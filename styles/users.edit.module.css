@@ -15,7 +15,6 @@
 }
 
 .group {
-  background-color: #1897c1;
   display: flex;
   padding: 1%;
 
@@ -24,34 +23,35 @@
 .formGroup {
   margin-bottom: 10px;
   text-align: center;
-  background-color: yellow;
+
   padding: 1%;
 }
 .grid {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
-  background-color: pink;
   padding: 1%;
+  width: 100%;
 }
 
 .lables {
-  background-color: green;
   white-space: nowrap;
 }
 
 .input {
-  background: #fcfbfb;
-  width: 100%;
+  background: #fbfbfb;
+  width: 150px;
+  border-radius: 3px;
+  border: 2px solid rgb(0, 221, 255);
+  margin: 0.5%;
 }
 
 .inputs {
-  background-color: white;
+  width: 100%;
+  margin: 0 0 0 auto;
+  display: grid;
 }
 
-.inputEmail {
-  background: #ffcdd2;
-  width: 20%;
-}
 .btnPrimary {
   text-align: center;
 }
@@ -127,4 +127,19 @@ input:focus{
     to(#1ed6ee)
   );
   border-bottom: 2px solid #eff2f4;
+}
+
+.passwordDisplay {
+  display: flex;
+}
+
+/* .formGroup {
+  margin-bottom: 10px;
+  text-align: center;
+
+  padding: 1%;
+} */
+
+.displayCenter {
+  text-align: center;
 }

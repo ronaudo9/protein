@@ -80,6 +80,7 @@ export default function UsersElements({ user }: any) {
             readOnly={readOnly}
           />
         </div>
+        <hr />
 
         <div className={styles.elementCategory}>
           <div>
@@ -95,9 +96,9 @@ export default function UsersElements({ user }: any) {
                 readOnly={readOnly}
               />
             </div>
-
+            <hr />
             <div>
-              <span className={styles.element_p1}>
+              <span>
                 （ミドルネーム） &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </span>
               <MiddleNameEdit
@@ -108,7 +109,7 @@ export default function UsersElements({ user }: any) {
             </div>
           </div>
         </div>
-
+        <hr />
         <div className={styles.elementCategory}>
           <div>
             <span className={styles.element_p1}>
@@ -121,7 +122,7 @@ export default function UsersElements({ user }: any) {
             readOnly={readOnly}
           />
         </div>
-
+        <hr />
         <div className={styles.elementCategory}>
           <div>
             <span className={styles.element_p1}>
@@ -134,7 +135,7 @@ export default function UsersElements({ user }: any) {
             readOnly={readOnly}
           />
         </div>
-
+        <hr />
         <div className={styles.elementCategory}>
           <div>
             <span className={styles.element_p1}>
@@ -147,15 +148,9 @@ export default function UsersElements({ user }: any) {
             readOnly={readOnly}
           />
         </div>
+        <hr />
 
-        <Link href="/users/new" legacyBehavior>
-          <p className={styles.credit}>
-            <button type="submit" className={styles.btnB}>
-              クレジットカード情報変更はこちら &rarr;
-            </button>
-          </p>
-        </Link>
-        <button className={styles.btnA}>完了</button>
+        <button className={styles.btnB}>完了</button>
       </form>
 
       <button onClick={clickHandler} className={styles.btnB_black}>

@@ -61,6 +61,7 @@ const MiddleNameEdit = ({
         onChange={handleChange}
         readOnly={readOnly}
         required
+        className={styles.input}
       />
     </>
   );

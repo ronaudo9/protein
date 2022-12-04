@@ -46,6 +46,7 @@ export default function UserLogin() {
   return (
     <>
       <HeaderLogin />
+      <hr className={style.hr}></hr>
       <div className={style.all}>
         <Head>
           <title>ログイン</title>
