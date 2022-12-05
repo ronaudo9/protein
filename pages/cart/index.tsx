@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   };
 };
 
- const data = {};
+const data = {};
 
 const Cart = ({ users }: any) => {
   const router = useRouter();
@@ -34,7 +34,7 @@ const Cart = ({ users }: any) => {
       headers: {
         'Content-Type': 'application/json',
       },
-       body: JSON.stringify(data),
+      body: JSON.stringify(data),
     });
     router.reload();
   }
@@ -54,15 +54,14 @@ const Cart = ({ users }: any) => {
     initialValue
   );
 
-
   const routerHandler = () => {
     if (users[0]) {
-      router.push('/purchase')
+      router.push('/purchase');
     } else {
-      alert('商品一覧から商品を選んでカートに入れてください')
-      router.push('/items')
+      alert('商品一覧から商品を選んでカートに入れてください');
+      router.push('/items');
     }
-  }
+  };
 
   return (
     <>
@@ -100,19 +99,24 @@ const Cart = ({ users }: any) => {
       <section>
         <div className={styles.cart_total}>
           <p>合計金額:</p>
-          <p className={styles.total}>¥&ensp;{sumPrice.toLocaleString()}</p>
+          <p className={styles.total}>
+            ¥&ensp;{sumPrice.toLocaleString()}
+          </p>
         </div>
         <div className={styles.buttons}>
           <Link href="/items">
-            <button className={styles.shopping}>買い物を続ける</button>
+            <button className={styles.shopping}>
+              買い物を続ける
+            </button>
           </Link>
           <Link href="/purchase">
-            <button className={styles.purchase}>
-              購入する
-            </button>
+            <button className={styles.purchase}>購入する</button>
           </Link>
         </div>
       </section>
+      <footer className={styles.footer}>
+        <h1>RAKUTEIN</h1>
+      </footer>
     </>
   );
 };

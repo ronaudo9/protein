@@ -191,3 +191,11 @@
   border: 1px solid #1aaada;
   margin-left: 40%;
 }
+
+.footer {
+  background-color: #454545;
+  width: 100%;
+  padding-top: 8%;
+  color: white;
+  text-align: right;
+}

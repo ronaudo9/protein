@@ -36,80 +36,93 @@ export const getServerSideProps: GetServerSideProps = async ({
       itemsArray.push(item);
     });
   });
-  console.log(JSON.stringify(itemsArray))
+  console.log(JSON.stringify(itemsArray));
   //サブスク
- const regular = await fetch(
-  `http://localhost:8000/subscription?userId=${cookies.id}`
- );
- const leave = await regular.json();
+  const regular = await fetch(
+    `http://localhost:8000/subscription?userId=${cookies.id}`
+  );
+  const leave = await regular.json();
 
- const subscriptionArray: any[] = [];
+  const subscriptionArray: any[] = [];
 
- leave.forEach((element: any) => {
-  const items = element.items;
-  // console.log(`2${items}`)
+  leave.forEach((element: any) => {
+    const items = element.items;
+    // console.log(`2${items}`)
 
-  items.forEach((item: any) => {
-    subscriptionArray.push(item);
+    items.forEach((item: any) => {
+      subscriptionArray.push(item);
+    });
   });
-});
-//サブスクの履歴
-const past = await fetch(
-  `http://localhost:8000/subscriptionHistories?userId=${cookies.id}`
- );
+  //サブスクの履歴
+  const past = await fetch(
+    `http://localhost:8000/subscriptionHistories?userId=${cookies.id}`
+  );
 
- const remain = await past.json();
+  const remain = await past.json();
 
- const subscriptionHistoriesArray: any[] = [];
+  const subscriptionHistoriesArray: any[] = [];
 
- remain.forEach((element: any) => {
-  const items = element.items;
+  remain.forEach((element: any) => {
+    const items = element.items;
 
-  items.forEach((item: any) => {
-    subscriptionHistoriesArray.push(item);
+    items.forEach((item: any) => {
+      subscriptionHistoriesArray.push(item);
+    });
   });
-});
 
   return {
-    props: { user, itemsArray,subscriptionArray,leave,subscriptionHistoriesArray,cookies },
+    props: {
+      user,
+      itemsArray,
+      subscriptionArray,
+      leave,
+      subscriptionHistoriesArray,
+      cookies,
+    },
   };
 };
 
-const UserDetails = ({ user, subscriptionArray, itemsArray,leave,subscriptionHistoriesArray,cookies }: any) => {
+const UserDetails = ({
+  user,
+  subscriptionArray,
+  itemsArray,
+  leave,
+  subscriptionHistoriesArray,
+  cookies,
+}: any) => {
   //サブスクからサブスク購入履歴への処理
 
-const router = useRouter();
-const handler = (event: any) => {
-  // console.log(subscriptionArray)
-  subscriptionArray.forEach((cart: any) => {
-    cart.date = new Date().toLocaleString('ja-JP');
-  });
-  const purchaseHistories = {
-    userId: cookies.id,
-    items: subscriptionArray,
+  const router = useRouter();
+  const handler = (event: any) => {
+    // console.log(subscriptionArray)
+    subscriptionArray.forEach((cart: any) => {
+      cart.date = new Date().toLocaleString('ja-JP');
+    });
+    const purchaseHistories = {
+      userId: cookies.id,
+      items: subscriptionArray,
+    };
+    fetch(`http://localhost:8000/subscriptionHistories/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(purchaseHistories),
+    }).then(() => {
+      deleteCarts(event);
+      router.reload();
+    });
   };
-  fetch(`http://localhost:8000/subscriptionHistories/`, {
-        method: 'POST',
+
+  const data = {};
+
+  const deleteCarts = (event: any) => {
+    leave.forEach((del: any) => {
+      fetch(`http://localhost:8000/subscription/${del.id}`, {
+        method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(purchaseHistories),
-      }).then(() => {
-        deleteCarts(event);
-        router.reload();
+        // body: JSON.stringify(data),
       });
-    }
-
- const data = {};
-
-    const deleteCarts = (event: any) => {
-      leave.forEach((del: any) => {
-        fetch(`http://localhost:8000/subscription/${del.id}`, {
-          method: 'DELETE',
-          headers: {'Content-Type': 'application/json'},
-          // body: JSON.stringify(data),
-        });
-      })
-
-};
+    });
+  };
   return (
     <>
       <Header />
@@ -132,7 +145,9 @@ const handler = (event: any) => {
               <Link href="#user_subscription">継続中の定期購入</Link>
             </p>
             <p className={styles.index_text}>
-              <Link href="#user_subscriptionHistories">定期購入の履歴</Link>
+              <Link href="#user_subscriptionHistories">
+                定期購入の履歴
+              </Link>
             </p>
           </div>
         </div>
@@ -169,7 +184,9 @@ const handler = (event: any) => {
                             item.itemId
                           )}`}
                         >
-                          <h4 className={styles.itemA}>{item.name}</h4>
+                          <h4 className={styles.itemA}>
+                            {item.name}
+                          </h4>
                         </Link>
                         <p>
                           フレーバー &nbsp;&nbsp;&nbsp;&nbsp;
@@ -206,7 +223,10 @@ const handler = (event: any) => {
         </section>
 
         <section className={styles.purchased}>
-          <h2 className={styles.title_purchased} id="user_subscription">
+          <h2
+            className={styles.title_purchased}
+            id="user_subscription"
+          >
             継続中の定期購入
           </h2>
           {subscriptionArray.map((items: any) => {
@@ -250,7 +270,7 @@ const handler = (event: any) => {
                           </span>
                         </p>
                         <p>
-                          <button onClick={() => handler(items)}>定期購入を終了する</button>
+                          <button className={styles.button} onClick={() => handler(items)}>定期購入を終了する</button>
                         </p>
                       </div>
                     </div>
@@ -262,9 +282,11 @@ const handler = (event: any) => {
           })}
         </section>
 
-
         <section className={styles.purchased}>
-          <h2 className={styles.title_purchased} id="user_subscriptionHistories">
+          <h2
+            className={styles.title_purchased}
+            id="user_subscriptionHistories"
+          >
             定期購入の履歴
           </h2>
           {subscriptionHistoriesArray.map((items: any) => {
@@ -317,6 +339,9 @@ const handler = (event: any) => {
           })}
         </section>
       </div>
+      <footer className={styles.footer}>
+        <h1>RAKUTEIN</h1>
+      </footer>
     </>
   );
 };
