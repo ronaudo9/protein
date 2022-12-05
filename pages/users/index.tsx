@@ -250,7 +250,7 @@ const handler = (event: any) => {
                           </span>
                         </p>
                         <p>
-                          <button onClick={() => handler(items)}>定期購入を終了する</button>
+                          <button className={styles.button} onClick={() => handler(items)}>定期購入を終了する</button>
                         </p>
                       </div>
                     </div>

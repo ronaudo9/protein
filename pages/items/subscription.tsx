@@ -61,7 +61,6 @@ export default function PurchaseCompletion({
     });
   };
 
-const data = {};
 
 const data = {};
 
