@@ -149,6 +149,7 @@ export default function UsersElements({ user }: any) {
             className={styles.input}
             setFormValues={setFormValues}
             placeholder="例:●●●●-●●●●-●●●●-●●●●（半角数字）"
+            required
             {...user.credit}
             readOnly={readOnly}
             formValues={formValues}

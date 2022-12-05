@@ -90,7 +90,7 @@ const Cart = ({ users }: any) => {
                   <span>価格(税込)</span>¥
                   {(cart.price * cart.countity).toLocaleString()}
                 </p>
-                <button onClick={() => deleteItem(cart)}>削除</button>
+                <button className={styles.delete_button} onClick={() => deleteItem(cart)}>削除</button>
               </div>
             </div>
           ))}

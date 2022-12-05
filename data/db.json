@@ -325,16 +325,6 @@
   "favorites": [],
   "purchaseHistories": [
     {
-      "userId": "2",
-      "items": [],
-      "id": 1
-    },
-    {
-      "userId": "2",
-      "items": [],
-      "id": 2
-    },
-    {
       "userId": 2,
       "items": [
         {
@@ -342,25 +332,64 @@
           "itemId": 2,
           "imageUrl": "/images/impact_whey_aisolate.jpg",
           "name": "Impact ホエイ アイソレート",
+          "flavor": "ストロベリー",
+          "price": 4390,
+          "countity": 1,
+          "id": 1,
+          "date": "2022/12/5 16:23:56"
+        },
+        {
+          "userId": 2,
+          "itemId": 2,
+          "imageUrl": "/images/impact_whey_aisolate.jpg",
+          "name": "Impact ホエイ アイソレート",
           "flavor": "チョコ",
           "price": 4390,
+          "countity": 3,
+          "id": 2,
+          "date": "2022/12/5 16:23:56"
+        },
+        {
+          "userId": 2,
+          "itemId": 9,
+          "imageUrl": "/images/organic_whey_protein.jpg",
+          "name": "オーガニック ホエイプロテイン",
+          "flavor": "ノンフレーバー",
+          "price": 2590,
+          "countity": 4,
+          "id": 3,
+          "date": "2022/12/5 16:23:56"
+        },
+        {
+          "userId": 2,
+          "itemId": 7,
+          "imageUrl": "/images/Essencial_whey_protein.jpg",
+          "name": "エッセンシャル ホエイ プロテイン",
+          "flavor": "ノンフレーバー",
+          "price": 3790,
+          "countity": 3,
+          "id": 4,
+          "date": "2022/12/5 16:23:56"
+        },
+        {
+          "userId": 2,
+          "itemId": 9,
+          "imageUrl": "/images/organic_whey_protein.jpg",
+          "name": "オーガニック ホエイプロテイン",
+          "flavor": "ノンフレーバー",
+          "price": 2590,
           "countity": 2,
-          "id": 1,
-          "date": "2022/12/5 15:26:05"
+          "id": 5,
+          "date": "2022/12/5 16:23:56"
         }
       ],
-      "id": 3
+      "id": 1
     },
     {
       "userId": "2",
       "items": [],
-      "id": 4
-    }
-  ],
-  "carts": [],
-  "subscriptionCart": [],
-  "subscription": [],
-  "subscriptionHistories": [
+      "id": 2
+    },
     {
       "userId": "2",
       "items": [
@@ -371,40 +400,56 @@
           "name": "Impact ホエイ アイソレート",
           "flavor": "チョコ",
           "price": 4390,
-          "countity": 0,
+          "countity": 3,
           "id": 1,
-          "date": "2022/12/5 15:09:01"
-        },
-        {
-          "userId": 2,
-          "itemId": 1,
-          "imageUrl": "/images/impact_whey_protein.jpg",
-          "name": "Impact ホエイ プロテイン",
-          "flavor": "チョコ",
-          "price": 1990,
-          "countity": 0,
-          "id": 2,
-          "date": "2022/12/5 15:09:01"
+          "date": "2022/12/5 16:25:41"
         }
       ],
+      "id": 3
+    }
+  ],
+  "carts": [
+    {
+      "userId": 2,
+      "itemId": 3,
+      "imageUrl": "/images/probiotech_whey_protein.jpg",
+      "name": "プロバイオティック ホエイ プロテイン",
+      "flavor": "ミルクティー",
+      "price": 2190,
+      "countity": 2,
       "id": 1
-    },
+    }
+  ],
+  "subscriptionCart": [],
+  "subscription": [
     {
       "userId": "2",
       "items": [
         {
           "userId": 2,
-          "itemId": 1,
-          "imageUrl": "/images/impact_whey_protein.jpg",
-          "name": "Impact ホエイ プロテイン",
+          "itemId": 2,
+          "imageUrl": "/images/impact_whey_aisolate.jpg",
+          "name": "Impact ホエイ アイソレート",
           "flavor": "チョコ",
-          "price": 1990,
-          "countity": 0,
+          "price": 4390,
+          "countity": 4,
           "id": 1,
-          "date": "2022/12/5 15:25:48"
+          "date": "2022/12/5 16:25:36"
+        },
+        {
+          "userId": 2,
+          "itemId": 2,
+          "imageUrl": "/images/impact_whey_aisolate.jpg",
+          "name": "Impact ホエイ アイソレート",
+          "flavor": "チョコ",
+          "price": 4390,
+          "countity": 0,
+          "id": 2,
+          "date": "2022/12/5 16:25:36"
         }
       ],
-      "id": 2
+      "id": 1
     }
-  ]
+  ],
+  "subscriptionHistories": []
 }
