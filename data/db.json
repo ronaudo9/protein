@@ -477,11 +477,11 @@
       "items": [
         {
           "userId": 2,
-          "itemId": 1,
-          "imageUrl": "/images/impact_whey_protein.jpg",
-          "name": "Impact ホエイ プロテイン",
+          "itemId": 2,
+          "imageUrl": "/images/impact_whey_aisolate.jpg",
+          "name": "Impact ホエイ アイソレート",
           "flavor": "チョコ",
-          "price": 1990,
+          "price": 4390,
           "countity": 0,
           "id": 2,
           "date": "2022/12/5 16:38:05"
@@ -494,11 +494,11 @@
       "items": [
         {
           "userId": 2,
-          "itemId": 6,
-          "imageUrl": "/images/impact_protein_brend.jpg",
-          "name": "Impact プロテイン ブレンド",
-          "flavor": "ミルクティー",
-          "price": 4990,
+          "itemId": 1,
+          "imageUrl": "/images/impact_whey_protein.jpg",
+          "name": "Impact ホエイ プロテイン",
+          "flavor": "チョコ",
+          "price": 4390,
           "countity": 0,
           "id": 2,
           "date": "2022/12/5 16:38:32"

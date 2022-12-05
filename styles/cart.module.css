@@ -172,6 +172,26 @@
   transform: scale(1, 1);
 }
 
+.delete_button{
+  position: relative;
+  color: white;
+  font-size: 1vw;
+  font-weight: 700;
+  background-image: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#5de1d6),
+    to(#1ed6ee)
+  );
+  transition: 0.3s;
+  white-space: nowrap;
+  word-break: break-all;
+  border-radius: 5px;
+  border: 1px solid #1aaada;
+  margin-left: 40%;
+}
+
 .footer {
   background-color: #454545;
   width: 100%;
