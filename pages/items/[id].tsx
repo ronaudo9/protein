@@ -196,6 +196,9 @@ const ItemDetail: NextPage = ({ detail }: any) => {
             <button className={styles.cart_button} onClick={handler}>
               カートに追加
             </button>
+            <button className={styles.subscription_button}>
+              定期購入をする
+            </button>
           </div>
         </div>
       </div>
