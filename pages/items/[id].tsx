@@ -218,16 +218,12 @@ const Subscription = (event:any) =>{
             <p className={styles.total_title}>合計金額</p>
             <p>¥{total.toLocaleString()}</p>
           </div>
-          <div>
-            <button onClick={Subscription}>
-              定期購入を開始
-            </button>
-          </div>
+          
           <div className={styles.cart}>
             <button className={styles.cart_button} onClick={handler}>
               カートに追加
             </button>
-            <button className={styles.subscription_button}>
+            <button className={styles.subscription_button} onClick={Subscription}>
               定期購入をする
             </button>
           </div>

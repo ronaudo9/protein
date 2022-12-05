@@ -95,7 +95,7 @@ const ItemData: React.FunctionComponent<{
             {user.building}
           </p>
         </div>
-        <div>
+        {/* <div>
           <h2 className={styles.purchase_h2}>決済方法</h2>
 
           <form action="/api/checkout_sessions" method="POST">
@@ -127,7 +127,7 @@ const ItemData: React.FunctionComponent<{
               <label htmlFor="cash_delivery">代引き</label>
             </p>
           </form>
-        </div>
+        </div> */}
 
         <section className={styles.purchased}>
           <h2 className={styles.purchase_h2} id="user_purchased">
@@ -205,8 +205,12 @@ const ItemData: React.FunctionComponent<{
               <span>キャンセル</span>
             </button>
           </Link>
+          <form action="/api/checkout_sessions" method="POST">
+            <input type="hidden" name="price" value={sumPrice} />
+            <button className={styles.btnB} type="submit">クレジット決済</button>
+          </form>
           <button className={styles.btnB} onClick={handler}>
-            <span>確定する</span>
+            <span>代引き決済</span>
           </button>
         </section>
       </section >

@@ -78,7 +78,7 @@ const past = await fetch(
 const UserDetails = ({ user, subscriptionArray, itemsArray,leave,subscriptionHistoriesArray,cookies }: any) => {
   //サブスクからサブスク購入履歴への処理
 
-const data = {};
+
 const router = useRouter();
 const handler = (event: any) => {
   // console.log(subscriptionArray)
@@ -98,6 +98,8 @@ const handler = (event: any) => {
         router.reload();
       });
     }
+
+ const data = {};
 
     const deleteCarts = (event: any) => {
       leave.forEach((del: any) => {
