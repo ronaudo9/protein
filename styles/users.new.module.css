@@ -143,6 +143,13 @@
   transform: scale(1, 1);
 }
 
+.btnB:active {
+  -webkit-transform: translate(0, 2px);
+  -moz-transform: translate(0, 2px);
+  transform: translate(0, 2px);
+  border-bottom: none;
+}
+
 .btnA {
   position: relative;
   margin: 0.5em;
