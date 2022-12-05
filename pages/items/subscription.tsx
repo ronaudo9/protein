@@ -63,6 +63,8 @@ export default function PurchaseCompletion({
 
 const data = {};
 
+const data = {};
+
 const deleteCarts = (event: any) => {
   event.preventDefault();
   subscriptionCart.forEach((cart: any) => {

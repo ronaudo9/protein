@@ -74,27 +74,27 @@ const AddressEdit = ({
   };
 
   // 住所検索機能
-  // const setAuto = async () => {
-  //   const res = await fetch(
-  //     `https://zipcloud.ibsnet.co.jp/api/search?zipcode=${formValues.postCode}`
-  //   );
-  //   const getAddress = await res.json();
-  //   if (getAddress.results === null) {
-  //     const message = '存在しない郵便番号です';
-  //     setAddressErrors(message);
-  //   } else {
-  //     const pre = getAddress.results[0].address1;
-  //     const city = getAddress.results[0].address2;
-  //     const aza = getAddress.results[0].address3;
-  //     setFormValues({
-  //       ...formValues,
-  //       prefecture: pre,
-  //       city: city,
-  //       aza: aza,
-  //     });
-  //     setAddressErrors('');
-  //   }
-  // };
+  const setAuto = async () => {
+    const res = await fetch(
+      `https://zipcloud.ibsnet.co.jp/api/search?zipcode=${formValues.postCode}`
+    );
+    const getAddress = await res.json();
+    if (getAddress.results === null) {
+      const message = '存在しない郵便番号です';
+      setAddressErrors(message);
+    } else {
+      const pre = getAddress.results[0].address1;
+      const city = getAddress.results[0].address2;
+      const aza = getAddress.results[0].address3;
+      setFormValues({
+        ...formValues,
+        prefecture: pre,
+        city: city,
+        aza: aza,
+      });
+    //   setAddressErrors('');
+    }
+  };
 
   return (
     <div className={styles.formGroup}>
@@ -107,6 +107,7 @@ const AddressEdit = ({
           </div>
 
           <div className={styles.inputs}>
+          <div className={styles.button}>
             <input
               type="text"
               name="postCode"
@@ -117,6 +118,10 @@ const AddressEdit = ({
               readOnly={readOnly}
               required
             />
+             <button className={styles.button2} type="button" onClick={setAuto}>
+                住所検索
+              </button>
+          </div>
           </div>
         </div>
       </div>
