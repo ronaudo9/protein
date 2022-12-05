@@ -44,6 +44,7 @@ export default function UsersElements({ user }: any) {
     email: user.email,
     middleName: user.middleName,
     tel: user.tel,
+    credit: user.credit,
     password: user.password,
     passwordConfirmation: user.passwordConfirmation,
   };
@@ -136,6 +137,23 @@ export default function UsersElements({ user }: any) {
           />
         </div>
         <hr />
+        <div className={styles.elementCategory}>
+          <div>
+            <span className={styles.element_p1}>
+              クレジット &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+          </div>
+          <input
+            type="credit"
+            name="credit"
+            className={styles.input}
+            value={formValues.credit}
+            placeholder="例:●●●●-●●●●-●●●●-●●●●（半角数字）"
+            required
+            {...user.credit}
+          />
+        </div>
+
         <div className={styles.elementCategory}>
           <div>
             <span className={styles.element_p1}>
