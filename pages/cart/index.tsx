@@ -103,12 +103,12 @@ const Cart = ({ users }: any) => {
           <p className={styles.total}>¥&ensp;{sumPrice.toLocaleString()}</p>
         </div>
         <div className={styles.buttons}>
-          <Link href="/purchase">
-            <button className={styles.purchase}>購入する</button>
-          </Link>
           <Link href="/items">
-            <button className={styles.shopping}>
-              買い物を続ける
+            <button className={styles.shopping}>買い物を続ける</button>
+          </Link>
+          <Link href="/purchase">
+            <button className={styles.purchase}>
+              購入する
             </button>
           </Link>
         </div>
