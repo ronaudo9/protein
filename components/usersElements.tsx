@@ -44,6 +44,7 @@ export default function UsersElements({ user }: any) {
     email: user.email,
     middleName: user.middleName,
     tel: user.tel,
+    credit: user.credit,
     password: user.password,
     passwordConfirmation: user.passwordConfirmation,
   };
@@ -80,6 +81,7 @@ export default function UsersElements({ user }: any) {
             readOnly={readOnly}
           />
         </div>
+        <hr />
 
         <div className={styles.elementCategory}>
           <div>
@@ -95,9 +97,9 @@ export default function UsersElements({ user }: any) {
                 readOnly={readOnly}
               />
             </div>
-
+            <hr />
             <div>
-              <span className={styles.element_p1}>
+              <span>
                 （ミドルネーム） &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </span>
               <MiddleNameEdit
@@ -108,7 +110,7 @@ export default function UsersElements({ user }: any) {
             </div>
           </div>
         </div>
-
+        <hr />
         <div className={styles.elementCategory}>
           <div>
             <span className={styles.element_p1}>
@@ -121,7 +123,7 @@ export default function UsersElements({ user }: any) {
             readOnly={readOnly}
           />
         </div>
-
+        <hr />
         <div className={styles.elementCategory}>
           <div>
             <span className={styles.element_p1}>
@@ -132,6 +134,23 @@ export default function UsersElements({ user }: any) {
             formValues={formValues}
             setFormValues={setFormValues}
             readOnly={readOnly}
+          />
+        </div>
+        <hr />
+        <div className={styles.elementCategory}>
+          <div>
+            <span className={styles.element_p1}>
+              クレジット &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+          </div>
+          <input
+            type="credit"
+            name="credit"
+            className={styles.input}
+            value={formValues.credit}
+            placeholder="例:●●●●-●●●●-●●●●-●●●●（半角数字）"
+            required
+            {...user.credit}
           />
         </div>
 
@@ -147,15 +166,9 @@ export default function UsersElements({ user }: any) {
             readOnly={readOnly}
           />
         </div>
+        <hr />
 
-        <Link href="/users/new" legacyBehavior>
-          <p className={styles.credit}>
-            <button type="submit" className={styles.btnB}>
-              クレジットカード情報変更はこちら &rarr;
-            </button>
-          </p>
-        </Link>
-        <button className={styles.btnA}>完了</button>
+        <button className={styles.btnB}>完了</button>
       </form>
 
       <button onClick={clickHandler} className={styles.btnB_black}>

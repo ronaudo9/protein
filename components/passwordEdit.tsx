@@ -97,23 +97,21 @@ const PasswordEdit = ({
         placeholder="例:半角英数でご入力ください"
         required
       />
-      <div>
+      <div className={styles.passwordDisplay}>
+        <div>(パスワード確認用)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
         <div>
-          <label htmlFor="passwordConfirmation">
-            (パスワード確認用)
-          </label>
+          <input
+            type="password"
+            id="passwordConfirmation"
+            name="passwordConfirmation"
+            value={formValues.passwordConfirmation}
+            onChange={handleChange}
+            className={styles.input}
+            placeholder="例:もう一度パスワードをご入力ください"
+            readOnly={readOnly}
+            required
+          />
         </div>
-        <input
-          type="password"
-          id="passwordConfirmation"
-          name="passwordConfirmation"
-          value={formValues.passwordConfirmation}
-          onChange={handleChange}
-          className={styles.input}
-          placeholder="例:もう一度パスワードをご入力ください"
-          readOnly={readOnly}
-          required
-        />
       </div>
     </div>
   );

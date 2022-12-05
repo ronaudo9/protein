@@ -261,8 +261,8 @@
       "building": "六本木ビル333",
       "tel": "090-8877-0099",
       "deleted": false,
-      "credit": "1234 3344 4455",
-      "id": 1
+      "id": 1,
+      "credit": "xxxx-xxxx-xxxx-1234"
     },
     {
       "id": 2,
@@ -280,8 +280,8 @@
       "aza": "宮前町607",
       "building": "宮前ビル308",
       "tel": "070-6699-9977",
-      "credit": "1234 3344 4455",
-      "deleted": false
+      "deleted": false,
+      "credit": "xxxx-xxxx-xxxx-4567"
     },
     {
       "id": 3,
@@ -299,47 +299,134 @@
       "aza": "川越3丁目0-8",
       "building": "川越ビル409",
       "tel": "070-3355-0099",
-      "credit": "1234 3344 4455",
-      "deleted": false
-    }
-  ],
-  "favorites": [
+      "deleted": false,
+      "credit": "xxxx-xxxx-xxxx-7890"
+    },
     {
-      "userID": 1,
-      "itemId": 1
+      "id": 4,
+      "firstName": "早川",
+      "lastName": "修平",
+      "firstNameKana": "はやかわ",
+      "lastNameKana": "しゅうへい",
+      "middleName": "",
+      "email": "hykwshuhei@gmail.com",
+      "password": "Vaga7326",
+      "passwordConfirmation": "Vaga7326",
+      "postCode": "251-0042",
+      "prefecture": "神奈川県",
+      "city": "藤沢市",
+      "aza": "辻堂新町1-4-26",
+      "building": "",
+      "tel": "090-8541-1689",
+      "deleted": false,
+      "credit": "xxxx-xxxx-xxxx-9876"
     }
   ],
+  "favorites": [],
   "purchaseHistories": [
     {
-      "userId": "2",
+      "userId": 4,
       "items": [
         {
-          "userId": 2,
-          "itemId": 2,
-          "imageUrl": "/images/impact_whey_aisolate.jpg",
-          "name": "Impact ホエイ アイソレート",
-          "flavor": "チョコ",
-          "price": 4390,
+          "userId": 4,
+          "itemId": 5,
+          "imageUrl": "/images/impact_whey_stroberry.jpg",
+          "name": "Impact ホエイ プロテイン-ストロベリーヨーグルトフレーバー",
+          "flavor": "ヨーグルト-ストロベリー-",
+          "price": 1990,
           "countity": 1,
-          "id": 1
+          "id": 1,
+          "date": "2022/12/3 12:03:18"
         }
       ],
       "id": 1
     },
     {
-      "userId": "2",
+      "userId": "4",
       "items": [],
       "id": 2
     },
     {
-      "userId": "2",
-      "items": [],
+      "userId": 4,
+      "items": [
+        {
+          "userId": 4,
+          "itemId": 16,
+          "imageUrl": "/images/the_whey.jpg",
+          "name": "THE ホエイ",
+          "flavor": "ミルクチョコレート",
+          "price": 6490,
+          "countity": 1,
+          "id": 1,
+          "date": "2022/12/3 13:24:44"
+        }
+      ],
       "id": 3
     },
     {
-      "userId": "2",
+      "userId": "4",
       "items": [],
       "id": 4
+    },
+    {
+      "userId": 4,
+      "items": [
+        {
+          "userId": 4,
+          "itemId": 7,
+          "imageUrl": "/images/Essencial_whey_protein.jpg",
+          "name": "エッセンシャル ホエイ プロテイン",
+          "flavor": "ノンフレーバー",
+          "price": 3790,
+          "countity": 1,
+          "id": 1,
+          "date": "2022/12/3 13:43:19"
+        }
+      ],
+      "id": 5
+    },
+    {
+      "userId": "4",
+      "items": [],
+      "id": 6
+    },
+    {
+      "userId": 4,
+      "items": [],
+      "id": 7
+    },
+    {
+      "userId": "4",
+      "items": [],
+      "id": 8
+    },
+    {
+      "userId": 2,
+      "items": [
+        {
+          "userId": 2,
+          "itemId": 7,
+          "imageUrl": "/images/Essencial_whey_protein.jpg",
+          "name": "エッセンシャル ホエイ プロテイン",
+          "flavor": "ノンフレーバー",
+          "price": 3790,
+          "countity": 1,
+          "id": 9,
+          "date": "2022/12/2 15:57:00"
+        },
+        {
+          "userId": 2,
+          "itemId": 8,
+          "imageUrl": "/images/impact_nativewhey.jpg",
+          "name": "Impact ネイティブホエイ",
+          "flavor": "バナナ＆シナモン",
+          "price": 7690,
+          "countity": 2,
+          "id": 12,
+          "date": "2022/12/2 15:57:00"
+        }
+      ],
+      "id": 9
     },
     {
       "userId": "2",
@@ -347,7 +434,7 @@
       "id": 5
     },
     {
-      "userId": "2",
+      "userId": "4",
       "items": [],
       "id": 6
     },
@@ -356,61 +443,29 @@
       "items": [
         {
           "userId": 2,
-          "itemId": 4,
-          "imageUrl": "/images/cofee_burst_whey.jpg",
-          "name": "コーヒー ブースト ホエイ",
-          "flavor": "ココナッツ",
-          "price": 2590,
-          "countity": 1,
-          "id": 1
-        }
-      ],
-      "id": 7
-    },
-    {
-      "userId": "2",
-      "items": [],
-      "id": 8
-    },
-    {
-      "userId": "2",
-      "items": [],
-      "id": 9
-    },
-    {
-      "userId": "2",
-      "items": [],
-      "id": 10
-    },
-    {
-      "userId": "3",
-      "items": [],
-      "id": 11
-    },
-    {
-      "userId": "3",
-      "items": [],
-      "id": 12
-    },
-    {
-      "userId": 3,
-      "items": [
-        {
-          "userId": 3,
           "itemId": 2,
           "imageUrl": "/images/impact_whey_aisolate.jpg",
           "name": "Impact ホエイ アイソレート",
           "flavor": "チョコ",
           "price": 4390,
-          "countity": 1,
-          "id": 1,
-          "date": "2022/12/3 17:30:56"
+          "countity": 6,
+          "id": 9
         }
       ],
+      "id": 11
+    },
+    {
+      "userId": "2",
+      "items": [],
+      "id": 12
+    },
+    {
+      "userId": "4",
+      "items": [],
       "id": 13
     },
     {
-      "userId": "3",
+      "userId": "1",
       "items": [],
       "id": 14
     },
@@ -1062,6 +1117,6 @@
   "subscriptionCart": [],
   "subscription": [],
   "subscriptionHistories": [
-   
+
   ]
 }

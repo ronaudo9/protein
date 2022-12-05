@@ -16,6 +16,7 @@ import useSWR from 'swr';
 const fetcher = (resource:any, init:any) =>
   fetch(resource, init).then((res) => res.json());
 
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(`http://localhost:8000/items/`);
   const items = await res.json();
@@ -118,23 +119,28 @@ const ItemDetail: NextPage = ({ detail }: any) => {
 
 
   const handler = (event: any) => {
-    if(count === 0){
+    if (count === 0) {
       ; // 数量0の場合はカートへ入れない
     } else {
-    event.preventDefault();
-    fetch('http://localhost:8000/carts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(carts),
+      event.preventDefault();
+      fetch('http://localhost:8000/carts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(carts),
 
-    })
-    .then(() => {
-      if (count > 0){
-        router.push('/cart');}
-      }
-    );}
+      })
+        .then(() => {
+          if (document.cookie !== '') {
+            router.push('/cart')
+          } else {
+            alert('カートに追加するにはログインが必要です');
+            router.push('/')
+          }
+        }
+        );
+    }
   }
 //サブスクリプション
 const Subscription = (event:any) =>{
@@ -199,18 +205,18 @@ const Subscription = (event:any) =>{
           </div>
           <div className={styles.quantity}>
             <p className={styles.quantity_title}>数量</p>
-            <button type="button" onClick={clickHandlerNext}>
+            <button className={styles.plus} type="button" onClick={clickHandlerNext}>
               +
             </button>
             <p>&nbsp;{count}&nbsp;</p>
-            <button type="button" onClick={clickHandlerPrev}>
+            <button className={styles.minus} type="button" onClick={clickHandlerPrev}>
               -
             </button>
             <p>&nbsp;個&nbsp;</p>
           </div>
           <div className={styles.total}>
             <p className={styles.total_title}>合計金額</p>
-            <p>{total.toLocaleString()}円</p>
+            <p>¥{total.toLocaleString()}</p>
           </div>
           <div>
             <button onClick={Subscription}>
@@ -221,11 +227,9 @@ const Subscription = (event:any) =>{
             <button className={styles.cart_button} onClick={handler}>
               カートに追加
             </button>
-            <div>
-              <p>
-                お気に入り登録<span>☆</span>
-              </p>
-            </div>
+            <button className={styles.subscription_button}>
+              定期購入をする
+            </button>
           </div>
         </div>
       </div>
