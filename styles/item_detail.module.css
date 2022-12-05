@@ -230,3 +230,11 @@
 .button05 a:active {
   color: white;
 }
+
+.footer {
+  background-color: #454545;
+  width: 100%;
+  padding-top: 8%;
+  color: white;
+  text-align: right;
+}
