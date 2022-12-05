@@ -152,7 +152,7 @@ export default function UsersElements({ user }: any) {
             required
             {...user.credit}
             readOnly={readOnly}
-            formValues={formValues}
+            value={formValues.credit}
           />
         </div>
 
