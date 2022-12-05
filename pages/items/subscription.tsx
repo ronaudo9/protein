@@ -58,16 +58,17 @@ const handler = (event: any) => {
   });
 }
 
+const data = {};
+
 const deleteCarts = (event: any) => {
   event.preventDefault();
-  const data = {};
   subscriptionCart.forEach((cart: any) => {
     fetch(`http://localhost:8000/subscriptionCart/${cart.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+       body: JSON.stringify(data),
     });
   });
 };

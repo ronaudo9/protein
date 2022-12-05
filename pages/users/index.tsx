@@ -78,7 +78,7 @@ const past = await fetch(
 const UserDetails = ({ user, subscriptionArray, itemsArray,leave,subscriptionHistoriesArray,cookies }: any) => {
   //サブスクからサブスク購入履歴への処理
 
-const data = {};
+// const data = {};
 const router = useRouter();
 const handler = (event: any) => {
   // console.log(subscriptionArray)
@@ -104,7 +104,7 @@ const handler = (event: any) => {
         fetch(`http://localhost:8000/subscription/${del.id}`, {
           method: 'DELETE',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(data),
+          // body: JSON.stringify(data),
         });
       })
 
@@ -125,10 +125,13 @@ const handler = (event: any) => {
               <Link href="#user_element">基本情報</Link>
             </p>
             <p className={styles.index_text}>
-              <Link href="#favorite_list">お気に入りリスト</Link>
+              <Link href="#user_purchased">ご購入履歴</Link>
             </p>
             <p className={styles.index_text}>
-              <Link href="#user_purchased">ご購入履歴</Link>
+              <Link href="#user_subscription">継続中の定期購入</Link>
+            </p>
+            <p className={styles.index_text}>
+              <Link href="#user_subscriptionHistories">定期購入の履歴</Link>
             </p>
           </div>
         </div>
@@ -202,20 +205,20 @@ const handler = (event: any) => {
         </section>
 
         <section className={styles.purchased}>
-          <h2 className={styles.title_purchased} id="user_purchased">
+          <h2 className={styles.title_purchased} id="user_subscription">
             継続中の定期購入
           </h2>
           {subscriptionArray.map((items: any) => {
             return (
               <div key={items.id}>
                 <div>
-                  <h3>{items.date}</h3>
+                  <h3>購入日時：{items.date}</h3>
                   <div>
                     <div className={styles.list}>
                       <Image
                         src={items.imageUrl}
-                        width={64}
-                        height={64}
+                        width={260}
+                        height={260}
                         alt="商品画像"
                         className={styles.img}
                       />
@@ -260,20 +263,20 @@ const handler = (event: any) => {
 
 
         <section className={styles.purchased}>
-          <h2 className={styles.title_purchased} id="user_purchased">
+          <h2 className={styles.title_purchased} id="user_subscriptionHistories">
             定期購入の履歴
           </h2>
           {subscriptionHistoriesArray.map((items: any) => {
             return (
               <div key={items.id}>
                 <div>
-                  <h3>{items.date}</h3>
+                  <h3>終了日時：{items.date}</h3>
                   <div>
                     <div className={styles.list}>
                       <Image
                         src={items.imageUrl}
-                        width={64}
-                        height={64}
+                        width={260}
+                        height={260}
                         alt="商品画像"
                         className={styles.img}
                       />

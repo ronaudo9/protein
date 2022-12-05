@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   };
 };
 
-const data = {};
+ const data = {};
 
 const Cart = ({ users }: any) => {
   const router = useRouter();
@@ -34,7 +34,7 @@ const Cart = ({ users }: any) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+       body: JSON.stringify(data),
     });
     router.reload();
   }

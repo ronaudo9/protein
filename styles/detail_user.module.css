@@ -382,3 +382,11 @@
   font-weight: bold;
   font-size: large;
 }
+
+.input {
+  background: #fbfbfb;
+  width: 150px;
+  border-radius: 3px;
+  border: 2px solid rgb(0, 221, 255);
+  margin: 0.5%;
+}
