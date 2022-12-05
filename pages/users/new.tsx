@@ -51,7 +51,9 @@ function UsersNew() {
         body: JSON.stringify(formValues),
       }).then(() => {
         router.push('/');
-        alert("ご登録ありがとうございます！ログインをしてお買い物を続けてください")
+        alert(
+          'ご登録ありがとうございます！ログインをしてお買い物を続けてください'
+        );
       });
     }
   };
@@ -428,6 +430,9 @@ function UsersNew() {
           </form>
         </div>
       </div>
+      <footer className={styles.footer}>
+        <h1>RAKUTEIN</h1>
+      </footer>
     </>
   );
 }
