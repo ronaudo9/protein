@@ -68,8 +68,6 @@ const ItemDisplay: NextPage = () => {
       <section>
         <p className={styles.titlesCenter}>
           <span className={styles.titleCenter}>ITEMS</span>
-          <br />
-          商品一覧
         </p>
 
         <div className={styles.displayCenter}>
