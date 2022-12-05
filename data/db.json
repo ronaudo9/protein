@@ -328,6 +328,11 @@
       "userId": "2",
       "items": [],
       "id": 1
+    },
+    {
+      "userId": "2",
+      "items": [],
+      "id": 2
     }
   ],
   "carts": [],
@@ -361,6 +366,23 @@
         }
       ],
       "id": 1
+    },
+    {
+      "userId": "2",
+      "items": [
+        {
+          "userId": 2,
+          "itemId": 2,
+          "imageUrl": "/images/impact_whey_aisolate.jpg",
+          "name": "Impact ホエイ アイソレート",
+          "flavor": "チョコ",
+          "price": 4390,
+          "countity": 0,
+          "id": 1,
+          "date": "2022/12/5 15:40:07"
+        }
+      ],
+      "id": 2
     }
   ]
 }
