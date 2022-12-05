@@ -1,0 +1,145 @@
+.element {
+  background-color: rgb(242, 239, 239);
+  text-align: center;
+  margin-bottom: 5%;
+  padding-top: 2%;
+  padding-left: 5%;
+  padding-bottom: 3%;
+  padding-right: 5%;
+  border-radius: 10px;
+  width: 60%;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10%;
+  padding-top: 2%;
+  margin: 9%;
+}
+
+.ps {
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.text_left {
+  text-align: left;
+  display: grid;
+  margin: 4% 24%;
+  white-space: nowrap;
+  font-size: 12px;
+
+  word-wrap: break-word;
+  table-layout: fixed;
+}
+.title {
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.purchased_buttonA {
+  padding: 1em 2em;
+  margin-top: 4%;
+  width: 30%;
+  height: 3rem;
+  color: #333;
+  font-size: 1em;
+  font-weight: 700;
+  white-space: nowrap;
+  background-color: #cccccc;
+  box-shadow: 0 5px 0 #aaaaaa;
+  transition: 0.3s;
+  background-image: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#5de1d6),
+    to(#1ed6ee)
+  );
+  background-image: -webkit-linear-gradient(
+    right,
+    #16a6ff 0%,
+    #1fdef7 100%
+  );
+  background-image: linear-gradient(
+    to left,
+    #16a6ff 0%,
+    #1fdef7 100%
+  );
+  border-color: grey;
+}
+
+.purchased_buttonA:after {
+  content: '';
+  width: 5px;
+  height: 5px;
+
+  transform: rotate(45deg);
+}
+
+.purchased_buttonA:hover {
+  transform: translateY(3px);
+  text-decoration: none;
+  box-shadow: 0 2px 0 #aaaaaa;
+}
+
+.purchased_buttonA::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  content: '';
+  background-image: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#6bdcf0),
+    to(#62fcd5)
+  );
+  border-radius: 5px;
+  transform-origin: right top;
+  transform: scale(0, 1);
+  transition: transform 0.3s;
+}
+
+.purchased_buttonA:hover::before {
+  transform-origin: left top;
+  transform: scale(1, 1);
+}
+
+.purchased_buttonA a:active {
+  color: white;
+}
+
+.border {
+  transition: color 0.3s;
+  text-decoration: underline;
+  font-weight: 550;
+}
+
+.border:hover {
+  color: #16a6ff;
+  font-weight: 550;
+}
+
+.border:visited {
+  color: rgb(67, 67, 255);
+}
+
+.border:active {
+  color: white;
+}
+
+.footer {
+  background-color: #454545;
+  width: 100%;
+  padding-top: 8%;
+  color: white;
+  text-align: right;
+}

@@ -257,6 +257,10 @@
   transform: scale(1, 1);
 }
 
+.btnB a :active {
+  color: white;
+}
+
 .btnB_black {
   position: relative;
   margin: 0.5em;
@@ -319,6 +323,10 @@
 .btnB_black:hover::before {
   transform-origin: left top;
   transform: scale(1, 1);
+}
+
+.btnB_black a :active {
+  background-color: white;
 }
 
 .elementCategory {

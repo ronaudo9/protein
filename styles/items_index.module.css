@@ -78,22 +78,18 @@
 }
 
 .a::after {
-  position: absolute; /*親要素であるaタグを基準に位置を指定*/
-  left: 0; /*アンダーラインを各メニュー（aタグ）の左端に指定*/
-  content: ''; /*本来は、擬似要素に入るテキストなどを’’内に指定。今回はアンダーラインなので何も記載しない*/
-  width: 100%; /*アンダーラインを各aタグの幅に合わせる*/
-  height: 4px; /*アンダーラインの高さ（太さ）*/
-  background: #95ffe1; /*アンダーラインの色*/
-}
-
-.a::after {
   opacity: 0;
   position: absolute;
   left: 0;
-  content: '';
+  content: ''; /*本来は、擬似要素に入るテキストなどを’’内に指定。今回はアンダーラインなので何も記載しない*/
   width: 100%;
-  height: 4px;
-  background: #95ffe1;
+  height: 11px;
+  background: linear-gradient(
+    transparent 20%,
+    #41d7fd,
+    rgb(0, 255, 166)
+  );
+  line-height: 1;
   bottom: -1px; /*アンダーラインが位置する、各リストの下端からの高さ　ヘッダーの下端に合わせています*/
   visibility: hidden; /*ホバー前に、アンダーラインを可視化しない*/
   transition: 0.3s;
