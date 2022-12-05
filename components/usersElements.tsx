@@ -168,11 +168,13 @@ export default function UsersElements({ user }: any) {
         </div>
         <hr />
 
-        <button className={styles.btnB}>完了</button>
+        <button className={styles.btnB}>
+          <a>完了</a>
+        </button>
       </form>
 
       <button onClick={clickHandler} className={styles.btnB_black}>
-        編集
+        <a>編集</a>
       </button>
     </>
   );

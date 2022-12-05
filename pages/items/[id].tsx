@@ -12,10 +12,8 @@ import Header from '../layout/header';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
-
-const fetcher = (resource:any, init:any) =>
+const fetcher = (resource: any, init: any) =>
   fetch(resource, init).then((res) => res.json());
-
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(`http://localhost:8000/items/`);
@@ -49,7 +47,7 @@ export const getStaticProps: GetStaticProps = async ({
 
 // detail getStaticPropsから取得
 const ItemDetail: NextPage = ({ detail }: any) => {
-  console.log(detail)
+  console.log(detail);
   const router = useRouter();
 
   const [count, setCount] = React.useState(0);
@@ -117,10 +115,9 @@ const ItemDetail: NextPage = ({ detail }: any) => {
     setUserId(userId);
   }, []);
 
-
   const handler = (event: any) => {
     if (count === 0) {
-      ; // 数量0の場合はカートへ入れない
+      // 数量0の場合はカートへ入れない
     } else {
       event.preventDefault();
       fetch('http://localhost:8000/carts', {
@@ -129,36 +126,30 @@ const ItemDetail: NextPage = ({ detail }: any) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(carts),
-
-      })
-        .then(() => {
-          if (document.cookie !== '') {
-            router.push('/cart')
-          } else {
-            alert('カートに追加するにはログインが必要です');
-            router.push('/')
-          }
+      }).then(() => {
+        if (document.cookie !== '') {
+          router.push('/cart');
+        } else {
+          alert('カートに追加するにはログインが必要です');
+          router.push('/');
         }
-        );
+      });
     }
-  }
-//サブスクリプション
-const Subscription = (event:any) =>{
-  event.preventDefault();
+  };
+  //サブスクリプション
+  const Subscription = (event: any) => {
+    event.preventDefault();
 
-  fetch(`http://localhost:8000/subscriptionCart/`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(carts),
-  }).then(() => {
-    router.push(`/items/subscription`);
-  });
-};
-
-
-
+    fetch(`http://localhost:8000/subscriptionCart/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(carts),
+    }).then(() => {
+      router.push(`/items/subscription`);
+    });
+  };
 
   return (
     <>
@@ -170,8 +161,8 @@ const Subscription = (event:any) =>{
             className={styles.detail_img}
             src={detail.imageUrl}
             alt="商品画像"
-            width={300}
-            height={300}
+            width={450}
+            height={450}
           />
         </div>
 
@@ -205,11 +196,19 @@ const Subscription = (event:any) =>{
           </div>
           <div className={styles.quantity}>
             <p className={styles.quantity_title}>数量</p>
-            <button className={styles.plus} type="button" onClick={clickHandlerNext}>
+            <button
+              className={styles.plus}
+              type="button"
+              onClick={clickHandlerNext}
+            >
               +
             </button>
             <p>&nbsp;{count}&nbsp;</p>
-            <button className={styles.minus} type="button" onClick={clickHandlerPrev}>
+            <button
+              className={styles.minus}
+              type="button"
+              onClick={clickHandlerPrev}
+            >
               -
             </button>
             <p>&nbsp;個&nbsp;</p>
@@ -219,16 +218,16 @@ const Subscription = (event:any) =>{
             <p>¥{total.toLocaleString()}</p>
           </div>
           <div>
-            <button onClick={Subscription}>
-              定期購入を開始
+            <button
+              onClick={Subscription}
+              className={styles.button05}
+            >
+              <a>今すぐ定期購入を開始</a>
             </button>
           </div>
           <div className={styles.cart}>
             <button className={styles.cart_button} onClick={handler}>
               カートに追加
-            </button>
-            <button className={styles.subscription_button}>
-              定期購入をする
             </button>
           </div>
         </div>
