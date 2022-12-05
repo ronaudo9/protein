@@ -122,9 +122,9 @@ export default function UserLogin(cookieData: any) {
         </main>
       </div>
 
-      <footer className={style.footer}>
+      {/* <footer className={style.footer}>
         <h1>RAKUTEIN</h1>
-      </footer>
+      </footer> */}
     </div>
   );
 }
