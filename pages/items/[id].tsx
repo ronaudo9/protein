@@ -10,6 +10,11 @@ import {
 import React, { useState, useEffect } from 'react';
 import Header from '../layout/header';
 import { useRouter } from 'next/router';
+import useSWR from 'swr';
+
+
+const fetcher = (resource:any, init:any) =>
+  fetch(resource, init).then((res) => res.json());
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -51,6 +56,11 @@ const ItemDetail: NextPage = ({ detail }: any) => {
   const [total, setTotal] = React.useState(0);
   const [userId, setUserId] = React.useState('');
   const [flavor, setFlavor] = React.useState(detail.flavor[0]);
+  // const { data, error } = useSWR(`/api/users?id=${userId}`, fetcher);
+
+  // if (error) return <div>エラー</div>;
+
+  // if (!data) return <div>ロード中...</div>;
 
   //　数量変更
   const addHandlerNext = (sub: any) => {
@@ -132,6 +142,22 @@ const ItemDetail: NextPage = ({ detail }: any) => {
         );
     }
   }
+//サブスクリプション
+const Subscription = (event:any) =>{
+  event.preventDefault();
+
+  fetch(`http://localhost:8000/subscriptionCart/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(carts),
+  }).then(() => {
+    router.push(`/items/subscription`);
+  });
+};
+
+
 
 
   return (
@@ -191,6 +217,11 @@ const ItemDetail: NextPage = ({ detail }: any) => {
           <div className={styles.total}>
             <p className={styles.total_title}>合計金額</p>
             <p>¥{total.toLocaleString()}</p>
+          </div>
+          <div>
+            <button onClick={Subscription}>
+              定期購入を開始
+            </button>
           </div>
           <div className={styles.cart}>
             <button className={styles.cart_button} onClick={handler}>

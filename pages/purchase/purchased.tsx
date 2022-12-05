@@ -14,6 +14,7 @@ export const getServerSideProps: GetServerSideProps = async (
     `http://localhost:8000/carts?userId=${cookies.id}`
   );
   const carts = await res.json();
+  //購入時間
   carts.forEach((cart: any) => {
     cart.date = new Date().toLocaleString('ja-JP');
   });
