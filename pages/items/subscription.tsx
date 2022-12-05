@@ -73,8 +73,8 @@ const deleteCarts = (event: any) => {
       },
        body: JSON.stringify(data),
     });
-  };
-
+  })
+};
   return (
     <>
       <Header />
