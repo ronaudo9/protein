@@ -105,7 +105,7 @@ const AddressEdit = ({
               住所1(都道府県)
             </label>
           </div>
-          &nbsp;&nbsp;&nbsp;
+
           <div className={styles.inputs}>
             <input
               type="text"
@@ -127,7 +127,7 @@ const AddressEdit = ({
               住所2(市区町村)
             </label>
           </div>
-          &nbsp;&nbsp;&nbsp;
+
           <div className={styles.inputs}>
             <input
               type="text"
@@ -146,10 +146,12 @@ const AddressEdit = ({
 
       <div className={styles.group}>
         <div className={styles.grid}>
-          <label htmlFor="aza" className={styles.lables}>
-            住所3(字丁目)
-          </label>
-          &nbsp;&nbsp;&nbsp;
+          <div>
+            <label htmlFor="aza" className={styles.lables}>
+              住所3(字丁目)
+            </label>
+          </div>
+
           <div className={styles.inputs}>
             <input
               type="text"
@@ -170,7 +172,7 @@ const AddressEdit = ({
           <label htmlFor="building" className={styles.lables}>
             住所4(建物名)
           </label>
-          &nbsp;&nbsp;&nbsp;
+
           <div className={styles.inputs}>
             <input
               type="text"

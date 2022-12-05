@@ -40,7 +40,7 @@ export const getServerSideProps: GetServerSideProps = async (
 
 export default function PurchaseCompletion() {
   return (
-    <div className={styles.container}>
+    <>
       <Header />
       <hr className={styles.hr}></hr>
       <Head>
@@ -58,17 +58,17 @@ export default function PurchaseCompletion() {
           <p className={styles.purchased_p}>
             詳細はユーザー情報のご購入履歴をご確認ください。
           </p>
-          {/* <Link href=> */}
+
           <div className={styles.purchasedBottonsDisplay}>
             <div className={styles.purchased_buttons}>
-              <div>
-                <Link href="/users#user_purchased">
+              <div className={styles.bottonC}>
+                <Link href="/users">
                   <button className={styles.purchased_button}>
                     ご購入履歴を確認する
                   </button>
                 </Link>
               </div>
-              <div>
+              <div className={styles.bottonC}>
                 <Link href="/items">
                   <button className={styles.purchased_button}>
                     買い物を続ける
@@ -79,6 +79,9 @@ export default function PurchaseCompletion() {
           </div>
         </div>
       </main>
-    </div>
+      <footer className={styles.footer}>
+        <h1>RAKUTEIN</h1>
+      </footer>
+    </>
   );
 }

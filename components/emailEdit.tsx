@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import styles from '/styles/detail_user.module.css';
+import styles from '/styles/users.edit.module.css';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -68,11 +68,11 @@ const EmailEdit = ({ formValues, setFormValues, readOnly }: any) => {
 
   return (
     <>
-      <div className={styles.formGroup}>
+      <div className={styles.displayCenter}>
         <input
           type="email"
           name="email"
-          className={styles.inputEmail}
+          className={styles.input}
           value={formValues.email}
           placeholder="例:raffaello@jungleocean.com"
           onChange={handleChange}

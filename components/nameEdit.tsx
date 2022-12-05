@@ -53,32 +53,32 @@ const NameEdit = ({ formValues, setFormValues, readOnly }: any) => {
   return (
     <>
       <div className={styles.formGroup}>
-        <input
-          type="text"
-          name="firstName"
-          className={styles.input}
-          placeholder="例:姓"
-          value={formValues.firstName}
-          onChange={handleChange}
-          required
-          readOnly={readOnly}
-        />
-        &nbsp;
-        <input
-          type="text"
-          name="lastName"
-          className={styles.input}
-          placeholder="例:名"
-          value={formValues.lastName}
-          onChange={handleChange}
-          readOnly={readOnly}
-          required
-        />
+        <div>
+          <input
+            type="text"
+            name="firstName"
+            className={styles.input}
+            placeholder="例:姓"
+            value={formValues.firstName}
+            onChange={handleChange}
+            required
+            readOnly={readOnly}
+          />
+          <br />
+          <input
+            type="text"
+            name="lastName"
+            className={styles.input}
+            placeholder="例:名"
+            value={formValues.lastName}
+            onChange={handleChange}
+            readOnly={readOnly}
+            required
+          />
+        </div>
+        <br />
         {/* <p>{formErrors?.name}</p> */}
         <div>
-          <span className={styles.element_p1}>
-            ふりがな &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </span>
           <div>
             <input
               type="text"
@@ -90,7 +90,7 @@ const NameEdit = ({ formValues, setFormValues, readOnly }: any) => {
               readOnly={readOnly}
               required
             />
-            &nbsp;
+            <br />
             <span>
               <input
                 type="text"
