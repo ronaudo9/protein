@@ -121,6 +121,10 @@ export default function UserLogin(cookieData: any) {
           </form>
         </main>
       </div>
+
+      <footer className={style.footer}>
+        <h1>RAKUTEIN</h1>
+      </footer>
     </div>
   );
 }

@@ -232,6 +232,9 @@ const ItemDetail: NextPage = ({ detail }: any) => {
           </div>
         </div>
       </div>
+      <footer className={styles.footer}>
+        <h1>RAKUTEIN</h1>
+      </footer>
     </>
   );
 };

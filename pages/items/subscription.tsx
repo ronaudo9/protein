@@ -61,21 +61,20 @@ export default function PurchaseCompletion({
     });
   };
 
+  const data = {};
 
-const data = {};
-
-const deleteCarts = (event: any) => {
-  event.preventDefault();
-  subscriptionCart.forEach((cart: any) => {
-    fetch(`http://localhost:8000/subscriptionCart/${cart.id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-       body: JSON.stringify(data),
+  const deleteCarts = (event: any) => {
+    event.preventDefault();
+    subscriptionCart.forEach((cart: any) => {
+      fetch(`http://localhost:8000/subscriptionCart/${cart.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
     });
-  })
-};
+  };
   return (
     <>
       <Header />

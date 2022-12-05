@@ -34,7 +34,8 @@
   padding: 3em 2em 2em 2em;
   background: #fafafa;
   border: 1px solid #ebebeb;
-  box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
+  box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
 }
 
 .group {
@@ -59,7 +60,6 @@
   outline: none;
 }
 
-
 /* Label */
 
 .label {
@@ -73,18 +73,16 @@
   transition: all 0.2s ease;
 }
 
-
 /* active */
 
-.input:focus~label,
-.input.used~label {
+.input:focus ~ label,
+.input.used ~ label {
   top: -20px;
-  transform: scale(.75);
+  transform: scale(0.75);
   left: -2px;
   /* font-size: 14px; */
   color: #4a89dc;
 }
-
 
 /* Underline */
 
@@ -113,14 +111,12 @@
   right: 50%;
 }
 
-
 /* active */
 
-.input:focus~.bar:before,
-.input:focus~.bar:after {
+.input:focus ~ .bar:before,
+.input:focus ~ .bar:after {
   width: 50%;
 }
-
 
 /* Highlight */
 
@@ -134,13 +130,11 @@
   opacity: 0.5;
 }
 
-
 /* active */
 
-.input:focus~.highlight {
+.input:focus ~ .highlight {
   animation: inputHighlighter 0.3s ease;
 }
-
 
 /* Animations */
 
@@ -155,14 +149,13 @@
   }
 }
 
-
 /* Button */
 
 .button {
   position: relative;
   display: inline-block;
   padding: 12px 24px;
-  margin: .3em 0 1em 0;
+  margin: 0.3em 0 1em 0;
   width: 100%;
   vertical-align: middle;
   color: #fff;
@@ -173,7 +166,7 @@
   letter-spacing: 1px;
   background: transparent;
   border: 0;
-  border-bottom: 2px solid #3160B6;
+  border-bottom: 2px solid #3160b6;
   cursor: pointer;
   transition: all 0.15s ease;
 }
@@ -182,18 +175,16 @@
   outline: 0;
 }
 
-
 /* Button modifiers */
 
 .buttonBlue {
   background: #4a89dc;
-  text-shadow: 1px 1px 0 rgba(39, 110, 204, .5);
+  text-shadow: 1px 1px 0 rgba(39, 110, 204, 0.5);
 }
 
 .buttonBlue:hover {
   background: #357bd8;
 }
-
 
 /* Ripples container */
 
@@ -206,7 +197,6 @@
   overflow: hidden;
   background: transparent;
 }
-
 
 /* Ripples circle */
 
@@ -223,9 +213,8 @@
 }
 
 .ripples.is-active .ripplesCircle {
-  animation: ripples .4s ease-in;
+  animation: ripples 0.4s ease-in;
 }
-
 
 /* Ripples animation */
 
@@ -243,4 +232,12 @@
     padding-bottom: 200%;
     opacity: 0;
   }
+}
+
+.footer {
+  background-color: #454545;
+  width: 100%;
+  padding-top: 8%;
+  color: white;
+  text-align: right;
 }
