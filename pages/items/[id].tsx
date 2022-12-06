@@ -140,7 +140,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
   const Subscription = (event: any) => {
     event.preventDefault();
 
-    fetch(`http://localhost:8000/subscriptionCart/`, {
+    fetch(`http://localhost:3000/api/subscriptionCart/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
