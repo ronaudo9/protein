@@ -109,9 +109,9 @@ const Cart = ({ users }: any) => {
               買い物を続ける
             </button>
           </Link>
-          <Link href="/purchase">
-            <button className={styles.purchase}>購入する</button>
-          </Link>
+          {/* <Link href="/purchase"> */}
+            <button className={styles.purchase} onClick={routerHandler}>購入する</button>
+          {/* </Link> */}
         </div>
       </section>
       <footer className={styles.footer}>
