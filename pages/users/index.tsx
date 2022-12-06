@@ -110,7 +110,7 @@ const UserDetails = ({
       userId: cookies.id,
       items: subscriptionArray,
     };
-    fetch(`http://localhost:8000/subscriptionHistories/`, {
+    fetch(`http://localhost:3000/api/subscriptionHistories/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(purchaseHistories),
