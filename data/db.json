@@ -338,32 +338,28 @@
       "building": "中央ビル３０４",
       "tel": "090-6677-5544",
       "deleted": false
+    },
+    {
+      "id": 6,
+      "firstName": "早川",
+      "lastName": "修平",
+      "firstNameKana": "はやかわ",
+      "lastNameKana": "しゅうへい",
+      "middleName": "",
+      "email": "hykwshuhei@gmail.com",
+      "password": "Vaga7326",
+      "passwordConfirmation": "Vaga7326",
+      "postCode": "251-0042",
+      "prefecture": "神奈川県",
+      "city": "藤沢市",
+      "aza": "辻堂新町",
+      "building": "",
+      "tel": "090-8541-1689",
+      "deleted": false
     }
   ],
   "favorites": [],
   "purchaseHistories": [],
-  "carts": [
-    {
-      "userId": "2",
-      "items": [],
-      "id": 1
-    },
-    {
-      "userId": "2",
-      "items": [],
-      "id": 2
-    },
-    {
-      "userId": "2",
-      "items": [],
-      "id": 3
-    },
-    {
-      "userId": "2",
-      "items": [],
-      "id": 4
-    }
-  ],
   "carts": [],
   "subscriptionCart": [],
   "subscription": [],
