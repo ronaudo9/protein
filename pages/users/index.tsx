@@ -12,72 +12,79 @@ import { useRouter } from 'next/router';
 export const getServerSideProps: GetServerSideProps = async ({
   req,
 }) => {
-  const cookies = req.cookies;
-  const res = await fetch(
-    `http://localhost:8000/users?id=${cookies.id}`
-  );
-  const users = await res.json();
-  const user = users[0];
+  const errors: string[] = [];
 
+  const cookies = req.cookies;
+  let user = { id: cookies.id };
+  try {
+    const res = await fetch(
+      `http://localhost:8000/users/${cookies.id}`
+    );
+    user = await res.json();
+  } catch (err) {
+    console.error('failed to get user', err);
+    errors.push('ユーザの取得に失敗しました');
+  }
+
+  const itemsArray: any[] = [];
+  try{
   const resHistories = await fetch(
     `http://localhost:8000/purchaseHistories?userId=${cookies.id}`
   );
   const history = await resHistories.json();
-  // history配列　[ { userId: 2, items: [ [Object] ], id: 2 } ][ { userId: 2, items: [ [Object] ], id: 2 } ]
-
-  const itemsArray: any[] = [];
-
-  //element { userId: 2, items: [ [Object] ], id: 2 } { userId: 2, items: [ [Object] ], id: 2 }
   history.forEach((element: any) => {
     const items = element.items;
-    //items配列 [{userId: 2,itemId: 1,imageUrl: '/images/impact_whey_protein.jpg',name: 'Impact ホエイ プロテイン',flavor: 'チョコ',price: 1990,countity: 1,id: 2,date: '2022/12/1 11:12:47'}]
 
     items.forEach((item: any) => {
       itemsArray.push(item);
     });
-  });
-  console.log(JSON.stringify(itemsArray));
+  })}catch(err){
+    console.error('failed to get purchaseHistories', err);
+    errors.push('ユーザ履歴の取得に失敗しました');
+  }
   //サブスク
+  const subscriptionArray: any[] = [];
+  try{
   const regular = await fetch(
     `http://localhost:8000/subscription?userId=${cookies.id}`
   );
   const leave = await regular.json();
 
-  const subscriptionArray: any[] = [];
-
   leave.forEach((element: any) => {
     const items = element.items;
-    // console.log(`2${items}`)
-
     items.forEach((item: any) => {
       subscriptionArray.push(item);
     });
-  });
+  })}catch(err){
+    console.error('failed to get subscription', err);
+    errors.push('定期購入の取得に失敗しました');
+  };
   //サブスクの履歴
+  const subscriptionHistoriesArray: any[] = [];
+  try{
   const past = await fetch(
     `http://localhost:8000/subscriptionHistories?userId=${cookies.id}`
   );
-
   const remain = await past.json();
-
-  const subscriptionHistoriesArray: any[] = [];
-
   remain.forEach((element: any) => {
     const items = element.items;
-
     items.forEach((item: any) => {
       subscriptionHistoriesArray.push(item);
     });
-  });
+  })}catch(err){
+    console.error('failed to get subscriptionHistories', err);
+    errors.push('定期購入の履歴取得に失敗しました');
+  }
 
   return {
     props: {
       user,
       itemsArray,
       subscriptionArray,
-      leave,
+      // leave,
       subscriptionHistoriesArray,
       cookies,
+      errors,
     },
   };
 };
@@ -89,6 +96,7 @@ const UserDetails = ({
   leave,
   subscriptionHistoriesArray,
   cookies,
+  errors,
 }: any) => {
   //サブスクからサブスク購入履歴への処理
 
@@ -112,17 +120,17 @@ const UserDetails = ({
     });
   };
 
-  const data = {};
-
+  //  const data = {};
   const deleteCarts = (event: any) => {
-    leave.forEach((del: any) => {
-      fetch(`http://localhost:3000/api/subscription/${del.id}`, {
+    subscriptionArray.forEach((del: any) => {
+      fetch(`http://localhost:8000/subscription/${del.id}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         // body: JSON.stringify(data),
       });
     });
   };
+
   return (
     <>
       <Header />
@@ -151,6 +159,16 @@ const UserDetails = ({
             </p>
           </div>
         </div>
+
+        {errors.length > 0 && (
+          <section>
+            <ul>
+              {errors.map((message: string, index: number) => (
+                <li key={index}>{message}</li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <section className={styles.element}>
           <h2 className={styles.title_element} id="user_element">
@@ -270,7 +288,12 @@ const UserDetails = ({
                           </span>
                         </p>
                         <p>
-                          <button className={styles.button} onClick={() => handler(items)}>定期購入を終了する</button>
+                          <button
+                            className={styles.button}
+                            onClick={() => handler(items)}
+                          >
+                            定期購入を終了する
+                          </button>
                         </p>
                       </div>
                     </div>
