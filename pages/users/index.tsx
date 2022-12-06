@@ -102,7 +102,7 @@ const UserDetails = ({
       userId: cookies.id,
       items: subscriptionArray,
     };
-    fetch(`http://localhost:8000/subscriptionHistories/`, {
+    fetch(`http://localhost:3000/api/subscriptionHistories/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(purchaseHistories),
@@ -116,7 +116,7 @@ const UserDetails = ({
 
   const deleteCarts = (event: any) => {
     leave.forEach((del: any) => {
-      fetch(`http://localhost:8000/subscription/${del.id}`, {
+      fetch(`http://localhost:3000/api/subscription/${del.id}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         // body: JSON.stringify(data),

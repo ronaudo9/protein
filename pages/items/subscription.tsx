@@ -51,7 +51,7 @@ export default function PurchaseCompletion({
   const router = useRouter();
   const handler = (event: any) => {
     event.preventDefault();
-    fetch('http://localhost:8000/subscription', {
+    fetch('http://localhost:3000/api/subscription', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(subscription),
@@ -66,7 +66,7 @@ export default function PurchaseCompletion({
   const deleteCarts = (event: any) => {
     event.preventDefault();
     subscriptionCart.forEach((cart: any) => {
-      fetch(`http://localhost:8000/subscriptionCart/${cart.id}`, {
+      fetch(`http://localhost:3000/api/subscriptionCart/${cart.id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

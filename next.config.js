@@ -39,6 +39,33 @@ const nextConfig = {
         source: '/api/favorites/:slug',
         destination: 'http://localhost:8000/favorites/:slug',
       },
+
+      {
+        source: '/api/subscription',
+        destination: 'http://localhost:8000/subscription',
+      },
+      {
+        source: '/api/subscription/:slug',
+        destination: 'http://localhost:8000/subscription/:slug',
+      },
+
+      {
+        source: '/api/subscriptionHistories',
+        destination: 'http://localhost:8000/subscriptionHistories',
+      },
+      {
+        source: '/api/subscriptionHistories/:slug',
+        destination: 'http://localhost:8000/subscriptionHistories/:slug',
+      },
+
+      {
+        source: '/api/subscriptionCart',
+        destination: 'http://localhost:8000/subscriptionCart',
+      },
+      {
+        source: '/api/subscriptionCart/:slug',
+        destination: 'http://localhost:8000/subscriptionCart/:slug',
+      },
     ];
   },
 };
