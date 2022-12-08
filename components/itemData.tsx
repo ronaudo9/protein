@@ -28,7 +28,7 @@ const ItemData: React.FunctionComponent<{
   // 購入履歴jsonサーバーに購入商品を追加する処理[始まり]
   const handler = (event: any) => {
     event.preventDefault();
-    fetch('http://localhost:3000/api/purchaseHistories', {
+    fetch('http://localhost:8000/purchaseHistories', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const ItemData: React.FunctionComponent<{
     event.preventDefault();
     const data = {};
     carts.forEach((cart: any) => {
-      fetch(`http://localhost:3000/api/carts/${cart.id}`, {
+      fetch(`http://localhost:8000/carts/${cart.id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
