@@ -76,6 +76,8 @@ export const getServerSideProps: GetServerSideProps = async ({
     errors.push('定期購入の履歴取得に失敗しました');
   }
 
+  console.log(subscriptionArray)
+
   return {
     props: {
       user,
