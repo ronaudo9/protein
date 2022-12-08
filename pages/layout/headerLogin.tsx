@@ -8,6 +8,7 @@ export default function HeaderLogin() {
       <div className={style.logo}>
         <Link href="/">
           <Image
+            priority
             src="/images/rakutein.jpg"
             width={170}
             height={80}

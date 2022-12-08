@@ -11,30 +11,24 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const cookies = req.cookies;
   const res = await fetch(
-    `http://localhost:8000/carts?userId=${cookies.id}`
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts?userId=${cookies.id}`
   );
-  const users = await res.json();
-  // const user = users[0];
-  // console.log(user);
+  const carts = await res.json();
 
   return {
-    props: { users },
+    props: { carts },
   };
 };
 
 const data = {};
 
-const Cart = ({ users }: any) => {
+const Cart = ({ carts }: any) => {
   const router = useRouter();
 
   // 削除
-  function deleteItem(users: any) {
-    fetch(`http://localhost:3000/api/carts/${users.id}`, {
+  function deleteItem(cart: any) {
+    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/carts/${cart.id}`, {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
     });
     router.reload();
   }
@@ -42,9 +36,8 @@ const Cart = ({ users }: any) => {
   // 小計・合計
   const priceArray: any[] = [];
 
-  users.forEach((element: any) => {
+  carts.forEach((element: any) => {
     const multiPrice = element.price * element.countity;
-    console.log(multiPrice);
     priceArray.push(multiPrice);
   });
 
@@ -55,7 +48,7 @@ const Cart = ({ users }: any) => {
   );
 
   const routerHandler = () => {
-    if (users[0]) {
+    if (carts[0]) {
       router.push('/purchase');
     } else {
       alert('商品一覧から商品を選んでカートに入れてください');
@@ -70,9 +63,10 @@ const Cart = ({ users }: any) => {
       <div className={styles.item_list}>
         <h4 className={styles.cart_title}>カート</h4>
         <section className={styles.cart_content}>
-          {users.map((cart: any) => (
+          {carts.map((cart: any) => (
             <div key={cart.id} className={styles.cart_content2}>
               <Image
+                priority
                 className={styles.cart_img}
                 src={cart.imageUrl}
                 alt="商品画像"
@@ -89,7 +83,12 @@ const Cart = ({ users }: any) => {
                   <span>価格(税込)</span>¥
                   {(cart.price * cart.countity).toLocaleString()}
                 </p>
-                <button className={styles.delete_button} onClick={() => deleteItem(cart)}>削除</button>
+                <button
+                  className={styles.delete_button}
+                  onClick={() => deleteItem(cart)}
+                >
+                  削除
+                </button>
               </div>
             </div>
           ))}
@@ -110,7 +109,9 @@ const Cart = ({ users }: any) => {
             </button>
           </Link>
           {/* <Link href="/purchase"> */}
-            <button className={styles.purchase} onClick={routerHandler}>購入する</button>
+          <button className={styles.purchase} onClick={routerHandler}>
+            購入する
+          </button>
           {/* </Link> */}
         </div>
       </section>

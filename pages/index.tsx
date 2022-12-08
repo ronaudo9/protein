@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import HeaderLogin from './layout/headerLogin';
-import { isGeneratorFunction } from 'util/types';
 import ItemDisplay from './items/';
 import { GetServerSideProps } from 'next';
 
@@ -21,7 +20,7 @@ export default function UserLogin(cookieData: any) {
 
   const handler = (event: any) => {
     event.preventDefault();
-    fetch('/api/login', {
+    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -83,6 +82,7 @@ export default function UserLogin(cookieData: any) {
                   setVisible(false);
                 }}
                 required
+                autoComplete="off"
               />
               <span className={style.highlight}></span>
               <span className={style.bar}></span>
@@ -102,6 +102,7 @@ export default function UserLogin(cookieData: any) {
                 required
                 pattern=".{8,16}"
                 title="8文字以上16文字以下"
+                autoComplete="off"
               />
               <span className={style.highlight}></span>
               <span className={style.bar}></span>

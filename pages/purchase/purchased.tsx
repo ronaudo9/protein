@@ -9,9 +9,8 @@ export const getServerSideProps: GetServerSideProps = async (
   context
 ) => {
   const cookies = context.req.cookies;
-  console.log(`cookie:${cookies.id}`);
   const res = await fetch(
-    `http://localhost:8000/carts?userId=${cookies.id}`
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts?userId=${cookies.id}`
   );
   const carts = await res.json();
   //購入時間
@@ -22,13 +21,13 @@ export const getServerSideProps: GetServerSideProps = async (
     userId: cookies.id,
     items: carts,
   };
-  await fetch(`http://localhost:8000/purchaseHistories`, {
+  await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(purchaseHistories),
   }).then(() => {
     carts.forEach((cart: any) => {
-      fetch(`http://localhost:8000/carts/${cart.id}`, {
+      fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts/${cart.id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

@@ -21,20 +21,22 @@ const ItemData: React.FunctionComponent<{
 
   const purchaseHistories = {
     userId: user.id,
-    items: carts
-  }
-
+    items: carts,
+  };
 
   // 購入履歴jsonサーバーに購入商品を追加する処理[始まり]
   const handler = (event: any) => {
     event.preventDefault();
-    fetch('http://localhost:3000/api/purchaseHistories', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(purchaseHistories),
-    }).then(() => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(purchaseHistories),
+      }
+    ).then(() => {
       deleteCarts(event);
       router.push('/purchase/purchased');
     });
@@ -48,7 +50,7 @@ const ItemData: React.FunctionComponent<{
     event.preventDefault();
     const data = {};
     carts.forEach((cart: any) => {
-      fetch(`http://localhost:3000/api/carts/${cart.id}`, {
+      fetch(`http://localhost:8000/carts/${cart.id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -193,7 +195,10 @@ const ItemData: React.FunctionComponent<{
         <br />
         <br />
 
-        <div style={{ textAlign: 'right' }} className={styles.sumPrice}>
+        <div
+          style={{ textAlign: 'right' }}
+          className={styles.sumPrice}
+        >
           <u>合計金額:{sumPrice}円</u>
         </div>
         <br />
@@ -207,13 +212,15 @@ const ItemData: React.FunctionComponent<{
           </Link>
           <form action="/api/checkout_sessions" method="POST">
             <input type="hidden" name="price" value={sumPrice} />
-            <button className={styles.btnB} type="submit">クレジット決済</button>
+            <button className={styles.btnB} type="submit">
+              クレジット決済
+            </button>
           </form>
           <button className={styles.btnB} onClick={handler}>
             <span>代引き決済</span>
           </button>
         </section>
-      </section >
+      </section>
     </>
   );
 };

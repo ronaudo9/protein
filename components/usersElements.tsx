@@ -14,9 +14,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
 }) => {
   const cookies = req.cookies;
-  console.log(cookies.id);
   const res = await fetch(
-    `http://localhost:8000/users?id=${cookies.id}`
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users?id=${cookies.id}`
   );
   const users = await res.json();
   const user = users[0];
@@ -55,13 +54,16 @@ export default function UsersElements({ user }: any) {
   function submit(e: SyntheticEvent) {
     e.preventDefault();
 
-    fetch(`/api/users/${user.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formValues),
-    }).then(() => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/api/users/${user.id}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formValues),
+      }
+    ).then(() => {
       router.reload();
     });
   }
@@ -147,7 +149,7 @@ export default function UsersElements({ user }: any) {
             type="credit"
             name="credit"
             className={styles.input}
-            setFormValues={setFormValues}
+            setformvalues={setFormValues}
             placeholder="例:●●●●-●●●●-●●●●-●●●●（半角数字）"
             required
             {...user.credit}
@@ -164,7 +166,7 @@ export default function UsersElements({ user }: any) {
           </div>
           <PasswordEdit
             formValues={formValues}
-            setFormValues={setFormValues}
+            setformvalues={setFormValues}
             readOnly={readOnly}
           />
         </div>
@@ -181,10 +183,3 @@ export default function UsersElements({ user }: any) {
     </>
   );
 }
-
-// input ---- readOnly={編集フラグ}/>↑trueで編集可能にする
-//最初state:編集フラグ（false）
-// 編集ボタン　onClickで編集フラグを切り替え
-// readonlyの切り替えはフラグで
-
-// 本来は意味の持たないidとloginIdのemailと別で持っているはず
