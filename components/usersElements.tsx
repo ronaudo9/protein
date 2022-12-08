@@ -54,13 +54,16 @@ export default function UsersElements({ user }: any) {
   function submit(e: SyntheticEvent) {
     e.preventDefault();
 
-    fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/api/users/${user.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formValues),
-    }).then(() => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/api/users/${user.id}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formValues),
+      }
+    ).then(() => {
       router.reload();
     });
   }
@@ -180,10 +183,3 @@ export default function UsersElements({ user }: any) {
     </>
   );
 }
-
-// input ---- readOnly={編集フラグ}/>↑trueで編集可能にする
-//最初state:編集フラグ（false）
-// 編集ボタン　onClickで編集フラグを切り替え
-// readonlyの切り替えはフラグで
-
-// 本来は意味の持たないidとloginIdのemailと別で持っているはず

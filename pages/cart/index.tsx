@@ -29,10 +29,6 @@ const Cart = ({ carts }: any) => {
   function deleteItem(cart: any) {
     fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/carts/${cart.id}`, {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
     });
     router.reload();
   }
@@ -70,6 +66,7 @@ const Cart = ({ carts }: any) => {
           {carts.map((cart: any) => (
             <div key={cart.id} className={styles.cart_content2}>
               <Image
+                priority
                 className={styles.cart_img}
                 src={cart.imageUrl}
                 alt="商品画像"
@@ -86,7 +83,12 @@ const Cart = ({ carts }: any) => {
                   <span>価格(税込)</span>¥
                   {(cart.price * cart.countity).toLocaleString()}
                 </p>
-                <button className={styles.delete_button} onClick={() => deleteItem(cart)}>削除</button>
+                <button
+                  className={styles.delete_button}
+                  onClick={() => deleteItem(cart)}
+                >
+                  削除
+                </button>
               </div>
             </div>
           ))}
@@ -107,7 +109,9 @@ const Cart = ({ carts }: any) => {
             </button>
           </Link>
           {/* <Link href="/purchase"> */}
-          <button className={styles.purchase} onClick={routerHandler}>購入する</button>
+          <button className={styles.purchase} onClick={routerHandler}>
+            購入する
+          </button>
           {/* </Link> */}
         </div>
       </section>

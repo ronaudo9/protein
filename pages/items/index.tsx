@@ -55,6 +55,7 @@ const ItemDisplay: NextPage = () => {
       </section>
       <section className={styles.head}>
         <Image
+          priority
           className={styles.img}
           width={900}
           height={400}
@@ -81,6 +82,7 @@ const ItemDisplay: NextPage = () => {
         </h2>
         <br />
         <Image
+          priority
           src="/images/powder.jpg"
           alt="powder"
           width={800}
