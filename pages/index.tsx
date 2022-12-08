@@ -21,7 +21,7 @@ export default function UserLogin(cookieData: any) {
 
   const handler = (event: any) => {
     event.preventDefault();
-    fetch('/api/login', {
+    fetch(`${process.env.NEXT_PUBLIC_DATA}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
