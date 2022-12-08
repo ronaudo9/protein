@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   let user = { id: cookies.id };
   try {
     const res = await fetch(
-      `http://localhost:8000/users/${cookies.id}`
+      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users/${cookies.id}`
     );
     user = await res.json();
   } catch (err) {
@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const itemsArray: any[] = [];
   try{
   const resHistories = await fetch(
-    `http://localhost:8000/purchaseHistories?userId=${cookies.id}`
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories?userId=${cookies.id}`
   );
   const history = await resHistories.json();
   history.forEach((element: any) => {
@@ -48,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const subscriptionArray: any[] = [];
   // try{
   const regular = await fetch(
-    `http://localhost:8000/subscription?userId=${cookies.id}`
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscription?userId=${cookies.id}`
   );
   const leave = await regular.json();
 
@@ -77,7 +77,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const subscriptionHistoriesArray: any[] = [];
   try{
   const past = await fetch(
-    `http://localhost:8000/subscriptionHistories?userId=${cookies.id}`
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscriptionHistories?userId=${cookies.id}`
   );
   const remain = await past.json();
   remain.forEach((element: any) => {
@@ -90,7 +90,12 @@ export const getServerSideProps: GetServerSideProps = async ({
     errors.push('.');
   }
 
+<<<<<<< HEAD
 // console.log(subscriptionArray)
+=======
+  console.log(subscriptionArray)
+
+>>>>>>> main
   return {
     props: {
       user,
@@ -118,27 +123,27 @@ const UserDetails = ({
   const router = useRouter();
   const handler = (items: any) => {
     // console.log(subscriptionArray)
-  //   subscriptionArray.forEach((cart: any) => {
-  //     cart.date = new Date().toLocaleString('ja-JP');
-  //   });
-  //   const purchaseHistories = {
-  //     userId: cookies.id,
-  //     items: subscriptionArray,
-  //   };
-  //   fetch(`http://localhost:8000/subscriptionHistories/`, {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(purchaseHistories),
-  //   }).then(() => {
-  //     deleteCarts(event);
-  //     router.reload();
-  //   });
-  // };
+    subscriptionArray.forEach((cart: any) => {
+      cart.date = new Date().toLocaleString('ja-JP');
+    });
+    const purchaseHistories = {
+      userId: cookies.id,
+      items: subscriptionArray,
+    };
+    fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscriptionHistories/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(purchaseHistories),
+    }).then(() => {
+      deleteCarts(event);
+      router.reload();
+    });
+  };
 
   //  const data = {};
-  // const deleteCarts = (items:any) => {
-
-      fetch(`http://localhost:3000/api/subscription/${items.userId}`, {
+  const deleteCarts = (event: any) => {
+    subscriptionArray.forEach((del: any) => {
+      fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscription/${del.id}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         // body: JSON.stringify(data),

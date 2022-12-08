@@ -61,7 +61,7 @@ const nextConfig = {
       },
       {
         source: '/api/subscriptionHistories/:slug',
-        destination:'http://localhost:8000/subscriptionHistories/:slug',
+        destination: 'http://localhost:8000/subscriptionHistories/:slug',
       },
       {
         source: '/api/carts',
@@ -71,8 +71,22 @@ const nextConfig = {
         source: '/api/carts/:slug',
         destination: 'http://localhost:8000/carts/:slug',
       },
+      /*
+      {
+        source: 'PROTEIN',
+        destination: 'NEXT_PUBLIC_PROTEIN',
+      },
+      {
+        source: 'PROTEIN_DATA',
+        destination: 'NEXT_PUBLIC_PROTEIN_DATA',
+      },
+      */
     ];
   },
 };
+
+require('dotenv').config({ path: `./.env.${process.env.ENVIRONMENT}` })
+
+module.exports = {}
 
 module.exports = nextConfig;

@@ -8,9 +8,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
 }) => {
   const cookies = req.cookies;
-  console.log(cookies.id);
   const res = await fetch(
-    `http://localhost:8000/users?id=${cookies.id}`
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users?id=${cookies.id}`
   );
   const users = await res.json();
   const user = users[0];
@@ -20,7 +19,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 };
 
 const NameEdit = ({ formValues, setFormValues, readOnly }: any) => {
-  // ページコンポーネントは｛｝一つしか持てない
   const router = useRouter();
 
   // const initialValues = {
