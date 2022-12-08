@@ -20,7 +20,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 };
 
 const NameEdit = ({ formValues, setFormValues, readOnly }: any) => {
-  // ページコンポーネントは｛｝一つしか持てない
   const router = useRouter();
 
   // const initialValues = {

@@ -250,7 +250,7 @@
       "lastName": "正子",
       "firstNameKana": "おかだ",
       "lastNameKana": "まさこ",
-      "middleName": "おか",
+      "middleName": " ",
       "email": "na@gmail.com",
       "password": "ddeerrff",
       "passwordConfirmation": "ddeerrff",
@@ -359,7 +359,63 @@
     }
   ],
   "favorites": [],
-  "purchaseHistories": [],
+  "purchaseHistories": [
+    {
+      "userId": "1",
+      "items": [
+        {
+          "userId": 1,
+          "itemId": 2,
+          "imageUrl": "/images/impact_whey_aisolate.jpg",
+          "name": "Impact ホエイ アイソレート",
+          "flavor": "チョコ",
+          "price": 4390,
+          "countity": 1,
+          "id": 1,
+          "date": "2022/12/8 11:02:28"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "userId": "1",
+      "items": [
+        {
+          "userId": 1,
+          "itemId": 7,
+          "imageUrl": "/images/Essencial_whey_protein.jpg",
+          "name": "エッセンシャル ホエイ プロテイン",
+          "flavor": "ノンフレーバー",
+          "price": 3790,
+          "countity": 1,
+          "id": 1
+        }
+      ],
+      "id": 2
+    },
+    {
+      "userId": "1",
+      "items": [
+        {
+          "userId": 1,
+          "itemId": 7,
+          "imageUrl": "/images/Essencial_whey_protein.jpg",
+          "name": "エッセンシャル ホエイ プロテイン",
+          "flavor": "ノンフレーバー",
+          "price": 3790,
+          "countity": 1,
+          "id": 1,
+          "date": "2022/12/8 11:03:33"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "userId": "1",
+      "items": [],
+      "id": 4
+    }
+  ],
   "carts": [],
   "subscriptionCart": [],
   "subscription": [],

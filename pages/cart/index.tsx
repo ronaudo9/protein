@@ -22,8 +22,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   };
 };
 
-const data = {};
-
 const Cart = ({ users }: any) => {
   const router = useRouter();
 
@@ -31,10 +29,6 @@ const Cart = ({ users }: any) => {
   function deleteItem(users: any) {
     fetch(`http://localhost:3000/api/carts/${users.id}`, {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
     });
     router.reload();
   }
@@ -73,6 +67,7 @@ const Cart = ({ users }: any) => {
           {users.map((cart: any) => (
             <div key={cart.id} className={styles.cart_content2}>
               <Image
+                priority
                 className={styles.cart_img}
                 src={cart.imageUrl}
                 alt="商品画像"
@@ -89,7 +84,12 @@ const Cart = ({ users }: any) => {
                   <span>価格(税込)</span>¥
                   {(cart.price * cart.countity).toLocaleString()}
                 </p>
-                <button className={styles.delete_button} onClick={() => deleteItem(cart)}>削除</button>
+                <button
+                  className={styles.delete_button}
+                  onClick={() => deleteItem(cart)}
+                >
+                  削除
+                </button>
               </div>
             </div>
           ))}
@@ -110,7 +110,9 @@ const Cart = ({ users }: any) => {
             </button>
           </Link>
           {/* <Link href="/purchase"> */}
-            <button className={styles.purchase} onClick={routerHandler}>購入する</button>
+          <button className={styles.purchase} onClick={routerHandler}>
+            購入する
+          </button>
           {/* </Link> */}
         </div>
       </section>

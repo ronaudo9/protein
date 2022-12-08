@@ -181,10 +181,3 @@ export default function UsersElements({ user }: any) {
     </>
   );
 }
-
-// input ---- readOnly={編集フラグ}/>↑trueで編集可能にする
-//最初state:編集フラグ（false）
-// 編集ボタン　onClickで編集フラグを切り替え
-// readonlyの切り替えはフラグで
-
-// 本来は意味の持たないidとloginIdのemailと別で持っているはず
