@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const cookies = req.cookies;
   const res = await fetch(
-    `http://localhost:8000/carts?userId=${cookies.id}`
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts?userId=${cookies.id}`
   );
   const carts = await res.json();
 
@@ -27,7 +27,7 @@ const Cart = ({ carts }: any) => {
 
   // 削除
   function deleteItem(cart: any) {
-    fetch(`http://localhost:3000/api/carts/${cart.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/carts/${cart.id}`, {
       method: 'DELETE',
     });
     router.reload();

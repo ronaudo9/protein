@@ -296,21 +296,55 @@
       "userId": "3",
       "items": [],
       "id": 4
-    }
-  ],
-  "carts": [
+    },
     {
-      "userId": 3,
-      "itemId": 1,
-      "imageUrl": "/images/impact_whey_protein.jpg",
-      "name": "Impact ホエイ プロテイン",
-      "flavor": "チョコ",
-      "price": 1990,
-      "countity": 1,
-      "id": 1
+      "userId": 2,
+      "items": [
+        {
+          "userId": 2,
+          "itemId": 1,
+          "imageUrl": "/images/impact_whey_protein.jpg",
+          "name": "Impact ホエイ プロテイン",
+          "flavor": "チョコ",
+          "price": 1990,
+          "countity": 2,
+          "id": 3,
+          "date": "2022/12/8 16:38:25"
+        }
+      ],
+      "id": 5
+    },
+    {
+      "userId": "2",
+      "items": [],
+      "id": 6
+    },
+    {
+      "userId": "2",
+      "items": [],
+      "id": 7
     }
   ],
+  "carts": [],
   "subscriptionCart": [],
   "subscription": [],
-  "subscriptionHistories": []
+  "subscriptionHistories": [
+    {
+      "userId": "2",
+      "items": [
+        {
+          "userId": 2,
+          "itemId": 1,
+          "imageUrl": "/images/impact_whey_protein.jpg",
+          "name": "Impact ホエイ プロテイン",
+          "flavor": "チョコ",
+          "price": 1990,
+          "countity": 1,
+          "id": 1,
+          "date": "2022/12/8 16:46:23"
+        }
+      ],
+      "id": 1
+    }
+  ]
 }

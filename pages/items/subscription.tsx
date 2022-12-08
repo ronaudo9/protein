@@ -9,7 +9,7 @@ export const getServerSideProps: GetServerSideProps = async (
 ) => {
   const cookies = context.req.cookies;
   const res = await fetch(
-    `http://localhost:8000/subscriptionCart?userId=${cookies.id}`
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscriptionCart?userId=${cookies.id}`
   );
   const subscriptionCart = await res.json();
   subscriptionCart.forEach((cart: any) => {
@@ -50,7 +50,7 @@ export default function PurchaseCompletion({
   const router = useRouter();
   const handler = (event: any) => {
     event.preventDefault();
-    fetch('http://localhost:3000/api/subscription', {
+    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/subscription`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(subscription),
@@ -65,7 +65,7 @@ export default function PurchaseCompletion({
   const deleteCarts = (event: any) => {
     event.preventDefault();
     subscriptionCart.forEach((cart: any) => {
-      fetch(`http://localhost:3000/api/subscriptionCart/${cart.id}`, {
+      fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/${cart.id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

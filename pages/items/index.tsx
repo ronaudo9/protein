@@ -17,7 +17,7 @@ const fetcher = (resource: any, init: any) =>
   fetch(resource, init).then((res) => res.json());
 
 const ItemDisplay: NextPage = () => {
-  const [resource, setResource] = useState('/api/items');
+  const [resource, setResource] = useState(`${process.env.NEXT_PUBLIC_PROTEIN}/api/items`);
   const [category, setCategory] = useState('');
   const [flavor, setFlavor] = useState('');
   const { data, error } = useSWR(resource, fetcher);
@@ -26,12 +26,12 @@ const ItemDisplay: NextPage = () => {
 
   const categoryHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
-    setResource(`/api/items?category=${e.target.value}`);
+    setResource(`${process.env.NEXT_PUBLIC_PROTEIN}/api/items?category=${e.target.value}`);
   };
 
   const flavorHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setFlavor(e.target.value);
-    setResource(`/api/items?flavor_like=${e.target.value}`);
+    setResource(`${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${e.target.value}`);
     // _like演算子でdbjson内の配列から検索できる
   };
 
