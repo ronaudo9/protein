@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const cookies = req.cookies;
   const res = await fetch(
-    `http://localhost:8000/users?id=${cookies.id}`
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users?id=${cookies.id}`
   );
   const users = await res.json();
   const user = users[0];
@@ -54,13 +54,16 @@ export default function UsersElements({ user }: any) {
   function submit(e: SyntheticEvent) {
     e.preventDefault();
 
-    fetch(`/api/users/${user.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formValues),
-    }).then(() => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users/${user.id}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formValues),
+      }
+    ).then(() => {
       router.reload();
     });
   }

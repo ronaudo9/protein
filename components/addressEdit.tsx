@@ -9,7 +9,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const cookies = req.cookies;
   const res = await fetch(
-    `http://localhost:8000/users?id=${cookies.id}`
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users?id=${cookies.id}`
   );
   const users = await res.json();
   const user = users[0];
@@ -91,7 +91,7 @@ const AddressEdit = ({
         city: city,
         aza: aza,
       });
-    //   setAddressErrors('');
+      //   setAddressErrors('');
     }
   };
 
@@ -106,21 +106,25 @@ const AddressEdit = ({
           </div>
 
           <div className={styles.inputs}>
-          <div className={styles.button}>
-            <input
-              type="text"
-              name="postCode"
-              className={styles.input}
-              value={formValues.postCode}
-              placeholder="例:●●●-●●●●"
-              onChange={handleChange}
-              readOnly={readOnly}
-              required
-            />
-             <button className={styles.button2} type="button" onClick={setAuto}>
+            <div className={styles.button}>
+              <input
+                type="text"
+                name="postCode"
+                className={styles.input}
+                value={formValues.postCode}
+                placeholder="例:●●●-●●●●"
+                onChange={handleChange}
+                readOnly={readOnly}
+                required
+              />
+              <button
+                className={styles.button2}
+                type="button"
+                onClick={setAuto}
+              >
                 住所検索
               </button>
-          </div>
+            </div>
           </div>
         </div>
       </div>

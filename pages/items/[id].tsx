@@ -16,7 +16,9 @@ const fetcher = (resource: any, init: any) =>
   fetch(resource, init).then((res) => res.json());
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(`PROTEIN_DATA/items/`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/`
+  );
   const items = await res.json();
   const paths = items.map((item: any) => ({
     params: {
@@ -113,7 +115,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
       // 数量0の場合はカートへ入れない
     } else {
       event.preventDefault();
-      fetch('http://localhost:8000/carts', {
+      fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -133,13 +135,16 @@ const ItemDetail: NextPage = ({ detail }: any) => {
   const Subscription = (event: any) => {
     event.preventDefault();
 
-    fetch(`http://localhost:3000/api/subscriptionCart/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(carts),
-    }).then(() => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(carts),
+      }
+    ).then(() => {
       router.push(`/items/subscription`);
     });
   };

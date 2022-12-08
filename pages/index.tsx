@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import HeaderLogin from './layout/headerLogin';
-import { isGeneratorFunction } from 'util/types';
 import ItemDisplay from './items/';
 import { GetServerSideProps } from 'next';
 
@@ -21,7 +20,7 @@ export default function UserLogin(cookieData: any) {
 
   const handler = (event: any) => {
     event.preventDefault();
-    fetch(`${process.env.NEXT_PUBLIC_DATA}/api/login`, {
+    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
