@@ -14,8 +14,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     `http://localhost:8000/carts?userId=${cookies.id}`
   );
   const users = await res.json();
-  // const user = users[0];
-  // console.log(user);
 
   return {
     props: { users },
@@ -44,7 +42,6 @@ const Cart = ({ users }: any) => {
 
   users.forEach((element: any) => {
     const multiPrice = element.price * element.countity;
-    console.log(multiPrice);
     priceArray.push(multiPrice);
   });
 

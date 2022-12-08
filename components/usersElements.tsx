@@ -14,7 +14,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
 }) => {
   const cookies = req.cookies;
-  console.log(cookies.id);
   const res = await fetch(
     `http://localhost:8000/users?id=${cookies.id}`
   );
