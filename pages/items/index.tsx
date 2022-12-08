@@ -27,14 +27,12 @@ const ItemDisplay: NextPage = () => {
   const categoryHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
     setResource(`/api/items?category=${e.target.value}`);
-    console.log(e.target.value);
   };
 
   const flavorHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setFlavor(e.target.value);
     setResource(`/api/items?flavor_like=${e.target.value}`);
     // _like演算子でdbjson内の配列から検索できる
-    console.log(e.target.value);
   };
 
   return (
@@ -75,7 +73,7 @@ const ItemDisplay: NextPage = () => {
         </div>
       </section>
 
-      <body className={styles.form}>
+      <div className={styles.form}>
         <h2 className={styles.h2}>
           <span className={styles.border}>ホエイプロテイン</span>と
           <span className={styles.border}>カゼインプロテイン</span>
@@ -114,7 +112,7 @@ const ItemDisplay: NextPage = () => {
           カゼインは血中にゆっくりと着実に吸収されるプロテインです。カゼインはどちらかというと、後者の分解を防ぎたい場合に役立ちます。結果的に、カゼインを適切に摂ることで、マイナスを回避してプラス・マイナスでプラスにさせることができます。
         </p>
         <h2></h2>
-      </body>
+      </div>
       <footer className={styles.footer}>
         <h1>RAKUTEIN</h1>
       </footer>
