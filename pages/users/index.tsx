@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     user = await res.json();
   } catch (err) {
     console.error('failed to get user', err);
-    errors.push('ユーザの取得に失敗しました');
+    errors.push('.');
   }
 
   const itemsArray: any[] = [];
@@ -38,27 +38,41 @@ export const getServerSideProps: GetServerSideProps = async ({
     items.forEach((item: any) => {
       itemsArray.push(item);
     });
+
+
   })}catch(err){
     console.error('failed to get purchaseHistories', err);
-    errors.push('ユーザ履歴の取得に失敗しました');
+    errors.push('.');
   }
   //サブスク
   const subscriptionArray: any[] = [];
-  try{
+  // try{
   const regular = await fetch(
     `http://localhost:8000/subscription?userId=${cookies.id}`
   );
   const leave = await regular.json();
+
+
 
   leave.forEach((element: any) => {
     const items = element.items;
     items.forEach((item: any) => {
       subscriptionArray.push(item);
     });
-  })}catch(err){
-    console.error('failed to get subscription', err);
-    errors.push('定期購入の取得に失敗しました');
-  };
+  })
+  console.log(subscriptionArray)
+// const subscription = subscriptionArray.forEach(element => console.log(element));
+// console.log(subscription)
+  // for (let i = 0; i < subscriptionArray.length; i++) {
+  //   console.log(subscriptionArray[i]);
+  // }
+
+
+// }catch(err){
+//     console.error('failed to get subscription', err);
+//     errors.push('.');
+//   };
+
   //サブスクの履歴
   const subscriptionHistoriesArray: any[] = [];
   try{
@@ -73,15 +87,16 @@ export const getServerSideProps: GetServerSideProps = async ({
     });
   })}catch(err){
     console.error('failed to get subscriptionHistories', err);
-    errors.push('定期購入の履歴取得に失敗しました');
+    errors.push('.');
   }
 
+// console.log(subscriptionArray)
   return {
     props: {
       user,
       itemsArray,
       subscriptionArray,
-      // leave,
+      leave,
       subscriptionHistoriesArray,
       cookies,
       errors,
@@ -101,34 +116,34 @@ const UserDetails = ({
   //サブスクからサブスク購入履歴への処理
 
   const router = useRouter();
-  const handler = (event: any) => {
+  const handler = (items: any) => {
     // console.log(subscriptionArray)
-    subscriptionArray.forEach((cart: any) => {
-      cart.date = new Date().toLocaleString('ja-JP');
-    });
-    const purchaseHistories = {
-      userId: cookies.id,
-      items: subscriptionArray,
-    };
-    fetch(`http://localhost:3000/api/subscriptionHistories/`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(purchaseHistories),
-    }).then(() => {
-      deleteCarts(event);
-      router.reload();
-    });
-  };
+  //   subscriptionArray.forEach((cart: any) => {
+  //     cart.date = new Date().toLocaleString('ja-JP');
+  //   });
+  //   const purchaseHistories = {
+  //     userId: cookies.id,
+  //     items: subscriptionArray,
+  //   };
+  //   fetch(`http://localhost:8000/subscriptionHistories/`, {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(purchaseHistories),
+  //   }).then(() => {
+  //     deleteCarts(event);
+  //     router.reload();
+  //   });
+  // };
 
   //  const data = {};
-  const deleteCarts = (event: any) => {
-    subscriptionArray.forEach((del: any) => {
-      fetch(`http://localhost:8000/subscription/${del.id}`, {
+  // const deleteCarts = (items:any) => {
+
+      fetch(`http://localhost:3000/api/subscription/${items.userId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         // body: JSON.stringify(data),
       });
-    });
+      router.reload();
   };
 
   return (

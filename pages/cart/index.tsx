@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   );
   const users = await res.json();
   // const user = users[0];
-  // console.log(user);
+  console.log(users);
 
   return {
     props: { users },
@@ -29,7 +29,7 @@ const Cart = ({ users }: any) => {
 
   // 削除
   function deleteItem(users: any) {
-    fetch(`http://localhost:3000/api/carts/${users.id}`, {
+    fetch(`http://localhost:8000/carts/${users.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
