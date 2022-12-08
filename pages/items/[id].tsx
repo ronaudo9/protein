@@ -16,7 +16,7 @@ const fetcher = (resource: any, init: any) =>
   fetch(resource, init).then((res) => res.json());
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(`http://localhost:8000/items/`);
+  const res = await fetch(`http://${process.env.API_BASE_URL}/items/`);
   const items = await res.json();
   const paths = items.map((item: any) => ({
     params: {
@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
   const res = await fetch(
-    `http://localhost:8000/items/${params!.id}`
+    `http://${process.env.API_BASE_URL}/items/${params!.id}`
   );
   const detail = await res.json();
 

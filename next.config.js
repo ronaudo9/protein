@@ -61,7 +61,7 @@ const nextConfig = {
       },
       {
         source: '/api/subscriptionHistories/:slug',
-        destination:'http://localhost:8000/subscriptionHistories/:slug',
+        destination: 'http://localhost:8000/subscriptionHistories/:slug',
       },
       {
         source: '/api/carts',
