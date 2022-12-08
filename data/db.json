@@ -285,25 +285,6 @@
     },
     {
       "id": 3,
-      "firstName": "中田",
-      "lastName": "圭",
-      "firstNameKana": "なかた",
-      "lastNameKana": "けい",
-      "middleName": "けい",
-      "email": "naoy.@korakus-partners.co.jp",
-      "password": "ggttrrff",
-      "passwordConfirmation": "ggttrrff",
-      "postCode": "445-6677",
-      "prefecture": "埼玉県",
-      "city": "川越市",
-      "aza": "川越3丁目0-8",
-      "building": "川越ビル409",
-      "tel": "070-3355-0099",
-      "deleted": false,
-      "credit": "xxxx-xxxx-xxxx-7890"
-    },
-    {
-      "id": 4,
       "firstName": "早川",
       "lastName": "修平",
       "firstNameKana": "はやかわ",
@@ -315,16 +296,71 @@
       "postCode": "251-0042",
       "prefecture": "神奈川県",
       "city": "藤沢市",
-      "aza": "辻堂新町1-4-26",
+      "aza": "辻堂新町",
       "building": "",
       "tel": "090-8541-1689",
-      "deleted": false,
-      "credit": "xxxx-xxxx-xxxx-9876"
+      "deleted": false
     }
   ],
   "favorites": [],
-  "purchaseHistories":[],
-  "carts": [],
+  "purchaseHistories": [
+    {
+      "userId": 3,
+      "items": [
+        {
+          "userId": 3,
+          "itemId": 1,
+          "imageUrl": "/images/impact_whey_protein.jpg",
+          "name": "Impact ホエイ プロテイン",
+          "flavor": "チョコ",
+          "price": 1990,
+          "countity": 1,
+          "id": 1,
+          "date": "2022/12/8 11:16:07"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": 2
+    },
+    {
+      "userId": 3,
+      "items": [
+        {
+          "userId": 3,
+          "itemId": 1,
+          "imageUrl": "/images/impact_whey_protein.jpg",
+          "name": "Impact ホエイ プロテイン",
+          "flavor": "チョコ",
+          "price": 1990,
+          "countity": 1,
+          "id": 1,
+          "date": "2022/12/8 11:18:25"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "userId": "3",
+      "items": [],
+      "id": 4
+    }
+  ],
+  "carts": [
+    {
+      "userId": 3,
+      "itemId": 1,
+      "imageUrl": "/images/impact_whey_protein.jpg",
+      "name": "Impact ホエイ プロテイン",
+      "flavor": "チョコ",
+      "price": 1990,
+      "countity": 1,
+      "id": 1
+    }
+  ],
   "subscriptionCart": [],
   "subscription": [],
   "subscriptionHistories": []

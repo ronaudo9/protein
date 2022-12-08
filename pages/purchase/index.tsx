@@ -13,13 +13,11 @@ export const getServerSideProps: GetServerSideProps = async ({
   );
   const users = await res.json();
   const user = users[0];
-  console.log(user);
 
   const resCarts = await fetch(
     `http://localhost:8000/carts?userId=${cookies.id}`
   );
   const carts = await resCarts.json();
-  console.log(carts);
 
   return {
     props: {

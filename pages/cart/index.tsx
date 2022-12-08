@@ -14,8 +14,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     `http://localhost:8000/carts?userId=${cookies.id}`
   );
   const carts = await res.json();
-  // const user = users[0];
-  // console.log(user);
 
   return {
     props: { carts },
@@ -28,8 +26,8 @@ const Cart = ({ carts }: any) => {
   const router = useRouter();
 
   // 削除
-  function deleteItem(carts: any) {
-    fetch(`http://localhost:3000/api/carts/${carts.id}`, {
+  function deleteItem(cart: any) {
+    fetch(`http://localhost:3000/api/carts/${cart.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +42,6 @@ const Cart = ({ carts }: any) => {
 
   carts.forEach((element: any) => {
     const multiPrice = element.price * element.countity;
-    console.log(multiPrice);
     priceArray.push(multiPrice);
   });
 
@@ -110,7 +107,7 @@ const Cart = ({ carts }: any) => {
             </button>
           </Link>
           {/* <Link href="/purchase"> */}
-            <button className={styles.purchase} onClick={routerHandler}>購入する</button>
+          <button className={styles.purchase} onClick={routerHandler}>購入する</button>
           {/* </Link> */}
         </div>
       </section>
