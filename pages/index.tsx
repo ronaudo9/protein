@@ -83,6 +83,7 @@ export default function UserLogin(cookieData: any) {
                   setVisible(false);
                 }}
                 required
+                autoComplete="off"
               />
               <span className={style.highlight}></span>
               <span className={style.bar}></span>
@@ -102,6 +103,7 @@ export default function UserLogin(cookieData: any) {
                 required
                 pattern=".{8,16}"
                 title="8文字以上16文字以下"
+                autoComplete="off"
               />
               <span className={style.highlight}></span>
               <span className={style.bar}></span>
