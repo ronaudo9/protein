@@ -9,7 +9,6 @@ export const getServerSideProps: GetServerSideProps = async (
   context
 ) => {
   const cookies = context.req.cookies;
-  console.log(`cookie:${cookies.id}`);
   const res = await fetch(
     `http://localhost:8000/carts?userId=${cookies.id}`
   );

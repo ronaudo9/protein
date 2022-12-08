@@ -27,14 +27,12 @@ const ItemDisplay: NextPage = () => {
   const categoryHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
     setResource(`/api/items?category=${e.target.value}`);
-    console.log(e.target.value);
   };
 
   const flavorHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setFlavor(e.target.value);
     setResource(`/api/items?flavor_like=${e.target.value}`);
     // _like演算子でdbjson内の配列から検索できる
-    console.log(e.target.value);
   };
 
   return (

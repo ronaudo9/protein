@@ -14,7 +14,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
 }) => {
   const cookies = req.cookies;
-  console.log(cookies.id);
   const res = await fetch(
     `http://localhost:8000/users?id=${cookies.id}`
   );
@@ -147,7 +146,7 @@ export default function UsersElements({ user }: any) {
             type="credit"
             name="credit"
             className={styles.input}
-            setFormValues={setFormValues}
+            setformvalues={setFormValues}
             placeholder="例:●●●●-●●●●-●●●●-●●●●（半角数字）"
             required
             {...user.credit}
@@ -164,7 +163,7 @@ export default function UsersElements({ user }: any) {
           </div>
           <PasswordEdit
             formValues={formValues}
-            setFormValues={setFormValues}
+            setformvalues={setFormValues}
             readOnly={readOnly}
           />
         </div>

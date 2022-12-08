@@ -16,7 +16,7 @@ const fetcher = (resource: any, init: any) =>
   fetch(resource, init).then((res) => res.json());
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(`http://localhost:8000/items/`);
+  const res = await fetch(`PROTEIN_DATA/items/`);
   const items = await res.json();
   const paths = items.map((item: any) => ({
     params: {
@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
   const res = await fetch(
-    `http://localhost:8000/items/${params!.id}`
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/${params!.id}`
   );
   const detail = await res.json();
 
@@ -47,18 +47,12 @@ export const getStaticProps: GetStaticProps = async ({
 
 // detail getStaticPropsから取得
 const ItemDetail: NextPage = ({ detail }: any) => {
-  console.log(detail);
   const router = useRouter();
 
   const [count, setCount] = React.useState(0);
   const [total, setTotal] = React.useState(0);
   const [userId, setUserId] = React.useState('');
   const [flavor, setFlavor] = React.useState(detail.flavor[0]);
-  // const { data, error } = useSWR(`/api/users?id=${userId}`, fetcher);
-
-  // if (error) return <div>エラー</div>;
-
-  // if (!data) return <div>ロード中...</div>;
 
   //　数量変更
   const addHandlerNext = (sub: any) => {
@@ -111,7 +105,6 @@ const ItemDetail: NextPage = ({ detail }: any) => {
   useEffect(() => {
     const user = document.cookie;
     const userId = user.slice(3);
-    console.log(userId);
     setUserId(userId);
   }, []);
 

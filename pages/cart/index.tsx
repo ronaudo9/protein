@@ -13,21 +13,21 @@ export const getServerSideProps: GetServerSideProps = async ({
   const res = await fetch(
     `http://localhost:8000/carts?userId=${cookies.id}`
   );
-  const users = await res.json();
-  // const user = users[0];
-  // console.log(user);
+  const carts = await res.json();
 
   return {
-    props: { users },
+    props: { carts },
   };
 };
 
-const Cart = ({ users }: any) => {
+const data = {};
+
+const Cart = ({ carts }: any) => {
   const router = useRouter();
 
   // 削除
-  function deleteItem(users: any) {
-    fetch(`http://localhost:3000/api/carts/${users.id}`, {
+  function deleteItem(cart: any) {
+    fetch(`http://localhost:3000/api/carts/${cart.id}`, {
       method: 'DELETE',
     });
     router.reload();
@@ -36,9 +36,8 @@ const Cart = ({ users }: any) => {
   // 小計・合計
   const priceArray: any[] = [];
 
-  users.forEach((element: any) => {
+  carts.forEach((element: any) => {
     const multiPrice = element.price * element.countity;
-    console.log(multiPrice);
     priceArray.push(multiPrice);
   });
 
@@ -49,7 +48,7 @@ const Cart = ({ users }: any) => {
   );
 
   const routerHandler = () => {
-    if (users[0]) {
+    if (carts[0]) {
       router.push('/purchase');
     } else {
       alert('商品一覧から商品を選んでカートに入れてください');
@@ -64,7 +63,7 @@ const Cart = ({ users }: any) => {
       <div className={styles.item_list}>
         <h4 className={styles.cart_title}>カート</h4>
         <section className={styles.cart_content}>
-          {users.map((cart: any) => (
+          {carts.map((cart: any) => (
             <div key={cart.id} className={styles.cart_content2}>
               <Image
                 priority
