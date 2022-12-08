@@ -90,12 +90,8 @@ export const getServerSideProps: GetServerSideProps = async ({
     errors.push('.');
   }
 
-<<<<<<< HEAD
-// console.log(subscriptionArray)
-=======
   console.log(subscriptionArray)
 
->>>>>>> main
   return {
     props: {
       user,

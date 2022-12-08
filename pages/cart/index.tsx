@@ -13,13 +13,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts?userId=${cookies.id}`
   );
-<<<<<<< HEAD
-  const users = await res.json();
-  // const user = users[0];
-  console.log(users);
-=======
   const carts = await res.json();
->>>>>>> main
 
   return {
     props: { carts },
