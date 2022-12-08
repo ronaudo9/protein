@@ -270,7 +270,7 @@
       "lastName": "獅童",
       "firstNameKana": "なかむら",
       "lastNameKana": "しどう",
-      "middleName": "しどう",
+      "middleName": "　",
       "email": "nao@gmail.com",
       "password": "kkiiooll",
       "passwordConfirmation": "kkiiooll",
@@ -279,7 +279,7 @@
       "city": "板橋区",
       "aza": "宮前町607",
       "building": "宮前ビル308",
-      "tel": "070-6699-9977",
+      "tel": "070-6699-9981",
       "deleted": false,
       "credit": "xxxx-xxxx-xxxx-4567"
     },
