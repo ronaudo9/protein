@@ -21,7 +21,7 @@ export default function UserLogin(cookieData: any) {
 
   const handler = (event: any) => {
     event.preventDefault();
-    fetch('/api/login', {
+    fetch(`PROTEIN/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

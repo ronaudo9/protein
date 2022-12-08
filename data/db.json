@@ -323,7 +323,7 @@
     }
   ],
   "favorites": [],
-  "purchaseHistories": [],
+  "purchaseHistories":[],
   "carts": [],
   "subscriptionCart": [],
   "subscription": [],
