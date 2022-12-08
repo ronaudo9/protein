@@ -17,7 +17,7 @@ export default async function Handler(req:IncomingMessage & {
     items:carts
   }
   await fetch(
-    `http://localhost:8000/purchaseHistories`,{
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories`,{
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify( purchaseHistories),

@@ -16,7 +16,7 @@ const fetcher = (resource: any, init: any) =>
   fetch(resource, init).then((res) => res.json());
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(`PROTEIN_DATA/items/`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/`);
   const items = await res.json();
   const paths = items.map((item: any) => ({
     params: {
