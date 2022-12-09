@@ -43,6 +43,7 @@ export default function PurchaseDisplay({
         <hr className={styles.hr}></hr>
         <Head>
           <title>ご注文内容確認</title>
+          <meta name="turbolinks-visit-control" />
         </Head>
         <ItemData user={user} carts={carts} />
       </div>
