@@ -10,10 +10,7 @@ import {
 import React, { useState, useEffect } from 'react';
 import Header from '../layout/header';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
 
-const fetcher = (resource: any, init: any) =>
-  fetch(resource, init).then((res) => res.json());
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(
@@ -47,20 +44,20 @@ export const getStaticProps: GetStaticProps = async ({
   };
 };
 
+
 // detail getStaticPropsから取得
 const ItemDetail: NextPage = ({ detail }: any) => {
   const router = useRouter();
-
   const [count, setCount] = React.useState(0);
   const [total, setTotal] = React.useState(0);
   const [userId, setUserId] = React.useState('');
   const [flavor, setFlavor] = React.useState(detail.flavor[0]);
 
-  //　数量変更
+
+  //　数量変更【始まり】
   const addHandlerNext = (sub: any) => {
     setTotal(total + sub);
   };
-
   const addHandlerPrev = (sub: any) => {
     if (total <= 0) {
       setTotal(0);
@@ -72,10 +69,8 @@ const ItemDetail: NextPage = ({ detail }: any) => {
   const clickHandlerNext = () => {
     const nextCount = count + 1;
     setCount(nextCount);
-
     const nextTotal = detail.price * nextCount;
     setTotal(nextTotal);
-
     addHandlerNext(detail.price);
   };
 
@@ -86,14 +81,14 @@ const ItemDetail: NextPage = ({ detail }: any) => {
     } else {
       setCount(prevCount);
     }
-
     const prevTotal = detail.price * count;
     setTotal(prevTotal);
-
     addHandlerPrev(detail.price);
   };
+  // 数量変更【終わり】
 
-  // カートへ追加
+
+  // カートへ追加【始まり】
   const carts = {
     userId: Number(userId),
     itemId: detail.id,
@@ -103,15 +98,42 @@ const ItemDetail: NextPage = ({ detail }: any) => {
     price: detail.price,
     countity: count,
   };
+  // カートへ追加【終わり】
 
+  // ローカルストレージへ追加【始まり】
+  const cartsForStrage = {
+    userId: 0,
+    itemId: detail.id,
+    imageUrl: detail.imageUrl,
+    name: detail.name,
+    flavor: flavor,
+    price: detail.price,
+    countity: count,
+  };
+  // ローカルストレージへ追加【終わり】
+
+
+  // cookie取得【始まり】
   useEffect(() => {
     const user = document.cookie;
     const userId = user.slice(3);
     setUserId(userId);
   }, []);
+  // cookie取得【終わり】
+
+
+  // localstrageへ保存【始まり】
+  useEffect(() => {
+    if (!document.cookie) {
+      localStorage.setItem(carts.itemId, JSON.stringify(cartsForStrage));
+    }
+  }, [count]);
+  // localstrageへ保存【終わり】
+
 
   const handler = (event: any) => {
     if (count === 0) {
+      return
       // 数量0の場合はカートへ入れない
     } else {
       event.preventDefault();
@@ -121,16 +143,22 @@ const ItemDetail: NextPage = ({ detail }: any) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(carts),
-      }).then(() => {
-        if (document.cookie !== '') {
-          router.push('/cart');
-        } else {
-          alert('カートに追加するにはログインが必要です');
-          router.push('/');
-        }
-      });
+      })
+
+        .then(() => {
+          // if (document.cookie !== '') 
+          {
+            router.push('/cart');
+            // } else {
+            //   alert('カートに追加するにはログインが必要です');
+            //   router.push('/');
+            // 
+          }
+        });
     }
   };
+
+
   //サブスクリプション
   const Subscription = (event: any) => {
     event.preventDefault();
