@@ -3,6 +3,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from '../../styles/subscription.module.css';
 import Header from '../layout/header';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+);
 
 export const getServerSideProps: GetServerSideProps = async (
   context
@@ -12,68 +17,17 @@ export const getServerSideProps: GetServerSideProps = async (
     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscriptionCart?userId=${cookies.id}`
   );
   const subscriptionCart = await res.json();
-  subscriptionCart.forEach((cart: any) => {
-    cart.date = new Date().toLocaleString('ja-JP');
-  });
-  const subscription = {
-    userId: cookies.id,
-    items: subscriptionCart,
-  };
-  // const subscription = {
-  //   userId: cookies.id,
-  //   items: subscriptionCart,
-  // };
-  // await fetch(`http://localhost:8000/subscription`, {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(subscription),
-  // }).then(() => {
-  //   subscriptionCart.forEach((cart: any) => {
-  //     fetch(`http://localhost:8000/carts/${cart.id}`, {
-  //       method: 'DELETE',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(subscription),
-  //     });
-  //   });
-  // });
+
+  const subscriptionCart2 = subscriptionCart.slice(-1)[0];
+
   return {
-    props: { subscriptionCart, subscription },
+    props: { subscriptionCart2 },
   };
 };
 
 export default function PurchaseCompletion({
-  subscriptionCart,
-  subscription,
+  subscriptionCart2,
 }: any) {
-  const router = useRouter();
-  const handler = (event: any) => {
-    event.preventDefault();
-    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/subscription`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(subscription),
-    }).then(() => {
-      deleteCarts(event);
-      router.push('/purchase/purchased/');
-    });
-  };
-
-  const data = {};
-
-  const deleteCarts = (event: any) => {
-    event.preventDefault();
-    subscriptionCart.forEach((cart: any) => {
-      fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/${cart.id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-    });
-  };
   return (
     <>
       <Header />
@@ -86,27 +40,40 @@ export default function PurchaseCompletion({
             </p>
             <div className={styles.ps}>
               <p className={styles.text_left}>
-                ※定期購入はご登録されているクレジットカード支払いのみです。
+                ※定期購入はクレジットカード支払いのみです。
                 <br />
-                ※配送頻度は本日から30日単位で1個発送されます。
+                ※配送頻度は本日から30日単位で発送されます。
               </p>
             </div>
           </div>
-          <button
-            onClick={handler}
-            className={styles.purchased_buttonA}
+          <form
+            action="/api/checkout_sessions_subscription"
+            method="POST"
           >
-            <a>確定</a>
-          </button>
-          &nbsp;{' '}
-          <Link
-            href={`javascript:history.back()`}
-            className={styles.border}
-          >
+            <input
+              type="hidden"
+              name="price"
+              value={
+                subscriptionCart2.price * subscriptionCart2.countity
+              }
+            />
+            <button
+              type="submit"
+              className={styles.purchased_buttonA}
+            >
+              <a>クレジット決済</a>
+            </button>
+          </form>
+          <div>
             <br />
             <br />
-            前のページに戻る→
-          </Link>
+            <button
+              onClick={() => history.back()}
+              className={styles.border}
+            >
+              ←戻る
+            </button>
+          </div>
         </div>
       </div>
       <footer className={styles.footer}>
