@@ -17,12 +17,7 @@ export default function Header() {
   const router = useRouter();
 
   const moveToCart = () => {
-    if (document.cookie !== '') {
       router.push('/cart');
-    } else {
-      alert('ログインをしてください');
-      router.push('/');
-    }
   };
 
   const moveToUsers = () => {

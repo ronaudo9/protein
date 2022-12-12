@@ -97,39 +97,6 @@ const ItemData: React.FunctionComponent<{
             {user.building}
           </p>
         </div>
-        {/* <div>
-          <h2 className={styles.purchase_h2}>決済方法</h2>
-
-          <form action="/api/checkout_sessions" method="POST">
-            <input type="hidden" name="price" value={sumPrice} />
-            <button type="submit">
-              Checkout
-            </button>
-          </form>
-
-          <form>
-            <p>
-              <input
-                type="radio"
-                name="paymentMethod"
-                value="クレジットカード"
-                id="pay_credit"
-              />
-              <label htmlFor="pay_credit">クレジットカード</label>
-
-            </p>
-            <p>
-              <input
-                type="radio"
-                name="paymentMethod"
-                value="代引き"
-                id="cash_delivery"
-                defaultChecked
-              />
-              <label htmlFor="cash_delivery">代引き</label>
-            </p>
-          </form>
-        </div> */}
 
         <section className={styles.purchased}>
           <h2 className={styles.purchase_h2} id="user_purchased">
