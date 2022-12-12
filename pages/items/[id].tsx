@@ -50,12 +50,11 @@ export const getStaticProps: GetStaticProps = async ({
 // detail getStaticPropsから取得
 const ItemDetail: NextPage = ({ detail }: any) => {
   const router = useRouter();
-
   const [count, setCount] = React.useState(0);
   const [total, setTotal] = React.useState(0);
   const [userId, setUserId] = React.useState('');
   const [flavor, setFlavor] = React.useState(detail.flavor[0]);
-
+  // const [number, setNumber] = React.useState(0);
   //　数量変更
   const addHandlerNext = (sub: any) => {
     setTotal(total + sub);
@@ -133,8 +132,19 @@ const ItemDetail: NextPage = ({ detail }: any) => {
   };
   //サブスクリプション
   const Subscription = (event: any) => {
-    event.preventDefault();
 
+    const SubscriptionCart = {
+      userId: Number(userId),
+      itemId: detail.id,
+      imageUrl: detail.imageUrl,
+      name: detail.name,
+      flavor: flavor,
+      price: detail.price,
+      countity: count,
+    };
+    if (count === 0) {
+      // 数量0の場合はカートへ入れない
+    } else {
     fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
       {
@@ -142,12 +152,13 @@ const ItemDetail: NextPage = ({ detail }: any) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(carts),
+        body: JSON.stringify(SubscriptionCart),
       }
     ).then(() => {
       router.push(`/items/subscription`);
     });
-  };
+  }
+};
 
   return (
     <>
