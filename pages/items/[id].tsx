@@ -167,6 +167,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
       <div className={styles.detail_page}>
         <div>
           <Image
+            priority
             className={styles.detail_img}
             src={detail.imageUrl}
             alt="商品画像"

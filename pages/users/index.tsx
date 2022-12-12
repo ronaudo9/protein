@@ -47,11 +47,11 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
   //サブスク
   const subscriptionArray: any[] = [];
-  try{
-  const regular = await fetch(
-    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscription?userId=${cookies.id}`
-  );
-  const leave = await regular.json();
+  try {
+    const regular = await fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscription?userId=${cookies.id}`
+    );
+    const leave = await regular.json();
 
   leave.forEach((element: any) => {
     const items = element.items;
@@ -328,15 +328,15 @@ const UserDetails = ({
           >
             定期購入の履歴
           </h2>
-          {subscriptionHistoriesArray.map((items: any) => {
+          {subscriptionHistoriesArray.map((items2: any) => {
             return (
-              <div key={items.id}>
+              <div key={items2.id}>
                 <div>
-                  <h3>終了日時：{items.date}</h3>
+                  <h3>終了日時：{items2.date}</h3>
                   <div>
                     <div className={styles.list}>
                       <Image
-                        src={items.imageUrl}
+                        src={items2.imageUrl}
                         width={260}
                         height={260}
                         alt="商品画像"
@@ -345,33 +345,33 @@ const UserDetails = ({
                       <div className={styles.itemDetail}>
                         <Link
                           href={`./items/${encodeURIComponent(
-                            items.itemId
+                            items2.itemId
                           )}`}
                         >
-                          <h4>{items.name}</h4>
+                          <h4>{items2.name}</h4>
                         </Link>
                         <p>
                           フレーバー &nbsp;&nbsp;&nbsp;&nbsp;
                           <span className={styles.style}>
-                            &nbsp;{items.flavor}&nbsp;
+                            &nbsp;{items2.flavor}&nbsp;
                           </span>
                         </p>
                         <p>
                           価格 &nbsp;&nbsp;&nbsp;&nbsp; ¥
                           <span className={styles.style}>
-                            &nbsp;{items.price}&nbsp;
+                            &nbsp;{items2.price}&nbsp;
                           </span>
                         </p>
                         <p>
                           数量&nbsp;&nbsp;&nbsp;&nbsp;
                           <span className={styles.style}>
-                            &nbsp;{items.countity}&nbsp;
+                            &nbsp;{items2.countity}&nbsp;
                           </span>
                         </p>
                         <p>
                           小計 &nbsp;&nbsp;&nbsp;&nbsp; ¥
                           <span className={styles.style}>
-                            &nbsp;{items.price * items.countity}&nbsp;
+                            &nbsp;{items2.price * items2.countity}&nbsp;
                           </span>
                         </p>
                         <p>
