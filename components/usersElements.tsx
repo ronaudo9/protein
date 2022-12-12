@@ -136,7 +136,7 @@ export default function UsersElements({ user }: any) {
           />
         </div>
         <hr />
-        <div className={styles.elementCategory}>
+        {/* <div className={styles.elementCategory}>
           <div>
             <span className={styles.element_p1}>
               クレジット &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -153,7 +153,7 @@ export default function UsersElements({ user }: any) {
             readOnly={readOnly}
             value={formValues.credit}
           />
-        </div>
+        </div> */}
 
         <div className={styles.elementCategory}>
           <div>

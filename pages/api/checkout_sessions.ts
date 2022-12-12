@@ -1,6 +1,7 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-export default async function handler(req:any, res:any) {
+export default async function handler(req:NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     try {
       // Create Checkout Sessions from body params.

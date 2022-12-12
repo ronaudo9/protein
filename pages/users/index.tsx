@@ -186,9 +186,9 @@ const UserDetails = ({
           <h2 className={styles.title_purchased} id="user_purchased">
             ご購入履歴
           </h2>
-          {itemsArray.map((item: any) => {
+          {itemsArray.map((item: any,index:any) => {
             return (
-              <div key={item.id}>
+              <div key={index}>
                 <div>
                   <h3>購入日時：{item.date}</h3>
                   <div>
@@ -251,9 +251,9 @@ const UserDetails = ({
           >
             継続中の定期購入
           </h2>
-          {subscriptionArray.map((items: any) => {
+          {subscriptionArray.map((items: any,index:any) => {
             return (
-              <div key={items.id}>
+              <div key={index}>
                 <div>
                   <h3>購入日時：{items.date}</h3>
                   <div>
@@ -328,9 +328,9 @@ const UserDetails = ({
           >
             定期購入の履歴
           </h2>
-          {subscriptionHistoriesArray.map((items2: any) => {
+          {subscriptionHistoriesArray.map((items2: any,index:any) => {
             return (
-              <div key={items2.id}>
+              <div key={index}>
                 <div>
                   <h3>終了日時：{items2.date}</h3>
                   <div>
