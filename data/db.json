@@ -251,7 +251,7 @@
       "firstNameKana": "おかだ",
       "lastNameKana": "まさこ",
       "middleName": " ",
-      "email": "na@gmail.com",
+      "email": "na09@gmail.com",
       "password": "ddeerrff",
       "passwordConfirmation": "ddeerrff",
       "postCode": "778-0099",
@@ -300,40 +300,47 @@
       "building": "",
       "tel": "090-8541-1689",
       "deleted": false
+    },
+    {
+      "id": 7,
+      "firstName": "安田",
+      "lastName": "優斗",
+      "firstNameKana": "やすだ",
+      "lastNameKana": "ゆうと",
+      "middleName": "",
+      "email": "nao@gmail.com",
+      "password": "aaqqwwss",
+      "passwordConfirmation": "aaqqwwss",
+      "postCode": "370-1301",
+      "prefecture": "群馬県",
+      "city": "高崎市",
+      "aza": "新町302",
+      "building": "",
+      "tel": "080-2233-4455",
+      "deleted": false
+    },
+    {
+      "id": 8,
+      "firstName": "安田",
+      "lastName": "優斗",
+      "firstNameKana": "やすだ",
+      "lastNameKana": "ゆうと",
+      "middleName": "",
+      "email": "nao@gmail.com",
+      "password": "aaqqwwss",
+      "passwordConfirmation": "aaqqwwss",
+      "postCode": "370-1301",
+      "prefecture": "群馬県",
+      "city": "高崎市",
+      "aza": "新町303",
+      "building": "",
+      "tel": "090-8877-6655",
+      "deleted": false
     }
   ],
   "favorites": [],
   "purchaseHistories": [],
-  "carts": [
-    {
-      "userId": null,
-      "id": 1
-    },
-    {
-      "userId": null,
-      "id": 2
-    },
-    {
-      "userId": 0,
-      "itemId": 3,
-      "imageUrl": "/images/probiotech_whey_protein.jpg",
-      "name": "プロバイオティック ホエイ プロテイン",
-      "flavor": "ミルクティー",
-      "price": 2190,
-      "countity": 7,
-      "id": 3
-    },
-    {
-      "userId": 0,
-      "itemId": 1,
-      "imageUrl": "/images/impact_whey_protein.jpg",
-      "name": "Impact ホエイ プロテイン",
-      "flavor": "チョコ",
-      "price": 1990,
-      "countity": 5,
-      "id": 4
-    }
-  ],
+  "carts": [],
   "subscriptionCart": [],
   "subscription": [],
   "subscriptionHistories": []
