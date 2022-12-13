@@ -53,7 +53,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
   const [userId, setUserId] = React.useState('');
   const [flavor, setFlavor] = React.useState(detail.flavor[0]);
 
-  
+
   //　数量変更
   const addHandlerNext = (sub: any) => {
     setTotal(total + sub);
@@ -132,9 +132,12 @@ const ItemDetail: NextPage = ({ detail }: any) => {
 
 
   const handler = (event: any) => {
+    // 数量0の場合はカートへ入れない
     if (count === 0) {
       return
-      // 数量0の場合はカートへ入れない
+    }
+    else if (userId === '') {
+      router.push('/cart');
     } else {
       event.preventDefault();
       fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
@@ -144,7 +147,6 @@ const ItemDetail: NextPage = ({ detail }: any) => {
         },
         body: JSON.stringify(carts),
       })
-
         .then(() => {
           // if (document.cookie !== '') 
           {
@@ -174,20 +176,20 @@ const ItemDetail: NextPage = ({ detail }: any) => {
     if (count === 0) {
       // 数量0の場合はカートへ入れない
     } else {
-    fetch(
-      `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(SubscriptionCart),
-      }
-    ).then(() => {
-      router.push(`/items/subscription`);
-    });
-  }
-};
+      fetch(
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(SubscriptionCart),
+        }
+      ).then(() => {
+        router.push(`/items/subscription`);
+      });
+    }
+  };
 
   return (
     <>
