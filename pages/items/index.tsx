@@ -24,9 +24,10 @@ const ItemDisplay: NextPage = () => {
   const [category, setCategory] = useState('');
   const [flavor, setFlavor] = useState('');
 
-  const [searchQuery, setSearchQuery] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const inputref = useRef<HTMLInputElement>();
+
   const { data, error } = useSWR(resource, fetcher);
   if (error) return <div>Failed to Load</div>;
   if (!data) return <div>Loading...</div>;
@@ -43,20 +44,16 @@ const ItemDisplay: NextPage = () => {
   const flavorHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setFlavor(e.target.value);
     setResource(
-      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/api/items?flavor_like=${e.target.value}`
+      `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${e.target.value}`
       // _like演算子でdbjson内の配列から検索できる
     );
   };
 
   // 検索BOXイベント
   const handleSearch = () => {
-    console.log(inputref.current?.value);
     // フィルタリング機能、この小文字の中にcurrent.valueが含まれている商品情報だけ残す
-    setSearchQuery(
-      data.filter((item: any) =>
-        item.name.toLowerCase().includes(inputref.current!.value)
-      )
-    );
+
+    setSearchQuery(inputref.current!.value);
   };
 
   return (
