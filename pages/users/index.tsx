@@ -15,6 +15,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   const errors: string[] = [];
 
   const cookies = req.cookies;
+  const cookie = Number(cookies.id);
+
   let user = { id: cookies.id };
   try {
     const res = await fetch(
@@ -23,69 +25,67 @@ export const getServerSideProps: GetServerSideProps = async ({
     user = await res.json();
   } catch (err) {
     console.error('failed to get user', err);
-    errors.push('ユーザの取得に失敗しました');
+    errors.push('情報の取得に失敗しました。リロードしてください。');
   }
 
   const itemsArray: any[] = [];
-  try{
-  const resHistories = await fetch(
-    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories?userId=${cookies.id}`
-  );
-  const history = await resHistories.json();
-  history.forEach((element: any) => {
-    const items = element.items;
+  try {
+    const resHistories = await fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories?userId=${cookies.id}`
+    );
+    const history = await resHistories.json();
+    history.forEach((element: any) => {
+      const items = element.items;
 
-    items.forEach((item: any) => {
-      itemsArray.push(item);
+      items.forEach((item: any) => {
+        itemsArray.push(item);
+      });
     });
-  })}catch(err){
+  } catch (err) {
     console.error('failed to get purchaseHistories', err);
-    errors.push('ユーザ履歴の取得に失敗しました');
+    errors.push('情報の取得に失敗しました。リロードしてください。');
   }
   //サブスク
   const subscriptionArray: any[] = [];
-  try{
-  const regular = await fetch(
-    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscription?userId=${cookies.id}`
-  );
-  const leave = await regular.json();
+  try {
+    const regular = await fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscription?userId=${cookies.id}`
+    );
+    const leave = await regular.json();
 
   leave.forEach((element: any) => {
     const items = element.items;
-    items.forEach((item: any) => {
-      subscriptionArray.push(item);
-    });
-  })}catch(err){
-    console.error('failed to get subscription', err);
-    errors.push('定期購入の取得に失敗しました');
-  };
+    subscriptionArray.push(items);
+  })
+}catch(err){
+  console.error('failed to get subscription', err);
+  errors.push('情報の取得に失敗しました。リロードしてください。');
+};
+
   //サブスクの履歴
   const subscriptionHistoriesArray: any[] = [];
-  try{
-  const past = await fetch(
-    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscriptionHistories?userId=${cookies.id}`
-  );
-  const remain = await past.json();
-  remain.forEach((element: any) => {
-    const items = element.items;
-    items.forEach((item: any) => {
-      subscriptionHistoriesArray.push(item);
+  try {
+    const past = await fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscriptionHistories?userId=${cookies.id}`
+    );
+    const remain = await past.json();
+    remain.forEach((element: any) => {
+      const items = element.items;
+      subscriptionHistoriesArray.push(items);
     });
-  })}catch(err){
+  } catch (err) {
     console.error('failed to get subscriptionHistories', err);
-    errors.push('定期購入の履歴取得に失敗しました');
+    errors.push('情報の取得に失敗しました。リロードしてください。');
   }
 
-  console.log(subscriptionArray)
-
+  // console.log(subscriptionArray);
   return {
     props: {
       user,
       itemsArray,
       subscriptionArray,
-      // leave,
       subscriptionHistoriesArray,
-      cookies,
+      cookie,
       errors,
     },
   };
@@ -95,42 +95,44 @@ const UserDetails = ({
   user,
   subscriptionArray,
   itemsArray,
-  leave,
   subscriptionHistoriesArray,
-  cookies,
+  cookie,
   errors,
 }: any) => {
   //サブスクからサブスク購入履歴への処理
 
   const router = useRouter();
-  const handler = (event: any) => {
-    // console.log(subscriptionArray)
+  const handler = (items: any) => {
     subscriptionArray.forEach((cart: any) => {
-      cart.date = new Date().toLocaleString('ja-JP');
-    });
-    const purchaseHistories = {
-      userId: cookies.id,
-      items: subscriptionArray,
-    };
-    fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscriptionHistories/`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(purchaseHistories),
-    }).then(() => {
-      deleteCarts(event);
-      router.reload();
-    });
-  };
-
-  //  const data = {};
-  const deleteCarts = (event: any) => {
-    subscriptionArray.forEach((del: any) => {
-      fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscription/${del.id}`, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        // body: JSON.stringify(data),
+        cart.date = new Date().toLocaleString('ja-JP');
       });
-    });
+
+      const purchaseHistories = {
+        userId: cookie,
+        items: items,
+      };
+      fetch(
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionHistories/`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(purchaseHistories),
+        }
+      ).then(() => {
+        deleteCarts(items);
+        location.reload();
+      });
+    };
+
+
+    const deleteCarts = (items: any) => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscription/${items.id}`,
+      {
+        method: 'DELETE',
+      }
+    );
+    location.reload();
   };
 
   return (
@@ -284,6 +286,18 @@ const UserDetails = ({
                           </span>
                         </p>
                         <p>
+                          数量&nbsp;&nbsp;&nbsp;&nbsp;
+                          <span className={styles.style}>
+                            &nbsp;{items.countity}&nbsp;
+                          </span>
+                        </p>
+                        <p>
+                          小計 &nbsp;&nbsp;&nbsp;&nbsp; ¥
+                          <span className={styles.style}>
+                            &nbsp;{items.price * items.countity}&nbsp;
+                          </span>
+                        </p>
+                        <p>
                           定期購入 &nbsp;&nbsp;&nbsp;&nbsp;
                           <span className={styles.style}>
                             &nbsp; 継続中 &nbsp;
@@ -314,15 +328,15 @@ const UserDetails = ({
           >
             定期購入の履歴
           </h2>
-          {subscriptionHistoriesArray.map((items: any) => {
+          {subscriptionHistoriesArray.map((items2: any) => {
             return (
-              <div key={items.id}>
+              <div key={items2.id}>
                 <div>
-                  <h3>終了日時：{items.date}</h3>
+                  <h3>終了日時：{items2.date}</h3>
                   <div>
                     <div className={styles.list}>
                       <Image
-                        src={items.imageUrl}
+                        src={items2.imageUrl}
                         width={260}
                         height={260}
                         alt="商品画像"
@@ -331,21 +345,33 @@ const UserDetails = ({
                       <div className={styles.itemDetail}>
                         <Link
                           href={`./items/${encodeURIComponent(
-                            items.itemId
+                            items2.itemId
                           )}`}
                         >
-                          <h4>{items.name}</h4>
+                          <h4>{items2.name}</h4>
                         </Link>
                         <p>
                           フレーバー &nbsp;&nbsp;&nbsp;&nbsp;
                           <span className={styles.style}>
-                            &nbsp;{items.flavor}&nbsp;
+                            &nbsp;{items2.flavor}&nbsp;
                           </span>
                         </p>
                         <p>
                           価格 &nbsp;&nbsp;&nbsp;&nbsp; ¥
                           <span className={styles.style}>
-                            &nbsp;{items.price}&nbsp;
+                            &nbsp;{items2.price}&nbsp;
+                          </span>
+                        </p>
+                        <p>
+                          数量&nbsp;&nbsp;&nbsp;&nbsp;
+                          <span className={styles.style}>
+                            &nbsp;{items2.countity}&nbsp;
+                          </span>
+                        </p>
+                        <p>
+                          小計 &nbsp;&nbsp;&nbsp;&nbsp; ¥
+                          <span className={styles.style}>
+                            &nbsp;{items2.price * items2.countity}&nbsp;
                           </span>
                         </p>
                         <p>

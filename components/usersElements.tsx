@@ -54,16 +54,13 @@ export default function UsersElements({ user }: any) {
   function submit(e: SyntheticEvent) {
     e.preventDefault();
 
-    fetch(
-      `${process.env.NEXT_PUBLIC_PROTEIN}/api/users/${user.id}`,
-      {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formValues),
-      }
-    ).then(() => {
+    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/users/${user.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formValues),
+    }).then(() => {
       router.reload();
     });
   }

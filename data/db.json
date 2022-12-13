@@ -251,7 +251,7 @@
       "firstNameKana": "おかだ",
       "lastNameKana": "まさこ",
       "middleName": " ",
-      "email": "na@gmail.com",
+      "email": "na09@gmail.com",
       "password": "ddeerrff",
       "passwordConfirmation": "ddeerrff",
       "postCode": "778-0099",
@@ -300,252 +300,48 @@
       "building": "",
       "tel": "090-8541-1689",
       "deleted": false
+    },
+    {
+      "id": 7,
+      "firstName": "安田",
+      "lastName": "優斗",
+      "firstNameKana": "やすだ",
+      "lastNameKana": "ゆうと",
+      "middleName": "",
+      "email": "nao@gmail.com",
+      "password": "aaqqwwss",
+      "passwordConfirmation": "aaqqwwss",
+      "postCode": "370-1301",
+      "prefecture": "群馬県",
+      "city": "高崎市",
+      "aza": "新町302",
+      "building": "",
+      "tel": "080-2233-4455",
+      "deleted": false
+    },
+    {
+      "id": 8,
+      "firstName": "安田",
+      "lastName": "優斗",
+      "firstNameKana": "やすだ",
+      "lastNameKana": "ゆうと",
+      "middleName": "",
+      "email": "nao@gmail.com",
+      "password": "aaqqwwss",
+      "passwordConfirmation": "aaqqwwss",
+      "postCode": "370-1301",
+      "prefecture": "群馬県",
+      "city": "高崎市",
+      "aza": "新町303",
+      "building": "",
+      "tel": "090-8877-6655",
+      "deleted": false
     }
   ],
   "favorites": [],
-  "purchaseHistories": [
-    {
-      "userId": 3,
-      "items": [
-        {
-          "userId": 3,
-          "itemId": 1,
-          "imageUrl": "/images/impact_whey_protein.jpg",
-          "name": "Impact ホエイ プロテイン",
-          "flavor": "チョコ",
-          "price": 1990,
-          "countity": 1,
-          "id": 1,
-          "date": "2022/12/8 11:16:07"
-        }
-      ],
-      "id": 1
-    },
-    {
-      "userId": "3",
-      "items": [],
-      "id": 2
-    },
-    {
-      "userId": 3,
-      "items": [
-        {
-          "userId": 3,
-          "itemId": 1,
-          "imageUrl": "/images/impact_whey_protein.jpg",
-          "name": "Impact ホエイ プロテイン",
-          "flavor": "チョコ",
-          "price": 1990,
-          "countity": 1,
-          "id": 1,
-          "date": "2022/12/8 11:18:25"
-        }
-      ],
-      "id": 3
-    },
-    {
-      "userId": "3",
-      "items": [],
-      "id": 4
-    },
-    {
-      "userId": 2,
-      "items": [
-        {
-          "userId": 2,
-          "itemId": 1,
-          "imageUrl": "/images/impact_whey_protein.jpg",
-          "name": "Impact ホエイ プロテイン",
-          "flavor": "チョコ",
-          "price": 1990,
-          "countity": 2,
-          "id": 3,
-          "date": "2022/12/8 16:38:25"
-        }
-      ],
-      "id": 5
-    },
-    {
-      "userId": "2",
-      "items": [],
-      "id": 6
-    },
-    {
-      "userId": "2",
-      "items": [],
-      "id": 7
-    },
-    {
-      "userId": 2,
-      "items": [
-        {
-          "userId": 2,
-          "itemId": 1,
-          "imageUrl": "/images/impact_whey_protein.jpg",
-          "name": "Impact ホエイ プロテイン",
-          "flavor": "チョコ",
-          "price": 1990,
-          "countity": 1,
-          "id": 1,
-          "date": "2022/12/8 17:25:36"
-        },
-        {
-          "userId": 2,
-          "itemId": 1,
-          "imageUrl": "/images/impact_whey_protein.jpg",
-          "name": "Impact ホエイ プロテイン",
-          "flavor": "チョコ",
-          "price": 1990,
-          "countity": 1,
-          "id": 2,
-          "date": "2022/12/8 17:25:36"
-        }
-      ],
-      "id": 8
-    },
-    {
-      "userId": "2",
-      "items": [],
-      "id": 9
-    },
-    {
-      "userId": "2",
-      "items": [
-        {
-          "userId": 2,
-          "itemId": 1,
-          "imageUrl": "/images/impact_whey_protein.jpg",
-          "name": "Impact ホエイ プロテイン",
-          "flavor": "チョコ",
-          "price": 1990,
-          "countity": 1,
-          "id": 1,
-          "date": "2022/12/8 17:50:31"
-        }
-      ],
-      "id": 10
-    },
-    {
-      "userId": 2,
-      "items": [
-        {
-          "userId": 2,
-          "itemId": 8,
-          "imageUrl": "/images/impact_nativewhey.jpg",
-          "name": "Impact ネイティブホエイ",
-          "flavor": "バナナ＆シナモン",
-          "price": 7690,
-          "countity": 1,
-          "id": 1,
-          "date": "2022/12/9 14:36:50"
-        },
-        {
-          "userId": 2,
-          "itemId": 1,
-          "imageUrl": "/images/impact_whey_protein.jpg",
-          "name": "Impact ホエイ プロテイン",
-          "flavor": "チョコ",
-          "price": 1990,
-          "countity": 1,
-          "id": 2,
-          "date": "2022/12/9 14:36:50"
-        }
-      ],
-      "id": 11
-    },
-    {
-      "userId": "2",
-      "items": [],
-      "id": 12
-    },
-    {
-      "userId": "2",
-      "items": [],
-      "id": 13
-    },
-    {
-      "userId": "2",
-      "items": [],
-      "id": 14
-    }
-  ],
+  "purchaseHistories": [],
   "carts": [],
-  "subscriptionCart": [
-    {
-      "userId": 2,
-      "itemId": 1,
-      "imageUrl": "/images/impact_whey_protein.jpg",
-      "name": "Impact ホエイ プロテイン",
-      "flavor": "チョコ",
-      "price": 1990,
-      "countity": 0,
-      "id": 1
-    }
-  ],
-  "subscription": [
-    {
-      "userId": "2",
-      "items": [
-        {
-          "userId": 2,
-          "itemId": 1,
-          "imageUrl": "/images/impact_whey_protein.jpg",
-          "name": "Impact ホエイ プロテイン",
-          "flavor": "チョコ",
-          "price": 1990,
-          "countity": 0,
-          "id": 1,
-          "date": "2022/12/9 14:39:11"
-        }
-      ],
-      "id": 1
-    },
-    {
-      "userId": "2",
-      "items": [
-        {
-          "userId": 2,
-          "itemId": 3,
-          "imageUrl": "/images/probiotech_whey_protein.jpg",
-          "name": "プロバイオティック ホエイ プロテイン",
-          "flavor": "ミルクティー",
-          "price": 2190,
-          "countity": 0,
-          "id": 1,
-          "date": "2022/12/9 16:15:18"
-        },
-        {
-          "userId": 2,
-          "itemId": 3,
-          "imageUrl": "/images/probiotech_whey_protein.jpg",
-          "name": "プロバイオティック ホエイ プロテイン",
-          "flavor": "ミルクティー",
-          "price": 2190,
-          "countity": 0,
-          "id": 2,
-          "date": "2022/12/9 16:15:18"
-        }
-      ],
-      "id": 2
-    }
-  ],
-  "subscriptionHistories": [
-    {
-      "userId": "2",
-      "items": [
-        {
-          "userId": 2,
-          "itemId": 1,
-          "imageUrl": "/images/impact_whey_protein.jpg",
-          "name": "Impact ホエイ プロテイン",
-          "flavor": "チョコ",
-          "price": 1990,
-          "countity": 1,
-          "id": 1,
-          "date": "2022/12/8 16:46:23"
-        }
-      ],
-      "id": 1
-    }
-  ]
+  "subscriptionCart": [],
+  "subscription": [],
+  "subscriptionHistories": []
 }
