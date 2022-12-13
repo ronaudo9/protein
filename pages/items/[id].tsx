@@ -10,6 +10,7 @@ import {
 import React, { useState, useEffect } from 'react';
 import Header from '../layout/header';
 import { useRouter } from 'next/router';
+import { Item } from '../../types/type';
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -37,7 +38,6 @@ export const getStaticProps: GetStaticProps = async ({
     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/${params!.id}`
   );
   const detail = await res.json();
-
   return {
     props: { detail },
     revalidate: 10,
@@ -46,7 +46,7 @@ export const getStaticProps: GetStaticProps = async ({
 
 
 // detail getStaticPropsから取得
-const ItemDetail: NextPage = ({ detail }: any) => {
+const ItemDetail: NextPage<{ detail: Item }> = ({detail}) => {
   const router = useRouter();
   const [count, setCount] = React.useState(0);
   const [total, setTotal] = React.useState(0);
@@ -125,7 +125,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
   // localstrageへ保存【始まり】
   useEffect(() => {
     if (!document.cookie) {
-      localStorage.setItem(carts.itemId, JSON.stringify(cartsForStrage));
+      localStorage.setItem(carts.itemId as any, JSON.stringify(cartsForStrage));
     }
   }, [count]);
   // localstrageへ保存【終わり】

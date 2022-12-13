@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from '../../styles/subscription.module.css';
 import Header from '../layout/header';
+import { User } from '../../types/type';
 import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe(
