@@ -146,7 +146,7 @@ export default function UsersElements({ user }: any) {
             type="credit"
             name="credit"
             className={styles.input}
-            setformvalues={setFormValues}
+            setFormvalues={setFormValues}
             placeholder="例:●●●●-●●●●-●●●●-●●●●（半角数字）"
             required
             {...user.credit}
@@ -163,7 +163,7 @@ export default function UsersElements({ user }: any) {
           </div>
           <PasswordEdit
             formValues={formValues}
-            setformvalues={setFormValues}
+            setFormvalues={setFormValues}
             readOnly={readOnly}
           />
         </div>

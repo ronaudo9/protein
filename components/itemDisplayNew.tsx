@@ -1,13 +1,12 @@
-import useSWR from 'swr';
 import Link from 'next/link';
 import styles from '../styles/items_index.module.css';
 import Image from 'next/image';
 import { useState } from 'react';
 
-const fetcher = (resource: any, init: any) =>
-  fetch(resource, init).then((res) => res.json());
+// const fetcher = (resource: any, init: any) =>
+//   fetch(resource, init).then((res) => res.json());
 
-export default function ItemDisplayNew({ data }: any) {
+export default function ItemDisplayNew({ data, searchQuery }: any) {
   // const { data, error } = useSWR('/api/items', fetcher);
   // if (error) return <div>Failed to Load</div>;
   // if (!data) return <div>Loading...</div>;
@@ -15,7 +14,7 @@ export default function ItemDisplayNew({ data }: any) {
   return (
     <>
       <div className={styles.side}>
-        {data.map((item: any) => {
+        {searchQuery.map((item: any) => {
           const MAX_LENGTH = 25;
           let modStr = '';
           if (item.description.length > MAX_LENGTH) {

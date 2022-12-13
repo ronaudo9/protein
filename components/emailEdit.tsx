@@ -4,19 +4,19 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req,
-}) => {
-  const cookies = req.cookies;
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users?id=${cookies.id}`
-  );
-  const users = await res.json();
-  const user = users[0];
-  return {
-    props: { user },
-  };
-};
+// export const getServerSideProps: GetServerSideProps = async ({
+//   req,
+// }) => {
+//   const cookies = req.cookies;
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users?id=${cookies.id}`
+//   );
+//   const users = await res.json();
+//   const user = users[0];
+//   return {
+//     props: { user },
+//   };
+// };
 
 const EmailEdit = ({ formValues, setFormValues, readOnly }: any) => {
   const router = useRouter();
