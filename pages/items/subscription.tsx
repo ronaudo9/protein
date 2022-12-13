@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from '../../styles/subscription.module.css';
 import Header from '../layout/header';
+import { User } from '../../types/type';
 
 export const getServerSideProps: GetServerSideProps = async (
   context
@@ -12,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async (
     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscriptionCart?userId=${cookies.id}`
   );
   const subscriptionCart = await res.json();
-  subscriptionCart.forEach((cart: any) => {
+  subscriptionCart.forEach((cart: User) => {
     cart.date = new Date().toLocaleString('ja-JP');
   });
   const subscription = {
@@ -38,6 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (
   //     });
   //   });
   // });
+  console.log(subscriptionCart);
   return {
     props: { subscriptionCart, subscription },
   };

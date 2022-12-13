@@ -18,6 +18,7 @@ type User = {
   itemId: number;
   countity: number;
   date: string;
+  id: number;
 };
 
 type Item = {
@@ -26,7 +27,14 @@ type Item = {
   imageUrl: string;
   category: string;
   flavor: string[];
+  price: number;
+  description: string;
+  content: string;
 };
+
+type subscriptionCart = {
+
+}
 
 export type { User };
 export type { Item };

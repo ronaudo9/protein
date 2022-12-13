@@ -55,7 +55,7 @@ export default function UsersElements({ user }: any) {
     e.preventDefault();
 
     fetch(
-      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/api/users/${user.id}`,
+      `${process.env.NEXT_PUBLIC_PROTEIN}/api/users/${user.id}`,
       {
         method: 'PATCH',
         headers: {

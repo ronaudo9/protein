@@ -462,10 +462,26 @@
       "userId": "2",
       "items": [],
       "id": 13
+    },
+    {
+      "userId": "2",
+      "items": [],
+      "id": 14
     }
   ],
   "carts": [],
-  "subscriptionCart": [],
+  "subscriptionCart": [
+    {
+      "userId": 2,
+      "itemId": 1,
+      "imageUrl": "/images/impact_whey_protein.jpg",
+      "name": "Impact ホエイ プロテイン",
+      "flavor": "チョコ",
+      "price": 1990,
+      "countity": 0,
+      "id": 1
+    }
+  ],
   "subscription": [
     {
       "userId": "2",
@@ -483,6 +499,34 @@
         }
       ],
       "id": 1
+    },
+    {
+      "userId": "2",
+      "items": [
+        {
+          "userId": 2,
+          "itemId": 3,
+          "imageUrl": "/images/probiotech_whey_protein.jpg",
+          "name": "プロバイオティック ホエイ プロテイン",
+          "flavor": "ミルクティー",
+          "price": 2190,
+          "countity": 0,
+          "id": 1,
+          "date": "2022/12/9 16:15:18"
+        },
+        {
+          "userId": 2,
+          "itemId": 3,
+          "imageUrl": "/images/probiotech_whey_protein.jpg",
+          "name": "プロバイオティック ホエイ プロテイン",
+          "flavor": "ミルクティー",
+          "price": 2190,
+          "countity": 0,
+          "id": 2,
+          "date": "2022/12/9 16:15:18"
+        }
+      ],
+      "id": 2
     }
   ],
   "subscriptionHistories": [
