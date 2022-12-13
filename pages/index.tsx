@@ -1,17 +1,66 @@
 import Head from 'next/head';
 import style from '../styles/index.module.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import HeaderLogin from './layout/headerLogin';
 import ItemDisplay from './items/';
 import { GetServerSideProps } from 'next';
 
+
 export default function UserLogin(cookieData: any) {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(false);
+  const [localData, setLocalData] = useState([]);
+  const [userId, setUserId] = useState(0);
+
+
+  // Local Storageからカートに追加した商品データ取得
+  useEffect(() => {
+    const collection = Object.keys(localStorage).map(key => {
+      let keyJson = JSON.stringify(key);
+      return {
+        key: JSON.parse(keyJson),
+        value: JSON.parse(localStorage.getItem(key) as string)
+      }
+    })
+    setLocalData(collection as any)
+  }, [])
+
+  //"ally-supports-cache"などを除外 (Local Storageの中の商品情報以外を削除)
+  const filteredData: any = localData.filter((object: any) => {
+    return object.key == object.value.itemId;
+  });
+
+
+  // ユーザーIDの取得&POST(onSubmitのタイミングで発火)
+  const postUserdata = async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users?email=${email}&password=${password}`)
+    const data = await response.json();
+    const user = data[0];
+    setUserId(user.id)
+
+    filteredData.forEach((data: any) => {
+      data.value.userId = userId
+    })
+
+    filteredData.forEach((data: any) => {
+      fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+    })
+  }
+
+
+  console.log(filteredData)
+  console.log(userId)
+
 
   const data = {
     email: email,
@@ -37,11 +86,14 @@ export default function UserLogin(cookieData: any) {
       })
       .then((data) => {
         console.log(data);
+        if (userId !== 0)
+          postUserdata();
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
 
   return (
     <div>
@@ -70,7 +122,7 @@ export default function UserLogin(cookieData: any) {
               ユーザーが見つかりません。もう一度入力してください。
             </h3>
           </hgroup>
-          <form className={style.form} onSubmit={handler}>
+          <form className={style.form} onSubmit={() => { handler(event) }}>
             <div className={style.group}>
               <input
                 type="email"
@@ -122,10 +174,6 @@ export default function UserLogin(cookieData: any) {
           </form>
         </main>
       </div>
-
-      {/* <footer className={style.footer}>
-        <h1>RAKUTEIN</h1>
-      </footer> */}
     </div>
   );
 }
