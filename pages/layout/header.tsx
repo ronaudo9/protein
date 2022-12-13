@@ -42,7 +42,8 @@ export default function Header() {
           />
         </Link>
       </div>
-      <section className={style.iconlist}>
+
+      <div className={style.iconlist}>
         <div className={style.icon} onClick={moveToCart}>
           <Image
             priority
@@ -72,7 +73,7 @@ export default function Header() {
             />
           </Link>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
