@@ -125,7 +125,7 @@ const ItemDetail: NextPage<{ detail: Item }> = ({detail}) => {
   // localstrageへ保存【始まり】
   useEffect(() => {
     if (!document.cookie) {
-      localStorage.setItem(carts.itemId, JSON.stringify(cartsForStrage));
+      localStorage.setItem(carts.itemId as any, JSON.stringify(cartsForStrage));
     }
   }, [count]);
   // localstrageへ保存【終わり】
