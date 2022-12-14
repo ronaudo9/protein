@@ -6,7 +6,7 @@ export default function HeaderLogin() {
   return (
     <div className={style.all}>
       <div className={style.logo}>
-        <Link href="/">
+        <Link href="/login">
           <Image
             priority
             src="/images/rakutein.jpg"
