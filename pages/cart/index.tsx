@@ -116,7 +116,7 @@ const Cart = ({ carts, cookies }: any) => {
       router.push('/items');
     } else {
       alert('ログイン後に商品購入可能です（会員登録してない方は会員登録をお願いします）');
-      router.push('/');
+      router.push('/login');
     }
   };
 

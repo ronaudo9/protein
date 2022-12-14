@@ -71,16 +71,18 @@ const nextConfig = {
         source: '/api/carts/:slug',
         destination: 'http://localhost:8000/carts/:slug',
       },
-      /*
       {
-        source: 'PROTEIN',
-        destination: 'NEXT_PUBLIC_PROTEIN',
+        source: '/',
+        destination: '/items/',
       },
-      {
-        source: 'PROTEIN_DATA',
-        destination: 'NEXT_PUBLIC_PROTEIN_DATA',
-      },
-      */
+      // {
+      //   source: 'PROTEIN',
+      //   destination: 'NEXT_PUBLIC_PROTEIN',
+      // },
+      // {
+      //   source: 'PROTEIN_DATA',
+      //   destination: 'NEXT_PUBLIC_PROTEIN_DATA',
+      // },
     ];
   },
 };
