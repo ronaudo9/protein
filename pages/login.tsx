@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import HeaderLogin from './layout/headerLogin';
-import ItemDisplay from './items/';
+import ItemDisplay from './items';
 import { GetServerSideProps } from 'next';
 
 
@@ -17,7 +17,7 @@ export default function UserLogin(cookieData: any) {
   const [userId, setUserId] = useState(0);
 
 
-  // Local Storageからカートに追加した商品データ取得
+  // Local Storageから商品データ取得
   useEffect(() => {
     const collection = Object.keys(localStorage).map(key => {
       let keyJson = JSON.stringify(key);
@@ -29,37 +29,30 @@ export default function UserLogin(cookieData: any) {
     setLocalData(collection as any)
   }, [])
 
+  console.log(localData)
+
   //"ally-supports-cache"などを除外 (Local Storageの中の商品情報以外を削除)
   const filteredData: any = localData.filter((object: any) => {
     return object.key == object.value.itemId;
   });
 
+  console.log(filteredData)
+
 
   // ユーザーIDの取得&POST(onSubmitのタイミングで発火)
   const postUserdata = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users?email=${email}&password=${password}`)
-    const data = await response.json();
-    const user = data[0];
-    setUserId(user.id)
+    console.log(email)
+    console.log(password)
 
-    filteredData.forEach((data: any) => {
-      data.value.userId = userId
-    })
-
-    filteredData.forEach((data: any) => {
-      fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-    })
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users?email=${email}&password=${password}`
+    );
+    const json = await res.json();
+    const id = await json[0].id;
+    // console.log(id) id出てくる OK
+    return id;
+    //　idを返す
   }
-
-
-  console.log(filteredData)
-  console.log(userId)
 
 
   const data = {
@@ -67,7 +60,8 @@ export default function UserLogin(cookieData: any) {
     password: password,
   };
 
-  const handler = (event: any) => {
+
+  const handler = async (event: any) => {
     event.preventDefault();
     fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/login`, {
       method: 'POST',
@@ -81,13 +75,25 @@ export default function UserLogin(cookieData: any) {
         if (response.status !== 200) {
           setVisible(true);
         } else if (response.status === 200) {
+          filteredData.forEach(async (data: any) => {
+            data.value.userId = await postUserdata()
+
+            filteredData.forEach((data: any) => {
+              fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data.value),
+              })
+            })
+          })
+          localStorage.clear()
           router.push('/items');
         }
       })
       .then((data) => {
         console.log(data);
-        if (userId !== 0)
-          postUserdata();
       })
       .catch((error) => {
         console.error(error);

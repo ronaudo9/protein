@@ -9,10 +9,11 @@ import Head from 'next/head';
 import Header from '../layout/header';
 import CategoryTypeSearch from '../../components/categoryTypeSearch';
 import useSWR from 'swr';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useRef } from 'react';
 import CategoryFlavorSearch from '../../components/categoryFlavorSearch';
 import Pagination from '../../components/page';
 import Image from 'next/image';
+import Searching from '../../components/Searching';
 
 const fetcher = (resource: any, init: any) =>
   fetch(resource, init).then((res) => res.json());
@@ -24,10 +25,16 @@ const ItemDisplay: NextPage = () => {
   );
   const [category, setCategory] = useState('');
   const [flavor, setFlavor] = useState('');
+
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const inputref = useRef<HTMLInputElement>();
+
   const { data, error } = useSWR(resource, fetcher);
   if (error) return <div>Failed to Load</div>;
   if (!data) return <div>Loading...</div>;
 
+  // 種類検索イベント
   const categoryHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
     setResource(
@@ -35,12 +42,20 @@ const ItemDisplay: NextPage = () => {
     );
   };
 
+  // フレーバー検索イベント
   const flavorHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setFlavor(e.target.value);
     setResource(
       `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${e.target.value}`
+      // _like演算子でdbjson内の配列から検索できる
     );
-    // _like演算子でdbjson内の配列から検索できる
+  };
+
+  // 検索BOXイベント
+  const handleSearch = () => {
+    // フィルタリング機能、この小文字の中にcurrent.valueが含まれている商品情報だけ残す
+
+    setSearchQuery(inputref.current!.value);
   };
 
   const clickHandlerNext = () => {
@@ -73,15 +88,19 @@ const ItemDisplay: NextPage = () => {
       <Header />
       <hr className={styles.hr}></hr>
       <section className={styles.searchList}>
+        {/* 種類検索コンポーネント */}
         <CategoryTypeSearch
           category={category}
           categoryHandler={categoryHandler}
         />
         &nbsp;&nbsp;&nbsp;
+        {/* フレーバー検索コンポーネント */}
         <CategoryFlavorSearch
           flavor={flavor}
           flavorHandler={flavorHandler}
         />
+        {/* 検索BOXコンポーネント */}
+        <Searching handleSearch={handleSearch} inputref={inputref} />
       </section>
       <section className={styles.head}>
         <Image
@@ -100,7 +119,8 @@ const ItemDisplay: NextPage = () => {
         </p>
 
         <div className={styles.displayCenter}>
-          <ItemDisplayNew data={data} />
+          {/* 商品一覧表示コンポーネント */}
+          <ItemDisplayNew data={data} searchQuery={searchQuery} />
         </div>
       </section>
 
@@ -165,6 +185,7 @@ const ItemDisplay: NextPage = () => {
         </p>
         <h2></h2>
       </div>
+
       <footer className={styles.footer}>
         <h1>RAKUTEIN</h1>
       </footer>

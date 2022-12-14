@@ -17,15 +17,16 @@ export const getServerSideProps: GetServerSideProps = async ({
   const carts = await res.json();
 
   return {
-    props: { carts }
+    props: { carts, cookies }
   };
 };
 
 
-const Cart = ({ carts }: any) => {
+const Cart = ({ carts, cookies }: any) => {
   const [localData, setLocalData] = useState([])
   const router = useRouter();
 
+  console.log(cookies)
 
   // Local Storageからカートに追加した商品データ取得
   useEffect(() => {
@@ -98,6 +99,7 @@ const Cart = ({ carts }: any) => {
 
 
   console.log(carts)
+  console.log(carts.length)
 
   const routerHandler = () => {
     if (carts[0]) {
@@ -109,12 +111,12 @@ const Cart = ({ carts }: any) => {
   };
 
   const handlerWithLocal = () => {
-    if (!filteredData.values) {
+    if (filteredData.length < 1) {
       alert('商品一覧から商品を選んでカートに入れてください');
       router.push('/items');
     } else {
       alert('ログイン後に商品購入可能です（会員登録してない方は会員登録をお願いします）');
-      router.push('/');
+      router.push('/login');
     }
   };
 
@@ -125,7 +127,7 @@ const Cart = ({ carts }: any) => {
       <div className={styles.item_list}>
         <h4 className={styles.cart_title}>カート</h4>
 
-        {carts.length > 0 ?
+        {cookies.id ?
           <div>
             <section className={styles.cart_content}>
               {carts.map((cart: any) => (

@@ -25,7 +25,7 @@ export default function Header() {
       router.push('/users');
     } else {
       alert('ログインをしてください');
-      router.push('/');
+      router.push('/login');
     }
   };
 
@@ -42,7 +42,8 @@ export default function Header() {
           />
         </Link>
       </div>
-      <section className={style.iconlist}>
+
+      <div className={style.iconlist}>
         <div className={style.icon} onClick={moveToCart}>
           <Image
             priority
@@ -62,7 +63,7 @@ export default function Header() {
           />
         </div>
         <div className={style.icon} onClick={logOut}>
-          <Link href="/">
+          <Link href="/login">
             <Image
               priority
               src="/images/logout.jpg"
@@ -72,7 +73,7 @@ export default function Header() {
             />
           </Link>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

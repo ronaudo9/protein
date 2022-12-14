@@ -251,7 +251,7 @@
       "firstNameKana": "おかだ",
       "lastNameKana": "まさこ",
       "middleName": " ",
-      "email": "na09@gmail.com",
+      "email": "na@gmail.com",
       "password": "ddeerrff",
       "passwordConfirmation": "ddeerrff",
       "postCode": "778-0099",
@@ -380,5 +380,23 @@
   ],
   "subscriptionCart": [],
   "subscription": [],
-  "subscriptionHistories": []
+  "subscriptionHistories": [
+    {
+      "userId": "2",
+      "items": [
+        {
+          "userId": 2,
+          "itemId": 1,
+          "imageUrl": "/images/impact_whey_protein.jpg",
+          "name": "Impact ホエイ プロテイン",
+          "flavor": "チョコ",
+          "price": 1990,
+          "countity": 1,
+          "id": 1,
+          "date": "2022/12/8 16:46:23"
+        }
+      ],
+      "id": 1
+    }
+  ]
 }
