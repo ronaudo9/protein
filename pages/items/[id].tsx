@@ -53,7 +53,7 @@ const ItemDetail: NextPage = ({ detail }: any) => {
   const [userId, setUserId] = React.useState('');
   const [flavor, setFlavor] = React.useState(detail.flavor[0]);
 
-  
+
   //　数量変更
   const addHandlerNext = (sub: any) => {
     setTotal(total + sub);
@@ -146,13 +146,13 @@ const ItemDetail: NextPage = ({ detail }: any) => {
       })
 
         .then(() => {
-          // if (document.cookie !== '') 
+          // if (document.cookie !== '')
           {
             router.push('/cart');
             // } else {
             //   alert('カートに追加するにはログインが必要です');
             //   router.push('/');
-            // 
+            //
           }
         });
     }
@@ -172,8 +172,12 @@ const ItemDetail: NextPage = ({ detail }: any) => {
       countity: count,
     };
     if (count === 0) {
+      return
       // 数量0の場合はカートへ入れない
-    } else {
+    }else if( Number(userId)== 0){
+      return
+    }
+    else {
     fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
       {

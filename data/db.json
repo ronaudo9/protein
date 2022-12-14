@@ -334,11 +334,50 @@
       "building": "",
       "tel": "090-8877-6655",
       "deleted": false
+    },
+    {
+      "id": 9,
+      "firstName": "小栗",
+      "lastName": "旬",
+      "firstNameKana": "おぐり",
+      "lastNameKana": "しゅん",
+      "middleName": "しゅん",
+      "email": "yuki@rakus-partners.co.jp",
+      "password": "zzaassxx",
+      "passwordConfirmation": "zzaassxx",
+      "postCode": "134-2321",
+      "prefecture": "東京都",
+      "city": "新宿区",
+      "aza": "新宿３丁目3-3",
+      "building": "新宿ビル505",
+      "tel": "090-8877-2233",
+      "deleted": false
     }
   ],
   "favorites": [],
   "purchaseHistories": [],
-  "carts": [],
+  "carts": [
+    {
+      "userId": 7,
+      "itemId": 1,
+      "imageUrl": "/images/impact_whey_protein.jpg",
+      "name": "Impact ホエイ プロテイン",
+      "flavor": "チョコ",
+      "price": 1990,
+      "countity": 1,
+      "id": 1
+    },
+    {
+      "userId": 7,
+      "itemId": 11,
+      "imageUrl": "/images/slow_release.jpg",
+      "name": "スロー リリース カゼイン",
+      "flavor": "ノンフレーバー",
+      "price": 5190,
+      "countity": 1,
+      "id": 2
+    }
+  ],
   "subscriptionCart": [],
   "subscription": [],
   "subscriptionHistories": []

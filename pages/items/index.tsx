@@ -11,13 +11,17 @@ import CategoryTypeSearch from '../../components/categoryTypeSearch';
 import useSWR from 'swr';
 import { ChangeEvent, useState } from 'react';
 import CategoryFlavorSearch from '../../components/categoryFlavorSearch';
+import Pagination from '../../components/page';
 import Image from 'next/image';
 
 const fetcher = (resource: any, init: any) =>
   fetch(resource, init).then((res) => res.json());
 
 const ItemDisplay: NextPage = () => {
-  const [resource, setResource] = useState(`${process.env.NEXT_PUBLIC_PROTEIN}/api/items`);
+  const [count, setCount] = useState(1);
+  const [resource, setResource] = useState(
+    `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?_page=1&_limit=8`
+  );
   const [category, setCategory] = useState('');
   const [flavor, setFlavor] = useState('');
   const { data, error } = useSWR(resource, fetcher);
@@ -26,13 +30,39 @@ const ItemDisplay: NextPage = () => {
 
   const categoryHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
-    setResource(`${process.env.NEXT_PUBLIC_PROTEIN}/api/items?category=${e.target.value}`);
+    setResource(
+      `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?category=${e.target.value}`
+    );
   };
 
   const flavorHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setFlavor(e.target.value);
-    setResource(`${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${e.target.value}`);
+    setResource(
+      `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${e.target.value}`
+    );
     // _like演算子でdbjson内の配列から検索できる
+  };
+
+  const clickHandlerNext = () => {
+    const nextCount = count + 1;
+    if (nextCount >= 4) {
+      ''
+    } else {
+    setCount(nextCount);
+    setResource(
+      `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?_page=${nextCount}&_limit=8`
+    )};
+  };
+
+  const clickHandlerPrev = () => {
+    const prevCount = count - 1;
+    if (prevCount <= 0) {
+      setCount(1);
+    } else {
+      setCount(prevCount);
+    setResource(
+      `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?_page=${prevCount}&_limit=8`
+    ) };
   };
 
   return (
@@ -73,6 +103,26 @@ const ItemDisplay: NextPage = () => {
           <ItemDisplayNew data={data} />
         </div>
       </section>
+
+      {/* <Pagination
+      clickHandlerNext={clickHandlerNext}
+      clickHandlerPrev={clickHandlerPrev}
+      /> */}
+      <button
+        className={styles.plus}
+        type="button"
+        onClick={clickHandlerNext}
+      >
+        +
+      </button>
+      <p>&nbsp;{count}ページ目&nbsp;</p>
+      <button
+        className={styles.minus}
+        type="button"
+        onClick={clickHandlerPrev}
+      >
+        -
+      </button>
 
       <div className={styles.form}>
         <h2 className={styles.h2}>
