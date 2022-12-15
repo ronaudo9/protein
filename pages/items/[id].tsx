@@ -179,22 +179,26 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
       countity: count,
     };
     if (count === 0) {
+      return
       // 数量0の場合はカートへ入れない
-    } else {
-      fetch(
-        `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(SubscriptionCart),
-        }
-      ).then(() => {
-        router.push(`/items/subscription`);
-      });
+    }else if( Number(userId)== 0){
+      return
     }
-  };
+    else {
+    fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(SubscriptionCart),
+      }
+    ).then(() => {
+      router.push(`/items/subscription`);
+    });
+  }
+};
 
   let favs = {
     userId: Number(userId),
