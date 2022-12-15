@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import HeaderLogin from './layout/headerLogin';
-import ItemDisplay from './items/';
+import ItemDisplay from './items';
 import { GetServerSideProps } from 'next';
 
 export default function UserLogin(cookieData: any) {
