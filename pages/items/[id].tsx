@@ -11,7 +11,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../layout/header';
 import { useRouter } from 'next/router';
 import { Item } from '../../types/type';
-
+import Footer from '../layout/footer';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(
@@ -37,6 +37,7 @@ export const getStaticProps: GetStaticProps = async ({
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/${params!.id}`
   );
+
   const detail = await res.json();
   return {
     props: { detail },
@@ -44,15 +45,13 @@ export const getStaticProps: GetStaticProps = async ({
   };
 };
 
-
 // detail getStaticPropsから取得
-const ItemDetail: NextPage<{ detail: Item }> = ({detail}) => {
+const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   const router = useRouter();
   const [count, setCount] = React.useState(0);
   const [total, setTotal] = React.useState(0);
   const [userId, setUserId] = React.useState('');
   const [flavor, setFlavor] = React.useState(detail.flavor[0]);
-
 
   //　数量変更
   const addHandlerNext = (sub: any) => {
@@ -87,7 +86,6 @@ const ItemDetail: NextPage<{ detail: Item }> = ({detail}) => {
   };
   // 数量変更【終わり】
 
-
   // カートへ追加【始まり】
   const carts = {
     userId: Number(userId),
@@ -99,6 +97,17 @@ const ItemDetail: NextPage<{ detail: Item }> = ({detail}) => {
     countity: count,
   };
   // カートへ追加【終わり】
+
+  // お気に入りへ追加【始まり】
+  // const favs = {
+  //   userId: Number(userId),
+  //   itemId: detail.id,
+  //   imageUrl: detail.imageUrl,
+  //   name: detail.name,
+
+  //   price: detail.price,
+  // };
+  // お気に入りへ追加【終わり】
 
   // ローカルストレージへ追加【始まり】
   const cartsForStrage = {
@@ -112,7 +121,6 @@ const ItemDetail: NextPage<{ detail: Item }> = ({detail}) => {
   };
   // ローカルストレージへ追加【終わり】
 
-
   // cookie取得【始まり】
   useEffect(() => {
     const user = document.cookie;
@@ -121,22 +129,22 @@ const ItemDetail: NextPage<{ detail: Item }> = ({detail}) => {
   }, []);
   // cookie取得【終わり】
 
-
   // localstrageへ保存【始まり】
   useEffect(() => {
     if (!document.cookie) {
-      localStorage.setItem(carts.itemId as any, JSON.stringify(cartsForStrage));
+      localStorage.setItem(
+        carts.itemId as any,
+        JSON.stringify(cartsForStrage)
+      );
     }
   }, [count]);
   // localstrageへ保存【終わり】
 
-
   const handler = (event: any) => {
     // 数量0の場合はカートへ入れない
     if (count === 0) {
-      return
-    }
-    else if (userId === '') {
+      return;
+    } else if (userId === '') {
       router.push('/cart');
     } else {
       event.preventDefault();
@@ -146,24 +154,21 @@ const ItemDetail: NextPage<{ detail: Item }> = ({detail}) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(carts),
-      })
-        .then(() => {
-          // if (document.cookie !== '') 
-          {
-            router.push('/cart');
-            // } else {
-            //   alert('カートに追加するにはログインが必要です');
-            //   router.push('/');
-            // 
-          }
-        });
+      }).then(() => {
+        // if (document.cookie !== '')
+        {
+          router.push('/cart');
+          // } else {
+          //   alert('カートに追加するにはログインが必要です');
+          //   router.push('/');
+          //
+        }
+      });
     }
   };
 
-
   //サブスクリプション
   const Subscription = (event: any) => {
-
     const SubscriptionCart = {
       userId: Number(userId),
       itemId: detail.id,
@@ -191,10 +196,28 @@ const ItemDetail: NextPage<{ detail: Item }> = ({detail}) => {
     }
   };
 
+  let favs = {
+    userId: Number(userId),
+    itemId: [detail.id],
+  };
+
+  console.log(favs);
+  // お気に入り登録（db.jsonへ現在の商品情報登録）
+  const addFavoritesHandler = () => {
+    fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/favorites`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(favs),
+    });
+  };
+  // pagesのしたにお気に入りapi作成
+
   return (
     <>
       <Header />
-      <hr className={styles.hr}></hr>
+
       <div className={styles.detail_page}>
         <div>
           <Image
@@ -266,6 +289,9 @@ const ItemDetail: NextPage<{ detail: Item }> = ({detail}) => {
               <a>今すぐ定期購入を開始</a>
             </button>
           </div>
+          <button type="button" onClick={addFavoritesHandler}>
+            お気に入りに追加
+          </button>
           <div className={styles.cart}>
             <button className={styles.cart_button} onClick={handler}>
               カートに追加
@@ -273,9 +299,7 @@ const ItemDetail: NextPage<{ detail: Item }> = ({detail}) => {
           </div>
         </div>
       </div>
-      <footer className={styles.footer}>
-        <h1>RAKUTEIN</h1>
-      </footer>
+      <Footer />
     </>
   );
 };

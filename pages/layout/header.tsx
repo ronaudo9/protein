@@ -17,7 +17,11 @@ export default function Header() {
   const router = useRouter();
 
   const moveToCart = () => {
-      router.push('/cart');
+    router.push('/cart');
+  };
+
+  const moveToFavorite = () => {
+    router.push('users/favorite');
   };
 
   const moveToUsers = () => {
@@ -36,20 +40,30 @@ export default function Header() {
           <Image
             priority
             src="/images/rakutein.jpg"
-            width={170}
-            height={80}
+            width={140}
+            height={90}
             alt="logout"
           />
         </Link>
       </div>
 
       <div className={style.iconlist}>
+        <div className={style.icon} onClick={moveToFavorite}>
+          <Image
+            priority
+            src="/images/fav.jpg"
+            width={45}
+            height={45}
+            alt="favorite"
+            className={style.iconHover}
+          />
+        </div>
         <div className={style.icon} onClick={moveToCart}>
           <Image
             priority
             src="/images/cart.jpg"
-            width={50}
-            height={50}
+            width={45}
+            height={45}
             alt="cart"
           />
         </div>
@@ -67,8 +81,8 @@ export default function Header() {
             <Image
               priority
               src="/images/logout.jpg"
-              width={40}
-              height={40}
+              width={45}
+              height={45}
               alt="logout"
             />
           </Link>

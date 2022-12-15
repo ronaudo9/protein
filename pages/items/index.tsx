@@ -51,8 +51,7 @@ const ItemDisplay: NextPage = () => {
 
   // 検索BOXイベント
   const handleSearch = () => {
-    // フィルタリング機能、この小文字の中にcurrent.valueが含まれている商品情報だけ残す
-
+    // stateに現在入力されている値をいれていく
     setSearchQuery(inputref.current!.value);
   };
 
@@ -62,19 +61,22 @@ const ItemDisplay: NextPage = () => {
         <title>RAKUTEIN</title>
       </Head>
       <Header />
-      <hr className={styles.hr}></hr>
+
       <section className={styles.searchList}>
-        {/* 種類検索コンポーネント */}
-        <CategoryTypeSearch
-          category={category}
-          categoryHandler={categoryHandler}
-        />
+        <div className={styles.searchflex}>
+          {/* 種類検索コンポーネント */}
+          <CategoryTypeSearch
+            category={category}
+            categoryHandler={categoryHandler}
+          />
+          &nbsp;&nbsp;&nbsp;
+          {/* フレーバー検索コンポーネント */}
+          <CategoryFlavorSearch
+            flavor={flavor}
+            flavorHandler={flavorHandler}
+          />
+        </div>
         &nbsp;&nbsp;&nbsp;
-        {/* フレーバー検索コンポーネント */}
-        <CategoryFlavorSearch
-          flavor={flavor}
-          flavorHandler={flavorHandler}
-        />
         {/* 検索BOXコンポーネント */}
         <Searching handleSearch={handleSearch} inputref={inputref} />
       </section>

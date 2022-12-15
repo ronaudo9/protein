@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Header from '../layout/header';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
+import Footer from '../layout/footer';
 
 export const getServerSideProps: GetServerSideProps = async (
   context
@@ -24,12 +25,15 @@ export const getServerSideProps: GetServerSideProps = async (
     id: subscriptionCart2.id,
     items: subscriptionCart2,
   };
-  await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscription`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(subscription),
-  })
- 
+  await fetch(
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscription`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(subscription),
+    }
+  );
+
   return {
     props: { subscriptionCart2 },
   };
@@ -39,7 +43,7 @@ export default function PurchaseCompletion() {
   return (
     <>
       <Header />
-      <hr className={styles.hr}></hr>
+
       <Head>
         <title>購入完了</title>
       </Head>
@@ -76,9 +80,7 @@ export default function PurchaseCompletion() {
           </div>
         </div>
       </main>
-      <footer className={styles.footer}>
-        <h1>RAKUTEIN</h1>
-      </footer>
+      <Footer />
     </>
   );
 }

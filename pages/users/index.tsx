@@ -8,6 +8,7 @@ import useSWR from 'swr';
 import EmailEdit from '../../components/emailEdit';
 import UsersElements from '../../components/usersElements';
 import { useRouter } from 'next/router';
+import Footer from '../layout/footer';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -53,14 +54,14 @@ export const getServerSideProps: GetServerSideProps = async ({
     );
     const leave = await regular.json();
 
-  leave.forEach((element: any) => {
-    const items = element.items;
-    subscriptionArray.push(items);
-  })
-}catch(err){
-  console.error('failed to get subscription', err);
-  errors.push('情報の取得に失敗しました。リロードしてください。');
-};
+    leave.forEach((element: any) => {
+      const items = element.items;
+      subscriptionArray.push(items);
+    });
+  } catch (err) {
+    console.error('failed to get subscription', err);
+    errors.push('情報の取得に失敗しました。リロードしてください。');
+  }
 
   //サブスクの履歴
   const subscriptionHistoriesArray: any[] = [];
@@ -78,7 +79,25 @@ export const getServerSideProps: GetServerSideProps = async ({
     errors.push('情報の取得に失敗しました。リロードしてください。');
   }
 
-  // console.log(subscriptionArray);
+  // お気に入りリスト表示
+
+  // const favoritesArray: any[] = [];
+  // try {
+  //   const favs = await fetch(
+  //     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/favorites?userId=${cookies.id}`
+  //   );
+  //   const favsSt = await favs.json();
+
+  //   favsSt.forEach((element: any) => {
+  //     const items = element.items;
+  //     favoritesArray.push(items);
+  //   });
+  // } catch (err) {
+  //   console.error('failed to get subscription', err);
+  //   errors.push('情報の取得に失敗しました。リロードしてください。');
+  // }
+  // console.log(itemsArray);
+
   return {
     props: {
       user,
@@ -87,6 +106,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       subscriptionHistoriesArray,
       cookie,
       errors,
+      // favoritesArray,
     },
   };
 };
@@ -98,34 +118,34 @@ const UserDetails = ({
   subscriptionHistoriesArray,
   cookie,
   errors,
-}: any) => {
+}: // favoritesArray,
+any) => {
   //サブスクからサブスク購入履歴への処理
 
   const router = useRouter();
   const handler = (items: any) => {
     subscriptionArray.forEach((cart: any) => {
-        cart.date = new Date().toLocaleString('ja-JP');
-      });
+      cart.date = new Date().toLocaleString('ja-JP');
+    });
 
-      const purchaseHistories = {
-        userId: cookie,
-        items: items,
-      };
-      fetch(
-        `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionHistories/`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(purchaseHistories),
-        }
-      ).then(() => {
-        deleteCarts(items);
-        location.reload();
-      });
+    const purchaseHistories = {
+      userId: cookie,
+      items: items,
     };
+    fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionHistories/`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(purchaseHistories),
+      }
+    ).then(() => {
+      deleteCarts(items);
+      location.reload();
+    });
+  };
 
-
-    const deleteCarts = (items: any) => {
+  const deleteCarts = (items: any) => {
     fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscription/${items.id}`,
       {
@@ -138,7 +158,7 @@ const UserDetails = ({
   return (
     <>
       <Header />
-      <hr className={styles.hr}></hr>
+
       <Head>
         <title>ユーザー情報</title>
       </Head>
@@ -150,6 +170,7 @@ const UserDetails = ({
             <p className={styles.index_text}>
               <Link href="#user_element">基本情報</Link>
             </p>
+
             <p className={styles.index_text}>
               <Link href="#user_purchased">ご購入履歴</Link>
             </p>
@@ -371,7 +392,8 @@ const UserDetails = ({
                         <p>
                           小計 &nbsp;&nbsp;&nbsp;&nbsp; ¥
                           <span className={styles.style}>
-                            &nbsp;{items2.price * items2.countity}&nbsp;
+                            &nbsp;{items2.price * items2.countity}
+                            &nbsp;
                           </span>
                         </p>
                         <p>
@@ -390,16 +412,9 @@ const UserDetails = ({
           })}
         </section>
       </div>
-      <footer className={styles.footer}>
-        <h1>RAKUTEIN</h1>
-      </footer>
+      <Footer />
     </>
   );
 };
 
 export default UserDetails;
-
-// input ---- readOnly={編集フラグ}/>↑trueで編集可能にする
-//最初state:編集フラグ（false）
-// 編集ボタン　onClickで編集フラグを切り替え
-// readonlyの切り替えはフラグで
