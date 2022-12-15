@@ -1,24 +1,28 @@
 .all {
   width: 100%;
-  background-color: white;
-
+  background-color: rgb(81, 80, 80);
+  padding-left: 1%;
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 2fr 1fr;
   padding-top: 1%;
-}
-
-.logo {
-  padding: 0;
 }
 
 .iconlist {
   display: flex;
   justify-content: space-between;
-  padding-top: 5%;
+  padding-top: 8%;
 }
 
 .icon {
   margin-left: 5%;
   margin-right: 5%;
   cursor: pointer;
+}
+
+.footer {
+  background-color: rgb(81, 80, 80);
+  width: 100%;
+  padding-top: 8%;
+  color: white;
+  text-align: right;
 }
