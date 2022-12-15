@@ -25,8 +25,14 @@
 
 .searchList {
   background-color: rgb(243, 239, 239);
-  padding: 0.5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
   display: flex;
+}
+
+.searchflex {
+  display: flex;
+  padding-right: 8%;
 }
 
 .category2 {
@@ -226,31 +232,10 @@
   margin-top: 5%;
 }
 
-/* .search_container {
-  border: white solid 2px;
-  background-color: rgb(245, 245, 242);
-  width: 30rem;
-  height: 30px;
-  border-radius: 4px;
-  overflow: hidden;
-  margin: 3%;
-} */
-
 .search_box {
   display: inline-block; /* なくても大丈夫だけど、念の為 */
   position: relative; /* 基準値とする */
-}
-
-.search_box::before {
-  content: ''; /* 疑似要素に必須 */
-  width: 16px; /* アイコンの横幅 */
-  height: 16px; /* アイコンの高さ */
-  background-image: url(/public/icon.png) no-repeat center center /
-    auto 100%; /* 背景にアイコン画像を配置 */
-  display: inline-block; /* 高さを持たせるためにインラインブロック要素にする */
-  position: absolute; /* 相対位置に指定 */
-  top: 4px; /* アイコンの位置。微調整してね */
-  left: 5px; /* アイコンの位置。微調整してね */
+  height: 5px;
 }
 
 .search_box input {
@@ -258,8 +243,7 @@
   border: rgb(202, 202, 202) solid 3px;
   background-color: rgb(245, 245, 242);
   width: 25rem;
-  height: 30px;
+  height: 45px;
   border-radius: 260px;
   overflow: hidden;
-  margin: 3%;
 }

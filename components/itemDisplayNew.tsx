@@ -18,7 +18,7 @@ export default function ItemDisplayNew({ data, searchQuery }: any) {
           .filter((item: any) => {
             return (
               searchQuery.length === 0 || item.name.match(searchQuery)
-              // item.name.include(searchQuery)
+              // 検索BOXに値がない場合のmap、searchQueryに入っている値とdb.jsonのnameと合致する商品のみ表示するmap
             );
           })
           .map((item: any) => {
