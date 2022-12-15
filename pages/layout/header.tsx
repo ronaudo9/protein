@@ -29,7 +29,7 @@ export default function Header() {
       router.push('/users');
     } else {
       alert('ログインをしてください');
-      router.push('/');
+      router.push('/login');
     }
   };
 
@@ -77,7 +77,7 @@ export default function Header() {
           />
         </div>
         <div className={style.icon} onClick={logOut}>
-          <Link href="/">
+          <Link href="/login">
             <Image
               priority
               src="/images/logout.jpg"
