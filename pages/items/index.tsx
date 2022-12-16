@@ -11,7 +11,6 @@ import CategoryTypeSearch from '../../components/categoryTypeSearch';
 import useSWR from 'swr';
 import { ChangeEvent, useState, useRef, useEffect } from 'react';
 import CategoryFlavorSearch from '../../components/categoryFlavorSearch';
-import Pagination from '../../components/page';
 import Image from 'next/image';
 import Searching from '../../components/Searching';
 
@@ -25,17 +24,22 @@ const ItemDisplay: NextPage = () => {
   const [count, setCount] = useState(1);
   const [category, setCategory] = useState('');
   const [flavor, setFlavor] = useState('');
-
   const [searchQuery, setSearchQuery] = useState('');
 
   const inputref = useRef<HTMLInputElement>();
-
+  //ページング
   useEffect(() => {
-    if(flavor||category){
-    setResource(`${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}&category=${category}`)
-    }else{
-    setResource(`${process.env.NEXT_PUBLIC_PROTEIN}/api/items`);
-    };
+    if (category) {
+      setResource(
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}&category=${category}`
+      );
+    } else if (flavor) {
+      setResource(
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}`
+      );
+    } else {
+      setResource(`${process.env.NEXT_PUBLIC_PROTEIN}/api/items`);
+    }
   }, [flavor, category]);
 
   const { data, error } = useSWR(resource, fetcher);
@@ -52,13 +56,25 @@ const ItemDisplay: NextPage = () => {
     setFlavor(e.target.value);
   };
 
-  const totalCount = data.length;
-  const pageSize = 8;
-  const startIndex = (count-1)*pageSize
-  const value = data.slice(startIndex,startIndex+pageSize)
-  console.log(totalCount);
-  console.log(resource)
-
+  const searchData= data.filter((item: any) => {
+            return (
+              searchQuery.length === 0 || item.name.match(searchQuery)
+              // 検索BOXに値がない場合のmap、searchQueryに入っている値とdb.jsonのnameと合致する商品のみ表示するmap
+            );
+          })
+  const totalCount = searchData.length;
+  const pageSize = 12;
+  let startIndex = (count - 1) * pageSize;
+  let value = '';
+  if (flavor || (category && count >= 2)) {
+    value = searchData.slice(0, pageSize);
+  }
+  else {
+    value = searchData.slice(startIndex, startIndex + pageSize);
+  }
+  // if(searchQuery){
+  //   value = a.slice(0, pageSize);
+  // }
   const range = (start: number, end: number) =>
     [...Array(end - start + 1)].map((_, i) => start + i);
 
@@ -68,23 +84,6 @@ const ItemDisplay: NextPage = () => {
     setSearchQuery(inputref.current!.value);
   };
 
-  // const clickHandlerNext = () => {
-  //   const nextCount = count + 1;
-  //   if (nextCount >= 4) {
-  //     ''
-  //   } else {
-  //   setCount(nextCount);
-  // }
-  // };
-
-  // const clickHandlerPrev = () => {
-  //   const prevCount = count - 1;
-  //   if (prevCount <= 0) {
-  //     setCount(1);
-  //   } else {
-  //     setCount(prevCount);
-  //   }
-  // };
 
   return (
     <>
@@ -132,39 +131,21 @@ const ItemDisplay: NextPage = () => {
           <ItemDisplayNew data={value} searchQuery={searchQuery} />
         </div>
       </section>
-
-      {/* <Pagination
-      clickHandlerNext={clickHandlerNext}
-      clickHandlerPrev={clickHandlerPrev}
-      /> */}
-      <div>
-      {range(1, Math.ceil(totalCount / pageSize)).map(
-        (number, index) => (
-          <button
-            className={styles.pagingBtn}
-            key={index}
-            onClick={() => setCount(number)}
-          >
-            {number}
-          </button>
-        )
-      )}
+      {/* ページングのボタン */}
+      <div className={styles.page}>
+        {range(1, Math.ceil(totalCount / pageSize)).map(
+          (number, index) => (
+            <Link
+              className={styles.paging}
+              key={index}
+              onClick={() => setCount(number)}
+              href=''
+            >
+              {number}
+            </Link>
+          )
+        )}
       </div>
-      {/* <button
-        className={styles.plus}
-        type="button"
-        onClick={clickHandlerNext}
-      >
-        +
-      </button>
-      <p>&nbsp;{count}ページ目&nbsp;</p>
-      <button
-        className={styles.minus}
-        type="button"
-        onClick={clickHandlerPrev}
-      >
-        -
-      </button> */}
 
       <div className={styles.form}>
         <h2 className={styles.h2}>
