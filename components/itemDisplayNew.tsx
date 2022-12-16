@@ -14,14 +14,8 @@ export default function ItemDisplayNew({ data, searchQuery }: any) {
   return (
     <>
       <div className={styles.side}>
-        {data
-          .filter((item: any) => {
-            return (
-              searchQuery.length === 0 || item.name.match(searchQuery)
-              // 検索BOXに値がない場合のmap、searchQueryに入っている値とdb.jsonのnameと合致する商品のみ表示するmap
-            );
-          })
-          .map((item: any) => {
+
+          {data.map((item: any) => {
             const MAX_LENGTH = 25;
             let modStr = '';
             if (item.description.length > MAX_LENGTH) {
