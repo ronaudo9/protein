@@ -22,7 +22,17 @@ type User = {
 };
 
 type Item = {
+  items: any;
+  preventDefault(): unknown;
+  date: string;
+  value: any;
+  map(arg0: (cart: Item) => JSX.Element): import("react").ReactNode;
+  length: number;
+  forEach(arg0: (element: Item) => void): unknown;
+  key: string;
   id: number;
+  userId: number;
+  itemId: number;
   name: string;
   imageUrl: string;
   category: string;
@@ -30,11 +40,19 @@ type Item = {
   price: number;
   description: string;
   content: string;
+  countity: number;
 };
 
-type subscriptionCart = {
-
+type Event = {
+  onClick: (event: React.MouseEvent<HTMLInputElement>) => void
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onkeypress: (event: React.KeyboardEvent<HTMLInputElement>) => void
+  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void
+  onFocus: (event: React.FocusEvent<HTMLInputElement>) => void
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+  onClickDiv: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
 export type { User };
 export type { Item };
+export type { Event };
