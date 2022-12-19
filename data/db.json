@@ -354,22 +354,7 @@
       "deleted": false
     }
   ],
-  "favorites": [
-    {
-      "userId": 1,
-      "itemId": [
-        2
-      ],
-      "id": 1
-    },
-    {
-      "userId": 1,
-      "itemId": [
-        3
-      ],
-      "id": 2
-    }
-  ],
+  "favorites": [],
   "purchaseHistories": [
     {
       "userId": 1,
@@ -861,11 +846,7 @@
       "id": 92
     }
   ],
-  "subscriptionCart": [
-
-  ],
+  "subscriptionCart": [],
   "subscription": [],
-  "subscriptionHistories": [
-
-  ]
+  "subscriptionHistories": []
 }

@@ -16,39 +16,37 @@ export const getServerSideProps = async ({ req }: any) => {
     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/favorites?userId=${cookies.id}`
   );
   favs = await res.json();
-  console.log(favs);
+
 
   const itemsArray = favs.map((fav: any) => {
     return `id=${fav.itemId}`;
   });
   const Array = itemsArray.join('&');
-  // console.log(Array);
+  console.log(Array);
 
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items?${Array}`
-  );
+
+  const data = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items?${Array}`);
+
   const itemsArray2 = await data.json();
-  // console.log(itemsArray2);
+  //空の配列を作るために存在しないid=0を指定した。
+  const data2 = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items?id=0`);
 
-  // const favsIdArray = favs.id;
-  // const favsIdArray = favs.slice(-1)[0];
+  const itemsArray3 = await data2.json();
 
-  const favsIdArray = favs.map((favid: any) => {
-    favid.id;
-  });
 
-  const itemsArray3 = {
-    id: favsIdArray,
-    items: itemsArray2,
-  };
-  console.log(itemsArray3);
+  let itemsArray4 = ''
+  if(Array){
+    itemsArray4 = itemsArray2
+  }else{
+    itemsArray4 = itemsArray3
+  }
 
   return {
-    props: { itemsArray2, favs },
+    props: { itemsArray4, favs },
   };
 };
 
-export default function FavoriteList({ itemsArray2, favs }: any) {
+export default function FavoriteList({ itemsArray4, favs }: any) {
   const router = useRouter();
   // cartsの削除【始まり】
   function deleteItem(favoriteItem: any) {
@@ -60,8 +58,8 @@ export default function FavoriteList({ itemsArray2, favs }: any) {
       return item.itemId === favoriteItem.id;
     });
     console.log(favNew);
-    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/favorites/:id`, {
-      method: 'PATCH',
+    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/favorites/${favoriteItem.id}`, {
+      method: 'DELETE',
     });
     router.reload();
   }
@@ -77,7 +75,7 @@ export default function FavoriteList({ itemsArray2, favs }: any) {
             お気に入りリスト
           </h2>
 
-          {itemsArray2.map((favoriteItem: any) => {
+          {itemsArray4.map((favoriteItem: any) => {
             return (
               <div key={favoriteItem.id}>
                 <br />

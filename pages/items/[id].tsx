@@ -192,6 +192,7 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   let favs = {
     userId: Number(userId),
     itemId: [detail.id],
+    id:detail.id,
   };
 
   console.log(favs);
