@@ -5,6 +5,7 @@ import Header from '../layout/header';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Footer from '../layout/footer';
+import { Item } from '../../types/type';
 
 export const getServerSideProps: GetServerSideProps = async (
   context
@@ -15,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (
   );
   const carts = await res.json();
   //購入時間
-  carts.forEach((cart: any) => {
+  carts.forEach((cart: Item) => {
     cart.date = new Date().toLocaleString('ja-JP');
   });
   const purchaseHistories = {
@@ -30,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async (
       body: JSON.stringify(purchaseHistories),
     }
   ).then(() => {
-    carts.forEach((cart: any) => {
+    carts.forEach((cart: Item) => {
       fetch(
         `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts/${cart.id}`,
         {

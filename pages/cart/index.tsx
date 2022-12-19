@@ -6,6 +6,8 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../layout/header';
 import Footer from '../layout/footer';
+import { User } from '../../types/type';
+import { Item } from '../../types/type';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -17,15 +19,15 @@ export const getServerSideProps: GetServerSideProps = async ({
   const carts = await res.json();
 
   return {
-    props: { carts, cookies },
+    props: { carts, cookies }
   };
 };
 
-const Cart = ({ carts, cookies }: any) => {
+// <{ user: User }> = ({ user }) => {
+
+const Cart:NextPage <{carts:Item ,cookies: Item }> = ({ carts, cookies }) => {
   const [localData, setLocalData] = useState([]);
   const router = useRouter();
-
-  console.log(cookies);
 
   // Local Storageからカートに追加した商品データ取得
   useEffect(() => {
@@ -42,12 +44,12 @@ const Cart = ({ carts, cookies }: any) => {
   }, []);
 
   //"ally-supports-cache" を除外 (Local Storageの中の商品情報以外を削除)
-  const filteredData: any = localData.filter((object: any) => {
+  const filteredData: any = localData.filter((object: Item) => {
     return object.key == object.value.itemId;
   });
 
   // cartsの削除【始まり】
-  function deleteItem(cart: any) {
+  function deleteItem(cart: Item) {
     fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/carts/${cart.id}`, {
       method: 'DELETE',
     });
@@ -56,7 +58,7 @@ const Cart = ({ carts, cookies }: any) => {
   // cartsの削除【終わり】
 
   // localDataの削除【始まり】
-  function deleteItemID(data: any) {
+  function deleteItemID(data: Item) {
     localStorage.removeItem(data.key);
     router.reload();
   }
@@ -65,7 +67,7 @@ const Cart = ({ carts, cookies }: any) => {
   // cartsの合計【始まり】
   const priceArray: any[] = [];
 
-  carts.forEach((element: any) => {
+  carts.forEach((element: Item) => {
     const multiPrice = element.price * element.countity;
     priceArray.push(multiPrice);
   });
@@ -78,9 +80,9 @@ const Cart = ({ carts, cookies }: any) => {
   // cartsの合計【終わり】
 
   // localDataの合計【始まり】
-  const priceArrayLocal: any[] = [];
+  const priceArrayLocal: number[] = [];
 
-  filteredData.forEach((element: any) => {
+  filteredData.forEach((element: Item) => {
     const multiPriceLocal =
       element.value.price * element.value.countity;
     priceArrayLocal.push(multiPriceLocal);
@@ -127,7 +129,7 @@ const Cart = ({ carts, cookies }: any) => {
         {cookies.id ? (
           <div>
             <section className={styles.cart_content}>
-              {carts.map((cart: any) => (
+              {carts.map((cart: Item) => (
                 <div key={cart.id} className={styles.cart_content2}>
                   <Image
                     priority
