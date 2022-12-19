@@ -41,7 +41,6 @@
 .purchased_h2font:before,
 .purchased_h2font:after {
   content: '';
-
   top: 50%;
   display: inline-block;
   width: 44px;
