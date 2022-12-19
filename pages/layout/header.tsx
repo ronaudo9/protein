@@ -21,7 +21,7 @@ export default function Header() {
   };
 
   const moveToFavorite = () => {
-    router.push('users/favorite');
+    router.push('/users/favorite');
   };
 
   const moveToUsers = () => {

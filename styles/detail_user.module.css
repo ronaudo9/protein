@@ -399,7 +399,7 @@
   margin: 0.5%;
 }
 
-.button{
+.button {
   background-color: lightgray;
   position: relative;
   color: white;
@@ -424,4 +424,33 @@
   padding-top: 8%;
   color: white;
   text-align: right;
+}
+.a {
+  position: relative;
+}
+
+.a::after {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  content: ''; /*本来は、擬似要素に入るテキストなどを’’内に指定。今回はアンダーラインなので何も記載しない*/
+  width: 100%;
+  height: 11px;
+  background: linear-gradient(
+    transparent 20%,
+    #41d7fd,
+    rgb(0, 255, 166)
+  );
+  line-height: 1;
+  bottom: -1px; /*アンダーラインが位置する、各リストの下端からの高さ　ヘッダーの下端に合わせています*/
+  visibility: hidden; /*ホバー前に、アンダーラインを可視化しない*/
+  transition: 0.3s;
+  bottom: 7px; /*アンダーラインが現れ始める位置*/
+}
+
+.a:hover::after {
+  visibility: visible; /*ホバー後、アンダーラインを可視化する*/
+  opacity: 1; /*アンダーラインが透明な状態からアニメーションが開始され、ホバーを話して終了する際も、徐々に透明な状態に戻る。*/
+  transition: 0.3s; /*変形の時間*/
+  bottom: 1px;
 }
