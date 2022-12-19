@@ -4,14 +4,13 @@ import { useRouter } from 'next/router';
 import HeaderLogin from '../layout/headerLogin';
 import Footer from '../layout/footer';
 import { Item } from '../../types/type';
-import { User } from '../../types/type';
+import { User,Users,Users2 } from '../../types/type';
 import { Event } from '../../types/type';
 
 function UsersNew() {
   const router = useRouter();
 
   const initialValues = {
-    id: '',
     firstName: '',
     lastName: '',
     firstNameKana: '',
@@ -54,7 +53,7 @@ function UsersNew() {
         },
         body: JSON.stringify(formValues),
       }).then(() => {
-        router.push('/');
+        router.push('/login');
         alert(
           'ご登録ありがとうございます！ログインをしてお買い物を続けてください'
         );
@@ -62,8 +61,8 @@ function UsersNew() {
     }
   };
 
-  const validate = (values: any) => {
-    const errors = {} as any;
+  const validate = (values: Users2) => {
+    const errors = {} as Users;
 
     const emailReg = /.+@.+\..+/;
     const postCodeReg = /^[0-9]{3}-[0-9]{4}$/;

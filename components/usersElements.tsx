@@ -9,6 +9,8 @@ import AddressEdit from './addressEdit';
 import TelEdit from './telEdit';
 import PasswordEdit from './passwordEdit';
 import router, { useRouter } from 'next/router';
+import{ Users,User } from '../types/type';
+
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -24,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   };
 };
 
-export default function UsersElements({ user }: any) {
+export default function UsersElements({ user }: {user:Users}) {
   const [readOnly, setReadOnly] = useState(true);
   const clickHandler = (e: SyntheticEvent) => {
     setReadOnly((prev) => !prev);
@@ -43,7 +45,6 @@ export default function UsersElements({ user }: any) {
     email: user.email,
     middleName: user.middleName,
     tel: user.tel,
-    credit: user.credit,
     password: user.password,
     passwordConfirmation: user.passwordConfirmation,
   };
@@ -163,7 +164,7 @@ export default function UsersElements({ user }: any) {
           </div>
           <PasswordEdit
             formValues={formValues}
-            setFormvalues={setFormValues}
+            setFormValues={setFormValues}
             readOnly={readOnly}
           />
         </div>

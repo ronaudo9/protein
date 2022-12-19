@@ -352,6 +352,24 @@
       "building": "新宿ビル505",
       "tel": "090-8877-2233",
       "deleted": false
+    },
+    {
+      "firstName": "佐藤",
+      "lastName": "健",
+      "firstNameKana": "さとう",
+      "lastNameKana": "たける",
+      "middleName": "たける",
+      "email": "na.ma@rakus-partners.co.jp",
+      "password": "ddeerrff",
+      "passwordConfirmation": "ddeerrff",
+      "postCode": "154-0098",
+      "prefecture": "東京都",
+      "city": "新宿区",
+      "aza": "新宿４丁目",
+      "building": "新宿ビル５０５",
+      "tel": "090-9988-2233",
+      "deleted": false,
+      "id": 10
     }
   ],
   "favorites": [
@@ -389,7 +407,48 @@
       "id": 1
     }
   ],
-  "carts": [],
+  "carts": [
+    {
+      "userId": 7,
+      "itemId": 9,
+      "imageUrl": "/images/organic_whey_protein.jpg",
+      "name": "オーガニック ホエイプロテイン",
+      "flavor": "ノンフレーバー",
+      "price": 2590,
+      "countity": 0,
+      "id": 1
+    },
+    {
+      "userId": 7,
+      "itemId": 9,
+      "imageUrl": "/images/organic_whey_protein.jpg",
+      "name": "オーガニック ホエイプロテイン",
+      "flavor": "ノンフレーバー",
+      "price": 2590,
+      "countity": 0,
+      "id": 2
+    },
+    {
+      "userId": 7,
+      "itemId": 2,
+      "imageUrl": "/images/impact_whey_aisolate.jpg",
+      "name": "Impact ホエイ アイソレート",
+      "flavor": "チョコ",
+      "price": 4390,
+      "countity": 0,
+      "id": 3
+    },
+    {
+      "userId": 0,
+      "itemId": 2,
+      "imageUrl": "/images/impact_whey_aisolate.jpg",
+      "name": "Impact ホエイ アイソレート",
+      "flavor": "チョコ",
+      "price": 4390,
+      "countity": 0,
+      "id": 4
+    }
+  ],
   "subscriptionCart": [],
   "subscription": [],
   "subscriptionHistories": []

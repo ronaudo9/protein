@@ -10,7 +10,7 @@ import {
 import React, { useState, useEffect } from 'react';
 import Header from '../layout/header';
 import { useRouter } from 'next/router';
-import { Item } from '../../types/type';
+import { Item,Event } from '../../types/type';
 import Footer from '../layout/footer';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -195,7 +195,6 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
     id:detail.id,
   };
 
-  console.log(favs);
   // お気に入り登録（db.jsonへ現在の商品情報登録）
   const addFavoritesHandler = () => {
     fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/favorites`, {
