@@ -5,6 +5,7 @@ import Header from '../layout/header';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Footer from '../layout/footer';
+import { Item } from '../../types/type';
 
 export const getServerSideProps: GetServerSideProps = async (
   context
@@ -17,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async (
 
   const subscriptionCart2 = subscriptionCart.slice(-1)[0];
   //購入時間
-  subscriptionCart.forEach((cart: any) => {
+  subscriptionCart.forEach((cart: Item) => {
     cart.date = new Date().toLocaleString('ja-JP');
   });
   const subscription = {

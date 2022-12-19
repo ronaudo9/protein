@@ -56,20 +56,19 @@ const ItemDisplay: NextPage = () => {
     setFlavor(e.target.value);
   };
 
-  const searchData= data.filter((item: any) => {
-            return (
-              searchQuery.length === 0 || item.name.match(searchQuery)
-              // 検索BOXに値がない場合のmap、searchQueryに入っている値とdb.jsonのnameと合致する商品のみ表示するmap
-            );
-          })
+  const searchData = data.filter((item: any) => {
+    return (
+      searchQuery.length === 0 || item.name.match(searchQuery)
+      // 検索BOXに値がない場合のmap、searchQueryに入っている値とdb.jsonのnameと合致する商品のみ表示するmap
+    );
+  });
   const totalCount = searchData.length;
   const pageSize = 12;
   let startIndex = (count - 1) * pageSize;
   let value = '';
   if (flavor || (category && count >= 2)) {
     value = searchData.slice(0, pageSize);
-  }
-  else {
+  } else {
     value = searchData.slice(startIndex, startIndex + pageSize);
   }
   // if(searchQuery){
@@ -83,7 +82,6 @@ const ItemDisplay: NextPage = () => {
     // stateに現在入力されている値をいれていく
     setSearchQuery(inputref.current!.value);
   };
-
 
   return (
     <>
@@ -139,7 +137,7 @@ const ItemDisplay: NextPage = () => {
               className={styles.paging}
               key={index}
               onClick={() => setCount(number)}
-              href=''
+              href=""
             >
               {number}
             </Link>
