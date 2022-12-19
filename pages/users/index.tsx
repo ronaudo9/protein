@@ -121,7 +121,7 @@ any) => {
       }
     ).then(() => {
       deleteCarts(items);
-      location.reload();
+      router.reload();
     });
   };
 
@@ -132,7 +132,7 @@ any) => {
         method: 'DELETE',
       }
     );
-    location.reload();
+    router.reload();
   };
 
   return (
