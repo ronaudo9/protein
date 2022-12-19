@@ -98,17 +98,6 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   };
   // カートへ追加【終わり】
 
-  // お気に入りへ追加【始まり】
-  // const favs = {
-  //   userId: Number(userId),
-  //   itemId: detail.id,
-  //   imageUrl: detail.imageUrl,
-  //   name: detail.name,
-
-  //   price: detail.price,
-  // };
-  // お気に入りへ追加【終わり】
-
   // ローカルストレージへ追加【始まり】
   const cartsForStrage = {
     userId: 0,
@@ -203,6 +192,7 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   let favs = {
     userId: Number(userId),
     itemId: [detail.id],
+    id:detail.id,
   };
 
   console.log(favs);

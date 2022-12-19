@@ -4,8 +4,7 @@ import styles from '../../styles/detail_user.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import Header from '../layout/header';
-import useSWR from 'swr';
-import EmailEdit from '../../components/emailEdit';
+
 import UsersElements from '../../components/usersElements';
 import { useRouter } from 'next/router';
 import Footer from '../layout/footer';
@@ -80,25 +79,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     errors.push('情報の取得に失敗しました。リロードしてください。');
   }
 
-  // お気に入りリスト表示
-
-  // const favoritesArray: any[] = [];
-  // try {
-  //   const favs = await fetch(
-  //     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/favorites?userId=${cookies.id}`
-  //   );
-  //   const favsSt = await favs.json();
-
-  //   favsSt.forEach((element: any) => {
-  //     const items = element.items;
-  //     favoritesArray.push(items);
-  //   });
-  // } catch (err) {
-  //   console.error('failed to get subscription', err);
-  //   errors.push('情報の取得に失敗しました。リロードしてください。');
-  // }
-  // console.log(itemsArray);
-
   return {
     props: {
       user,
@@ -142,7 +122,7 @@ any) => {
       }
     ).then(() => {
       deleteCarts(items);
-      location.reload();
+      router.reload();
     });
   };
 
@@ -153,7 +133,7 @@ any) => {
         method: 'DELETE',
       }
     );
-    location.reload();
+    router.reload();
   };
 
   return (

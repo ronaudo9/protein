@@ -26,6 +26,7 @@ export default function CategoryTypeSearch({
         <option value="" hidden>
           種類
         </option>
+        <option value="">選択してください</option>
         <option value="whey">ホエイプロテイン</option>
         <option value="casein">カゼインプロテイン</option>
       </select>
