@@ -354,7 +354,15 @@
       "deleted": false
     }
   ],
-  "favorites": [],
+  "favorites": [
+    {
+      "userId": 1,
+      "itemId": [
+        1
+      ],
+      "id": 1
+    }
+  ],
   "purchaseHistories": [
     {
       "userId": 1,
@@ -844,6 +852,16 @@
       "price": 6590,
       "countity": 0,
       "id": 92
+    },
+    {
+      "userId": 1,
+      "itemId": 1,
+      "imageUrl": "/images/impact_whey_protein.jpg",
+      "name": "Impact ホエイ プロテイン",
+      "flavor": "チョコ",
+      "price": 1990,
+      "countity": 1,
+      "id": 93
     }
   ],
   "subscriptionCart": [],
