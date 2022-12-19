@@ -9,10 +9,11 @@ import Head from 'next/head';
 import Header from '../layout/header';
 import CategoryTypeSearch from '../../components/categoryTypeSearch';
 import useSWR from 'swr';
-import { ChangeEvent, useState, useRef } from 'react';
+import { ChangeEvent, useState, useRef, useEffect } from 'react';
 import CategoryFlavorSearch from '../../components/categoryFlavorSearch';
 import Image from 'next/image';
 import Searching from '../../components/Searching';
+import TooltipButton from '../../components/tooltipButton';
 
 const fetcher = (resource: any, init: any) =>
   fetch(resource, init).then((res) => res.json());
@@ -23,10 +24,23 @@ const ItemDisplay: NextPage = () => {
   );
   const [category, setCategory] = useState('');
   const [flavor, setFlavor] = useState('');
-
   const [searchQuery, setSearchQuery] = useState('');
+  const [showChatbot, setShowChatbot] = useState(false);
+  const [count, setCount] = useState(0);
+
+  
+  //検索、絞り込み、商品詳細のクリック以外の何もしない時間が5秒あればチャットボット出現させる
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowChatbot(true);
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, [resource, category, flavor, searchQuery]);
+
 
   const inputref = useRef<HTMLInputElement>();
+  
 
   const { data, error } = useSWR(resource, fetcher);
   if (error) return <div>Failed to Load</div>;
@@ -52,10 +66,10 @@ const ItemDisplay: NextPage = () => {
   // 検索BOXイベント
   const handleSearch = () => {
     // フィルタリング機能、この小文字の中にcurrent.valueが含まれている商品情報だけ残す
-
     setSearchQuery(inputref.current!.value);
   };
-
+  
+  
   return (
     <>
       <Head>
@@ -87,6 +101,11 @@ const ItemDisplay: NextPage = () => {
           src="/images/strong.jpg"
           alt="画像"
         />
+      </section>
+
+      {/* Chatbotコンポーネント */}
+      <section>
+        {showChatbot && <TooltipButton />}
       </section>
 
       <section>

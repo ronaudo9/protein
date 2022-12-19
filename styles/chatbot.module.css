@@ -1,0 +1,8 @@
+.backToTop {
+    z-index: 100;
+    position: fixed;
+    right: 350px;
+    bottom: 500px;
+    width: 40px;
+    height: 40px;
+}
