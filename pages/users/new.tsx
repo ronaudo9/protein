@@ -2,6 +2,7 @@ import styles from '../../styles/users.new.module.css';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import HeaderLogin from '../layout/headerLogin';
+import Footer from '../layout/footer';
 
 function UsersNew() {
   const router = useRouter();
@@ -135,8 +136,6 @@ function UsersNew() {
   return (
     <>
       <HeaderLogin />
-
-      <hr className={styles.hr}></hr>
 
       <div className="container">
         <div className={styles.form}>
@@ -430,9 +429,7 @@ function UsersNew() {
           </form>
         </div>
       </div>
-      <footer className={styles.footer}>
-        <h1>RAKUTEIN</h1>
-      </footer>
+      <Footer />
     </>
   );
 }

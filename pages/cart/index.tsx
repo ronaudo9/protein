@@ -5,7 +5,7 @@ import type { GetServerSideProps, NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../layout/header';
-
+import Footer from '../layout/footer';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -17,31 +17,29 @@ export const getServerSideProps: GetServerSideProps = async ({
   const carts = await res.json();
 
   return {
-    props: { carts, cookies }
+    props: { carts, cookies },
   };
 };
 
-
 const Cart = ({ carts, cookies }: any) => {
-  const [localData, setLocalData] = useState([])
+  const [localData, setLocalData] = useState([]);
   const router = useRouter();
 
-  console.log(cookies)
+  console.log(cookies);
 
   // Local Storageからカートに追加した商品データ取得
   useEffect(() => {
     if (carts.length === 0) {
-      const collection = Object.keys(localStorage).map(key => {
+      const collection = Object.keys(localStorage).map((key) => {
         let keyJson = JSON.stringify(key);
         return {
           key: JSON.parse(keyJson),
-          value: JSON.parse(localStorage.getItem(key) as string)
-        }
-      })
-      setLocalData(collection as any)
+          value: JSON.parse(localStorage.getItem(key) as string),
+        };
+      });
+      setLocalData(collection as any);
     }
   }, []);
-
 
   //"ally-supports-cache" を除外 (Local Storageの中の商品情報以外を削除)
   const filteredData: any = localData.filter((object: any) => {
@@ -57,14 +55,12 @@ const Cart = ({ carts, cookies }: any) => {
   }
   // cartsの削除【終わり】
 
-
   // localDataの削除【始まり】
   function deleteItemID(data: any) {
     localStorage.removeItem(data.key);
     router.reload();
   }
   // localDataの削除【終わり】
-
 
   // cartsの合計【始まり】
   const priceArray: any[] = [];
@@ -81,12 +77,12 @@ const Cart = ({ carts, cookies }: any) => {
   );
   // cartsの合計【終わり】
 
-
   // localDataの合計【始まり】
   const priceArrayLocal: any[] = [];
 
   filteredData.forEach((element: any) => {
-    const multiPriceLocal = element.value.price * element.value.countity;
+    const multiPriceLocal =
+      element.value.price * element.value.countity;
     priceArrayLocal.push(multiPriceLocal);
   });
 
@@ -97,9 +93,8 @@ const Cart = ({ carts, cookies }: any) => {
   );
   // localDataの合計【終わり】
 
-
-  console.log(carts)
-  console.log(carts.length)
+  console.log(carts);
+  console.log(carts.length);
 
   const routerHandler = () => {
     if (carts[0]) {
@@ -115,7 +110,9 @@ const Cart = ({ carts, cookies }: any) => {
       alert('商品一覧から商品を選んでカートに入れてください');
       router.push('/items');
     } else {
-      alert('ログイン後に商品購入可能です（会員登録してない方は会員登録をお願いします）');
+      alert(
+        'ログイン後に商品購入可能です（会員登録してない方は会員登録をお願いします）'
+      );
       router.push('/login');
     }
   };
@@ -123,11 +120,11 @@ const Cart = ({ carts, cookies }: any) => {
   return (
     <>
       <Header />
-      <hr className={styles.hr}></hr>
+
       <div className={styles.item_list}>
         <h4 className={styles.cart_title}>カート</h4>
 
-        {cookies.id ?
+        {cookies.id ? (
           <div>
             <section className={styles.cart_content}>
               {carts.map((cart: any) => (
@@ -174,19 +171,23 @@ const Cart = ({ carts, cookies }: any) => {
                     買い物を続ける
                   </button>
                 </Link>
-                <button className={styles.purchase} onClick={routerHandler}>
+                <button
+                  className={styles.purchase}
+                  onClick={routerHandler}
+                >
                   購入する
                 </button>
               </div>
             </section>
           </div>
-
-          :
-
+        ) : (
           <div>
             <section className={styles.cart_content}>
               {filteredData.map((data: any) => (
-                <div key={data.value.itemId} className={styles.cart_content2}>
+                <div
+                  key={data.value.itemId}
+                  className={styles.cart_content2}
+                >
                   <Image
                     priority
                     className={styles.cart_img}
@@ -203,7 +204,9 @@ const Cart = ({ carts, cookies }: any) => {
                     </p>
                     <p>
                       <span>価格(税込)</span>¥
-                      {(data.value.price * data.value.countity).toLocaleString()}
+                      {(
+                        data.value.price * data.value.countity
+                      ).toLocaleString()}
                     </p>
                     <button
                       className={styles.delete_button}
@@ -229,17 +232,18 @@ const Cart = ({ carts, cookies }: any) => {
                     買い物を続ける
                   </button>
                 </Link>
-                <button className={styles.purchase} onClick={handlerWithLocal}>
+                <button
+                  className={styles.purchase}
+                  onClick={handlerWithLocal}
+                >
                   購入する
                 </button>
               </div>
             </section>
-          </div>}
-
+          </div>
+        )}
       </div>
-      <footer className={styles.footer}>
-        <h1>RAKUTEIN</h1>
-      </footer>
+      <Footer />
     </>
   );
 };
