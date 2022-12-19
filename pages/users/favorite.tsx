@@ -3,8 +3,10 @@ import styles from '../../styles/detail_user.module.css';
 import Link from 'next/link';
 import Header from '../layout/header';
 import Footer from '../layout/footer';
+import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { useState, useEffect } from 'react';
+import { idText } from 'typescript';
 
 export const getServerSideProps = async ({ req }: any) => {
   const cookies = req.cookies;
@@ -14,26 +16,61 @@ export const getServerSideProps = async ({ req }: any) => {
     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/favorites?userId=${cookies.id}`
   );
   favs = await res.json();
+  console.log(favs);
 
   const itemsArray = favs.map((fav: any) => {
     return `id=${fav.itemId}`;
   });
   const Array = itemsArray.join('&');
+  // console.log(Array);
 
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items?${Array}`
   );
   const itemsArray2 = await data.json();
+  // console.log(itemsArray2);
+
+  // const favsIdArray = favs.id;
+  // const favsIdArray = favs.slice(-1)[0];
+
+  const favsIdArray = favs.map((favid: any) => {
+    favid.id;
+  });
+
+  const itemsArray3 = {
+    id: favsIdArray,
+    items: itemsArray2,
+  };
+  console.log(itemsArray3);
 
   return {
-    props: { itemsArray2 },
+    props: { itemsArray2, favs },
   };
 };
 
-export default function FavoriteList({ itemsArray2 }: any) {
+export default function FavoriteList({ itemsArray2, favs }: any) {
+  const router = useRouter();
+  // cartsの削除【始まり】
+  function deleteItem(favoriteItem: any) {
+    // .filterを使用して削除ボタンが押されたitmIdを取得し、それ以外の配列データを作る
+    // favoriteItemにfilterをかけると、取れるのはその商品情報のidのみ⇒filterじゃなくてfavoriteItem.id
+    // itemsArray2にfilterをかけると、取れるのは？その人が登録した各商品の商品情報のidのみ
+    // itemsAeeayにfilterをかけると、取れるのは[ 'id=2', 'id=3', 'id=2', 'id=5' ]で同じユーザーodのお気に入りのitemId
+    const favNew = favs.filter((item: any) => {
+      return item.itemId === favoriteItem.id;
+    });
+    console.log(favNew);
+    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/favorites/:id`, {
+      method: 'PATCH',
+    });
+    router.reload();
+  }
+  // favorites?itemId_like=だとitemIdを持つすべてのデータを消してしまう、他の人も。
+  // cartsの削除【終わり】
   return (
     <>
       <Header />
+
       <div className={styles.main}>
         <section className={styles.element}>
           <h2 className={styles.title_favorite} id="user_favorites">
@@ -47,6 +84,7 @@ export default function FavoriteList({ itemsArray2 }: any) {
                 <div>
                   <div className={styles.list}>
                     <Image
+                      priority
                       src={favoriteItem.imageUrl}
                       width={260}
                       height={260}
@@ -60,9 +98,9 @@ export default function FavoriteList({ itemsArray2 }: any) {
                         )}`}
                         className={styles.a}
                       >
-                        <h4 className={styles.itemA}>
+                        <div className={styles.itemA}>
                           {favoriteItem.name}
-                        </h4>
+                        </div>
                       </Link>
 
                       <p>
@@ -72,7 +110,12 @@ export default function FavoriteList({ itemsArray2 }: any) {
                           &nbsp;
                         </span>
                       </p>
-                      <button type="button">削除</button>
+                      <button
+                        className={styles.delete_button}
+                        onClick={() => deleteItem(favoriteItem)}
+                      >
+                        削除
+                      </button>
                     </div>
                   </div>
                   <br />
