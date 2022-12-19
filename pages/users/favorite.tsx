@@ -17,28 +17,29 @@ export const getServerSideProps = async ({ req }: any) => {
   );
   favs = await res.json();
 
-
   const itemsArray = favs.map((fav: any) => {
     return `id=${fav.itemId}`;
   });
   const Array = itemsArray.join('&');
   console.log(Array);
 
-
-  const data = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items?${Array}`);
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items?${Array}`
+  );
 
   const itemsArray2 = await data.json();
   //空の配列を作るために存在しないid=0を指定した。
-  const data2 = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items?id=0`);
+  const data2 = await fetch(
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items?id=0`
+  );
 
   const itemsArray3 = await data2.json();
 
-
-  let itemsArray4 = ''
-  if(Array){
-    itemsArray4 = itemsArray2
-  }else{
-    itemsArray4 = itemsArray3
+  let itemsArray4 = '';
+  if (Array) {
+    itemsArray4 = itemsArray2;
+  } else {
+    itemsArray4 = itemsArray3;
   }
 
   return {
@@ -58,9 +59,12 @@ export default function FavoriteList({ itemsArray4, favs }: any) {
       return item.itemId === favoriteItem.id;
     });
     console.log(favNew);
-    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/favorites/${favoriteItem.id}`, {
-      method: 'DELETE',
-    });
+    fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN}/api/favorites/${favoriteItem.id}`,
+      {
+        method: 'DELETE',
+      }
+    );
     router.reload();
   }
   // favorites?itemId_like=だとitemIdを持つすべてのデータを消してしまう、他の人も。
@@ -101,19 +105,21 @@ export default function FavoriteList({ itemsArray4, favs }: any) {
                         </div>
                       </Link>
 
-                      <p>
+                      <div>
                         価格 &nbsp;&nbsp;&nbsp;&nbsp; ¥
                         <span className={styles.style}>
                           &nbsp;{favoriteItem.price.toLocaleString()}
                           &nbsp;
                         </span>
-                      </p>
-                      <button
-                        className={styles.delete_button}
-                        onClick={() => deleteItem(favoriteItem)}
-                      >
-                        削除
-                      </button>
+                      </div>
+                      <div className={styles.rightSide}>
+                        <button
+                          className={styles.delete_button}
+                          onClick={() => deleteItem(favoriteItem)}
+                        >
+                          <a>削除</a>
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <br />
