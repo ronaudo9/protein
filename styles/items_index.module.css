@@ -247,3 +247,23 @@
   border-radius: 260px;
   overflow: hidden;
 }
+
+
+.page{
+  text-align: center;
+}
+
+.paging{
+  padding: .5rem .7rem;
+  background: #26a4ca;
+  color: #FFF;
+  text-decoration: none;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  border-radius: 25rem;
+}
+
+.paging:active{
+  background: #26a4ca;
+  color: black;
+}

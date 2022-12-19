@@ -97,7 +97,7 @@ const PasswordEdit = ({
         required
       />
       <div className={styles.passwordDisplay}>
-        <div>(パスワード確認用)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
         <div>
           <input
             type="password"
@@ -110,6 +110,7 @@ const PasswordEdit = ({
             readOnly={readOnly}
             required
           />
+          <div className={styles.passwordConfirmation}>(パスワード確認用)</div>
         </div>
       </div>
     </div>
