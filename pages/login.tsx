@@ -6,9 +6,9 @@ import Link from 'next/link';
 import HeaderLogin from './layout/headerLogin';
 import ItemDisplay from './items';
 import { GetServerSideProps } from 'next';
+import { Item } from './../types/type';
 
-
-export default function UserLogin(cookieData: any) {
+export default function UserLogin(cookieData: Item) {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,33 +16,27 @@ export default function UserLogin(cookieData: any) {
   const [localData, setLocalData] = useState([]);
   const [userId, setUserId] = useState(0);
 
-
   // Local Storageから商品データ取得
   useEffect(() => {
-    const collection = Object.keys(localStorage).map(key => {
+    const collection = Object.keys(localStorage).map((key) => {
       let keyJson = JSON.stringify(key);
       return {
         key: JSON.parse(keyJson),
-        value: JSON.parse(localStorage.getItem(key) as string)
-      }
-    })
-    setLocalData(collection as any)
-  }, [])
-
-  console.log(localData)
+        value: JSON.parse(localStorage.getItem(key) as string),
+      };
+    });
+    setLocalData(collection as any);
+  }, []);
 
   //"ally-supports-cache"などを除外 (Local Storageの中の商品情報以外を削除)
-  const filteredData: any = localData.filter((object: any) => {
+  const filteredData = localData.filter((object: Item) => {
     return object.key == object.value.itemId;
   });
 
-  console.log(filteredData)
-
-
   // ユーザーIDの取得&POST(onSubmitのタイミングで発火)
   const postUserdata = async () => {
-    console.log(email)
-    console.log(password)
+    console.log(email);
+    console.log(password);
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users?email=${email}&password=${password}`
@@ -52,14 +46,12 @@ export default function UserLogin(cookieData: any) {
     // console.log(id) id出てくる OK
     return id;
     //　idを返す
-  }
-
+  };
 
   const data = {
     email: email,
     password: password,
   };
-
 
   const handler = async (event: any) => {
     event.preventDefault();
@@ -75,20 +67,20 @@ export default function UserLogin(cookieData: any) {
         if (response.status !== 200) {
           setVisible(true);
         } else if (response.status === 200) {
-          filteredData.forEach(async (data: any) => {
-            data.value.userId = await postUserdata()
+          filteredData.forEach(async (data: Item) => {
+            data.value.userId = await postUserdata();
 
-            filteredData.forEach((data: any) => {
+            filteredData.forEach((data: Item) => {
               fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data.value),
-              })
-            })
-          })
-          localStorage.clear()
+              });
+            });
+          });
+          localStorage.clear();
           router.push('/items');
         }
       })
@@ -100,11 +92,10 @@ export default function UserLogin(cookieData: any) {
       });
   };
 
-
   return (
     <div>
       <HeaderLogin />
-      <hr className={style.hr}></hr>
+
       <div className={style.all}>
         <Head>
           <title>ログイン</title>
@@ -128,7 +119,12 @@ export default function UserLogin(cookieData: any) {
               ユーザーが見つかりません。もう一度入力してください。
             </h3>
           </hgroup>
-          <form className={style.form} onSubmit={() => { handler(event) }}>
+          <form
+            className={style.form}
+            onSubmit={() => {
+              handler(event);
+            }}
+          >
             <div className={style.group}>
               <input
                 type="email"

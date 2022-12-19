@@ -3,6 +3,8 @@ import ItemData from '../../components/itemData';
 import styles from '../../styles/purchase.module.css';
 import { GetServerSideProps } from 'next';
 import Header from '../layout/header';
+import Footer from '../layout/footer';
+import { Item } from '../../types/type';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -31,8 +33,8 @@ export default function PurchaseDisplay({
   user,
   carts,
 }: {
-  user: any;
-  carts: any;
+  user: Item;
+  carts: Item;
 }) {
   // const {user,carts} = props
 
@@ -40,16 +42,14 @@ export default function PurchaseDisplay({
     <>
       <div className={styles.container}>
         <Header />
-        <hr className={styles.hr}></hr>
+
         <Head>
           <title>ご注文内容確認</title>
           <meta name="turbolinks-visit-control" />
         </Head>
         <ItemData user={user} carts={carts} />
       </div>
-      <footer className={styles.footer}>
-        <h1>RAKUTEIN</h1>
-      </footer>
+      <Footer />
     </>
   );
 }

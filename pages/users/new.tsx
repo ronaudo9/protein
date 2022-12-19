@@ -2,6 +2,10 @@ import styles from '../../styles/users.new.module.css';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import HeaderLogin from '../layout/headerLogin';
+import Footer from '../layout/footer';
+import { Item } from '../../types/type';
+import { User } from '../../types/type';
+import { Event } from '../../types/type';
 
 function UsersNew() {
   const router = useRouter();
@@ -30,12 +34,12 @@ function UsersNew() {
   const [isSubmit, setIsSubmit] = useState(false);
   const [addressErrors, setAddressErrors] = useState('');
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const Handler = (event: any) => {
+  const Handler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const newErrors = validate(formValues);
     setFormErrors(newErrors);
@@ -135,8 +139,6 @@ function UsersNew() {
   return (
     <>
       <HeaderLogin />
-
-      <hr className={styles.hr}></hr>
 
       <div className="container">
         <div className={styles.form}>
@@ -430,9 +432,7 @@ function UsersNew() {
           </form>
         </div>
       </div>
-      <footer className={styles.footer}>
-        <h1>RAKUTEIN</h1>
-      </footer>
+      <Footer />
     </>
   );
 }

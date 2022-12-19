@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import styles from '../../styles/subscription.module.css';
 import Header from '../layout/header';
 import { User } from '../../types/type';
+import { Item } from '../../types/type';
 import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe(
@@ -28,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async (
 
 export default function PurchaseCompletion({
   subscriptionCart2,
-}: any) {
+}: {subscriptionCart2: Item}) {
   return (
     <>
       <Header />

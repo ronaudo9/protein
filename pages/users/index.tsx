@@ -4,10 +4,11 @@ import styles from '../../styles/detail_user.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import Header from '../layout/header';
-import useSWR from 'swr';
-import EmailEdit from '../../components/emailEdit';
+
 import UsersElements from '../../components/usersElements';
 import { useRouter } from 'next/router';
+import Footer from '../layout/footer';
+import { Item } from '../../types/type';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -28,16 +29,16 @@ export const getServerSideProps: GetServerSideProps = async ({
     errors.push('情報の取得に失敗しました。リロードしてください。');
   }
 
-  const itemsArray: any[] = [];
+  const itemsArray: Item[] = [];
   try {
     const resHistories = await fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories?userId=${cookies.id}`
     );
-    const history = await resHistories.json();
-    history.forEach((element: any) => {
+    const history: Item = await resHistories.json();
+    history.forEach((element) => {
       const items = element.items;
 
-      items.forEach((item: any) => {
+      items.forEach((item: Item) => {
         itemsArray.push(item);
       });
     });
@@ -46,30 +47,30 @@ export const getServerSideProps: GetServerSideProps = async ({
     errors.push('情報の取得に失敗しました。リロードしてください。');
   }
   //サブスク
-  const subscriptionArray: any[] = [];
+  const subscriptionArray: Item[] = [];
   try {
     const regular = await fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscription?userId=${cookies.id}`
     );
     const leave = await regular.json();
 
-  leave.forEach((element: any) => {
-    const items = element.items;
-    subscriptionArray.push(items);
-  })
-}catch(err){
-  console.error('failed to get subscription', err);
-  errors.push('情報の取得に失敗しました。リロードしてください。');
-};
+    leave.forEach((element: Item) => {
+      const items = element.items;
+      subscriptionArray.push(items);
+    });
+  } catch (err) {
+    console.error('failed to get subscription', err);
+    errors.push('情報の取得に失敗しました。リロードしてください。');
+  }
 
   //サブスクの履歴
-  const subscriptionHistoriesArray: any[] = [];
+  const subscriptionHistoriesArray: Item[] = [];
   try {
     const past = await fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscriptionHistories?userId=${cookies.id}`
     );
     const remain = await past.json();
-    remain.forEach((element: any) => {
+    remain.forEach((element: Item) => {
       const items = element.items;
       subscriptionHistoriesArray.push(items);
     });
@@ -78,7 +79,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     errors.push('情報の取得に失敗しました。リロードしてください。');
   }
 
-  // console.log(subscriptionArray);
   return {
     props: {
       user,
@@ -87,6 +87,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       subscriptionHistoriesArray,
       cookie,
       errors,
+      // favoritesArray,
     },
   };
 };
@@ -98,47 +99,47 @@ const UserDetails = ({
   subscriptionHistoriesArray,
   cookie,
   errors,
-}: any) => {
+}: // favoritesArray,
+any) => {
   //サブスクからサブスク購入履歴への処理
 
   const router = useRouter();
-  const handler = (items: any) => {
-    subscriptionArray.forEach((cart: any) => {
-        cart.date = new Date().toLocaleString('ja-JP');
-      });
+  const handler = (items: Item) => {
+    subscriptionArray.forEach((cart: Item) => {
+      cart.date = new Date().toLocaleString('ja-JP');
+    });
 
-      const purchaseHistories = {
-        userId: cookie,
-        items: items,
-      };
-      fetch(
-        `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionHistories/`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(purchaseHistories),
-        }
-      ).then(() => {
-        deleteCarts(items);
-        location.reload();
-      });
+    const purchaseHistories = {
+      userId: cookie,
+      items: items,
     };
+    fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionHistories/`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(purchaseHistories),
+      }
+    ).then(() => {
+      deleteCarts(items);
+      router.reload();
+    });
+  };
 
-
-    const deleteCarts = (items: any) => {
+  const deleteCarts = (items: Item) => {
     fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscription/${items.id}`,
       {
         method: 'DELETE',
       }
     );
-    location.reload();
+    router.reload();
   };
 
   return (
     <>
       <Header />
-      <hr className={styles.hr}></hr>
+
       <Head>
         <title>ユーザー情報</title>
       </Head>
@@ -150,6 +151,7 @@ const UserDetails = ({
             <p className={styles.index_text}>
               <Link href="#user_element">基本情報</Link>
             </p>
+
             <p className={styles.index_text}>
               <Link href="#user_purchased">ご購入履歴</Link>
             </p>
@@ -186,9 +188,9 @@ const UserDetails = ({
           <h2 className={styles.title_purchased} id="user_purchased">
             ご購入履歴
           </h2>
-          {itemsArray.map((item: any) => {
+          {itemsArray.map((item: any,index:any) => {
             return (
-              <div key={item.id}>
+              <div key={index}>
                 <div>
                   <h3>購入日時：{item.date}</h3>
                   <div>
@@ -251,9 +253,9 @@ const UserDetails = ({
           >
             継続中の定期購入
           </h2>
-          {subscriptionArray.map((items: any) => {
+          {subscriptionArray.map((items: any,index:any) => {
             return (
-              <div key={items.id}>
+              <div key={index}>
                 <div>
                   <h3>購入日時：{items.date}</h3>
                   <div>
@@ -328,9 +330,9 @@ const UserDetails = ({
           >
             定期購入の履歴
           </h2>
-          {subscriptionHistoriesArray.map((items2: any) => {
+          {subscriptionHistoriesArray.map((items2: any,index:any) => {
             return (
-              <div key={items2.id}>
+              <div key={index}>
                 <div>
                   <h3>終了日時：{items2.date}</h3>
                   <div>
@@ -371,7 +373,8 @@ const UserDetails = ({
                         <p>
                           小計 &nbsp;&nbsp;&nbsp;&nbsp; ¥
                           <span className={styles.style}>
-                            &nbsp;{items2.price * items2.countity}&nbsp;
+                            &nbsp;{items2.price * items2.countity}
+                            &nbsp;
                           </span>
                         </p>
                         <p>
@@ -390,16 +393,9 @@ const UserDetails = ({
           })}
         </section>
       </div>
-      <footer className={styles.footer}>
-        <h1>RAKUTEIN</h1>
-      </footer>
+      <Footer />
     </>
   );
 };
 
 export default UserDetails;
-
-// input ---- readOnly={編集フラグ}/>↑trueで編集可能にする
-//最初state:編集フラグ（false）
-// 編集ボタン　onClickで編集フラグを切り替え
-// readonlyの切り替えはフラグで

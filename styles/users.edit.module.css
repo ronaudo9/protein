@@ -131,6 +131,11 @@ input:focus{
 
 .passwordDisplay {
   display: flex;
+  margin-top: 2%;
+}
+
+.passwordConfirmation {
+  padding-top: 2%;
 }
 
 /* .formGroup {

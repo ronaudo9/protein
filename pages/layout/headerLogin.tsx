@@ -10,8 +10,8 @@ export default function HeaderLogin() {
           <Image
             priority
             src="/images/rakutein.jpg"
-            width={170}
-            height={80}
+            width={140}
+            height={90}
             alt="logout"
           />
         </Link>

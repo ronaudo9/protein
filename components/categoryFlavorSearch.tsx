@@ -25,6 +25,7 @@ export default function CategoryFlavorSearch({
         <option value="" hidden>
           フレーバー
         </option>
+        <option value="">選択してください</option>
         <option value="チョコ">チョコ</option>
         <option value="バニラ">バニラ</option>
         <option value="抹茶">抹茶</option>

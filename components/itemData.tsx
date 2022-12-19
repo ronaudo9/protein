@@ -133,7 +133,7 @@ const ItemData: React.FunctionComponent<{
                       <p>
                         価格 &nbsp;&nbsp;&nbsp;&nbsp; ¥
                         <span className={styles.style}>
-                          &nbsp;{cart.price}&nbsp;
+                          &nbsp;{cart.price.toLocaleString()}&nbsp;
                         </span>
                       </p>
                       <p>
@@ -145,11 +145,16 @@ const ItemData: React.FunctionComponent<{
                       <p>
                         小計 &nbsp;&nbsp;&nbsp;&nbsp; ¥
                         <span className={styles.style}>
-                          &nbsp;{cart.price * cart.countity}&nbsp;
+                          &nbsp;
+                          {(
+                            cart.price * cart.countity
+                          ).toLocaleString()}
+                          &nbsp;
                         </span>
                       </p>
                     </div>
                   </div>
+                  <br />
                   <hr />
                 </div>
                 {/* </div> */}
@@ -166,7 +171,7 @@ const ItemData: React.FunctionComponent<{
           style={{ textAlign: 'right' }}
           className={styles.sumPrice}
         >
-          <u>合計金額:{sumPrice}円</u>
+          <u>合計金額:&nbsp;￥{sumPrice.toLocaleString()}</u>
         </div>
         <br />
         <br />
