@@ -6,8 +6,9 @@ import Link from 'next/link';
 import HeaderLogin from './layout/headerLogin';
 import ItemDisplay from './items';
 import { GetServerSideProps } from 'next';
+import { Item } from './../types/type';
 
-export default function UserLogin(cookieData: any) {
+export default function UserLogin(cookieData: Item) {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,14 +28,10 @@ export default function UserLogin(cookieData: any) {
     setLocalData(collection as any);
   }, []);
 
-  console.log(localData);
-
   //"ally-supports-cache"などを除外 (Local Storageの中の商品情報以外を削除)
-  const filteredData: any = localData.filter((object: any) => {
+  const filteredData = localData.filter((object: Item) => {
     return object.key == object.value.itemId;
   });
-
-  console.log(filteredData);
 
   // ユーザーIDの取得&POST(onSubmitのタイミングで発火)
   const postUserdata = async () => {
@@ -70,10 +67,10 @@ export default function UserLogin(cookieData: any) {
         if (response.status !== 200) {
           setVisible(true);
         } else if (response.status === 200) {
-          filteredData.forEach(async (data: any) => {
+          filteredData.forEach(async (data: Item) => {
             data.value.userId = await postUserdata();
 
-            filteredData.forEach((data: any) => {
+            filteredData.forEach((data: Item) => {
               fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
                 method: 'POST',
                 headers: {

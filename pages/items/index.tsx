@@ -13,6 +13,7 @@ import { ChangeEvent, useState, useRef, useEffect } from 'react';
 import CategoryFlavorSearch from '../../components/categoryFlavorSearch';
 import Image from 'next/image';
 import Searching from '../../components/Searching';
+import TooltipButton from '../../components/tooltipButton';
 
 const fetcher = (resource: any, init: any) =>
   fetch(resource, init).then((res) => res.json());
@@ -25,13 +26,25 @@ const ItemDisplay: NextPage = () => {
   const [category, setCategory] = useState('');
   const [flavor, setFlavor] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [showChatbot, setShowChatbot] = useState(false);
+
+
+  //検索、絞り込み、商品詳細のクリック以外の何もしない時間が5秒あればチャットボット出現させる
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowChatbot(true);
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, [resource, category, flavor, searchQuery, count]);
+
 
   const inputref = useRef<HTMLInputElement>();
   //ページング
   useEffect(() => {
     if (category) {
       setResource(
-        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}&category=${category}` );
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}&category=${category}`);
     } else if (flavor) {
       setResource(
         `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}`);
@@ -54,20 +67,19 @@ const ItemDisplay: NextPage = () => {
     setFlavor(e.target.value);
   };
 
-  const searchData= data.filter((item: any) => {
-            return (
-              searchQuery.length === 0 || item.name.match(searchQuery)
-              // 検索BOXに値がない場合のmap、searchQueryに入っている値とdb.jsonのnameと合致する商品のみ表示するmap
-            );
-          })
+  const searchData = data.filter((item: any) => {
+    return (
+      searchQuery.length === 0 || item.name.match(searchQuery)
+      // 検索BOXに値がない場合のmap、searchQueryに入っている値とdb.jsonのnameと合致する商品のみ表示するmap
+    );
+  });
   const totalCount = searchData.length;
   const pageSize = 12;
   let startIndex = (count - 1) * pageSize;
   let value = '';
   if (flavor || (category && count >= 2)) {
     value = searchData.slice(0, pageSize);
-  }
-  else {
+  } else {
     value = searchData.slice(startIndex, startIndex + pageSize);
   }
 
@@ -76,6 +88,7 @@ const ItemDisplay: NextPage = () => {
 
   // 検索BOXイベント
   const handleSearch = () => {
+    // フィルタリング機能、この小文字の中にcurrent.valueが含まれている商品情報だけ残す
     // stateに現在入力されている値をいれていく
     setSearchQuery(inputref.current!.value);
   };
@@ -117,6 +130,11 @@ const ItemDisplay: NextPage = () => {
         />
       </section>
 
+      {/* Chatbotコンポーネント */}
+      <section>
+        {showChatbot && <TooltipButton />}
+      </section>
+
       <section>
         <p className={styles.titlesCenter}>
           <span className={styles.titleCenter}>ITEMS</span>
@@ -135,7 +153,7 @@ const ItemDisplay: NextPage = () => {
               className={styles.paging}
               key={index}
               onClick={() => setCount(number)}
-              href=''
+              href=""
             >
               {number}
             </Link>

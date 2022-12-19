@@ -8,6 +8,7 @@ import Header from '../layout/header';
 import UsersElements from '../../components/usersElements';
 import { useRouter } from 'next/router';
 import Footer from '../layout/footer';
+import { Item } from '../../types/type';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -28,16 +29,16 @@ export const getServerSideProps: GetServerSideProps = async ({
     errors.push('情報の取得に失敗しました。リロードしてください。');
   }
 
-  const itemsArray: any[] = [];
+  const itemsArray: Item[] = [];
   try {
     const resHistories = await fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories?userId=${cookies.id}`
     );
-    const history = await resHistories.json();
-    history.forEach((element: any) => {
+    const history: Item = await resHistories.json();
+    history.forEach((element) => {
       const items = element.items;
 
-      items.forEach((item: any) => {
+      items.forEach((item: Item) => {
         itemsArray.push(item);
       });
     });
@@ -46,14 +47,14 @@ export const getServerSideProps: GetServerSideProps = async ({
     errors.push('情報の取得に失敗しました。リロードしてください。');
   }
   //サブスク
-  const subscriptionArray: any[] = [];
+  const subscriptionArray: Item[] = [];
   try {
     const regular = await fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscription?userId=${cookies.id}`
     );
     const leave = await regular.json();
 
-    leave.forEach((element: any) => {
+    leave.forEach((element: Item) => {
       const items = element.items;
       subscriptionArray.push(items);
     });
@@ -63,13 +64,13 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
 
   //サブスクの履歴
-  const subscriptionHistoriesArray: any[] = [];
+  const subscriptionHistoriesArray: Item[] = [];
   try {
     const past = await fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscriptionHistories?userId=${cookies.id}`
     );
     const remain = await past.json();
-    remain.forEach((element: any) => {
+    remain.forEach((element: Item) => {
       const items = element.items;
       subscriptionHistoriesArray.push(items);
     });
@@ -103,8 +104,8 @@ any) => {
   //サブスクからサブスク購入履歴への処理
 
   const router = useRouter();
-  const handler = (items: any) => {
-    subscriptionArray.forEach((cart: any) => {
+  const handler = (items: Item) => {
+    subscriptionArray.forEach((cart: Item) => {
       cart.date = new Date().toLocaleString('ja-JP');
     });
 
@@ -125,7 +126,7 @@ any) => {
     });
   };
 
-  const deleteCarts = (items: any) => {
+  const deleteCarts = (items: Item) => {
     fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscription/${items.id}`,
       {
