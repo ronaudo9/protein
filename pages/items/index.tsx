@@ -31,12 +31,10 @@ const ItemDisplay: NextPage = () => {
   useEffect(() => {
     if (category) {
       setResource(
-        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}&category=${category}`
-      );
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}&category=${category}` );
     } else if (flavor) {
       setResource(
-        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}`
-      );
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}`);
     } else {
       setResource(`${process.env.NEXT_PUBLIC_PROTEIN}/api/items`);
     }
@@ -72,9 +70,7 @@ const ItemDisplay: NextPage = () => {
   else {
     value = searchData.slice(startIndex, startIndex + pageSize);
   }
-  // if(searchQuery){
-  //   value = a.slice(0, pageSize);
-  // }
+
   const range = (start: number, end: number) =>
     [...Array(end - start + 1)].map((_, i) => start + i);
 
