@@ -172,7 +172,7 @@
   transform: scale(1, 1);
 }
 
-.delete_button{
+.delete_button {
   position: relative;
   color: white;
   font-size: 1vw;
@@ -198,4 +198,8 @@
   padding-top: 8%;
   color: white;
   text-align: right;
+}
+
+.a:hover {
+  text-decoration-line: underline;
 }

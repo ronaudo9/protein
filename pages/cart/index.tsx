@@ -138,7 +138,12 @@ const Cart = ({ carts, cookies }: any) => {
                     height={260}
                   />
                   <div className={styles.text_content}>
-                    <p>{cart.name}</p>
+                    <Link
+                      href={`../items/${encodeURIComponent(cart.id)}`}
+                      className={styles.a}
+                    >
+                      <div>{cart.name}</div>
+                    </Link>
                     <p>
                       <span className={styles.quantity}>数量</span>
                       {cart.countity}個
