@@ -21,7 +21,12 @@ export default function Header() {
   };
 
   const moveToFavorite = () => {
-    router.push('/users/favorite');
+    if (document.cookie !== '') {
+      router.push('/users/favorite');
+    } else {
+      alert('ログインをしてください');
+      router.push('/login');
+    }
   };
 
   const moveToUsers = () => {

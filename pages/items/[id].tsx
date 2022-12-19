@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { NextPage } from 'next';
 import styles from '../../styles/item_detail.module.css';
 import {
@@ -7,7 +6,7 @@ import {
   GetStaticProps,
   GetStaticPropsContext,
 } from 'next';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Header from '../layout/header';
 import { useRouter } from 'next/router';
 import { Item,Event } from '../../types/type';
@@ -48,8 +47,8 @@ export const getStaticProps: GetStaticProps = async ({
 // detail getStaticPropsから取得
 const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   const router = useRouter();
-  const [count, setCount] = React.useState(0);
-  const [total, setTotal] = React.useState(0);
+  const [count, setCount] = React.useState(1);
+  const [total, setTotal] = React.useState(detail.price);
   const [userId, setUserId] = React.useState('');
   const [flavor, setFlavor] = React.useState(detail.flavor[0]);
 
@@ -58,8 +57,8 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
     setTotal(total + sub);
   };
   const addHandlerPrev = (sub: any) => {
-    if (total <= 0) {
-      setTotal(0);
+    if (total <= detail.price) {
+      setTotal(detail.price);
     } else {
       setTotal(total - sub);
     }
@@ -75,8 +74,8 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
 
   const clickHandlerPrev = () => {
     const prevCount = count - 1;
-    if (prevCount <= 0) {
-      setCount(0);
+    if (prevCount <= 1) {
+      setCount(1);
     } else {
       setCount(prevCount);
     }
@@ -168,31 +167,30 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
       countity: count,
     };
     if (count === 0) {
-      return
+      return;
       // 数量0の場合はカートへ入れない
-    }else if( Number(userId)== 0){
-      return
+    } else if (Number(userId) == 0) {
+      return;
+    } else {
+      fetch(
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(SubscriptionCart),
+        }
+      ).then(() => {
+        router.push(`/items/subscription`);
+      });
     }
-    else {
-    fetch(
-      `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(SubscriptionCart),
-      }
-    ).then(() => {
-      router.push(`/items/subscription`);
-    });
-  }
-};
+  };
 
   let favs = {
     userId: Number(userId),
     itemId: [detail.id],
-    id:detail.id,
+    id: detail.id,
   };
 
   // お気に入り登録（db.jsonへ現在の商品情報登録）
@@ -282,13 +280,34 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
               <a>今すぐ定期購入を開始</a>
             </button>
           </div>
-          <button type="button" onClick={addFavoritesHandler}>
-            お気に入りに追加
-          </button>
-          <div className={styles.cart}>
-            <button className={styles.cart_button} onClick={handler}>
-              カートに追加
-            </button>
+          <div className={styles.buttons}>
+            <div className={styles.buttonsRight}>
+              <button
+                type="button"
+                onClick={addFavoritesHandler}
+                className={styles.fav_button}
+              >
+                <a>
+                  &nbsp;
+                  <Image
+                    priority
+                    src="/images/null_heart.png"
+                    width={20}
+                    height={20}
+                    alt="お気に入り"
+                    className={styles.favIcon}
+                  />
+                  お気に入りに追加&nbsp;
+                </a>
+              </button>
+
+              <button
+                className={styles.cart_button}
+                onClick={handler}
+              >
+                <a>カートに追加</a>
+              </button>
+            </div>
           </div>
         </div>
       </div>

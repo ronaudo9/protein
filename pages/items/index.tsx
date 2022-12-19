@@ -13,7 +13,7 @@ import { ChangeEvent, useState, useRef, useEffect } from 'react';
 import CategoryFlavorSearch from '../../components/categoryFlavorSearch';
 import Image from 'next/image';
 import Searching from '../../components/Searching';
-import { NextApiRequest, NextApiResponse } from 'next';
+import TooltipButton from '../../components/tooltipButton';
 
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -26,13 +26,25 @@ const ItemDisplay: NextPage = () => {
   const [category, setCategory] = useState('');
   const [flavor, setFlavor] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [showChatbot, setShowChatbot] = useState(false);
+
+
+  //検索、絞り込み、商品詳細のクリック以外の何もしない時間が5秒あればチャットボット出現させる
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowChatbot(true);
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, [resource, category, flavor, searchQuery, count]);
+
 
   const inputref = useRef<HTMLInputElement>();
   //ページング
   useEffect(() => {
     if (category) {
       setResource(
-        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}&category=${category}` );
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}&category=${category}`);
     } else if (flavor) {
       setResource(
         `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}`);
@@ -76,9 +88,11 @@ const ItemDisplay: NextPage = () => {
 
   // 検索BOXイベント
   const handleSearch = () => {
+    // フィルタリング機能、この小文字の中にcurrent.valueが含まれている商品情報だけ残す
     // stateに現在入力されている値をいれていく
     setSearchQuery(inputref.current!.value);
   };
+
 
   return (
     <>
@@ -114,6 +128,11 @@ const ItemDisplay: NextPage = () => {
           src="/images/strong.jpg"
           alt="画像"
         />
+      </section>
+
+      {/* Chatbotコンポーネント */}
+      <section>
+        {showChatbot && <TooltipButton />}
       </section>
 
       <section>
