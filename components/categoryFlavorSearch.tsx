@@ -1,17 +1,15 @@
 import useSWR from 'swr';
 import styles from 'styles/items_index.module.css';
 import { useState, useEffect, ChangeEvent } from 'react';
-import { setTokenSourceMapRange } from 'typescript';
+import { Users,User,Item } from '../types/type';
 
-const fetcher = (resource: any, init: any) =>
-  fetch(resource, init).then((res) => res.json());
 
 export default function CategoryFlavorSearch({
   flavor,
   flavorHandler,
 }: {
-  flavor: any;
-  flavorHandler: any;
+  flavor: string;
+  flavorHandler: React.ChangeEventHandler<HTMLSelectElement>;
 }) {
   // useStateで取得データを表示する
 

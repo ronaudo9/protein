@@ -2,11 +2,18 @@ import Link from 'next/link';
 import styles from '../styles/items_index.module.css';
 import Image from 'next/image';
 import { useState } from 'react';
+import { Users, Users2, Users3, User, Item } from '../types/type';
 
 // const fetcher = (resource: any, init: any) =>
 //   fetch(resource, init).then((res) => res.json());
 
-export default function ItemDisplayNew({ data, searchQuery }: any) {
+export default function ItemDisplayNew({
+  data,
+  searchQuery,
+}: {
+  data: any;
+  searchQuery: any;
+}) {
   // const { data, error } = useSWR('/api/items', fetcher);
   // if (error) return <div>Failed to Load</div>;
   // if (!data) return <div>Loading...</div>;
@@ -14,7 +21,7 @@ export default function ItemDisplayNew({ data, searchQuery }: any) {
   return (
     <>
       <div className={styles.side}>
-        {data.map((item: any) => {
+        {data.map((item: Item) => {
           const MAX_LENGTH = 25;
           let modStr = '';
           if (item.description.length > MAX_LENGTH) {
@@ -46,6 +53,19 @@ export default function ItemDisplayNew({ data, searchQuery }: any) {
                 </p>
                 <p className={styles.item}>{modStr}</p>
               </div>
+
+              <div className={styles.ul}>
+                <Link
+                  href={`./items/${encodeURIComponent(item.id)}`}
+                  className={styles.a}
+                >
+                  <p className={styles.itemA}>{item.name}</p>
+                </Link>
+                <p className={styles.itemB}>
+                  価格 &nbsp;¥{item.price.toLocaleString()}
+                </p>
+                <p className={styles.item}>{modStr}</p>
+              </div>
             </div>
           );
         })}
@@ -53,5 +73,3 @@ export default function ItemDisplayNew({ data, searchQuery }: any) {
     </>
   );
 }
-
-// itemDisplayにpropsで持ってくるitems={data}

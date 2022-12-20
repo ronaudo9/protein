@@ -6,8 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../layout/header';
 import Footer from '../layout/footer';
-import { User } from '../../types/type';
-import { Item } from '../../types/type';
+import { User,Item } from '../../types/type';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -25,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
 // <{ user: User }> = ({ user }) => {
 
-const Cart:NextPage <{carts:Item ,cookies: Item }> = ({ carts, cookies }) => {
+const Cart:NextPage <{carts:any ,cookies: Item }> = ({ carts, cookies }) => {
   const [localData, setLocalData] = useState([]);
   const router = useRouter();
 
@@ -44,7 +43,7 @@ const Cart:NextPage <{carts:Item ,cookies: Item }> = ({ carts, cookies }) => {
   }, []);
 
   //"ally-supports-cache" を除外 (Local Storageの中の商品情報以外を削除)
-  const filteredData: any = localData.filter((object: Item) => {
+  const filteredData: any = localData.filter((object: any) => {
     return object.key == object.value.itemId;
   });
 
@@ -65,7 +64,7 @@ const Cart:NextPage <{carts:Item ,cookies: Item }> = ({ carts, cookies }) => {
   // localDataの削除【終わり】
 
   // cartsの合計【始まり】
-  const priceArray: any[] = [];
+  const priceArray: number[] = [];
 
   carts.forEach((element: Item) => {
     const multiPrice = element.price * element.countity;
@@ -82,7 +81,7 @@ const Cart:NextPage <{carts:Item ,cookies: Item }> = ({ carts, cookies }) => {
   // localDataの合計【始まり】
   const priceArrayLocal: number[] = [];
 
-  filteredData.forEach((element: Item) => {
+  filteredData.forEach((element: any) => {
     const multiPriceLocal =
       element.value.price * element.value.countity;
     priceArrayLocal.push(multiPriceLocal);

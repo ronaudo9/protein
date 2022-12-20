@@ -13,6 +13,7 @@ import { ChangeEvent, useState, useRef, useEffect } from 'react';
 import CategoryFlavorSearch from '../../components/categoryFlavorSearch';
 import Image from 'next/image';
 import Searching from '../../components/Searching';
+import { Users, Users2, Users3, User, Item } from '../../types/type';
 import TooltipButton from '../../components/tooltipButton';
 
 const fetcher = (resource: any, init: any) =>
@@ -26,7 +27,7 @@ const ItemDisplay: NextPage = () => {
   const [category, setCategory] = useState('');
   const [flavor, setFlavor] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  const [showChatbot, setShowChatbot] = useState(false);
+  const [showchatbot, setShowChatbot] = useState(false);
 
   //検索、絞り込み、商品詳細のクリック以外の何もしない時間が5秒あればチャットボット出現させる
   useEffect(() => {
@@ -67,7 +68,7 @@ const ItemDisplay: NextPage = () => {
     setFlavor(e.target.value);
   };
 
-  const searchData = data.filter((item: any) => {
+  const searchData = data.filter((item: Item) => {
     return (
       searchQuery.length === 0 || item.name.match(searchQuery)
       // 検索BOXに値がない場合のmap、searchQueryに入っている値とdb.jsonのnameと合致する商品のみ表示するmap
@@ -130,7 +131,7 @@ const ItemDisplay: NextPage = () => {
       </section>
 
       {/* Chatbotコンポーネント */}
-      <section>{showChatbot && <TooltipButton />}</section>
+      <div>{showchatbot && <TooltipButton />}</div>
 
       <section>
         <p className={styles.titlesCenter}>

@@ -6,6 +6,9 @@ import Link from 'next/link';
 import HeaderLogin from './layout/headerLogin';
 import { Item } from './../types/type';
 import Image from 'next/image';
+import ItemDisplay from './items';
+import { GetServerSideProps } from 'next';
+import { Item, User, Users } from './../types/type';
 
 export default function UserLogin(cookieData: Item) {
   const router = useRouter();
@@ -52,7 +55,7 @@ export default function UserLogin(cookieData: Item) {
     password: password,
   };
 
-  const handler = async (event: any) => {
+  const handler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/login`, {
       method: 'POST',
