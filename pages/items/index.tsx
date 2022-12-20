@@ -13,7 +13,7 @@ import { ChangeEvent, useState, useRef, useEffect } from 'react';
 import CategoryFlavorSearch from '../../components/categoryFlavorSearch';
 import Image from 'next/image';
 import Searching from '../../components/Searching';
-import { Users,Users2,Users3,User,Item } from '../../types/type';
+import { Users, Users2, Users3, User, Item } from '../../types/type';
 import TooltipButton from '../../components/tooltipButton';
 
 const fetcher = (resource: any, init: any) =>
@@ -29,7 +29,6 @@ const ItemDisplay: NextPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showchatbot, setShowChatbot] = useState(false);
 
-
   //検索、絞り込み、商品詳細のクリック以外の何もしない時間が5秒あればチャットボット出現させる
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -39,16 +38,17 @@ const ItemDisplay: NextPage = () => {
     return () => clearTimeout(timeout);
   }, [resource, category, flavor, searchQuery, count]);
 
-
   const inputref = useRef<HTMLInputElement>();
   //ページング
   useEffect(() => {
     if (category) {
       setResource(
-        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}&category=${category}`);
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}&category=${category}`
+      );
     } else if (flavor) {
       setResource(
-        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}`);
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}`
+      );
     } else {
       setResource(`${process.env.NEXT_PUBLIC_PROTEIN}/api/items`);
     }
@@ -94,7 +94,6 @@ const ItemDisplay: NextPage = () => {
     setSearchQuery(inputref.current!.value);
   };
 
-
   return (
     <>
       <Head>
@@ -124,7 +123,7 @@ const ItemDisplay: NextPage = () => {
         <Image
           priority
           className={styles.img}
-          width={900}
+          width={700}
           height={400}
           src="/images/strong.jpg"
           alt="画像"
@@ -132,15 +131,12 @@ const ItemDisplay: NextPage = () => {
       </section>
 
       {/* Chatbotコンポーネント */}
-      <div>
-        {showchatbot && <TooltipButton />}
-      </div>
+      <div>{showchatbot && <TooltipButton />}</div>
 
       <section>
         <p className={styles.titlesCenter}>
           <span className={styles.titleCenter}>ITEMS</span>
         </p>
-
         <div className={styles.displayCenter}>
           {/* 商品一覧表示コンポーネント */}
           <ItemDisplayNew data={value} searchQuery={searchQuery} />
