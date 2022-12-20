@@ -13,6 +13,7 @@ import { ChangeEvent, useState, useRef, useEffect } from 'react';
 import CategoryFlavorSearch from '../../components/categoryFlavorSearch';
 import Image from 'next/image';
 import Searching from '../../components/Searching';
+import { Users,Users2,Users3,User,Item } from '../../types/type';
 
 const fetcher = (resource: any, init: any) =>
   fetch(resource, init).then((res) => res.json());
@@ -54,7 +55,7 @@ const ItemDisplay: NextPage = () => {
     setFlavor(e.target.value);
   };
 
-  const searchData = data.filter((item: any) => {
+  const searchData = data.filter((item: Item) => {
     return (
       searchQuery.length === 0 || item.name.match(searchQuery)
       // 検索BOXに値がない場合のmap、searchQueryに入っている値とdb.jsonのnameと合致する商品のみ表示するmap

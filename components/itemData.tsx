@@ -5,17 +5,18 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
+import { Users,Users2,Users3,User,Item } from '../types/type';
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
 );
 const ItemData: React.FunctionComponent<{
-  user: any;
-  carts: any;
+  user: User;
+  carts: Item;
 }> = ({ user, carts }) => {
   const router = useRouter();
 
-  carts.forEach((cart: any) => {
+  carts.forEach((cart: Item) => {
     cart.date = new Date().toLocaleString('ja-JP');
   });
 
@@ -25,7 +26,7 @@ const ItemData: React.FunctionComponent<{
   };
 
   // 購入履歴jsonサーバーに購入商品を追加する処理[始まり]
-  const handler = (event: any) => {
+  const handler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories`,
@@ -45,11 +46,11 @@ const ItemData: React.FunctionComponent<{
 
   // カート内の商品を消去[始まり]
   // fetch(`/api/carts/${cartItem.id})
-  const deleteCarts = (event: any) => {
+  const deleteCarts = (event: React.MouseEvent<HTMLButtonElement>) => {
     // const data = { deleted: true };
     event.preventDefault();
     const data = {};
-    carts.forEach((cart: any) => {
+    carts.forEach((cart: Item) => {
       fetch(`http://localhost:8000/carts/${cart.id}`, {
         method: 'DELETE',
         headers: {
@@ -62,8 +63,8 @@ const ItemData: React.FunctionComponent<{
   // カート内の商品を消去[終わり]
 
   // 合計金額を算出する処理[始まり]
-  const priceArray: any[] = [];
-  carts.forEach((element: any) => {
+  const priceArray: number[] = [];
+  carts.forEach((element: Item) => {
     const multiPrice = element.price * element.countity;
     priceArray.push(multiPrice);
   });
@@ -102,7 +103,7 @@ const ItemData: React.FunctionComponent<{
           <h2 className={styles.purchase_h2} id="user_purchased">
             ご注文内容
           </h2>
-          {carts.map((cart: any) => {
+          {carts.map((cart: Item) => {
             return (
               <div key={cart.id}>
                 {/* <div> */}
@@ -188,7 +189,7 @@ const ItemData: React.FunctionComponent<{
               クレジット決済
             </button>
           </form>
-          <button className={styles.btnB} onClick={handler}>
+          <button className={styles.btnB} onClick={() => handler}>
             <span>代引き決済</span>
           </button>
         </section>

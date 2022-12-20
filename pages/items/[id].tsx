@@ -18,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/`
   );
   const items = await res.json();
-  const paths = items.map((item: any) => ({
+  const paths = items.map((item: Item) => ({
     params: {
       // idをdb.jsonファイルの文字列に合わせる
       id: item.id.toString(),
@@ -54,10 +54,10 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   const [flavor, setFlavor] = React.useState(detail.flavor[0]);
 
   //　数量変更
-  const addHandlerNext = (sub: any) => {
+  const addHandlerNext = (sub: number) => {
     setTotal(total + sub);
   };
-  const addHandlerPrev = (sub: any) => {
+  const addHandlerPrev = (sub: number) => {
     if (total <= 0) {
       setTotal(0);
     } else {
@@ -129,14 +129,13 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   }, [count]);
   // localstrageへ保存【終わり】
 
-  const handler = (event: any) => {
+  const handler = () => {
     // 数量0の場合はカートへ入れない
     if (count === 0) {
       return;
     } else if (userId === '') {
       router.push('/cart');
     } else {
-      event.preventDefault();
       fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
         method: 'POST',
         headers: {
@@ -157,7 +156,7 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   };
 
   //サブスクリプション
-  const Subscription = (event: any) => {
+  const Subscription = () => {
     const SubscriptionCart = {
       userId: Number(userId),
       itemId: detail.id,
