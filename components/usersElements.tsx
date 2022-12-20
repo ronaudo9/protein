@@ -9,6 +9,7 @@ import AddressEdit from './addressEdit';
 import TelEdit from './telEdit';
 import PasswordEdit from './passwordEdit';
 import router, { useRouter } from 'next/router';
+import { Users,Users2,Users3,User,Item } from '../types/type';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,

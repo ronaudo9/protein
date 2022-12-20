@@ -6,7 +6,7 @@ import Link from 'next/link';
 import HeaderLogin from './layout/headerLogin';
 import ItemDisplay from './items';
 import { GetServerSideProps } from 'next';
-import { Item } from './../types/type';
+import { Item,User,Users } from './../types/type';
 
 export default function UserLogin(cookieData: Item) {
   const router = useRouter();
@@ -53,7 +53,7 @@ export default function UserLogin(cookieData: Item) {
     password: password,
   };
 
-  const handler = async (event: any) => {
+  const handler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/login`, {
       method: 'POST',
@@ -121,9 +121,9 @@ export default function UserLogin(cookieData: Item) {
           </hgroup>
           <form
             className={style.form}
-            onSubmit={() => {
-              handler(event);
-            }}
+            onSubmit={
+              handler
+            }
           >
             <div className={style.group}>
               <input

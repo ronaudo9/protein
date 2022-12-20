@@ -3,6 +3,7 @@ import styles from '/styles/users.edit.module.css';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import { Users,Users2,Users3,User,Item } from '../types/type';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -22,7 +23,11 @@ const AddressEdit = ({
   formValues,
   setFormValues,
   readOnly,
-}: any) => {
+}: {
+  formValues:Users2;
+  setFormValues:Users3;
+  readOnly:boolean;
+}) => {
   const router = useRouter();
 
   // const initialValues = {
@@ -38,7 +43,7 @@ const AddressEdit = ({
   const [isSubmit, setIsSubmit] = useState(false);
   const [addressErrors, setAddressErrors] = useState('');
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
@@ -63,8 +68,8 @@ const AddressEdit = ({
   //   }
   // };
 
-  const validate = (values: any) => {
-    const errors = {} as any;
+  const validate = (values: Users) => {
+    const errors = {} as Users;
     const postCodeReg = /^[0-9]{3}-[0-9]{4}$/;
     if (!postCodeReg.test(values.postCode)) {
       errors.postCode = '郵便番号はXXX-XXXXの形式で入力してください';

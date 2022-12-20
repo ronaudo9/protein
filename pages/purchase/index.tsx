@@ -4,7 +4,7 @@ import styles from '../../styles/purchase.module.css';
 import { GetServerSideProps } from 'next';
 import Header from '../layout/header';
 import Footer from '../layout/footer';
-import { Item } from '../../types/type';
+import { Item,User } from '../../types/type';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -33,7 +33,7 @@ export default function PurchaseDisplay({
   user,
   carts,
 }: {
-  user: Item;
+  user: User;
   carts: Item;
 }) {
   // const {user,carts} = props

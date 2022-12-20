@@ -4,11 +4,12 @@ import styles from '../styles/items_index.module.css';
 import Image from 'next/image';
 import { useEffect, useState, useRef } from 'react';
 import ItemDisplay from '../pages/items';
+import { Users,Users2,Users3,User,Item } from './../types/type';
 
 // const fetcher = (resource: any, init: any) =>
 //   fetch(resource, init).then((res) => res.json());
 
-export default function Searching({ handleSearch, inputref }: any) {
+export default function Searching({ handleSearch, inputref }: {handleSearch:any, inputref:any}) {
   // const [items, setItems] = useState('');
   // itemの表示が変われば再レンダリングされる
   // const [searchQuery, setSearchQuery] = useState([]);
