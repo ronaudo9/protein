@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import HeaderLogin from './layout/headerLogin';
-import { Item } from './../types/type';
 import Image from 'next/image';
 import ItemDisplay from './items';
 import { GetServerSideProps } from 'next';
@@ -129,12 +128,7 @@ export default function UserLogin(cookieData: Item) {
                 ユーザーが見つかりません。もう一度入力してください。
               </h3>
             </hgroup>
-            <form
-              className={style.form}
-              onSubmit={() => {
-                handler(event);
-              }}
-            >
+            <form className={style.form} onSubmit={handler}>
               <div className={style.group}>
                 <input
                   type="email"
