@@ -53,19 +53,6 @@ export default function ItemDisplayNew({
                 </p>
                 <p className={styles.item}>{modStr}</p>
               </div>
-
-              <div className={styles.ul}>
-                <Link
-                  href={`./items/${encodeURIComponent(item.id)}`}
-                  className={styles.a}
-                >
-                  <p className={styles.itemA}>{item.name}</p>
-                </Link>
-                <p className={styles.itemB}>
-                  価格 &nbsp;¥{item.price.toLocaleString()}
-                </p>
-                <p className={styles.item}>{modStr}</p>
-              </div>
             </div>
           );
         })}
