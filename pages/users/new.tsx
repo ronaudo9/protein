@@ -53,7 +53,7 @@ function UsersNew() {
         },
         body: JSON.stringify(formValues),
       }).then(() => {
-        router.push('/');
+        router.push('/login');
         alert(
           'ご登録ありがとうございます！ログインをしてお買い物を続けてください'
         );

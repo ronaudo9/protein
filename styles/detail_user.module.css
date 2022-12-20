@@ -454,3 +454,61 @@
   transition: 0.3s; /*変形の時間*/
   bottom: 1px;
 }
+
+.delete_button {
+  border: none;
+  /* buttonの枠線解除 */
+  border-radius: 4px;
+  margin-left: 3%;
+}
+
+.delete_button a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 4px;
+  padding: 1em 2em;
+  width: 96px;
+  height: 40px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  background-image: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#5de1d6),
+    to(#1ed6ee)
+  );
+  box-shadow: 0 5px 0 #64cccf;
+  transition: 0.3s;
+}
+
+.delete_button a:hover {
+  background-image: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#69f4e8),
+    to(#4ce6fa)
+  );
+  transform: translateY(3px);
+  white-space: nowrap;
+  box-shadow: 0 1px 0 #39a5e8;
+}
+
+.delete_button a::after {
+  width: 5px;
+  height: 5px;
+  border-top: 3px solid #333333;
+  border-right: 3px solid #333333;
+  transform: rotate(45deg);
+}
+
+.delete_button a:active {
+  color: white;
+}
+
+.itemDetail {
+  display: grid;
+}
