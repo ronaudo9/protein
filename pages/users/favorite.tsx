@@ -22,15 +22,14 @@ export const getServerSideProps = async ({ req }: any) => {
     return `id=${fav.itemId}`;
   });
   const Array = itemsArray.join('&');
+  console.log(itemsArray);
   console.log(Array);
 
 
   const data = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items?${Array}`);
-
   const itemsArray2 = await data.json();
   //空の配列を作るために存在しないid=0を指定した。
   const data2 = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items?id=0`);
-
   const itemsArray3 = await data2.json();
 
 

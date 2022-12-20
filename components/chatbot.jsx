@@ -1,13 +1,12 @@
 import ChatBot from 'react-simple-chatbot';
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import ChatBotItem from './chatBotItem';
 import styles from '../styles/chatbot.module.css';
-// import ChatBotMoveTop from './chatBotMoveTop';
+import ImageDisplay from './imageDisplay';
 
 
 // チャットボットのコンポーネント
-export default function ChatBotComponent() {
+export default function ChatBotComponent(props) {
   const [userId, setUserId] = useState(0);
   const [userDB, setUserDB] = useState({});
 
@@ -129,16 +128,15 @@ export default function ChatBotComponent() {
   // dbからuserId取得【始まり】
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users/${userId}`);
-      const user = await res.json();
-      setUserDB(user)
+      if (userId !== 0) {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users/${userId}`);
+        const user = await res.json();
+        setUserDB(user)
+      }
     }
     fetchData();
   }, [userId]);
   // dbからuserId取得【終わり】
-
-  // console.log(userId)
-  // console.log(userDB)
 
   //レンダリングを遅延させるカスタムフック
   const useDelay = msec => {
@@ -153,7 +151,6 @@ export default function ChatBotComponent() {
   const waiting = useDelay(300);
 
 
-  console.log(userId)
   return (
     <>
       {userId !== 0 ?
@@ -172,18 +169,7 @@ export default function ChatBotComponent() {
                   id: '2',
                   delay: 1000,
                   component: (
-                    <div>
-                      <Image
-                        priority
-                        src="/images/protein_display.png"
-                        alt="protein_display"
-                        width={300}
-                        height={150}
-                      />
-                      <p>
-                        ちょっとした診断から{userDB.lastName}さんにぴったりのプロテインを見つけてみましょう。
-                      </p>
-                    </div>
+                    <ImageDisplay userDB={userDB} />
                   ),
                   trigger: 3,
                 },
@@ -195,7 +181,6 @@ export default function ChatBotComponent() {
                 },
                 {
                   id: 'serch_protein',
-                  delay: 1000,
                   options: [
                     { value: 'training', label: 'カラダづくりのためのプロテイン', trigger: 'training' },
                     { value: 'delicious', label: '美味しいプロテイン', trigger: 'delicious' },
@@ -242,9 +227,7 @@ export default function ChatBotComponent() {
                   id: 'training_answer2',
                   delay: 2000,
                   component: (
-                    <div>
-                      <ChatBotItem data={dataTraining} />
-                    </div>
+                    <ChatBotItem data={dataTraining} />
                   ),
                   trigger: 'backToQuestion1',
                 },
@@ -252,9 +235,7 @@ export default function ChatBotComponent() {
                   id: 'delicious_answer2',
                   delay: 2000,
                   component: (
-                    <div>
-                      <ChatBotItem data={dataDelicious} />
-                    </div>
+                    <ChatBotItem data={dataDelicious} />
                   ),
                   trigger: 'backToQuestion1',
                 },
@@ -262,9 +243,7 @@ export default function ChatBotComponent() {
                   id: 'cost_answer2',
                   delay: 2000,
                   component: (
-                    <div>
-                      <ChatBotItem data={dataCost} />
-                    </div>
+                    <ChatBotItem data={dataCost} />
                   ),
                   trigger: 'backToQuestion1',
                 },
@@ -276,10 +255,9 @@ export default function ChatBotComponent() {
                 },
                 {
                   id: 'backToQuestion2',
-                  delay: 1000,
                   options: [
                     { value: 'found', label: '見つかった！', trigger: 'found' },
-                    { value: 'notfound', label: '見つからなかった', trigger: 'notfound' },
+                    { value: 'notFound', label: '見つからなかった', trigger: 'notFound' },
                     { value: 'back', label: '前の質問に戻る', trigger: '3' },
                   ],
                 },
@@ -290,17 +268,11 @@ export default function ChatBotComponent() {
                   end: true,
                 },
                 {
-                  id: 'notfound',
+                  id: 'notFound',
                   delay: 1000,
                   message: `お役に立てず、すみません。商品一覧ページに他にも商品揃えていますのでぜひ覗きに行ってください！`,
                   end: true,
                 },
-                // {
-                //   id: 'top',
-                //   delay: 2000,
-                //   component: <ChatBotMoveTop />,
-                //   end: true,
-                // },
               ]}
             />}
         </div>
@@ -324,18 +296,7 @@ export default function ChatBotComponent() {
                   id: '2',
                   delay: 1000,
                   component: (
-                    <div>
-                      <Image
-                        priority
-                        src="/images/protein_display.png"
-                        alt="protein_display"
-                        width={300}
-                        height={150}
-                      />
-                      <p>
-                        ちょっとした診断から,お気に入りのプロテインを見つけてみましょう。
-                      </p>
-                    </div>
+                    <ImageDisplay userDB={userDB} />
                   ),
                   trigger: 3,
                 },
@@ -347,7 +308,6 @@ export default function ChatBotComponent() {
                 },
                 {
                   id: 'serch_protein',
-                  delay: 1000,
                   options: [
                     { value: 'training', label: 'カラダづくりのためのプロテイン', trigger: 'training' },
                     { value: 'delicious', label: '美味しいプロテイン', trigger: 'delicious' },
@@ -394,9 +354,7 @@ export default function ChatBotComponent() {
                   id: 'training_answer2',
                   delay: 2000,
                   component: (
-                    <div>
-                      <ChatBotItem data={dataTraining} />
-                    </div>
+                    <ChatBotItem data={dataTraining} />
                   ),
                   trigger: 'backToQuestion1',
                 },
@@ -404,9 +362,7 @@ export default function ChatBotComponent() {
                   id: 'delicious_answer2',
                   delay: 2000,
                   component: (
-                    <div>
-                      <ChatBotItem data={dataDelicious} />
-                    </div>
+                    <ChatBotItem data={dataDelicious} />
                   ),
                   trigger: 'backToQuestion1',
                 },
@@ -414,9 +370,7 @@ export default function ChatBotComponent() {
                   id: 'cost_answer2',
                   delay: 2000,
                   component: (
-                    <div>
-                      <ChatBotItem data={dataCost} />
-                    </div>
+                    <ChatBotItem data={dataCost} />
                   ),
                   trigger: 'backToQuestion1',
                 },
@@ -428,10 +382,9 @@ export default function ChatBotComponent() {
                 },
                 {
                   id: 'backToQuestion2',
-                  delay: 1000,
                   options: [
                     { value: 'found', label: '見つかった！', trigger: 'found' },
-                    { value: 'notfound', label: '見つからなかった', trigger: 'notfound' },
+                    { value: 'notFound', label: '見つからなかった', trigger: 'notFound' },
                     { value: 'back', label: '前の質問に戻る', trigger: '3' },
                   ],
                 },
@@ -442,17 +395,11 @@ export default function ChatBotComponent() {
                   end: true,
                 },
                 {
-                  id: 'notfound',
+                  id: 'notFound',
                   delay: 1000,
                   message: `お役に立てず、すみません。商品一覧ページに他にも商品揃えていますのでぜひ覗きに行ってください！`,
                   end: true,
                 },
-                // {
-                //   id: 'top',
-                //   delay: 2000,
-                //   component: <ChatBotMoveTop />,
-                //   end: true,
-                // },
               ]}
             />
           }
