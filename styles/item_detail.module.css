@@ -232,7 +232,11 @@
   transition: 0.4s;
 }
 
-.fav_button a:focus {
+.fav_button :active {
+  background: rgb(203, 239, 254);
+}
+
+.fav_button :focus {
   background: rgb(203, 239, 254);
 }
 
