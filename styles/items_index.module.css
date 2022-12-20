@@ -5,7 +5,8 @@
 
 .img {
   width: 100%;
-  height: 100%;
+  height: 130%;
+  position: absolute;
 }
 
 .category1 {
@@ -15,12 +16,6 @@
   background-color: rgb(243, 239, 239);
   border: 3px solid #ffffff;
   margin: 1% 5%;
-}
-.head {
-  padding-top: 2%;
-  padding-left: 7%;
-  padding-right: 7%;
-  background-color: white;
 }
 
 .searchList {
@@ -38,7 +33,10 @@
 .category2 {
   margin: 0 0 0 5%;
 }
-
+.all {
+  background-color: black;
+  padding-bottom: 10%;
+}
 .item {
   list-style: none;
 }
@@ -269,4 +267,13 @@
 .paging:active {
   background: #26a4ca;
   color: black;
+}
+
+.background {
+  background: rgba(255, 255, 255, 0.55);
+  position: relative;
+  padding: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 20%;
 }
