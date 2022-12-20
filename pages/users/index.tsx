@@ -253,7 +253,7 @@ any) => {
           >
             継続中の定期購入
           </h2>
-          {subscriptionArray.map((items: any,index:any) => {
+          {subscriptionArray.map((items: Item,index:any) => {
             return (
               <div key={index}>
                 <div>

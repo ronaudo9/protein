@@ -3,15 +3,13 @@ import styles from 'styles/items_index.module.css';
 import { useState, useEffect, ChangeEvent } from 'react';
 import { setTokenSourceMapRange } from 'typescript';
 
-const fetcher = (resource: any, init: any) =>
-  fetch(resource, init).then((res) => res.json());
 
 export default function CategoryTypeSearch({
   category,
   categoryHandler,
 }: {
-  category: any;
-  categoryHandler: any;
+  category: string;
+  categoryHandler: React.ChangeEventHandler<HTMLSelectElement>;
 }) {
   // useStateで取得データを表示する
 

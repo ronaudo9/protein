@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { NextPage } from 'next';
 import styles from '../../styles/item_detail.module.css';
 import {
@@ -7,7 +6,7 @@ import {
   GetStaticProps,
   GetStaticPropsContext,
 } from 'next';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Header from '../layout/header';
 import { useRouter } from 'next/router';
 import { Item } from '../../types/type';
@@ -18,7 +17,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/`
   );
   const items = await res.json();
-  const paths = items.map((item: any) => ({
+  const paths = items.map((item: Item) => ({
     params: {
       // idをdb.jsonファイルの文字列に合わせる
       id: item.id.toString(),
@@ -48,18 +47,18 @@ export const getStaticProps: GetStaticProps = async ({
 // detail getStaticPropsから取得
 const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   const router = useRouter();
-  const [count, setCount] = React.useState(0);
-  const [total, setTotal] = React.useState(0);
+  const [count, setCount] = React.useState(1);
+  const [total, setTotal] = React.useState(detail.price);
   const [userId, setUserId] = React.useState('');
   const [flavor, setFlavor] = React.useState(detail.flavor[0]);
 
   //　数量変更
-  const addHandlerNext = (sub: any) => {
+  const addHandlerNext = (sub: number) => {
     setTotal(total + sub);
   };
-  const addHandlerPrev = (sub: any) => {
-    if (total <= 0) {
-      setTotal(0);
+  const addHandlerPrev = (sub: number) => {
+    if (total <= detail.price) {
+      setTotal(detail.price);
     } else {
       setTotal(total - sub);
     }
@@ -75,8 +74,8 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
 
   const clickHandlerPrev = () => {
     const prevCount = count - 1;
-    if (prevCount <= 0) {
-      setCount(0);
+    if (prevCount <= 1) {
+      setCount(1);
     } else {
       setCount(prevCount);
     }
@@ -129,14 +128,13 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   }, [count]);
   // localstrageへ保存【終わり】
 
-  const handler = (event: any) => {
+  const handler = () => {
     // 数量0の場合はカートへ入れない
     if (count === 0) {
       return;
     } else if (userId === '') {
       router.push('/cart');
     } else {
-      event.preventDefault();
       fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
         method: 'POST',
         headers: {
@@ -157,7 +155,7 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   };
 
   //サブスクリプション
-  const Subscription = (event: any) => {
+  const Subscription = () => {
     const SubscriptionCart = {
       userId: Number(userId),
       itemId: detail.id,
@@ -168,31 +166,30 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
       countity: count,
     };
     if (count === 0) {
-      return
+      return;
       // 数量0の場合はカートへ入れない
-    }else if( Number(userId)== 0){
-      return
+    } else if (Number(userId) == 0) {
+      return;
+    } else {
+      fetch(
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(SubscriptionCart),
+        }
+      ).then(() => {
+        router.push(`/items/subscription`);
+      });
     }
-    else {
-    fetch(
-      `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(SubscriptionCart),
-      }
-    ).then(() => {
-      router.push(`/items/subscription`);
-    });
-  }
-};
+  };
 
   let favs = {
     userId: Number(userId),
     itemId: [detail.id],
-    id:detail.id,
+    id: detail.id,
   };
 
   console.log(favs);
@@ -283,13 +280,34 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
               <a>今すぐ定期購入を開始</a>
             </button>
           </div>
-          <button type="button" onClick={addFavoritesHandler}>
-            お気に入りに追加
-          </button>
-          <div className={styles.cart}>
-            <button className={styles.cart_button} onClick={handler}>
-              カートに追加
-            </button>
+          <div className={styles.buttons}>
+            <div className={styles.buttonsRight}>
+              <button
+                type="button"
+                onClick={addFavoritesHandler}
+                className={styles.fav_button}
+              >
+                <a>
+                  &nbsp;
+                  <Image
+                    priority
+                    src="/images/null_heart.png"
+                    width={20}
+                    height={20}
+                    alt="お気に入り"
+                    className={styles.favIcon}
+                  />
+                  お気に入りに追加&nbsp;
+                </a>
+              </button>
+
+              <button
+                className={styles.cart_button}
+                onClick={handler}
+              >
+                <a>カートに追加</a>
+              </button>
+            </div>
           </div>
         </div>
       </div>
