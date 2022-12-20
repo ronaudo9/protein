@@ -21,6 +21,7 @@ export const getServerSideProps = async ({ req }: any) => {
     return `id=${fav.itemId}`;
   });
   const Array = itemsArray.join('&');
+  console.log(itemsArray);
   console.log(Array);
 
   const data = await fetch(

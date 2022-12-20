@@ -82,7 +82,7 @@ type Item = {
   items: any;
   preventDefault(): unknown;
   date: string;
-  value: string;
+  value: any;
   map(arg0: (cart: Item) => JSX.Element): import('react').ReactNode;
   length: number;
   forEach(arg0: (element: Item) => void): unknown;

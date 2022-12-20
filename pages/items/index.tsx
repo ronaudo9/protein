@@ -27,7 +27,7 @@ const ItemDisplay: NextPage = () => {
   const [category, setCategory] = useState('');
   const [flavor, setFlavor] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  const [showChatbot, setShowChatbot] = useState(false);
+  const [showchatbot, setShowChatbot] = useState(false);
 
 
   //検索、絞り込み、商品詳細のクリック以外の何もしない時間が5秒あればチャットボット出現させる
@@ -132,9 +132,9 @@ const ItemDisplay: NextPage = () => {
       </section>
 
       {/* Chatbotコンポーネント */}
-      <section>
-        {showChatbot && <TooltipButton />}
-      </section>
+      <div>
+        {showchatbot && <TooltipButton />}
+      </div>
 
       <section>
         <p className={styles.titlesCenter}>
