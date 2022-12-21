@@ -95,7 +95,7 @@ const Cart: NextPage<{ carts: any, cookies: Item }> = ({ carts, cookies }) => {
   // localDataの合計【終わり】
 
   console.log(carts);
-  console.log(carts.length);
+
 
   const routerHandler = () => {
     if (carts[0]) {
