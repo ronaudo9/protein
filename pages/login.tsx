@@ -26,7 +26,7 @@ export default function UserLogin(cookieData: Item) {
         value: JSON.parse(localStorage.getItem(key) as string),
       };
     });
-    setLocalData(collection as any);
+    setLocalData(collection as React.SetStateAction<never[]>) ;
   }, []);
 
   //"ally-supports-cache"などを除外 (Local Storageの中の商品情報以外を削除)
