@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../layout/header';
 import Footer from '../layout/footer';
-import { User,Item } from '../../types/type';
+import { User,Item,Item2 } from '../../types/type';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -16,7 +16,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts?userId=${cookies.id}`
   );
   const carts = await res.json();
-
   return {
     props: { carts, cookies }
   };
@@ -24,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
 // <{ user: User }> = ({ user }) => {
 
-const Cart:NextPage <{carts:any ,cookies: Item }> = ({ carts, cookies }) => {
+const Cart:NextPage <{carts:Item2 ,cookies: Item }> = ({ carts, cookies }) => {
   const [localData, setLocalData] = useState([]);
   const router = useRouter();
 
@@ -94,11 +93,8 @@ const Cart:NextPage <{carts:any ,cookies: Item }> = ({ carts, cookies }) => {
   );
   // localDataの合計【終わり】
 
-  console.log(carts);
-  console.log(carts.length);
-
   const routerHandler = () => {
-    if (carts[0]) {
+    if (carts.length > 0) {
       router.push('/purchase');
     } else {
       alert('商品一覧から商品を選んでカートに入れてください');

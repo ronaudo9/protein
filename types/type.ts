@@ -60,23 +60,25 @@ type Users2 = {
   passwordConfirmation: string;
 };
 
-type Users3 = React.Dispatch<React.SetStateAction<{
-  firstName: string;
-  lastName: string;
-  firstNameKana: string;
-  lastNameKana: string;
-  postCode: string;
-  prefecture: string;
-  city: string;
-  aza: string;
-  building: string;
-  email: string;
-  middleName: string;
-  tel: string;
-  credit: string;
-  password: string;
-  passwordConfirmation: string;
-}>>
+type Users3 = React.Dispatch<
+  React.SetStateAction<{
+    firstName: string;
+    lastName: string;
+    firstNameKana: string;
+    lastNameKana: string;
+    postCode: string;
+    prefecture: string;
+    city: string;
+    aza: string;
+    building: string;
+    email: string;
+    middleName: string;
+    tel: string;
+    credit: string;
+    password: string;
+    passwordConfirmation: string;
+  }>
+>;
 
 type Item = {
   items: any;
@@ -93,11 +95,26 @@ type Item = {
   name: string;
   imageUrl: string;
   category: string;
-  flavor: string[];
+  flavor: string[] | string;
   price: number;
   description: string;
   content: string;
   countity: number;
+};
+
+type Item2 = {
+  map(arg0: (cart: Item) => JSX.Element): import("react").ReactNode;
+  forEach(arg0: (element: Item) => void): unknown;
+  length: number;
+  userId: number;
+  itemId: number;
+  imageUrl: string;
+  name: string;
+  flavor: string;
+  price: number;
+  countity: number;
+  id: number;
+  carts: string[];
 };
 
 type Event = {
@@ -116,5 +133,5 @@ export type { User };
 export type { Users };
 export type { Users2 };
 export type { Users3 };
-export type { Item };
+export type { Item,Item2 };
 export type { Event };

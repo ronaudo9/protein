@@ -6,7 +6,7 @@ import Footer from '../layout/footer';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { useState, useEffect } from 'react';
-import { idText } from 'typescript';
+import { Users,Users2,Users3,User,Item } from '../../types/type';
 
 export const getServerSideProps = async ({ req }: any) => {
   const cookies = req.cookies;
@@ -17,7 +17,7 @@ export const getServerSideProps = async ({ req }: any) => {
   );
   favs = await res.json();
 
-  const itemsArray = favs.map((fav: any) => {
+  const itemsArray = favs.map((fav: Item) => {
     return `id=${fav.itemId}`;
   });
   const Array = itemsArray.join('&');
@@ -47,7 +47,7 @@ export const getServerSideProps = async ({ req }: any) => {
   };
 };
 
-export default function FavoriteList({ itemsArray4, favs }: any) {
+export default function FavoriteList({ itemsArray4, favs }: {itemsArray4:string[], favs:any}) {
   const router = useRouter();
   // cartsの削除【始まり】
   function deleteItem(favoriteItem: any) {
