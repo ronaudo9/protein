@@ -84,7 +84,8 @@ type Item = {
   items: any;
   preventDefault(): unknown;
   date: string;
-  value: string;
+  value: any;
+  map(arg0: (cart: Item) => JSX.Element): import('react').ReactNode;
   map(arg0: (cart: Item) => JSX.Element): import('react').ReactNode;
   length: number;
   forEach(arg0: (element: Item) => void): unknown;
@@ -100,6 +101,7 @@ type Item = {
   description: string;
   content: string;
   countity: number;
+  event: any;
 };
 
 type Item2 = {
@@ -129,9 +131,23 @@ type Event = {
   ) => void;
 };
 
+type Favorite = {
+  itemsArray4: string[];
+  favs: string[];
+  item: string;
+  favoriteItem: any;
+  id: number;
+  userId: number;
+  itmId: number[];
+  imageUrl: string;
+  name: string;
+  price: number;
+};
+
 export type { User };
 export type { Users };
 export type { Users2 };
 export type { Users3 };
 export type { Item,Item2 };
 export type { Event };
+export type { Favorite };

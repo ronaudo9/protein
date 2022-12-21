@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import HeaderLogin from './layout/headerLogin';
+import Image from 'next/image';
 import ItemDisplay from './items';
 import { GetServerSideProps } from 'next';
-import { Item,User,Users } from './../types/type';
+import { Item, User, Users } from './../types/type';
 
 export default function UserLogin(cookieData: Item) {
   const router = useRouter();
@@ -105,76 +106,80 @@ export default function UserLogin(cookieData: Item) {
           />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-
-        <main className={style.main}>
-          <hgroup className={style.hgroup}>
-            <h1 className={style.h1}>ログイン</h1>
-            <Link href="/users/new">
-              <h3 className={style.h3}>新規ユーザー登録はこちら</h3>
-            </Link>
-            <h3
-              className={style.login}
-              style={{ display: visible ? 'block' : 'none' }}
-            >
-              ユーザーが見つかりません。もう一度入力してください。
-            </h3>
-          </hgroup>
-          <form
-            className={style.form}
-            onSubmit={
-              handler
-            }
-          >
-            <div className={style.group}>
-              <input
-                type="email"
-                name="email"
-                placeholder="メールアドレス"
-                className={style.input}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  setVisible(false);
-                }}
-                required
-                autoComplete="off"
-              />
-              <span className={style.highlight}></span>
-              <span className={style.bar}></span>
-              <label className={style.label}></label>
-            </div>
-            <div className={style.group}>
-              <input
-                type="password"
-                name="password"
-                id="password_validation"
-                placeholder="パスワード&nbsp;(8文字以上16文字以下)"
-                className={style.input}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  setVisible(false);
-                }}
-                required
-                pattern=".{8,16}"
-                title="8文字以上16文字以下"
-                autoComplete="off"
-              />
-              <span className={style.highlight}></span>
-              <span className={style.bar}></span>
-              <label className={style.label}></label>
-            </div>
-            <button
-              type="submit"
-              className={`${style.button} ${style.buttonBlue}`}
-            >
-              ログイン
-              <div
-                className={`${style.ripples} ${style.buttonRipples}`}
+        <div className={style.top}>
+          <Image
+            priority
+            src="/images/ocean.jpg"
+            width={950}
+            height={800}
+            alt="お気に入り"
+            className={style.image}
+          />
+          <main className={style.main}>
+            <hgroup className={style.hgroup}>
+              <h1 className={style.h1}>ログイン</h1>
+              <Link href="/users/new">
+                <h3 className={style.h3}>新規ユーザー登録はこちら</h3>
+              </Link>
+              <h3
+                className={style.login}
+                style={{ display: visible ? 'block' : 'none' }}
               >
-                <span className={style.ripplesCircle}></span>
+                ユーザーが見つかりません。もう一度入力してください。
+              </h3>
+            </hgroup>
+            <form className={style.form} onSubmit={handler}>
+              <div className={style.group}>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="メールアドレス"
+                  className={style.input}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setVisible(false);
+                  }}
+                  required
+                  autoComplete="off"
+                />
+                <span className={style.highlight}></span>
+                <span className={style.bar}></span>
+                <label className={style.label}></label>
               </div>
-            </button>
-          </form>
-        </main>
+              <div className={style.group}>
+                <input
+                  type="password"
+                  name="password"
+                  id="password_validation"
+                  placeholder="パスワード&nbsp;(8文字以上16文字以下)"
+                  className={style.input}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setVisible(false);
+                  }}
+                  required
+                  pattern=".{8,16}"
+                  title="8文字以上16文字以下"
+                  autoComplete="off"
+                />
+                <span className={style.highlight}></span>
+                <span className={style.bar}></span>
+                <label className={style.label}></label>
+              </div>
+              <button
+                type="submit"
+                className={`${style.button} ${style.buttonBlue}`}
+              >
+                ログイン
+                <div
+                  className={`${style.ripples} ${style.buttonRipples}`}
+                >
+                  <span className={style.ripplesCircle}></span>
+                </div>
+              </button>
+            </form>
+          </main>
+        </div>
       </div>
     </div>
   );

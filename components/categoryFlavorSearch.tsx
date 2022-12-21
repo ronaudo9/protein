@@ -1,8 +1,7 @@
 import useSWR from 'swr';
 import styles from 'styles/items_index.module.css';
 import { useState, useEffect, ChangeEvent } from 'react';
-import { Users,User,Item } from '../types/type';
-
+import { Users, User, Item } from '../types/type';
 
 export default function CategoryFlavorSearch({
   flavor,
@@ -56,6 +55,8 @@ export default function CategoryFlavorSearch({
         <option value="ストロベリークリーム">
           ストロベリークリーム
         </option>
+        <option value="ベリーチェリー">ベリーチェリー</option>
+        <option value="バブルガム">バブルガム</option>
       </select>
     </div>
   );

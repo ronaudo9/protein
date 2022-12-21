@@ -186,6 +186,7 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
     }
   };
 
+  // お気に入り登録（db.jsonへ現在の商品情報登録）
   let favs = {
     userId: Number(userId),
     itemId: [detail.id],
@@ -193,7 +194,6 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   };
 
   console.log(favs);
-  // お気に入り登録（db.jsonへ現在の商品情報登録）
   const addFavoritesHandler = () => {
     fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/favorites`, {
       method: 'POST',
@@ -202,6 +202,12 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
       },
       body: JSON.stringify(favs),
     });
+    // .then(() => {
+    //   {
+    //     router.push('/users/favorite');
+    //   }
+    // }
+    // );
   };
   // pagesのしたにお気に入りapi作成
 

@@ -6,9 +6,11 @@ import Footer from '../layout/footer';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { useState, useEffect } from 'react';
-import { Users,Users2,Users3,User,Item } from '../../types/type';
+import { Favorite, Item } from '../../types/type';
 
-export const getServerSideProps = async ({ req }: any) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+}) => {
   const cookies = req.cookies;
 
   let favs;
@@ -20,12 +22,14 @@ export const getServerSideProps = async ({ req }: any) => {
   const itemsArray = favs.map((fav: Item) => {
     return `id=${fav.itemId}`;
   });
+  // console.log(favs);
   const Array = itemsArray.join('&');
-  console.log(Array);
+  // console.log(Array);
 
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items?${Array}`
   );
+  // console.log(data);
 
   const itemsArray2 = await data.json();
   //空の配列を作るために存在しないid=0を指定した。
@@ -47,18 +51,10 @@ export const getServerSideProps = async ({ req }: any) => {
   };
 };
 
-export default function FavoriteList({ itemsArray4, favs }: {itemsArray4:string[], favs:any}) {
+export default function FavoriteList({ itemsArray4 }: Favorite) {
   const router = useRouter();
-  // cartsの削除【始まり】
-  function deleteItem(favoriteItem: any) {
-    // .filterを使用して削除ボタンが押されたitmIdを取得し、それ以外の配列データを作る
-    // favoriteItemにfilterをかけると、取れるのはその商品情報のidのみ⇒filterじゃなくてfavoriteItem.id
-    // itemsArray2にfilterをかけると、取れるのは？その人が登録した各商品の商品情報のidのみ
-    // itemsAeeayにfilterをかけると、取れるのは[ 'id=2', 'id=3', 'id=2', 'id=5' ]で同じユーザーodのお気に入りのitemId
-    const favNew = favs.filter((item: any) => {
-      return item.itemId === favoriteItem.id;
-    });
-    console.log(favNew);
+  // お気に入り情報の削除
+  function deleteItem(favoriteItem: Favorite) {
     fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN}/api/favorites/${favoriteItem.id}`,
       {
@@ -67,8 +63,7 @@ export default function FavoriteList({ itemsArray4, favs }: {itemsArray4:string[
     );
     router.reload();
   }
-  // favorites?itemId_like=だとitemIdを持つすべてのデータを消してしまう、他の人も。
-  // cartsの削除【終わり】
+
   return (
     <>
       <Header />

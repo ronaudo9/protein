@@ -5,7 +5,8 @@
 
 .img {
   width: 100%;
-  height: 100%;
+  height: 130%;
+  position: absolute;
 }
 
 .category1 {
@@ -15,12 +16,6 @@
   background-color: rgb(243, 239, 239);
   border: 3px solid #ffffff;
   margin: 1% 5%;
-}
-.head {
-  padding-top: 2%;
-  padding-left: 7%;
-  padding-right: 7%;
-  background-color: white;
 }
 
 .searchList {
@@ -38,7 +33,10 @@
 .category2 {
   margin: 0 0 0 5%;
 }
-
+.all {
+  background-color: black;
+  padding-bottom: 10%;
+}
 .item {
   list-style: none;
 }
@@ -111,9 +109,18 @@
 
 .itemsImg {
   justify-content: space-between;
-
+  overflow: hidden;
   margin: 0 auto;
   width: 260px;
+}
+
+.imgPro {
+  transition: 1s all;
+}
+
+.imgPro:hover {
+  transform: scale(1.2, 1.2);
+  transition: 1s all;
 }
 
 .ul {
@@ -121,11 +128,6 @@
 
   width: 260px;
 }
-
-/* .imgPro {
-  width: 250px;
-  margin: auto;
-} */
 
 .side .items_list1 {
   margin: 2% auto;
@@ -248,22 +250,30 @@
   overflow: hidden;
 }
 
-
-.page{
+.page {
   text-align: center;
 }
 
-.paging{
-  padding: .5rem .7rem;
+.paging {
+  padding: 0.5rem 0.7rem;
   background: #26a4ca;
-  color: #FFF;
+  color: #fff;
   text-decoration: none;
   margin-right: 0.5rem;
   margin-left: 0.5rem;
   border-radius: 25rem;
 }
 
-.paging:active{
+.paging:active {
   background: #26a4ca;
   color: black;
+}
+
+.background {
+  background: rgba(255, 255, 255, 0.55);
+  position: relative;
+  padding: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 20%;
 }
