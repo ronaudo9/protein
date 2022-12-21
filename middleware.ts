@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const config = {
-  matcher: ['/', '/items'],
+  matcher: ['/','/items'],
 };
 
 const middleware = (req: NextRequest) => {

@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../layout/header';
 import Footer from '../layout/footer';
-import { User,Item } from '../../types/type';
+import { User, Item } from '../../types/type';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
 // <{ user: User }> = ({ user }) => {
 
-const Cart:NextPage <{carts:any ,cookies: Item }> = ({ carts, cookies }) => {
+const Cart: NextPage<{ carts: any, cookies: Item }> = ({ carts, cookies }) => {
   const [localData, setLocalData] = useState([]);
   const router = useRouter();
 
@@ -95,7 +95,7 @@ const Cart:NextPage <{carts:any ,cookies: Item }> = ({ carts, cookies }) => {
   // localDataの合計【終わり】
 
   console.log(carts);
-  console.log(carts.length);
+
 
   const routerHandler = () => {
     if (carts[0]) {
@@ -203,7 +203,12 @@ const Cart:NextPage <{carts:any ,cookies: Item }> = ({ carts, cookies }) => {
                     height={260}
                   />
                   <div className={styles.text_content}>
-                    <p>{data.value.name}</p>
+                    <Link
+                      href={`../items/${encodeURIComponent(data.value.itemId)}`}
+                      className={styles.a}
+                    >
+                      <p>{data.value.name}</p>
+                    </Link>
                     <p>
                       <span className={styles.quantity}>数量</span>
                       {data.value.countity}個

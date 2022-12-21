@@ -302,19 +302,19 @@
     {
       "id": 7,
       "firstName": "安田",
-      "lastName": "優斗",
+      "lastName": "裕也",
       "firstNameKana": "やすだ",
       "lastNameKana": "ゆうと",
       "middleName": " ",
       "email": "nao@gmail.com",
       "password": "aaqqwwss",
       "passwordConfirmation": "aaqqwwss",
-      "postCode": "370-1301",
-      "prefecture": "群馬県",
-      "city": "高崎市",
-      "aza": "新町302",
-      "building": "",
-      "tel": "080-2233-4455",
+      "postCode": "154-0033",
+      "prefecture": "東京都",
+      "city": "新宿区",
+      "aza": "３丁目４−２",
+      "building": "新橋ビル559",
+      "tel": "080-2233-5544",
       "deleted": false
     },
     {
@@ -408,47 +408,46 @@
       "id": 5
     },
     {
-      "userId": 9,
-      "itemId": 7,
-      "imageUrl": "/images/Essencial_whey_protein.jpg",
-      "name": "エッセンシャル ホエイ プロテイン",
-      "flavor": "ノンフレーバー",
-      "price": 3790,
+      "userId": 7,
+      "itemId": 2,
+      "imageUrl": "/images/impact_whey_aisolate.jpg",
+      "name": "Impact ホエイ アイソレート",
+      "flavor": "チョコ",
+      "price": 4390,
       "countity": 1,
       "id": 6
     },
     {
       "userId": 0,
-      "itemId": 2,
-      "imageUrl": "/images/impact_whey_aisolate.jpg",
-      "name": "Impact ホエイ アイソレート",
-      "flavor": "チョコ",
-      "price": 4390,
+      "itemId": 3,
+      "imageUrl": "/images/probiotech_whey_protein.jpg",
+      "name": "プロバイオティック ホエイ プロテイン",
+      "flavor": "ミルクティー",
+      "price": 2190,
       "countity": 1,
       "id": 7
     },
     {
-      "userId": 9,
-      "itemId": 7,
-      "imageUrl": "/images/Essencial_whey_protein.jpg",
-      "name": "エッセンシャル ホエイ プロテイン",
-      "flavor": "ノンフレーバー",
-      "price": 3790,
-      "countity": 1,
-      "id": 8
-    },
-    {
-      "userId": 9,
+      "userId": 7,
       "itemId": 2,
       "imageUrl": "/images/impact_whey_aisolate.jpg",
       "name": "Impact ホエイ アイソレート",
       "flavor": "チョコ",
       "price": 4390,
       "countity": 1,
+      "id": 8
+    },
+    {
+      "userId": 7,
+      "itemId": 3,
+      "imageUrl": "/images/probiotech_whey_protein.jpg",
+      "name": "プロバイオティック ホエイ プロテイン",
+      "flavor": "ミルクティー",
+      "price": 2190,
+      "countity": 1,
       "id": 9
     }
   ],
-  "subscriptionCart": [],
   "subscription": [],
   "subscriptionHistories": []
 }

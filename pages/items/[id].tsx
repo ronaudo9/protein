@@ -9,7 +9,7 @@ import {
 import React, { useEffect } from 'react';
 import Header from '../layout/header';
 import { useRouter } from 'next/router';
-import { Item } from '../../types/type';
+import { Item,Event } from '../../types/type';
 import Footer from '../layout/footer';
 
 export const getStaticPaths: GetStaticPaths = async () => {
