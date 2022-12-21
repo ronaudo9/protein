@@ -48,8 +48,13 @@ export default function UsersElements({ user }: {user:Users}) {
     passwordConfirmation: user.passwordConfirmation,
   };
 
+  const initialValues2 = {
+    tel: '',
+    password: '',
+    passwordConfirmation: '',
+  };
   const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState(initialValues2);
   const [isSubmit, setIsSubmit] = useState(false);
 
 
@@ -96,17 +101,12 @@ export default function UsersElements({ user }: {user:Users}) {
     } else if (!passwordReg.test(formValues.passwordConfirmation)) {
       errors.passwordConfirmation =
         '確認用パスワードは半角英数字で記載してください';
-    } else{
-      errors.passwordConfirmation = '';
     }
 
     if (!telReg.test(formValues.tel)) {
       errors.tel =
         '電話番号はXXX-XXXX-XXXXかXXXX-XX-XXXXの形式で入力してください';
-    }else{
-      errors.tel = '';
     }
-
     return errors;
   };
 

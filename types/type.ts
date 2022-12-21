@@ -23,43 +23,43 @@ type User = {
   password: string;
   passwordConfirmation: string;
 };
-// type Users = {
-//   id:number,
-//   firstName: string,
-//   lastName: string,
-//   firstNameKana: string,
-//   lastNameKana: string,
-//   middleName: string,
-//   email: string,
-//   password: string,
-//   passwordConfirmation: string,
-//   postCode: string,
-//   prefecture: string,
-//   city: string,
-//   aza: string,
-//   building: string,
-//   tel: string,
-//   deleted: boolean,
-// }
+type Users = {
+  id:number,
+  firstName: string,
+  lastName: string,
+  firstNameKana: string,
+  lastNameKana: string,
+  middleName: string,
+  email: string,
+  password: string,
+  passwordConfirmation: string,
+  postCode: string,
+  prefecture: string,
+  city: string,
+  aza: string,
+  building: string,
+  tel: string,
+  deleted: boolean,
+}
 
-// type Users2={
-//   firstName:string,
-//     lastName: string,
-//     firstNameKana: string,
-//     lastNameKana: string,
-//     postCode: string,
-//     prefecture: string,
-//     city: string,
-//     aza: string,
-//     building: string,
-//     email: string,
-//     middleName: string,
-//     tel: string,
-//     password: string,
-//     passwordConfirmation: string,
-// }
+type Users2={
+  firstName:string,
+    lastName: string,
+    firstNameKana: string,
+    lastNameKana: string,
+    postCode: string,
+    prefecture: string,
+    city: string,
+    aza: string,
+    building: string,
+    email: string,
+    middleName: string,
+    tel: string,
+    password: string,
+    passwordConfirmation: string,
+}
 
-type User3 = React.Dispatch<React.SetStateAction<{
+type Users3 = React.Dispatch<React.SetStateAction<{
   firstName: string;
   lastName: string;
   firstNameKana: string;
@@ -76,61 +76,7 @@ type User3 = React.Dispatch<React.SetStateAction<{
   passwordConfirmation: string;
 }>>;
 
-type Users = {
-  firstName: string;
-  lastName: string;
-  firstNameKana: string;
-  lastNameKana: string;
-  middleName: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-  postCode: string;
-  prefecture: string;
-  city: string;
-  aza: string;
-  building: string;
-  tel: string;
-  deleted: boolean;
-};
 
-type Users2 = {
-  firstName: string;
-  lastName: string;
-  firstNameKana: string;
-  lastNameKana: string;
-  postCode: string;
-  prefecture: string;
-  city: string;
-  aza: string;
-  building: string;
-  email: string;
-  middleName: string;
-  tel: string;
-  credit: string;
-  password: string;
-  passwordConfirmation: string;
-};
-
-type Users3 = React.Dispatch<
-  React.SetStateAction<{
-    firstName: string;
-    lastName: string;
-    firstNameKana: string;
-    lastNameKana: string;
-    postCode: string;
-    prefecture: string;
-    city: string;
-    aza: string;
-    building: string;
-    email: string;
-    middleName: string;
-    tel: string;
-    credit: string;
-    password: string;
-    passwordConfirmation: string;
-  }>
->;
 
 type Item = {
   items: any;

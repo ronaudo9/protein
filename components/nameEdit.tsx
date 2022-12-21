@@ -3,7 +3,7 @@ import styles from '/styles/users.edit.module.css';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import{ Users2,User3 } from '../types/type';
+import{ Users2,Users3 } from '../types/type';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
 const NameEdit = ({ formValues, setFormValues, readOnly }:{
   formValues:Users2;
-  setFormValues:User3;
+  setFormValues:Users3;
   readOnly:boolean;
 }) => {
   const router = useRouter();
