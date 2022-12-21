@@ -1,17 +1,14 @@
 import useSWR from 'swr';
 import styles from 'styles/items_index.module.css';
 import { useState, useEffect, ChangeEvent } from 'react';
-import { setTokenSourceMapRange } from 'typescript';
-
-const fetcher = (resource: any, init: any) =>
-  fetch(resource, init).then((res) => res.json());
+import { Users, User, Item } from '../types/type';
 
 export default function CategoryFlavorSearch({
   flavor,
   flavorHandler,
 }: {
-  flavor: any;
-  flavorHandler: any;
+  flavor: string;
+  flavorHandler: React.ChangeEventHandler<HTMLSelectElement>;
 }) {
   // useStateで取得データを表示する
 
@@ -58,6 +55,8 @@ export default function CategoryFlavorSearch({
         <option value="ストロベリークリーム">
           ストロベリークリーム
         </option>
+        <option value="ベリーチェリー">ベリーチェリー</option>
+        <option value="バブルガム">バブルガム</option>
       </select>
     </div>
   );

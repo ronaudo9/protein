@@ -232,7 +232,11 @@
   transition: 0.4s;
 }
 
-.fav_button a:focus {
+.fav_button :active {
+  background: rgb(203, 239, 254);
+}
+
+.fav_button :focus {
   background: rgb(203, 239, 254);
 }
 
@@ -301,7 +305,7 @@
 }
 
 .buttonsRight {
-  margin: 0 0 0 40%;
+  margin: 0 0 0 25%;
   display: flex;
   padding: 1%;
 }

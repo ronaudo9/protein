@@ -242,6 +242,16 @@
       "price": 4990,
       "description": "本商品は商品名を｢ベッドタイム エクストリーム」から｢オーバーナイト リカバリー ブレンド」に変更しましたが、栄養成分や味は従来の品質を保っております。ミルクプロテイン、ミセルカゼイン、ホエイコンセンレート、卵白パウダーを含有したスローリリースブレンド。寝ているときにもタンパク質を取ることができます。",
       "content": "エネルギー（1食あたり）: 209kcal, 脂質: 0.4g, 炭水化物: 5.7g, タンパク質: 43g, 食塩相当量: 0.06g"
+    },
+    {
+      "id": 19,
+      "imageUrl": "/images/clear_wheyaisolate.jpg",
+      "name": "クリア ホエイ アイソレート - Jelly Belly",
+      "category": "whey",
+      "flavor": ["ベリーチェリー", "バブルガム"],
+      "price": 3390,
+      "description": "受賞歴を誇るクリア ホエイ アイソレートに、懐かしさを感じる抜群に美味しいさまざまなフレーバーを配合しました。シェイクを飲むごとに、味覚を刺激するワクワクのフレーバーがはじけます。マイプロテインとJelly Bellyのコラボドリンクで、日々摂取するプロテインを風味豊かなご褒美に変えてみませんか。",
+      "content": "エネルギー（1食あたり）: 209kcal, 脂質: 0.4g, 炭水化物: 5.7g, タンパク質: 43g, 食塩相当量: 0.06g"
     }
   ],
   "users": [
@@ -304,9 +314,9 @@
       "firstName": "安田",
       "lastName": "裕也",
       "firstNameKana": "やすだ",
-      "lastNameKana": "ゆうや",
-      "middleName": "ゆうや",
-      "email": "no@gmail.com",
+      "lastNameKana": "ゆうと",
+      "middleName": " ",
+      "email": "nao@gmail.com",
       "password": "aaqqwwss",
       "passwordConfirmation": "aaqqwwss",
       "postCode": "154-0033",
@@ -352,48 +362,61 @@
       "building": "新宿ビル505",
       "tel": "090-8877-2233",
       "deleted": false
-    },
-    {
-      "firstName": "佐藤",
-      "lastName": "健",
-      "firstNameKana": "さとう",
-      "lastNameKana": "たける",
-      "middleName": "たける",
-      "email": "na.ma@rakus-partners.co.jp",
-      "password": "ddeerrff",
-      "passwordConfirmation": "ddeerrff",
-      "postCode": "154-0098",
-      "prefecture": "東京都",
-      "city": "新宿区",
-      "aza": "新宿４丁目",
-      "building": "新宿ビル５０５",
-      "tel": "090-9988-2233",
-      "deleted": false,
-      "id": 10
     }
   ],
   "favorites": [],
-  "purchaseHistories": [
+  "purchaseHistories": [],
+  "carts": [
     {
       "userId": 1,
-      "items": [
-        {
-          "userId": 1,
-          "itemId": 2,
-          "imageUrl": "/images/impact_whey_aisolate.jpg",
-          "name": "Impact ホエイ アイソレート",
-          "flavor": "チョコ",
-          "price": 4390,
-          "countity": 1,
-          "id": 1,
-          "date": "2022/12/14 14:21:13"
-        }
-      ],
+      "itemId": 1,
+      "imageUrl": "/images/impact_whey_protein.jpg",
+      "name": "Impact ホエイ プロテイン",
+      "flavor": "チョコ",
+      "price": 1990,
+      "countity": 1,
       "id": 1
+    },
+    {
+      "userId": 1,
+      "itemId": 2,
+      "imageUrl": "/images/impact_whey_aisolate.jpg",
+      "name": "Impact ホエイ アイソレート",
+      "flavor": "チョコ",
+      "price": 4390,
+      "countity": 1,
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "itemId": 2,
+      "imageUrl": "/images/impact_whey_aisolate.jpg",
+      "name": "Impact ホエイ アイソレート",
+      "flavor": "チョコ",
+      "price": 4390,
+      "countity": 1,
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "itemId": 1,
+      "imageUrl": "/images/impact_whey_protein.jpg",
+      "name": "Impact ホエイ プロテイン",
+      "flavor": "チョコ",
+      "price": 1990,
+      "countity": 3,
+      "id": 4
+    },
+    {
+      "userId": 0,
+      "itemId": 1,
+      "imageUrl": "/images/impact_whey_protein.jpg",
+      "name": "Impact ホエイ プロテイン",
+      "flavor": "チョコ",
+      "price": 1990,
+      "countity": 3,
+      "id": 5
     }
-  ],
-  "carts": [
-    
   ],
   "subscription": [],
   "subscriptionHistories": []
