@@ -15,7 +15,6 @@ import Image from 'next/image';
 import Searching from '../../components/Searching';
 import TooltipButton from '../../components/tooltipButton';
 
-
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const ItemDisplay: NextPage = () => {
@@ -28,7 +27,6 @@ const ItemDisplay: NextPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showChatbot, setShowChatbot] = useState(false);
 
-
   //検索、絞り込み、商品詳細のクリック以外の何もしない時間が5秒あればチャットボット出現させる
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -38,16 +36,17 @@ const ItemDisplay: NextPage = () => {
     return () => clearTimeout(timeout);
   }, [resource, category, flavor, searchQuery, count]);
 
-
   const inputref = useRef<HTMLInputElement>();
   //ページング
   useEffect(() => {
     if (category) {
       setResource(
-        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}&category=${category}`);
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}&category=${category}`
+      );
     } else if (flavor) {
       setResource(
-        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}`);
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}`
+      );
     } else {
       setResource(`${process.env.NEXT_PUBLIC_PROTEIN}/api/items`);
     }
@@ -93,7 +92,6 @@ const ItemDisplay: NextPage = () => {
     setSearchQuery(inputref.current!.value);
   };
 
-
   return (
     <>
       <Head>
@@ -131,9 +129,7 @@ const ItemDisplay: NextPage = () => {
       </section>
 
       {/* Chatbotコンポーネント */}
-      <section>
-        {showChatbot && <TooltipButton />}
-      </section>
+      <section>{showChatbot && <TooltipButton />}</section>
 
       <section>
         <p className={styles.titlesCenter}>

@@ -9,7 +9,7 @@ import AddressEdit from './addressEdit';
 import TelEdit from './telEdit';
 import PasswordEdit from './passwordEdit';
 import router, { useRouter } from 'next/router';
-import{ Users,User } from '../types/type';
+import{ Users,Users2,User3 } from '../types/type';
 
 
 export const getServerSideProps: GetServerSideProps = async ({
@@ -50,11 +50,20 @@ export default function UsersElements({ user }: {user:Users}) {
   };
 
   const [formValues, setFormValues] = useState(initialValues);
-  // const [formErrors, setFormErrors] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState(initialValues);
+  const [isSubmit, setIsSubmit] = useState(false);
+
 
   function submit(e: SyntheticEvent) {
     e.preventDefault();
 
+    const newErrors = validate(formValues);
+    setFormErrors(newErrors);
+    setIsSubmit(true);
+
+    if (Object.keys(newErrors).length !== 0) {
+      return isSubmit;
+    } else {
     fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/users/${user.id}`, {
       method: 'PATCH',
       headers: {
@@ -65,6 +74,42 @@ export default function UsersElements({ user }: {user:Users}) {
       router.reload();
     });
   }
+  }
+
+  const validate = (formValues: Users2) => {
+    const errors = {} as Users;
+
+    const passwordReg = /^[0-9a-zA-Z]*$/;
+    const telReg =
+      /^(0[5-9]0-[0-9]{4}-[0-9]{4}|0[0-9]{3}-[0-9]{2}-[0-9]{4})$/;
+
+    if (formValues.password.length < 8) {
+      errors.password =
+        'パスワードは８文字以上１６文字以内で設定してください';
+    } else if (formValues.password.length > 16) {
+      errors.password =
+        'パスワードは８文字以上１６文字以内で設定してください';
+    } else if (!passwordReg.test(formValues.password)) {
+      errors.password = 'パスワードは半角英数字で記載してください';
+    } else if (formValues.password !== formValues.passwordConfirmation) {
+      errors.passwordConfirmation =
+        'パスワードと確認用パスワードが不一致です';
+    } else if (!passwordReg.test(formValues.passwordConfirmation)) {
+      errors.passwordConfirmation =
+        '確認用パスワードは半角英数字で記載してください';
+    } else{
+      errors.passwordConfirmation = '';
+    }
+
+    if (!telReg.test(formValues.tel)) {
+      errors.tel =
+        '電話番号はXXX-XXXX-XXXXかXXXX-XX-XXXXの形式で入力してください';
+    }else{
+      errors.tel = '';
+    }
+
+    return errors;
+  };
 
   return (
     <>
@@ -81,6 +126,7 @@ export default function UsersElements({ user }: {user:Users}) {
             readOnly={readOnly}
           />
         </div>
+        {/* <div>{formErrors?.email}</div> */}
         <hr />
 
         <div className={styles.elementCategory}>
@@ -135,7 +181,9 @@ export default function UsersElements({ user }: {user:Users}) {
             setFormValues={setFormValues}
             readOnly={readOnly}
           />
+          <div>{formErrors?.tel}</div>
         </div>
+        {/* <div>{formErrors?.tel}</div> */}
         <hr />
         {/* <div className={styles.elementCategory}>
           <div>
@@ -168,6 +216,10 @@ export default function UsersElements({ user }: {user:Users}) {
             readOnly={readOnly}
           />
         </div>
+        <div>
+          {formErrors?.passwordConfirmation}
+          </div>
+
         <hr />
 
         <button className={styles.btnB}>

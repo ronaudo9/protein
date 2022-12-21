@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
 // <{ user: User }> = ({ user }) => {
 
-const Cart:NextPage <{carts:Item ,cookies: Item }> = ({ carts, cookies }) => {
+const Cart:NextPage <{carts:any ,cookies: Item }> = ({ carts, cookies }) => {
   const [localData, setLocalData] = useState([]);
   const router = useRouter();
 
@@ -96,7 +96,7 @@ const Cart:NextPage <{carts:Item ,cookies: Item }> = ({ carts, cookies }) => {
   // localDataの合計【終わり】
 
   console.log(carts);
-  console.log(carts.length);
+
 
   const routerHandler = () => {
     if (carts[0]) {

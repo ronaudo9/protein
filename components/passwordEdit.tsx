@@ -64,7 +64,7 @@ const PasswordEdit = ({
   //   }
   // };
 
-  const validate = (values: Users2) => {
+  const validate = (values: Users) => {
     const errors = {} as Users;
 
     const passwordReg = /^[0-9a-zA-Z]*$/;
