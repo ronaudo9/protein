@@ -17,7 +17,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/`
   );
   const items = await res.json();
-  const paths = items.map((item: any) => ({
+  const paths = items.map((item: Item) => ({
     params: {
       // idをdb.jsonファイルの文字列に合わせる
       id: item.id.toString(),
@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps = async ({
 };
 
 // detail getStaticPropsから取得
-const ItemDetail: NextPage<{ detail: any }> = ({ detail }) => {
+const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   const router = useRouter();
   const [count, setCount] = React.useState(1);
   const [total, setTotal] = React.useState(detail.price);
@@ -53,10 +53,10 @@ const ItemDetail: NextPage<{ detail: any }> = ({ detail }) => {
   const [flavor, setFlavor] = React.useState(detail.flavor[0]);
 
   //　数量変更
-  const addHandlerNext = (sub: any) => {
+  const addHandlerNext = (sub: number) => {
     setTotal(total + sub);
   };
-  const addHandlerPrev = (sub: any) => {
+  const addHandlerPrev = (sub: number) => {
     if (total <= detail.price) {
       setTotal(detail.price);
     } else {
