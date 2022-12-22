@@ -168,10 +168,9 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
     if (count === 0) {
       return;
       // 数量0の場合はカートへ入れない
-    // } else if (Number(userId) == 0) {
-    //   return;
-    } 
-    else {
+    } else if (Number(userId) == 0) {
+      return;
+    } else {
       fetch(
         `/api/subscriptionCart/`,
         {
