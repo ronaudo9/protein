@@ -305,86 +305,8 @@
   ],
   "favorites": [],
   "purchaseHistories": [],
-  "carts": [
-    {
-      "userId": 1,
-      "itemId": 12,
-      "imageUrl": "/images/protein_mocha.jpg",
-      "name": "プロテイン モカ",
-      "flavor": "チョコ",
-      "price": 3990,
-      "countity": 1,
-      "id": 1
-    },
-    {
-      "userId": 0,
-      "itemId": 1,
-      "imageUrl": "/images/impact_whey_protein.jpg",
-      "name": "Impact ホエイ プロテイン",
-      "flavor": "チョコ",
-      "price": 1990,
-      "countity": 1,
-      "id": 2
-    },
-    {
-      "userId": 1,
-      "itemId": 12,
-      "imageUrl": "/images/protein_mocha.jpg",
-      "name": "プロテイン モカ",
-      "flavor": "チョコ",
-      "price": 3990,
-      "countity": 1,
-      "id": 3
-    },
-    {
-      "userId": 1,
-      "itemId": 1,
-      "imageUrl": "/images/impact_whey_protein.jpg",
-      "name": "Impact ホエイ プロテイン",
-      "flavor": "チョコ",
-      "price": 1990,
-      "countity": 1,
-      "id": 4
-    }
-  ],
-  "subscriptionCart": [
-    {
-      "userId": 9,
-      "itemId": 5,
-      "imageUrl": "/images/impact_whey_stroberry.jpg",
-      "name": "Impact ホエイ プロテイン-ストロベリーヨーグルトフレーバー",
-      "flavor": "ヨーグルト-ストロベリー-",
-      "price": 1990,
-      "countity": 1,
-      "id": 1
-    },
-    {
-      "userId": 1,
-      "itemId": 1,
-      "imageUrl": "/images/impact_whey_protein.jpg",
-      "name": "Impact ホエイ プロテイン",
-      "flavor": "チョコ",
-      "price": 1990,
-      "countity": 1,
-      "id": 2
-    }
-  ],
+  "carts": [],
+  "subscriptionCart": [],
   "subscription": [],
-  "subscriptionHistories": [
-    {
-      "userId": 9,
-      "items": {
-        "userId": 9,
-        "itemId": 5,
-        "imageUrl": "/images/impact_whey_stroberry.jpg",
-        "name": "Impact ホエイ プロテイン-ストロベリーヨーグルトフレーバー",
-        "flavor": "ヨーグルト-ストロベリー-",
-        "price": 1990,
-        "countity": 1,
-        "id": 1,
-        "date": "2022/12/26 11:36:43"
-      },
-      "id": 1
-    }
-  ]
+  "subscriptionHistories": []
 }
