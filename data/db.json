@@ -356,8 +356,76 @@
   ],
   "favorites": [],
   "purchaseHistories": [],
-  "carts": [],
-  "subscriptionCart": [],
-  "subscription": [],
+  "carts": [
+    {
+      "userId": 3,
+      "itemId": 4,
+      "imageUrl": "/images/cofee_burst_whey.jpg",
+      "name": "コーヒー ブースト ホエイ",
+      "flavor": "ココナッツ",
+      "price": 2590,
+      "countity": 1,
+      "id": 1
+    },
+    {
+      "userId": 0,
+      "itemId": 5,
+      "imageUrl": "/images/impact_whey_stroberry.jpg",
+      "name": "Impact ホエイ プロテイン-ストロベリーヨーグルトフレーバー",
+      "flavor": "ヨーグルト-ストロベリー-",
+      "price": 1990,
+      "countity": 1,
+      "id": 2
+    },
+    {
+      "userId": 3,
+      "itemId": 4,
+      "imageUrl": "/images/cofee_burst_whey.jpg",
+      "name": "コーヒー ブースト ホエイ",
+      "flavor": "ココナッツ",
+      "price": 2590,
+      "countity": 1,
+      "id": 3
+    },
+    {
+      "userId": 3,
+      "itemId": 5,
+      "imageUrl": "/images/impact_whey_stroberry.jpg",
+      "name": "Impact ホエイ プロテイン-ストロベリーヨーグルトフレーバー",
+      "flavor": "ヨーグルト-ストロベリー-",
+      "price": 1990,
+      "countity": 1,
+      "id": 4
+    }
+  ],
+  "subscriptionCart": [
+    {
+      "userId": 3,
+      "itemId": 3,
+      "imageUrl": "/images/probiotech_whey_protein.jpg",
+      "name": "プロバイオティック ホエイ プロテイン",
+      "flavor": "ミルクティー",
+      "price": 2190,
+      "countity": 1,
+      "id": 1
+    }
+  ],
+  "subscription": [
+    {
+      "userId": "3",
+      "id": 1,
+      "items": {
+        "userId": 3,
+        "itemId": 3,
+        "imageUrl": "/images/probiotech_whey_protein.jpg",
+        "name": "プロバイオティック ホエイ プロテイン",
+        "flavor": "ミルクティー",
+        "price": 2190,
+        "countity": 1,
+        "id": 1,
+        "date": "2022/12/26 15:11:21"
+      }
+    }
+  ],
   "subscriptionHistories": []
 }
