@@ -26,7 +26,7 @@ export default function UserLogin(cookieData: Item) {
         value: JSON.parse(localStorage.getItem(key) as string),
       };
     });
-    setLocalData(collection as any);
+    setLocalData(collection as React.SetStateAction<never[]>) ;
   }, []);
 
   //"ally-supports-cache"などを除外 (Local Storageの中の商品情報以外を削除)
@@ -56,7 +56,7 @@ export default function UserLogin(cookieData: Item) {
 
   const handler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/login`, {
+    fetch(`/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -302,19 +302,19 @@
     {
       "id": 7,
       "firstName": "安田",
-      "lastName": "優斗",
+      "lastName": "裕也",
       "firstNameKana": "やすだ",
       "lastNameKana": "ゆうと",
       "middleName": " ",
       "email": "nao@gmail.com",
       "password": "aaqqwwss",
       "passwordConfirmation": "aaqqwwss",
-      "postCode": "370-1301",
-      "prefecture": "群馬県",
-      "city": "高崎市",
-      "aza": "新町302",
-      "building": "",
-      "tel": "080-2233-4453",
+      "postCode": "154-0033",
+      "prefecture": "東京都",
+      "city": "新宿区",
+      "aza": "３丁目４−２",
+      "building": "新橋ビル559",
+      "tel": "080-2233-5544",
       "deleted": false
     },
     {
@@ -354,7 +354,15 @@
       "deleted": false
     }
   ],
-  "favorites": [],
+  "favorites": [
+    {
+      "userId": 9,
+      "itemId": [
+        1
+      ],
+      "id": 1
+    }
+  ],
   "purchaseHistories": [],
   "carts": [],
   "subscriptionCart": [],

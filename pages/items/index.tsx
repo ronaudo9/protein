@@ -17,13 +17,10 @@ import { Users, Users2, Users3, User, Item } from '../../types/type';
 import TooltipButton from '../../components/tooltipButton';
 import Footer from '../layout/footer';
 
-const fetcher = (resource: any, init: any) =>
-  fetch(resource, init).then((res) => res.json());
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const ItemDisplay: NextPage = () => {
-  const [resource, setResource] = useState(
-    `${process.env.NEXT_PUBLIC_PROTEIN}/api/items`
-  );
+  const [resource, setResource] = useState(`/api/items`);
   const [count, setCount] = useState(1);
   const [category, setCategory] = useState('');
   const [flavor, setFlavor] = useState('');
@@ -41,19 +38,47 @@ const ItemDisplay: NextPage = () => {
 
   const inputref = useRef<HTMLInputElement>();
   //ページング
+  // useEffect(() => {
+  //   if (category) {
+  //     setResource(
+  //       `/api/items?flavor_like=${flavor}&category=${category}`
+  //     );
+  //   } else if (flavor) {
+  //     setResource(
+  //       `/api/items?flavor_like=${flavor}`
+  //     );
+  //   } else {
+  //     setResource(`/api/items`);
+  //   }
+  // }, [flavor, category]);
+
+  //ポストする
   useEffect(() => {
-    if (category) {
-      setResource(
-        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}&category=${category}`
-      );
-    } else if (flavor) {
-      setResource(
-        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}`
-      );
-    } else {
-      setResource(`${process.env.NEXT_PUBLIC_PROTEIN}/api/items`);
-    }
-  }, [flavor, category]);
+    const handler = async () => {
+      // event.preventDefault();
+      fetch(`/api/items`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(resource),
+      })
+        // .then((response) => {
+        //   response.json();
+        //   if (response.status !== 200) {
+        //   } else if (response.status === 200) {
+        //   }
+        // })
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+
+    handler();
+  }, [resource]);
 
   const { data, error } = useSWR(resource, fetcher);
   if (error) return <div>Failed to Load</div>;

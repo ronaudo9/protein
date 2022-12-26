@@ -8,6 +8,7 @@ import Header from '../layout/header';
 import Footer from '../layout/footer';
 import { User,Item,Item2 } from '../../types/type';
 
+
 export const getServerSideProps: GetServerSideProps = async ({
   req,
 }) => {
@@ -22,6 +23,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 };
 
 // <{ user: User }> = ({ user }) => {
+
 
 const Cart:NextPage <{carts:Item2 ,cookies: Item }> = ({ carts, cookies }) => {
   const [localData, setLocalData] = useState([]);
@@ -48,7 +50,7 @@ const Cart:NextPage <{carts:Item2 ,cookies: Item }> = ({ carts, cookies }) => {
 
   // cartsの削除【始まり】
   function deleteItem(cart: Item) {
-    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/carts/${cart.id}`, {
+    fetch(`/api/carts/${cart.id}`, {
       method: 'DELETE',
     });
     router.reload();
@@ -92,6 +94,7 @@ const Cart:NextPage <{carts:Item2 ,cookies: Item }> = ({ carts, cookies }) => {
     initialValueLocal
   );
   // localDataの合計【終わり】
+
 
   const routerHandler = () => {
     if (carts.length > 0) {
@@ -199,7 +202,12 @@ const Cart:NextPage <{carts:Item2 ,cookies: Item }> = ({ carts, cookies }) => {
                     height={260}
                   />
                   <div className={styles.text_content}>
-                    <p>{data.value.name}</p>
+                    <Link
+                      href={`../items/${encodeURIComponent(data.value.itemId)}`}
+                      className={styles.a}
+                    >
+                      <p>{data.value.name}</p>
+                    </Link>
                     <p>
                       <span className={styles.quantity}>数量</span>
                       {data.value.countity}個
