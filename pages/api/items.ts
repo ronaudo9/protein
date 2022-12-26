@@ -11,19 +11,19 @@ const handler: NextApiHandler = async (req: any, res: any) => {
   const body = await dataRes.json();
   res.status(200).json(body);
 
-  useEffect(() => {
-    if (rePath) {
-      const handler = async () => {
-        //カテゴリ選択・フレーバー選択された時に表示
-        const dataRes = await fetch(
-          `${process.env.NEXT_PUBLIC_PROTEIN_DATA}${rePath}`
-        );
-        const body = await dataRes.json();
-        res.status(200).json(body);
-      };
-      handler();
-    }
-  }, [rePath, res]);
+  // useEffect(() => {
+  //   if (rePath) {
+  //     const handler = async () => {
+  //       //カテゴリ選択・フレーバー選択された時に表示
+  //       const dataRes = await fetch(
+  //         `${process.env.NEXT_PUBLIC_PROTEIN_DATA}${rePath}`
+  //       );
+  //       const body = await dataRes.json();
+  //       res.status(200).json(body);
+  //     };
+  //     handler();
+  //   }
+  // }, [rePath, res]);
 };
 
 export default handler;
