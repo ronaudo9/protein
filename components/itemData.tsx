@@ -189,7 +189,7 @@ const ItemData: React.FunctionComponent<{
               クレジット決済
             </button>
           </form>
-          <button className={styles.btnB} onClick={() => handler}>
+          <button className={styles.btnB} onClick={handler}>
             <span>代引き決済</span>
           </button>
         </section>
