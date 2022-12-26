@@ -175,7 +175,7 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
         router.push('/login');
     } else {
       fetch(
-        `/api/subscriptionCart/`,
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
         {
           method: 'POST',
           headers: {
