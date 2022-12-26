@@ -30,7 +30,7 @@ export default function UserLogin(cookieData: Item) {
   }, []);
 
   //"ally-supports-cache"などを除外 (Local Storageの中の商品情報以外を削除)
-  const filteredData = localData.filter((object: Item) => {
+  const filteredData = localData.filter((object: any) => {
     return object.key == object.value.itemId;
   });
 
@@ -68,7 +68,7 @@ export default function UserLogin(cookieData: Item) {
         if (response.status !== 200) {
           setVisible(true);
         } else if (response.status === 200) {
-          filteredData.forEach(async (data: Item) => {
+          filteredData.forEach(async (data: any) => {
             data.value.userId = await postUserdata();
 
             filteredData.forEach((data: Item) => {

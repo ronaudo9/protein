@@ -87,8 +87,10 @@ const nextConfig = {
   },
 };
 
-require('dotenv').config({ path: `./.env.${process.env.ENVIRONMENT}` })
+require('dotenv').config({
+  path: `./.env.${process.env.ENVIRONMENT}`,
+});
 
-module.exports = {}
+module.exports = {};
 
 module.exports = nextConfig;
