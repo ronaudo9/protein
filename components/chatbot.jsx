@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import ChatBotItem from './chatBotItem';
 import styles from '../styles/chatbot.module.css';
 import ImageDisplay from './imageDisplay';
+import { supabase } from "../utils/supabase"; // supabaseをコンポーネントで使うときはかく
 
 
 // チャットボットのコンポーネント
@@ -129,8 +130,9 @@ export default function ChatBotComponent(props) {
   useEffect(() => {
     async function fetchData() {
       if (userId !== 0) {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users/${userId}`);
-        const user = await res.json();
+        let {user} = await supabase.from("users").eq("userId",userId)
+        // const res = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users/${userId}`);
+        // const user = await res.json();
         setUserDB(user)
       }
     }

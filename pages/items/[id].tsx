@@ -15,7 +15,7 @@ import { supabase } from "../../utils/supabase"; // supabaseをコンポーネ�
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const {data}:any = await supabase.from('items').select('*');
+  const { data }: any = await supabase.from('items').select('*');
   // const res = await fetch(
   //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/`
   // );
@@ -33,12 +33,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({params,}: GetStaticPropsContext) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/${params!.id}`
-  );
+export const getStaticProps: GetStaticProps = async ({ params, }: GetStaticPropsContext) => {
+  let { data }: { data: any } = await supabase.from('items').select().eq('id', params!.id)
+  // const res = await fetch(
+  //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/${params!.id}`
+  // );
 
-  const detail = await res.json();
+  // const detail = await res.json();
+  const detail = data[0]
   return {
     props: { detail },
     revalidate: 10,
