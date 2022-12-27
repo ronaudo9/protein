@@ -9,9 +9,9 @@ import {
 import React, { useEffect } from 'react';
 import Header from '../layout/header';
 import { useRouter } from 'next/router';
-import { Item,Event } from '../../types/type';
+import { Item, Event } from '../../types/type';
 import Footer from '../layout/footer';
-import supabase from "../../utils/supabase"; // supabaseをコンポーネントで使うときはかく
+import { supabase } from "../../utils/supabase"; // supabaseをコンポーネントで使うときはかく
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -87,6 +87,13 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   };
   // 数量変更【終わり】
 
+  // カート情報をsupabaseへ追加
+  const itemId = detail.id
+  const imageUrl = detail.imageUrl
+  const name = detail.name
+  const price = detail.price
+  const countity = count
+
   // カートへ追加【始まり】
   const carts = {
     userId: Number(userId),
@@ -137,7 +144,7 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
     } else if (userId === '') {
       router.push('/cart');
     } else {
-      await supabase.from("carts").insert({ carts }); // 入れたい("テーブル名")と({カラム名})
+      await supabase.from("carts").insert({ userId, itemId, imageUrl, name, flavor, price, countity }); // 入れたい("テーブル名")と({カラム名})
       // fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
       //   method: 'POST',
       //   headers: {
@@ -145,18 +152,19 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
       //   },
       //   body: JSON.stringify(carts),
       // })
-      () => {
-        // if (document.cookie !== '')
-        {
-          router.push('/cart');
-          // } else {
-          //   alert('カートに追加するにはログインが必要です');
-          //   router.push('/');
-          //
-        }
-      };
+      // () => {
+      // if (document.cookie !== '')
+      // {
+      router.push('/cart');
+      // } else {
+      //   alert('カートに追加するにはログインが必要です');
+      //   router.push('/');
+      //
+      // }
+      // };
     }
   };
+
 
   //サブスクリプション
   const Subscription = () => {
@@ -173,10 +181,10 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
       return;
       // 数量0の場合はカートへ入れない
     } else if (Number(userId) == 0) {
-        alert(
-          'ログイン後に商品購入可能です（会員登録してない方は会員登録をお願いします）'
-        );
-        router.push('/login');
+      alert(
+        'ログイン後に商品購入可能です（会員登録してない方は会員登録をお願いします）'
+      );
+      router.push('/login');
     } else {
       fetch(
         `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
@@ -200,7 +208,7 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
     id: detail.id,
   };
 
-  console.log(favs);
+  // console.log(favs);
   const addFavoritesHandler = () => {
     fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/favorites`, {
       method: 'POST',

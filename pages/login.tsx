@@ -36,9 +36,6 @@ export default function UserLogin(cookieData: Item) {
 
   // ユーザーIDの取得&POST(onSubmitのタイミングで発火)
   const postUserdata = async () => {
-    console.log(email);
-    console.log(password);
-
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users?email=${email}&password=${password}`
     );

@@ -354,50 +354,17 @@
       "deleted": false
     }
   ],
-  "favorites": [],
-  "purchaseHistories": [],
-  "carts": [
+  "favorites": [
     {
       "userId": 3,
-      "itemId": 4,
-      "imageUrl": "/images/cofee_burst_whey.jpg",
-      "name": "コーヒー ブースト ホエイ",
-      "flavor": "ココナッツ",
-      "price": 2590,
-      "countity": 1,
+      "itemId": [
+        1
+      ],
       "id": 1
-    },
-    {
-      "userId": 0,
-      "itemId": 5,
-      "imageUrl": "/images/impact_whey_stroberry.jpg",
-      "name": "Impact ホエイ プロテイン-ストロベリーヨーグルトフレーバー",
-      "flavor": "ヨーグルト-ストロベリー-",
-      "price": 1990,
-      "countity": 1,
-      "id": 2
-    },
-    {
-      "userId": 3,
-      "itemId": 4,
-      "imageUrl": "/images/cofee_burst_whey.jpg",
-      "name": "コーヒー ブースト ホエイ",
-      "flavor": "ココナッツ",
-      "price": 2590,
-      "countity": 1,
-      "id": 3
-    },
-    {
-      "userId": 3,
-      "itemId": 5,
-      "imageUrl": "/images/impact_whey_stroberry.jpg",
-      "name": "Impact ホエイ プロテイン-ストロベリーヨーグルトフレーバー",
-      "flavor": "ヨーグルト-ストロベリー-",
-      "price": 1990,
-      "countity": 1,
-      "id": 4
     }
   ],
+  "purchaseHistories": [],
+  "carts": [],
   "subscriptionCart": [
     {
       "userId": 3,
@@ -408,6 +375,16 @@
       "price": 2190,
       "countity": 1,
       "id": 1
+    },
+    {
+      "userId": 3,
+      "itemId": 1,
+      "imageUrl": "/images/impact_whey_protein.jpg",
+      "name": "Impact ホエイ プロテイン",
+      "flavor": "チョコ",
+      "price": 1990,
+      "countity": 1,
+      "id": 2
     }
   ],
   "subscription": [
