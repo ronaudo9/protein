@@ -90,23 +90,52 @@ function UsersNew() {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const Handler = (event: React.FormEvent<HTMLFormElement>) => {
+  const Handler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    let firstName = formValues.firstName;
+    let lastName = formValues.lastName;
+    let firstNameKana = formValues.firstNameKana;
+    let lastNameKana = formValues.lastNameKana;
+    let middleName = formValues.middleName;
+    let email = formValues.email;
+    let password = formValues.password;
+    let passwordConfirmation = formValues.passwordConfirmation;
+    let postCode = formValues.postCode;
+    let prefecture = formValues.prefecture;
+    let city = formValues.city;
+    let aza = formValues.aza;
+    let building = formValues.building;
+    let tel = formValues.tel;
+
     const newErrors = validate(formValues);
     setFormErrors(newErrors);
     setIsSubmit(true);
     if (Object.keys(newErrors).length !== 0) {
       return isSubmit;
     } else {
-      async (e: { preventDefault: () => void }) => {
-        e.preventDefault();
-        await supabase.from('users').insert({ formValues });
+      // let submit = async () => {
+        await supabase.from('users').insert({
+          firstName,
+          lastName,
+          firstNameKana,
+          lastNameKana,
+          middleName,
+          email,
+          password,
+          passwordConfirmation,
+          postCode,
+          prefecture,
+          city,
+          aza,
+          building,
+          tel,
+        });
         router.push('/login');
         alert(
           'ご登録ありがとうございます！ログインをしてお買い物を続けてください'
         );
-      };
-    }
+      }
+    // }
   };
 
   // 住所検索機能
