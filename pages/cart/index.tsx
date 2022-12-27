@@ -48,7 +48,7 @@ const Cart: NextPage<{ carts: Item2, cookies: Item }> = ({ carts, cookies }) => 
 
   // cartsの削除【始まり】
   async function deleteItem(cart: Item) {
-    await supabase.from("carts").delete().eq("id", cart.id)
+    await supabase.from("carts").delete().eq("id",cart.id)
     // fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/carts/${cart.id}`, {
     //   method: 'DELETE',
     // });
