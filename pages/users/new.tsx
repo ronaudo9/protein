@@ -6,6 +6,7 @@ import Footer from '../layout/footer';
 import { Item } from '../../types/type';
 import { User, Users, Users2 } from '../../types/type';
 import { Event } from '../../types/type';
+import { supabase } from '../../utils/supabase';
 
 function UsersNew() {
   const router = useRouter();
@@ -32,34 +33,6 @@ function UsersNew() {
   const [formErrors, setFormErrors] = useState(initialValues);
   const [isSubmit, setIsSubmit] = useState(false);
   const [addressErrors, setAddressErrors] = useState('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
-
-  const Handler = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const newErrors = validate(formValues);
-    setFormErrors(newErrors);
-    setIsSubmit(true);
-    if (Object.keys(newErrors).length !== 0) {
-      return isSubmit;
-    } else {
-      fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/users`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formValues),
-      }).then(() => {
-        router.push('/login');
-        alert(
-          'ご登録ありがとうございます！ログインをしてお買い物を続けてください'
-        );
-      });
-    }
-  };
 
   const validate = (values: Users2) => {
     const errors = {} as Users;
@@ -110,6 +83,30 @@ function UsersNew() {
         '電話番号はXXX-XXXX-XXXXかXXXX-XX-XXXXの形式で入力してください';
     }
     return errors;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const Handler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const newErrors = validate(formValues);
+    setFormErrors(newErrors);
+    setIsSubmit(true);
+    if (Object.keys(newErrors).length !== 0) {
+      return isSubmit;
+    } else {
+      async (e: { preventDefault: () => void }) => {
+        e.preventDefault();
+        await supabase.from('users').insert({ formValues });
+        router.push('/login');
+        alert(
+          'ご登録ありがとうございます！ログインをしてお買い物を続けてください'
+        );
+      };
+    }
   };
 
   // 住所検索機能
