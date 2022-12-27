@@ -13,13 +13,12 @@ import { supabase } from "../../utils/supabase"; // supabaseをコンポーネ�
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const cookies = req.cookies;
   let { data } = await supabase.from("carts").select("*").eq("userId", cookies.id);
-  console.log(data)
   // const res = await fetch(
   //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts?userId=${cookies.id}`
   // );
   // const carts = await res.json();
   return {
-    props: { carts:data, cookies }
+    props: { carts: data, cookies }
   };
 };
 
@@ -48,10 +47,11 @@ const Cart: NextPage<{ carts: Item2, cookies: Item }> = ({ carts, cookies }) => 
   });
 
   // cartsの削除【始まり】
-  function deleteItem(cart: Item) {
-    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/carts/${cart.id}`, {
-      method: 'DELETE',
-    });
+  async function deleteItem(cart: Item) {
+    await supabase.from("carts").delete().eq("id", cart.id)
+    // fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/carts/${cart.id}`, {
+    //   method: 'DELETE',
+    // });
     router.reload();
   }
   // cartsの削除【終わり】
