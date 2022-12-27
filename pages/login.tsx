@@ -53,7 +53,8 @@ export default function UserLogin(cookieData: Item) {
 
   const handler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetch(`${process.env.NEXT_PUBLIC_PROTEIN}/api/login`, {
+    console.log(data)
+    fetch(`/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
