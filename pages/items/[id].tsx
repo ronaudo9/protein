@@ -15,11 +15,12 @@ import { supabase } from "../../utils/supabase"; // supabaseをコンポーネ�
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/`
-  );
-  const items = await res.json();
-  const paths = items.map((item: Item) => ({
+  const {data}:any = await supabase.from('items').select('*');
+  // const res = await fetch(
+  //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/`
+  // );
+  // const items = await res.json();
+  const paths = data.map((item: Item) => ({
     params: {
       // idをdb.jsonファイルの文字列に合わせる
       id: item.id.toString(),
@@ -32,9 +33,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  params,
-}: GetStaticPropsContext) => {
+export const getStaticProps: GetStaticProps = async ({params,}: GetStaticPropsContext) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/${params!.id}`
   );
