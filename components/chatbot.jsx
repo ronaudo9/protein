@@ -122,6 +122,7 @@ export default function ChatBotComponent(props) {
     const cookie = document.cookie;
     const userId = cookie.slice(3);
     const id = (Number(userId));
+    console.log(id)
     setUserId(id);
   }, []);
   // cookie取得【終わり】
@@ -130,10 +131,11 @@ export default function ChatBotComponent(props) {
   useEffect(() => {
     async function fetchData() {
       if (userId !== 0) {
-        let {user} = await supabase.from("users").eq("userId",userId)
+        let { data } = await supabase.from("users").select().eq("id", userId);
         // const res = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users/${userId}`);
         // const user = await res.json();
-        setUserDB(user)
+        // const user = data[0];  
+        setUserDB(data[0])
       }
     }
     fetchData();
@@ -298,7 +300,7 @@ export default function ChatBotComponent(props) {
                   id: '2',
                   delay: 1000,
                   component: (
-                    <ImageDisplay userDB={userDB} />
+                    <ImageDisplay />
                   ),
                   trigger: 3,
                 },
