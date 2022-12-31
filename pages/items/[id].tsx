@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps = async ({
   // );
   // const detail = await res.json();
   const detail = data[0];
-  console.log(data);
+  console.log(detail);
   return {
     props: { detail },
     revalidate: 10,

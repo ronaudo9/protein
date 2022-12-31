@@ -9,6 +9,7 @@ import UsersElements from '../../components/usersElements';
 import { useRouter } from 'next/router';
 import Footer from '../layout/footer';
 import { Item } from '../../types/type';
+import { supabase } from '../../utils/supabase';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -17,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const cookies = req.cookies;
   const cookie = Number(cookies.id);
-
+  console.log(cookie)
   let user = { id: cookies.id };
   try {
     const res = await fetch(
@@ -29,23 +30,42 @@ export const getServerSideProps: GetServerSideProps = async ({
     errors.push('情報の取得に失敗しました。リロードしてください。');
   }
 
-  const itemsArray: Item[] = [];
+  //supabaseにて購入履歴(purchaseHistories)の情報を取得
+  const itemsArray2 = await supabase.from('purchaseHistories').select("*").eq("userId",cookie);
+  const itemsArray3 = itemsArray2.data!;
+  const itemsArray4: Item[] = [];
   try {
-    const resHistories = await fetch(
-      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories?userId=${cookies.id}`
-    );
-    const history: Item = await resHistories.json();
-    history.forEach((element) => {
-      const items = element.items;
+  itemsArray3.forEach((element) => {
+    const items = element.items;
 
-      items.forEach((item: Item) => {
-        itemsArray.push(item);
-      });
+    items.forEach((item: Item) => {
+      itemsArray4.push(item);
     });
-  } catch (err) {
-    console.error('failed to get purchaseHistories', err);
-    errors.push('情報の取得に失敗しました。リロードしてください。');
-  }
+  });
+} catch (err) {
+  console.error('failed to get purchaseHistories', err);
+  errors.push('情報の取得に失敗しました。リロードしてください。');
+}
+
+  // 購入履歴のfetchで取得している部分（一応、残しています）
+  // const itemsArray: Item[] = [];
+  // try {
+  //   const resHistories = await fetch(
+  //     `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories?userId=${cookies.id}`
+  //   );
+  //   const history: Item = await resHistories.json();
+  //   history.forEach((element) => {
+  //     const items = element.items;
+
+  //     items.forEach((item: Item) => {
+  //       itemsArray.push(item);
+  //     });
+  //   });
+  // } catch (err) {
+  //   console.error('failed to get purchaseHistories', err);
+  //   errors.push('情報の取得に失敗しました。リロードしてください。');
+  // }
+
   //サブスク
   const subscriptionArray: Item[] = [];
   try {
@@ -82,7 +102,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   return {
     props: {
       user,
-      itemsArray,
+      itemsArray4,
       subscriptionArray,
       subscriptionHistoriesArray,
       cookie,
@@ -94,7 +114,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 const UserDetails = ({
   user,
   subscriptionArray,
-  itemsArray,
+  itemsArray4,
   subscriptionHistoriesArray,
   cookie,
   errors,
@@ -186,7 +206,7 @@ const UserDetails = ({
           <h2 className={styles.title_purchased} id="user_purchased">
             ご購入履歴
           </h2>
-          {itemsArray.map((item: any, index: any) => {
+          {itemsArray4.map((item: any, index: any) => {
             return (
               <div key={index}>
                 <div>
