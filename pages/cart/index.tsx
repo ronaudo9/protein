@@ -12,7 +12,7 @@ import { supabase } from "../../utils/supabase"; // supabaseをコンポーネ�
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const cookies = req.cookies;
-  let { data } = await supabase.from("carts").select("*").eq("userId", cookies.id);
+  let { data } : {data:any} = await supabase.from("carts").select("*").eq("userId", cookies.id);
   // const res = await fetch(
   //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts?userId=${cookies.id}`
   // );
