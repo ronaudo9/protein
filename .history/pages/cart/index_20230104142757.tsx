@@ -29,7 +29,7 @@ const Cart: NextPage<{ carts: Item2, cookies: Item }> = ({ carts, cookies }) => 
 
   // Local Storageからカートに追加した商品データ取得
   useEffect(() => {
-    if (carts === null) {
+    if (carts.length === 0) {
       const collection = Object.keys(localStorage).map((key) => {
         let keyJson = JSON.stringify(key);
         return {

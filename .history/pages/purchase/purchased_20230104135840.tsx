@@ -37,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const userId = cookies.id;
   const items = carts;
 
-  if (items.length > 0) {
+  if (items) {
     await supabase.from("purchaseHistories")
       .insert({ userId, items })
     // await fetch(
