@@ -9,7 +9,7 @@ import { Item } from '../../types/type';
 import { supabase } from "../../utils/supabase"; // supabaseをコンポーネントで使うときはかく
 
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async ({req}) => {
   const cookies = req.cookies;
   let { data }: any = await supabase
     .from('carts')
@@ -19,58 +19,49 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts?userId=${cookies.id}`
   // );
   // const carts = await res.json();
+  console.log(cartsData)
+  console.log(cartsData[0])
+  // const carts = cartsData[0];
+  const carts = cartsData;
 
-  console.log(`data:${data[0]}`)
-  const carts = data;
 
   //購入時間
   carts.forEach((cart: Item) => {
-    console.log(`cartsData:${cart}`)
     cart.date = new Date().toLocaleString('ja-JP');
   });
 
-  // const purchaseHistories = {
-  //   userId: cookies.id,
-  //   items: carts,
-  // };
+  const purchaseHistories = {
+    userId: cookies.id,
+    items: carts,
+  };
 
-  const userId = cookies.id;
-  const items = carts;
+  // await supabase.from("purchaseHistories").select("*").eq("userId", cookies.id);
 
-  if (items.length > 0) {
-    await supabase.from("purchaseHistories")
-      .insert({ userId, items })
-    // await fetch(
-    //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories`,
-    //   {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(purchaseHistories),
-    //   }
-    // )
-    // .then(() => {
-    // carts.forEach((cart: Item) => {
-    await supabase
-      .from('carts')
-      .delete()
-      .eq('userId', userId)
-  }
-  // fetch(
-  //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts/${cart.id}`,
-  //   {
-  //     method: 'DELETE',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(purchaseHistories),
-  //   }
-  // );
-  // });
+  await fetch(
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(purchaseHistories),
+    }
+  ).then(() => {
+    carts.forEach((cart: Item) => {
+      fetch(
+        `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts/${cart.id}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(purchaseHistories),
+        }
+      );
+    });
+  });
   return {
     props: { carts },
   };
 };
-
 
 export default function PurchaseCompletion() {
   return (

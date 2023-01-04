@@ -1,5 +1,3 @@
-// 使ってない
-
 import { IncomingMessage } from 'http';
 
 export default async function Handler(

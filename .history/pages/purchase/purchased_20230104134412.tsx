@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
   //購入時間
   carts.forEach((cart: Item) => {
-    console.log(`cartsData:${cart}`)
+    console.log(`data:${cart}`)
     cart.date = new Date().toLocaleString('ja-JP');
   });
 
@@ -37,24 +37,22 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const userId = cookies.id;
   const items = carts;
 
-  if (items.length > 0) {
-    await supabase.from("purchaseHistories")
-      .insert({ userId, items })
-    // await fetch(
-    //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories`,
-    //   {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(purchaseHistories),
-    //   }
-    // )
-    // .then(() => {
-    // carts.forEach((cart: Item) => {
-    await supabase
-      .from('carts')
-      .delete()
-      .eq('userId', userId)
-  }
+  await supabase.from("purchaseHistories")
+    .insert({ userId, items })
+  // await fetch(
+  //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories`,
+  //   {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(purchaseHistories),
+  //   }
+  // )
+  // .then(() => {
+  // carts.forEach((cart: Item) => {
+  await supabase
+    .from('carts')
+    .delete()
+    .eq('userId', userId)
   // fetch(
   //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts/${cart.id}`,
   //   {
