@@ -11,8 +11,7 @@ import Header from '../layout/header';
 import { useRouter } from 'next/router';
 import { Item, Event } from '../../types/type';
 import Footer from '../layout/footer';
-import { supabase } from "../../utils/supabase"; // supabaseをコンポーネントで使うときはかく
-
+import { supabase } from '../../utils/supabase'; // supabaseをコンポーネントで使うときはかく
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { data }: any = await supabase.from('items').select('*');
@@ -33,19 +32,35 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params, }: GetStaticPropsContext) => {
-  let { data }: { data: any } = await supabase.from('items').select().eq('id', params!.id)
+export const getStaticProps: GetStaticProps = async ({
+  params,
+}: GetStaticPropsContext) => {
+  let { data }: any = await supabase
+    .from('items')
+    .select()
+    .eq('id', params!.id);
   // const res = await fetch(
   //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items/${params!.id}`
   // );
-
   // const detail = await res.json();
-  const detail = data[0]
+  const detail = data[0];
+  console.log(detail);
   return {
     props: { detail },
     revalidate: 10,
   };
 };
+
+// export const getStaticProps: GetStaticProps = async ({
+//   params,
+// }: GetStaticPropsContext) => {
+//   const { data }: any = await supabase.from('items').select().eq{'id', params!.id};
+//   const detail = data[0]
+//   return {
+//     props: { detail },
+//     revalidate: 10,
+//   };
+// };
 
 // detail getStaticPropsから取得
 const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
@@ -89,11 +104,11 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   // 数量変更【終わり】
 
   // カート情報をsupabaseへ追加
-  const itemId = detail.id
-  const imageUrl = detail.imageUrl
-  const name = detail.name
-  const price = detail.price
-  const countity = count
+  const itemId = detail.id;
+  const imageUrl = detail.imageUrl;
+  const name = detail.name;
+  const price = detail.price;
+  const countity = count;
 
   // カートへ追加【始まり】
   const carts = {
@@ -145,7 +160,15 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
     } else if (userId === '') {
       router.push('/cart');
     } else {
-      await supabase.from("carts").insert({ userId, itemId, imageUrl, name, flavor, price, countity }); // 入れたい("テーブル名")と({カラム名})
+      await supabase.from('carts').insert({
+        userId,
+        itemId,
+        imageUrl,
+        name,
+        flavor,
+        price,
+        countity,
+      }); // 入れたい("テーブル名")と({カラム名})
       // fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
       //   method: 'POST',
       //   headers: {
@@ -165,7 +188,6 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
       // };
     }
   };
-
 
   //サブスクリプション
   const Subscription = () => {
@@ -202,30 +224,37 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
     }
   };
 
+  // お気に入り情報をsupabaseへ追加
+  const itemIdFav = [detail.id];
+  const id = detail.id;
+
   // お気に入り登録（db.jsonへ現在の商品情報登録）
-  let favs = {
-    userId: Number(userId),
-    itemId: [detail.id],
-    id: detail.id,
-  };
+  // let favs = {
+  //   userId: Number(userId),
+  //   itemId: [detail.id],
+  //   id: detail.id,
+  // };
 
   // console.log(favs);
-  const addFavoritesHandler = () => {
-    fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/favorites`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(favs),
+  const addFavoritesHandler = async (e: {
+    preventDefault: () => void;
+  }) => {
+    e.preventDefault();
+    await supabase.from('favorites').insert({
+      userId,
+      itemIdFav,
+      id,
     });
-    // .then(() => {
-    //   {
-    //     router.push('/users/favorite');
-    //   }
-    // }
-    // );
+    router.push('/users/favorite');
+    //
+    // fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/favorites`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(favs),
+    // });
   };
-  // pagesのしたにお気に入りapi作成
 
   return (
     <>
