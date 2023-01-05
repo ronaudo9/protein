@@ -354,15 +354,7 @@
       "deleted": false
     }
   ],
-  "favorites": [
-    {
-      "userId": 3,
-      "itemId": [
-        1
-      ],
-      "id": 1
-    }
-  ],
+  "favorites": [],
   "purchaseHistories": [
     {
       "userId": 1,
