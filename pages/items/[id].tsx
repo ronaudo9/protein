@@ -190,8 +190,8 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   };
 
   //サブスクリプション
-  const Subscription = () => {
-    const SubscriptionCart = {
+  const Subscription = async () => {
+    const subscriptionCart = {
       userId: Number(userId),
       itemId: detail.id,
       imageUrl: detail.imageUrl,
@@ -209,18 +209,28 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
       );
       router.push('/login');
     } else {
-      fetch(
-        `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(SubscriptionCart),
-        }
-      ).then(() => {
-        router.push(`/items/subscription`);
+      await supabase.from('subscriptionCart').insert({
+        userId,
+        itemId,
+        imageUrl,
+        name,
+        flavor,
+        price,
+        countity,
       });
+      // fetch(
+      //   `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
+      //   {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify(SubscriptionCart),
+      //   }
+      // )
+      // .then(() => {
+        router.push(`/items/subscription`);
+      // });
     }
   };
 
