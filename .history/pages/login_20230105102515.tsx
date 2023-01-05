@@ -40,8 +40,8 @@ export default function UserLogin(cookieData: Item) {
   const postUserdata = async () => {
     let { data }: any = await supabase
       .from("users")
-      .select()
-      .eq("email", email)
+      .select() 
+      .eq("email", email)  
       .eq("password", password);
     // const res = await fetch(
     //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users?email=${email}&password=${password}`
@@ -63,7 +63,9 @@ export default function UserLogin(cookieData: Item) {
     console.log(data)
     fetch(`/api/login`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', },
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(data),
     })
       .then((response) => {
@@ -74,36 +76,27 @@ export default function UserLogin(cookieData: Item) {
           filteredData.forEach(async (data: any) => {
             data.value.userId = await postUserdata();
 
-              let userId = data.value.userId;
-              let itemId = data.value.itemId;
-              let imageUrl = data.value.imageUrl;
-              let name = data.value.name;
-              let flavor = data.value.flavor;
-              let price = data.value.price;
-              let countity = data.value.countity;
-
-              await supabase.from('carts').insert({
-                userId,
-                itemId,
-                imageUrl,
-                name,
-                flavor,
-                price,
-                countity,
-                // fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
-                //   method: 'POST',
-                //   headers: {
-                //     'Content-Type': 'application/json',
-                //   },
-                //   body: JSON.stringify(data.value),
-                // });
+            filteredData.forEach((data: Item) => {
+              fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data.value),
               });
-            localStorage.clear();
-            router.push('/items');
-          })
+            });
+          });
+          localStorage.clear();
+          router.push('/items');
         }
       })
-  }
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <div>

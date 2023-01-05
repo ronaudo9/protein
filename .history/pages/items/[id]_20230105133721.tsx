@@ -164,7 +164,9 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
       );
       router.push('/cart');
     }
-    else {
+    else if (userId === '') {
+      router.push('/cart');
+    } else {
       await supabase.from('carts').insert({
         userId,
         itemId,

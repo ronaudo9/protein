@@ -143,28 +143,23 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   // cookie取得【終わり】
 
   // localstrageへ保存【始まり】
-  // useEffect(() => {
-  //   if (!document.cookie) {
-  //     localStorage.setItem(
-  //       carts.itemId as any,
-  //       JSON.stringify(cartsForStrage)
-  //     );
-  //   }
-  // }, [count]);
-  // localstrageへ保存【終わり】
-
-  const handler = async () => {
-    // 数量0の場合はカートへ入れない
-    // if (count === 0) {
-    //   return;
+  useEffect(() => {
     if (!document.cookie) {
       localStorage.setItem(
         carts.itemId as any,
         JSON.stringify(cartsForStrage)
       );
-      router.push('/cart');
     }
-    else {
+  }, [count]);
+  // localstrageへ保存【終わり】
+
+  const handler = async () => {
+    // 数量0の場合はカートへ入れない
+    if (count === 0) {
+      return;
+    } else if (userId === '') {
+      router.push('/cart');
+    } else {
       await supabase.from('carts').insert({
         userId,
         itemId,

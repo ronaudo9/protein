@@ -16,25 +16,67 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     .from('favorites')
     .select('*')
     .eq('userId', cookies.id);
+  // let favs;
+  // const res = await fetch(
+  //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/favorites?userId=${cookies.id}`
+  // );
+  // favs = await res.json();
 
   let favs = data;
   let itemsArray = favs.map((fav: any) => {
+    // return `id=${fav.itemIdFav}`;
     return fav.id;
   });
 
-  itemsArray = await Promise.all(
-    itemsArray.map(async (array: any) => {
-      let { data }: any = await supabase
-        .from("items")
-        .select()
-        .eq("id", array)
-      return data[0];
-    })
+  console.log(`itemsArray:${itemsArray}`)
+  console.log(typeof itemsArray)
+
+
+  // console.log(favs);
+  // const Array = itemsArray.join('&');
+  // console.log(Array);
+  
+  
+  itemsArray.map(async (array: any) => {
+    let { data }: any = await supabase
+      .from("items")
+      .select()
+      .eq("id", array);
+    // let jsonData = data.json()
+    // let object = jsonData[0]
+    let object = await Promise.all(data);
+    return object
+  })
+
+
+  const getDataByIds = async (ids) => {
+    // 未解決の Promise を集めてしまう。
+    let promises = ids.map(id => {
+      return getDataById(id);
+    });
+    // Promise.all でまとめて待つ
+    let ret = await Promise.all(promises);
+    return ret
+  }
+
+  // const data = await fetch(
+  //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items?${Array}`
+  // );
+  // console.log(data);
+
+  // const itemsArray2 = data;
+  //空の配列を作るために存在しないid=0を指定した。
+  const data2 = await fetch(
+    `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/items?id=0`
   );
 
-  let itemsArray4 = [];
+  const itemsArray3 = await data2.json();
+
+  let itemsArray4 = '';
   if (itemsArray) {
     itemsArray4 = itemsArray;
+  } else {
+    itemsArray4 = itemsArray3;
   }
 
   return {
@@ -43,17 +85,15 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 };
 
 export default function FavoriteList({ itemsArray4 }: Favorite) {
-  console.log(`itemsArray4:${itemsArray4}`)
   const router = useRouter();
   // お気に入り情報の削除
-  async function deleteItem(favoriteItem: Favorite) {
-    await supabase.from("favorites").delete().eq("id", favoriteItem.id)
-    // fetch(
-    //   `${process.env.NEXT_PUBLIC_PROTEIN}/api/favorites/${favoriteItem.id}`,
-    //   {
-    //     method: 'DELETE',
-    //   }
-    // );
+  function deleteItem(favoriteItem: Favorite) {
+    fetch(
+      `${process.env.NEXT_PUBLIC_PROTEIN}/api/favorites/${favoriteItem.id}`,
+      {
+        method: 'DELETE',
+      }
+    );
     router.reload();
   }
 

@@ -74,6 +74,8 @@ export default function UserLogin(cookieData: Item) {
           filteredData.forEach(async (data: any) => {
             data.value.userId = await postUserdata();
 
+
+            // filteredData.forEach(async (data: Item) => {
               let userId = data.value.userId;
               let itemId = data.value.itemId;
               let imageUrl = data.value.imageUrl;
@@ -81,7 +83,6 @@ export default function UserLogin(cookieData: Item) {
               let flavor = data.value.flavor;
               let price = data.value.price;
               let countity = data.value.countity;
-
               await supabase.from('carts').insert({
                 userId,
                 itemId,
@@ -98,6 +99,7 @@ export default function UserLogin(cookieData: Item) {
                 //   body: JSON.stringify(data.value),
                 // });
               });
+            // });
             localStorage.clear();
             router.push('/items');
           })

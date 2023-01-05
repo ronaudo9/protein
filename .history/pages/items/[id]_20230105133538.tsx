@@ -162,9 +162,10 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
         carts.itemId as any,
         JSON.stringify(cartsForStrage)
       );
-      router.push('/cart');
     }
-    else {
+    else if (userId === '') {
+      router.push('/cart');
+    } else {
       await supabase.from('carts').insert({
         userId,
         itemId,
