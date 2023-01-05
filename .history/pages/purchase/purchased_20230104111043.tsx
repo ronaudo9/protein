@@ -6,7 +6,6 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Footer from '../layout/footer';
 import { Item } from '../../types/type';
-import React from 'react';
 import { supabase } from "../../utils/supabase"; // supabaseをコンポーネントで使うときはかく
 
 
@@ -21,12 +20,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   // );
   // const carts = await res.json();
 
-  console.log(`data:${data[0]}`)
+  console.log(data)
   const carts = data;
 
   //購入時間
   carts.forEach((cart: Item) => {
-    console.log(`cartsData:${cart}`)
     cart.date = new Date().toLocaleString('ja-JP');
   });
 
@@ -38,34 +36,30 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const userId = cookies.id;
   const items = carts;
 
-  if (items.length > 0) {
-    await supabase.from("purchaseHistories")
-      .insert({ userId, items })
-    // await fetch(
-    //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories`,
-    //   {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(purchaseHistories),
-    //   }
-    // )
-    // .then(() => {
-    // carts.forEach((cart: Item) => {
-    await supabase
-      .from('carts')
-      .delete()
-      .eq('userId', userId)
-  }
-  // fetch(
-  //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts/${cart.id}`,
+  await supabase.from("purchaseHistories")
+    .insert({ userId, items })
+  // await fetch(
+  //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories`,
   //   {
-  //     method: 'DELETE',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
   //     body: JSON.stringify(purchaseHistories),
   //   }
-  // );
+  // )
+  // .then(() => {
+  carts.forEach(async (cart: Item) => {
+    await supabase.from("purchaseHistories").delete({ userId, items })
+    // fetch(
+    //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts/${cart.id}`,
+    //   {
+    //     method: 'DELETE',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(purchaseHistories),
+    //   }
+    // );
+  });
   // });
   return {
     props: { carts },

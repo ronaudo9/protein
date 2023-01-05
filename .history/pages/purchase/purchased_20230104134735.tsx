@@ -6,7 +6,6 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Footer from '../layout/footer';
 import { Item } from '../../types/type';
-import React from 'react';
 import { supabase } from "../../utils/supabase"; // supabaseをコンポーネントで使うときはかく
 
 
@@ -38,24 +37,22 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const userId = cookies.id;
   const items = carts;
 
-  if (items.length > 0) {
-    await supabase.from("purchaseHistories")
-      .insert({ userId, items })
-    // await fetch(
-    //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories`,
-    //   {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(purchaseHistories),
-    //   }
-    // )
-    // .then(() => {
-    // carts.forEach((cart: Item) => {
-    await supabase
-      .from('carts')
-      .delete()
-      .eq('userId', userId)
-  }
+  await supabase.from("purchaseHistories")
+    .insert({ userId, items })
+  // await fetch(
+  //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/purchaseHistories`,
+  //   {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(purchaseHistories),
+  //   }
+  // )
+  // .then(() => {
+  // carts.forEach((cart: Item) => {
+  await supabase
+    .from('carts')
+    .delete()
+    .eq('userId', userId)
   // fetch(
   //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts/${cart.id}`,
   //   {

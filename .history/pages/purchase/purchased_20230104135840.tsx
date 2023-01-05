@@ -6,7 +6,6 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Footer from '../layout/footer';
 import { Item } from '../../types/type';
-import React from 'react';
 import { supabase } from "../../utils/supabase"; // supabaseをコンポーネントで使うときはかく
 
 
@@ -38,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const userId = cookies.id;
   const items = carts;
 
-  if (items.length > 0) {
+  if (items) {
     await supabase.from("purchaseHistories")
       .insert({ userId, items })
     // await fetch(

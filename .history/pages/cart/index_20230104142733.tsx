@@ -29,7 +29,7 @@ const Cart: NextPage<{ carts: Item2, cookies: Item }> = ({ carts, cookies }) => 
 
   // Local Storageからカートに追加した商品データ取得
   useEffect(() => {
-    if (carts === null) {
+    if (carts.length === 0) {
       const collection = Object.keys(localStorage).map((key) => {
         let keyJson = JSON.stringify(key);
         return {
@@ -66,7 +66,7 @@ const Cart: NextPage<{ carts: Item2, cookies: Item }> = ({ carts, cookies }) => 
   // cartsの合計【始まり】
   const priceArray: number[] = [];
 
-  if (carts !== null) {
+  if (carts.length > 0) {
     carts.forEach((element: Item) => {
       const multiPrice = element.price * element.countity;
       priceArray.push(multiPrice);
