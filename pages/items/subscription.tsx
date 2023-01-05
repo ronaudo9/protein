@@ -7,6 +7,7 @@ import { User } from '../../types/type';
 import { Item } from '../../types/type';
 import { loadStripe } from '@stripe/stripe-js';
 import Footer from '../layout/footer';
+import React from 'react';
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string

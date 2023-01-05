@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { useState, useEffect } from 'react';
 import { Favorite, Item } from '../../types/type';
+import React from 'react';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,

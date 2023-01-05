@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import Footer from '../layout/footer';
 import { Item } from '../../types/type';
 import { supabase } from '../../utils/supabase';
+import React from 'react';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -18,17 +19,21 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const cookies = req.cookies;
   const cookie = Number(cookies.id);
-  console.log(cookie)
-  let user = { id: cookies.id };
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users/${cookies.id}`
-    );
-    user = await res.json();
-  } catch (err) {
-    console.error('failed to get user', err);
-    errors.push('情報の取得に失敗しました。リロードしてください。');
-  }
+  // console.log(cookie)
+  // let user = { id: cookies.id };
+  // try {
+    const users = await supabase.from("users").select("*").eq("id", cookie);
+    const user = users.data![0];
+    console.log(user);
+
+    // const res = await fetch(
+    //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users/${cookies.id}`
+    // );
+    // user = await res.json();
+  // } catch (err) {
+  //   console.error('failed to get user', err);
+  //   errors.push('ユーザー情報の取得に失敗しました。リロードしてください。');
+  // }
 
   //supabaseにて購入履歴(purchaseHistories)の情報を取得
   const itemsArray2 = await supabase.from('purchaseHistories').select("*").eq("userId",cookie);
@@ -43,8 +48,8 @@ export const getServerSideProps: GetServerSideProps = async ({
     });
   });
 } catch (err) {
-  console.error('failed to get purchaseHistories', err);
-  errors.push('情報の取得に失敗しました。リロードしてください。');
+  // console.error('failed to get purchaseHistories', err);
+  errors.push('履歴情報の取得に失敗しました。リロードしてください。');
 }
 
   // 購入履歴のfetchで取得している部分（一応、残しています）
@@ -79,8 +84,8 @@ export const getServerSideProps: GetServerSideProps = async ({
       subscriptionArray.push(items);
     });
   } catch (err) {
-    console.error('failed to get subscription', err);
-    errors.push('情報の取得に失敗しました。リロードしてください。');
+    // console.error('failed to get subscription', err);
+    errors.push('サブスク情報の取得に失敗しました。リロードしてください。');
   }
 
   //サブスクの履歴
@@ -95,8 +100,8 @@ export const getServerSideProps: GetServerSideProps = async ({
       subscriptionHistoriesArray.push(items);
     });
   } catch (err) {
-    console.error('failed to get subscriptionHistories', err);
-    errors.push('情報の取得に失敗しました。リロードしてください。');
+    // console.error('failed to get subscriptionHistories', err);
+    errors.push('サブスク履歴情報の取得に失敗しました。リロードしてください。');
   }
 
   return {
@@ -112,6 +117,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 };
 
 const UserDetails = ({
+  data,
   user,
   subscriptionArray,
   itemsArray4,
