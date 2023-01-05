@@ -68,13 +68,16 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   //サブスク
   const subscriptionArray: Item[] = [];
-  try {
-    const regular = await fetch(
-      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscription?userId=${cookies.id}`
-    );
-    const leave = await regular.json();
+  const subscriptionArray2 = await supabase.from('subscription').select("*").eq("userId",cookie);
+  const subscriptionArray3 = subscriptionArray2.data!;
 
-    leave.forEach((element: Item) => {
+  try {
+    // const regular = await fetch(
+    //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscription?userId=${cookies.id}`
+    // );
+    // const leave = await regular.json();
+
+    subscriptionArray3.forEach((element: Item) => {
       const items = element.items;
       subscriptionArray.push(items);
     });
@@ -85,12 +88,15 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   //サブスクの履歴
   const subscriptionHistoriesArray: Item[] = [];
+  const subscriptionHistoriesArray2 = await supabase.from('subscriptionHistories').select("*").eq("userId",cookie);
+  const subscriptionHistoriesArray3 = subscriptionHistoriesArray2.data!;
+
   try {
-    const past = await fetch(
-      `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscriptionHistories?userId=${cookies.id}`
-    );
-    const remain = await past.json();
-    remain.forEach((element: Item) => {
+    // const past = await fetch(
+    //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscriptionHistories?userId=${cookies.id}`
+    // );
+    // const remain = await past.json();
+    subscriptionHistoriesArray3.forEach((element: Item) => {
       const items = element.items;
       subscriptionHistoriesArray.push(items);
     });
@@ -120,38 +126,40 @@ const UserDetails = ({
   errors,
 }: any) => {
   //サブスクからサブスク購入履歴への処理
-
   const router = useRouter();
-  const handler = (items: Item) => {
+  const handler =  async (items: Item) => {
     subscriptionArray.forEach((cart: Item) => {
       cart.date = new Date().toLocaleString('ja-JP');
     });
 
-    const purchaseHistories = {
-      userId: cookie,
-      items: items,
-    };
-    fetch(
-      `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionHistories/`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(purchaseHistories),
-      }
-    ).then(() => {
+    // const purchaseHistories = {
+    //   userId: cookie,
+    //   items: items,
+    // };
+    const userId = cookie;
+    // fetch(
+    //   `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionHistories/`,
+    //   {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(purchaseHistories),
+    //   }
+    // )
+    await supabase.from('subscriptionHistories').insert({userId,items}).then(() => {
       deleteCarts(items);
       router.reload();
     });
   };
 
-  const deleteCarts = (items: Item) => {
-    fetch(
-      `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscription/${items.id}`,
-      {
-        method: 'DELETE',
-      }
-    );
-    router.reload();
+  const deleteCarts = async (items: Item) => {
+    await supabase.from('subscription').delete().eq("id",items.id);
+    // fetch(
+    //   `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscription/${items.id}`,
+    //   {
+    //     method: 'DELETE',
+    //   }
+    // );
+    // router.reload();
   };
 
   return (
