@@ -21,14 +21,14 @@ import { supabase } from "../../utils/supabase";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const ItemDisplay: NextPage = () => {
-  const data2 = async() =>{
-  let { data :{uni} }: { data: any; error: any } = await supabase
-      .from("items")
-      .select("*")
-  }
-  console.log(data2)
+  // const data2 = async() =>{
+  // let { data :{uni} }: { data: any; error: any } = await supabase
+  //     .from("items")
+  //     .select("*")
+  // }
+
   const [resource, setResource] = useState(
-    `data2`
+    ''
   );
   const [count, setCount] = useState(1);
   const [category, setCategory] = useState('');
