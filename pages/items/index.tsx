@@ -22,10 +22,9 @@ import React from 'react';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const ItemDisplay: NextPage = () => {
-  // const data2 = async() =>{
-  // let { data :{uni} }: { data: any; error: any } = await supabase
-  //     .from("items")
-  //     .select("*")
+  // async function data2(){
+  //     let a =await supabase.from("items").select("*")
+  //     console.log(a.data!)
   // }
 
   const [resource, setResource] = useState(
@@ -36,6 +35,7 @@ const ItemDisplay: NextPage = () => {
   const [flavor, setFlavor] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [showchatbot, setShowChatbot] = useState(false);
+
 
   //検索、絞り込み、商品詳細のクリック以外の何もしない時間が5秒あればチャットボット出現させる
   useEffect(() => {
@@ -59,11 +59,13 @@ const ItemDisplay: NextPage = () => {
         `${process.env.NEXT_PUBLIC_PROTEIN}/api/items?flavor_like=${flavor}`
       );
     } else {
-      setResource(`data2`);
+      setResource(
+        `${process.env.NEXT_PUBLIC_PROTEIN}/api/items`
+        );
     }
   }, [flavor, category]);
-
-  const { data, error } = useSWR(`/api/supabase`, fetcher);
+console.log(resource)
+  const { data, error } = useSWR(resource, fetcher);
   if (error) return <div>Failed to Load</div>;
   if (!data) return <div>Loading...</div>;
 
