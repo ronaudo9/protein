@@ -5,7 +5,7 @@ import Header from '../layout/header';
 import Footer from '../layout/footer';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Favorite, Item } from '../../types/type';
 import { supabase } from "../../utils/supabase";
 
