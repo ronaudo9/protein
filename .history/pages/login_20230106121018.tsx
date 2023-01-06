@@ -71,38 +71,37 @@ export default function UserLogin(cookieData: Item) {
         if (response.status !== 200) {
           setVisible(true);
         } else if (response.status === 200) {
-          if (filteredData) {
-            filteredData.forEach(async (data: any) => {
-              data.value.userId = await postUserdata();
+          filteredData.forEach(async (data: any) => {
+            data.value.userId = await postUserdata();
 
-              let userId = data.value.userId;
-              let itemId = data.value.itemId;
-              let imageUrl = data.value.imageUrl;
-              let name = data.value.name;
-              let flavor = data.value.flavor;
-              let price = data.value.price;
-              let countity = data.value.countity;
+            let userId = data.value.userId;
+            let itemId = data.value.itemId;
+            let imageUrl = data.value.imageUrl;
+            let name = data.value.name;
+            let flavor = data.value.flavor;
+            let price = data.value.price;
+            let countity = data.value.countity;
 
-              await supabase.from('carts').insert({
-                userId,
-                itemId,
-                imageUrl,
-                name,
-                flavor,
-                price,
-                countity,
-                // fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
-                //   method: 'POST',
-                //   headers: {
-                //     'Content-Type': 'application/json',
-                //   },
-                //   body: JSON.stringify(data.value),
-                // });
-              });
-              localStorage.clear();
-            })
+            await supabase.from('carts').insert({
+              userId,
+              itemId,
+              imageUrl,
+              name,
+              flavor,
+              price,
+              countity,
+              // fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
+              //   method: 'POST',
+              //   headers: {
+              //     'Content-Type': 'application/json',
+              //   },
+              //   body: JSON.stringify(data.value),
+              // });
+            });
+            localStorage.clear();
             router.push('/items');
-          }
+
+          })
         }
       })
   }

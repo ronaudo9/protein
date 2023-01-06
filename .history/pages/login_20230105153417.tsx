@@ -71,9 +71,8 @@ export default function UserLogin(cookieData: Item) {
         if (response.status !== 200) {
           setVisible(true);
         } else if (response.status === 200) {
-          if (filteredData) {
-            filteredData.forEach(async (data: any) => {
-              data.value.userId = await postUserdata();
+          filteredData.forEach(async (data: any) => {
+            data.value.userId = await postUserdata();
 
               let userId = data.value.userId;
               let itemId = data.value.itemId;
@@ -99,10 +98,9 @@ export default function UserLogin(cookieData: Item) {
                 //   body: JSON.stringify(data.value),
                 // });
               });
-              localStorage.clear();
-            })
+            localStorage.clear();
             router.push('/items');
-          }
+          })
         }
       })
   }

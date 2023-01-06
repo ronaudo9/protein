@@ -102,6 +102,7 @@ export default function UserLogin(cookieData: Item) {
               localStorage.clear();
             })
             router.push('/items');
+
           }
         }
       })
