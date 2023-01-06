@@ -6,6 +6,7 @@ import Header from '../layout/header';
 import Footer from '../layout/footer';
 import { Item,User } from '../../types/type';
 import { supabase } from "../../utils/supabase";
+import React from 'react';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
