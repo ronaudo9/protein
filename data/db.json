@@ -356,44 +356,10 @@
   ],
   "favorites": [
     {
-      "userId": 3,
+      "userId": 0,
       "itemId": [
-        1
+        4
       ],
-      "id": 1
-    }
-  ],
-  "purchaseHistories": [
-    {
-      "userId": 1,
-      "items": [
-        {
-          "id": 1,
-          "userId": 1,
-          "itemId": 5,
-          "imageUrl": "/images/impact_whey_stroberry.jpg",
-          "name": "Impact ホエイ プロテイン-ストロベリーヨーグルトフレーバー",
-          "flavor": "ヨーグルト-ストロベリー-",
-          "price": 1990,
-          "countity": 1,
-          "date": "2022/12/30 10:23:15"
-        }
-      ],
-      "id": 1
-    },
-    {
-      "userId": "1",
-      "items": [],
-      "id": 2
-    },
-    {
-      "userId": "1",
-      "items": [],
-      "id": 3
-    },
-    {
-      "userId": "1",
-      "items": [],
       "id": 4
     },
     {

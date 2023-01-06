@@ -17,6 +17,7 @@ import { Users, Users2, Users3, User, Item } from '../../types/type';
 import TooltipButton from '../../components/tooltipButton';
 import Footer from '../layout/footer';
 import { supabase } from "../../utils/supabase";
+import React from 'react';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
