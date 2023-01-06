@@ -6,6 +6,7 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Footer from '../layout/footer';
 import { Item } from '../../types/type';
+import React from 'react';
 import { supabase } from "../../utils/supabase";
 
 export const getServerSideProps: GetServerSideProps = async (

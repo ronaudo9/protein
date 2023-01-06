@@ -7,6 +7,7 @@ import { User } from '../../types/type';
 import { Item } from '../../types/type';
 import { loadStripe } from '@stripe/stripe-js';
 import Footer from '../layout/footer';
+import React from 'react';
 import { supabase } from "../../utils/supabase";
 
 const stripePromise = loadStripe(
