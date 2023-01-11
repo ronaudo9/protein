@@ -2,37 +2,55 @@ import Link from 'next/link';
 import style from './header.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 
-const logOut = () => {
-   if(document.cookie.includes('; id=')){
-    var date = new Date('1999-12-31T23:59:59Z');
-    document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
-    alert('ログアウトしました');
-  }else if(document.cookie.includes('__stripe_mid=')){
-    alert('ログインをしてください');
-  }else if (document.cookie !== '') {
-    var date = new Date('1999-12-31T23:59:59Z');
-    document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
-    alert('ログアウトしました');
-  } else {
-    alert('ログインをしてください');
-  }
+export const getServerSideProps: GetServerSideProps = async (
+  context
+) => {
+  const cookies = context.req.cookies;
+  const cookie = cookies.id
+return {
+  props: { cookie },
 };
-export default function Header() {
+};
+
+export default function Header(cookie:any) {
   const router = useRouter();
+  const logOut = () => {
+    if(document.cookie == ''){
+     alert('ログインをしてください');
+     router.push('/login');
+    }else if(document.cookie.includes(`id=${cookie}`)){
+     var date = new Date('1999-12-31T23:59:59Z');
+     document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
+     alert('ログアウトしました');
+   }else if(document.cookie.includes('__stripe_mid=')){
+     alert('ログインをしてください');
+     router.push('/login');
+   }else if (document.cookie !== '') {
+     var date = new Date('1999-12-31T23:59:59Z');
+     document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
+     alert('ログアウトしました');
+   } else {
+     alert('ログインをしてください');
+     router.push('/login');
+   }
+  };
 
   const moveToCart = () => {
     router.push('/cart');
   };
-
   const moveToFavorite = () => {
-    if(document.cookie.includes('; id=')){
+    if (document.cookie == '') {
+      alert('ログインをしてください');
+      router.push('/login');
+    } else if(document.cookie.includes(`id=${cookie}`)){
       router.push('/users/favorite');
     }else if(document.cookie.includes('__stripe_mid=')){
       alert('ログインをしてください');
-    }else if (document.cookie !== '') {
+    } else if (document.cookie !== '') {
       router.push('/users/favorite');
-    } else {
+    }else {
       alert('ログインをしてください');
       router.push('/login');
     }
@@ -43,7 +61,10 @@ export default function Header() {
 // }
 // }
   const moveToUsers = () => {
-    if(document.cookie.includes('; id=')){
+    if (document.cookie == '') {
+      alert('ログインをしてください');
+      router.push('/login');
+    }else if(document.cookie.includes(`id=${cookie}`)){
       router.push('/users');
     } else if(document.cookie.includes('__stripe_mid=')){
       alert('ログインをしてください');
