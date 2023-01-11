@@ -4,11 +4,14 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 const logOut = () => {
-  if (document.cookie !== '') {
+  if (document.cookie !== ''||document.cookie.indexOf('id=')) {
     var date = new Date('1999-12-31T23:59:59Z');
     document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
     alert('ログアウトしました');
-  } else {
+  }else if(document.cookie.indexOf('__stripe_mid=')){
+    alert('ログインをしてください');
+  }
+   else {
     alert('ログインをしてください');
   }
 };
@@ -21,8 +24,10 @@ export default function Header() {
   };
 
   const moveToFavorite = () => {
-    if (document.cookie !== '') {
+    if (document.cookie !== ''||document.cookie.indexOf('id=')) {
       router.push('/users/favorite');
+    }else if(document.cookie.indexOf('__stripe_mid=')){
+      alert('ログインをしてください');
     } else {
       alert('ログインをしてください');
       router.push('/login');
@@ -30,9 +35,11 @@ export default function Header() {
   };
 
   const moveToUsers = () => {
-    if (document.cookie !== '') {
+    if (document.cookie !== ''||document.cookie.indexOf('id=')) {
       router.push('/users');
-    } else {
+    }else if(document.cookie.indexOf('__stripe_mid=')){
+      alert('ログインをしてください');
+    }  else {
       alert('ログインをしてください');
       router.push('/login');
     }
