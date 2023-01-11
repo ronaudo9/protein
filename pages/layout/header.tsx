@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 const logOut = () => {
-  if (document.cookie !== '') {
+  if (document.cookie !== '__stripe_mid=2e4e7dee-c8a8-478c-b903-146caf29bdd64d6c24') {
     var date = new Date('1999-12-31T23:59:59Z');
     document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
     alert('ログアウトしました');
@@ -21,7 +21,7 @@ export default function Header() {
   };
 
   const moveToFavorite = () => {
-    if (document.cookie !== '') {
+    if (document.cookie !== '__stripe_mid=2e4e7dee-c8a8-478c-b903-146caf29bdd64d6c24') {
       router.push('/users/favorite');
     } else {
       alert('ログインをしてください');
@@ -30,7 +30,7 @@ export default function Header() {
   };
 
   const moveToUsers = () => {
-    if (document.cookie !== '') {
+    if (document.cookie !== '__stripe_mid=2e4e7dee-c8a8-478c-b903-146caf29bdd64d6c24') {
       router.push('/users');
     } else {
       alert('ログインをしてください');
