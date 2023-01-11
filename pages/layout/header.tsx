@@ -23,7 +23,7 @@ export default function Header() {
     if(document.cookie == ''){
      alert('ログインをしてください');
      router.push('/login');
-    }else if(document.cookie.includes(`;`)){
+    }else if(document.cookie.includes(`; id=`)){
      var date = new Date('1999-12-31T23:59:59Z');
      document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
      alert('ログアウトしました');
@@ -47,7 +47,7 @@ export default function Header() {
     if (document.cookie == '') {
       alert('ログインをしてください');
       router.push('/login');
-    } else if(document.cookie.includes(`;`)){
+    } else if(document.cookie.includes(`; id=`)){
       router.push('/users/favorite');
     }else if(document.cookie.includes('__stripe_mid=')){
       alert('ログインをしてください');
@@ -68,7 +68,7 @@ export default function Header() {
     if (document.cookie == '') {
       alert('ログインをしてください');
       router.push('/login');
-    }else if(document.cookie.includes(`;`)){
+    }else if(document.cookie.includes(`; id=`)){
       router.push('/users');
     } else if(document.cookie.includes('__stripe_mid=')){
       alert('ログインをしてください');
