@@ -4,14 +4,17 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 const logOut = () => {
-  if (document.cookie !== ''||document.cookie.indexOf('id=')) {
+  if (document.cookie !== '') {
     var date = new Date('1999-12-31T23:59:59Z');
     document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
     alert('ログアウトしました');
-  }else if(document.cookie.indexOf('__stripe_mid=')){
+  } else if(document.cookie.indexOf('id=') != -1){
+    var date = new Date('1999-12-31T23:59:59Z');
+    document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
+    alert('ログアウトしました');
+  }else if(document.cookie.indexOf('__stripe_mid=') != -1){
     alert('ログインをしてください');
-  }
-   else {
+  } else {
     alert('ログインをしてください');
   }
 };
@@ -24,9 +27,11 @@ export default function Header() {
   };
 
   const moveToFavorite = () => {
-    if (document.cookie !== ''||document.cookie.indexOf('id=')) {
+    if (document.cookie !== '') {
       router.push('/users/favorite');
-    }else if(document.cookie.indexOf('__stripe_mid=')){
+    }else if(document.cookie.indexOf('id=') != -1){
+      router.push('/users/favorite');
+    }else if(document.cookie.indexOf('__stripe_mid=') != -1){
       alert('ログインをしてください');
     } else {
       alert('ログインをしてください');
@@ -35,9 +40,11 @@ export default function Header() {
   };
 
   const moveToUsers = () => {
-    if (document.cookie !== ''||document.cookie.indexOf('id=')) {
+    if (document.cookie !== '') {
       router.push('/users');
-    }else if(document.cookie.indexOf('__stripe_mid=')){
+    }else if(document.cookie.indexOf('id=') != -1){
+      router.push('/users');
+    } else if(document.cookie.indexOf('__stripe_mid=') != -1){
       alert('ログインをしてください');
     }  else {
       alert('ログインをしてください');
