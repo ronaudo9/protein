@@ -2,25 +2,28 @@ import Link from 'next/link';
 import style from './header.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { GetServerSideProps } from 'next';
+// import { GetServerSideProps } from 'next';
 
-export const getServerSideProps: GetServerSideProps = async (
-  context
-) => {
-  const cookies = context.req.cookies;
-  const cookie = cookies.id
-return {
-  props: { cookie },
-};
-};
 
-export default function Header(cookie:any) {
+// export const getServerSideProps: GetServerSideProps = async (
+//   {req}
+// ) => {
+//   const cookies = req.cookies;
+//   const cookie = Number(cookies.id)
+
+// return {
+//   props: { cookie },
+// };
+// };
+
+export default function Header() {
   const router = useRouter();
+
   const logOut = () => {
     if(document.cookie == ''){
      alert('ログインをしてください');
      router.push('/login');
-    }else if(document.cookie.includes(`id=${cookie}`)){
+    }else if(document.cookie.includes(`;`)){
      var date = new Date('1999-12-31T23:59:59Z');
      document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
      alert('ログアウトしました');
@@ -44,10 +47,11 @@ export default function Header(cookie:any) {
     if (document.cookie == '') {
       alert('ログインをしてください');
       router.push('/login');
-    } else if(document.cookie.includes(`id=${cookie}`)){
+    } else if(document.cookie.includes(`;`)){
       router.push('/users/favorite');
     }else if(document.cookie.includes('__stripe_mid=')){
       alert('ログインをしてください');
+      router.push('/login');
     } else if (document.cookie !== '') {
       router.push('/users/favorite');
     }else {
@@ -64,10 +68,11 @@ export default function Header(cookie:any) {
     if (document.cookie == '') {
       alert('ログインをしてください');
       router.push('/login');
-    }else if(document.cookie.includes(`id=${cookie}`)){
+    }else if(document.cookie.includes(`;`)){
       router.push('/users');
     } else if(document.cookie.includes('__stripe_mid=')){
       alert('ログインをしてください');
+      router.push('/login');
     } else if (document.cookie !== '') {
       router.push('/users');
     } else {
