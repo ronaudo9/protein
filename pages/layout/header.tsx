@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 const logOut = () => {
+  if (process.browser) {
   if (document.cookie !== '') {
     var date = new Date('1999-12-31T23:59:59Z');
     document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
@@ -17,8 +18,8 @@ const logOut = () => {
   } else {
     alert('ログインをしてください');
   }
+}
 };
-
 export default function Header() {
   const router = useRouter();
 
@@ -27,6 +28,7 @@ export default function Header() {
   };
 
   const moveToFavorite = () => {
+    if (process.browser) {
     if (document.cookie !== '') {
       router.push('/users/favorite');
     }else if(document.cookie.includes('id=')){
@@ -37,9 +39,11 @@ export default function Header() {
       alert('ログインをしてください');
       router.push('/login');
     }
-  };
+  }
+}
 
   const moveToUsers = () => {
+    if (process.browser) {
     if (document.cookie !== '') {
       router.push('/users');
     }else if(document.cookie.includes('id=')){
@@ -50,7 +54,8 @@ export default function Header() {
       alert('ログインをしてください');
       router.push('/login');
     }
-  };
+  }
+};
 
   return (
     <div className={style.all}>
