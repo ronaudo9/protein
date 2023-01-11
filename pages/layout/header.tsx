@@ -4,21 +4,19 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 const logOut = () => {
-  if (process.browser) {
-  if (document.cookie !== '') {
-    var date = new Date('1999-12-31T23:59:59Z');
-    document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
-    alert('ログアウトしました');
-  } else if(document.cookie.includes('id=')){
+   if(document.cookie.includes('id=')){
     var date = new Date('1999-12-31T23:59:59Z');
     document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
     alert('ログアウトしました');
   }else if(document.cookie.includes('__stripe_mid=')){
     alert('ログインをしてください');
+  }else if (document.cookie !== '') {
+    var date = new Date('1999-12-31T23:59:59Z');
+    document.cookie = `id=;path=/;expires=${date.toUTCString()};`;
+    alert('ログアウトしました');
   } else {
     alert('ログインをしてください');
   }
-}
 };
 export default function Header() {
   const router = useRouter();
@@ -28,33 +26,29 @@ export default function Header() {
   };
 
   const moveToFavorite = () => {
-    if (process.browser) {
-    if (document.cookie !== '') {
-      router.push('/users/favorite');
-    }else if(document.cookie.includes('id=')){
+    if(document.cookie.includes('id=')){
       router.push('/users/favorite');
     }else if(document.cookie.includes('__stripe_mid=')){
       alert('ログインをしてください');
+    }else if (document.cookie !== '') {
+      router.push('/users/favorite');
     } else {
       alert('ログインをしてください');
       router.push('/login');
     }
-  }
 }
 
   const moveToUsers = () => {
-    if (process.browser) {
-    if (document.cookie !== '') {
-      router.push('/users');
-    }else if(document.cookie.includes('id=')){
+    if(document.cookie.includes('id=')){
       router.push('/users');
     } else if(document.cookie.includes('__stripe_mid=')){
       alert('ログインをしてください');
-    }  else {
+    } else if (document.cookie !== '') {
+      router.push('/users');
+    } else {
       alert('ログインをしてください');
       router.push('/login');
     }
-  }
 };
 
   return (
