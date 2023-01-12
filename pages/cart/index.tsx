@@ -12,7 +12,8 @@ import { supabase } from "../../utils/supabase"; // supabaseをコンポーネ�
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const cookies = req.cookies;
-  let { data }: { data: any } = await supabase.from("carts").select("*").eq("userId", cookies.id);
+  const cookie = Number(cookies.id);
+  let { data }: { data: any } = await supabase.from("carts").select("*").eq("userId", cookie);
   // const res = await fetch(
   //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts?userId=${cookies.id}`
   // );
@@ -45,7 +46,7 @@ const Cart: NextPage<{ carts: Item2, cookies: Item }> = ({ carts, cookies }) => 
   const filteredData: any = localData.filter((object: any) => {
     return object.key == object.value.itemId;
   });
-
+   
   // cartsの削除【始まり】
   async function deleteItem(cart: Item) {
     await supabase.from("carts").delete().eq("id", cart.id)
