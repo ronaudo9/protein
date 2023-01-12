@@ -43,7 +43,7 @@ export default function Header() {
      router.push('/login');
    }
   };
-
+  
   const moveToCart = () => {
     router.push('/cart');
   };
