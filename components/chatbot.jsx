@@ -122,7 +122,7 @@ export default function ChatBotComponent(props) {
     const cookie = document.cookie;
     let userId = '';
     if(document.cookie.includes('; __stripe_mid=')){
-      userId = cookie.slice(3);
+      userId = cookie.slice(3,4);
     }else{
       userId = cookie.slice(-1);
    }
@@ -130,7 +130,7 @@ export default function ChatBotComponent(props) {
     setUserId(id);
   }, []);
   // cookie取得【終わり】
-  
+
   // dbからuserId取得【始まり】
   useEffect(() => {
     async function fetchData() {

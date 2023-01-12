@@ -149,7 +149,7 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
     const user = document.cookie;
     let userId = '';
     if(document.cookie.includes('; __stripe_mid=')){
-      userId = user.slice(3);
+      userId = user.slice(3,4);
     }else{
       userId = user.slice(-1);
    }
@@ -215,11 +215,27 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
         JSON.stringify(cartsForStrage)
       );
       router.push('/cart');
+    }else if(document.cookie.includes(`; id=`)){
+      await supabase.from('carts').insert({
+        userId,
+        itemId,
+        imageUrl,
+        name,
+        flavor,
+        price,
+        countity,
+      });
+      router.push('/cart');
     }else if(document.cookie.includes('; __stripe_mid=')){
-      localStorage.setItem(
-        carts.itemId as any,
-        JSON.stringify(cartsForStrage)
-      );
+      await supabase.from('carts').insert({
+        userId,
+        itemId,
+        imageUrl,
+        name,
+        flavor,
+        price,
+        countity,
+      });
       router.push('/cart');
     }else if(document.cookie.includes('__stripe_mid=')){
       localStorage.setItem(
