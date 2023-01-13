@@ -35,8 +35,8 @@ yarn mock-api
 
 - テストログイン
 ```
-メールアドレス:nao.ko.04@gmail.com
-パスワード:wwssddee
+メールアドレス:test@test.com
+パスワード:rakutein
 ```
 
 # ダミー決済の入力情報について
