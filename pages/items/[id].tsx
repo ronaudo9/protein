@@ -147,7 +147,12 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   // cookie取得【始まり】
   useEffect(() => {
     const user = document.cookie;
-    const userId = user.slice(3);
+    let userId = '';
+    if(document.cookie.includes('; __stripe_mid=')){
+      userId = user.slice(3,4);
+    }else{
+      userId = user.slice(-1);
+   }
     setUserId(userId);
   }, []);
   // cookie取得【終わり】
@@ -163,18 +168,54 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   // }, [count]);
   // localstrageへ保存【終わり】
 
+  // const handler = async () => {
+  //   // 数量0の場合はカートへ入れない
+  //   // if (count === 0) {
+  //   //   return;
+  //   if (!document.cookie) {
+  //     localStorage.setItem(
+  //       carts.itemId as any,
+  //       JSON.stringify(cartsForStrage)
+  //     );
+  //     router.push('/cart');
+  //   }
+  //   else {
+  //     await supabase.from('carts').insert({
+  //       userId,
+  //       itemId,
+  //       imageUrl,
+  //       name,
+  //       flavor,
+  //       price,
+  //       countity,
+  //     }); // 入れたい("テーブル名")と({カラム名})
+  //     // fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
+  //     //   method: 'POST',
+  //     //   headers: {
+  //     //     'Content-Type': 'application/json',
+  //     //   },
+  //     //   body: JSON.stringify(carts),
+  //     // })
+  //     // () => {
+  //     // if (document.cookie !== '')
+  //     // {
+  //     router.push('/cart');
+  //     // } else {
+  //     //   alert('カートに追加するにはログインが必要です');
+  //     //   router.push('/');
+  //     //
+  //     // }
+  //     // };
+  //   }
+  // };
   const handler = async () => {
-    // 数量0の場合はカートへ入れない
-    // if (count === 0) {
-    //   return;
     if (!document.cookie) {
       localStorage.setItem(
         carts.itemId as any,
         JSON.stringify(cartsForStrage)
       );
       router.push('/cart');
-    }
-    else {
+    }else if(document.cookie.includes(`; id=`)){
       await supabase.from('carts').insert({
         userId,
         itemId,
@@ -183,27 +224,37 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
         flavor,
         price,
         countity,
-      }); // 入れたい("テーブル名")と({カラム名})
-      // fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/carts`, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(carts),
-      // })
-      // () => {
-      // if (document.cookie !== '')
-      // {
+      });
       router.push('/cart');
-      // } else {
-      //   alert('カートに追加するにはログインが必要です');
-      //   router.push('/');
-      //
-      // }
-      // };
+    }else if(document.cookie.includes('; __stripe_mid=')){
+      await supabase.from('carts').insert({
+        userId,
+        itemId,
+        imageUrl,
+        name,
+        flavor,
+        price,
+        countity,
+      });
+      router.push('/cart');
+    }else if(document.cookie.includes('__stripe_mid=')){
+      localStorage.setItem(
+        carts.itemId as any,
+        JSON.stringify(cartsForStrage)
+      );
+      router.push('/cart');
+    }else {
+      await supabase.from('carts').insert({
+        userId,
+        itemId,
+        imageUrl,
+        name,
+        flavor,
+        price,
+        countity,
+      });
     }
-  };
-
+  }
   //サブスクリプション
   const Subscription = async () => {
     const subscriptionCart = {
@@ -218,12 +269,10 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
     if (count === 0) {
       return;
       // 数量0の場合はカートへ入れない
-    } else if (Number(userId) == 0) {
-      alert(
-        'ログイン後に商品購入可能です（会員登録してない方は会員登録をお願いします）'
-      );
+    }else if (document.cookie == '') {
+      alert( 'ログイン後に商品購入可能です（会員登録してない方は会員登録をお願いします）');
       router.push('/login');
-    } else {
+    }else if(document.cookie.includes(`; id=`)){
       await supabase.from('subscriptionCart').insert({
         userId,
         itemId,
@@ -233,25 +282,66 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
         price,
         countity,
       });
-      // fetch(
-      //   `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
-      //   {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify(SubscriptionCart),
-      //   }
-      // )
-      // .then(() => {
         router.push(`/items/subscription`);
-      // });
+    }else if(document.cookie.includes('; __stripe_mid=')){
+      await supabase.from('subscriptionCart').insert({
+        userId,
+        itemId,
+        imageUrl,
+        name,
+        flavor,
+        price,
+        countity,
+      });
+        router.push(`/items/subscription`);
+    } else if(document.cookie.includes('__stripe_mid=')){
+      alert( 'ログイン後に商品購入可能です（会員登録してない方は会員登録をお願いします）');
+      router.push('/login');
+    } else if (document.cookie !== '') {
+      await supabase.from('subscriptionCart').insert({
+        userId,
+        itemId,
+        imageUrl,
+        name,
+        flavor,
+        price,
+        countity,
+      });
+        router.push(`/items/subscription`);
+    } else {
+      alert( 'ログイン後に商品購入可能です（会員登録してない方は会員登録をお願いします）');
+      router.push('/login');
     }
-  };
+    };
+    // } else {
+    //   await supabase.from('subscriptionCart').insert({
+    //     userId,
+    //     itemId,
+    //     imageUrl,
+    //     name,
+    //     flavor,
+    //     price,
+    //     countity,
+    //   });
+    //   // fetch(
+    //   //   `${process.env.NEXT_PUBLIC_PROTEIN}/api/subscriptionCart/`,
+    //   //   {
+    //   //     method: 'POST',
+    //   //     headers: {
+    //   //       'Content-Type': 'application/json',
+    //   //     },
+    //   //     body: JSON.stringify(SubscriptionCart),
+    //   //   }
+    //   // )
+    //   // .then(() => {
+    //     router.push(`/items/subscription`);
+    //   // });
+    // }
+
 
   // お気に入り情報をsupabaseへ追加
-  const itemIdFav = [detail.id];
-  const id = detail.id;
+  // const itemIdFav = [detail.id];
+  // const id = detail.id;
 
   // お気に入り登録（db.jsonへ現在の商品情報登録）
   // let favs = {
@@ -261,16 +351,16 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
   // };
 
   // console.log(favs);
-  const addFavoritesHandler = async (e: {
-    preventDefault: () => void;
-  }) => {
-    e.preventDefault();
-    await supabase.from('favorites').insert({
-      userId,
-      itemIdFav,
-      id,
-    });
-    router.push('/users/favorite');
+  // const addFavoritesHandler = async (e: {
+  //   preventDefault: () => void;
+  // }) => {
+  //   e.preventDefault();
+  //   await supabase.from('favorites').insert({
+  //     userId,
+  //     itemIdFav,
+  //     id,
+  //   });
+  //   router.push('/users/favorite');
     //
     // fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/favorites`, {
     //   method: 'POST',
@@ -279,7 +369,46 @@ const ItemDetail: NextPage<{ detail: Item }> = ({ detail }) => {
     //   },
     //   body: JSON.stringify(favs),
     // });
-  };
+  // };
+
+  const addFavoritesHandler = async (e: {
+    preventDefault: () => void;
+  }) => {
+    e.preventDefault();
+    const itemIdFav = [detail.id];
+    const id = detail.id;
+    if (document.cookie == '') {
+      alert('ログインをしてください');
+      router.push('/login');
+    }else if(document.cookie.includes(`; id=`)){
+      await supabase.from('favorites').insert({
+        userId,
+        itemIdFav,
+        id,
+      });
+      router.push('/users/favorite');
+    }else if(document.cookie.includes('; __stripe_mid=')){
+      await supabase.from('favorites').insert({
+        userId,
+        itemIdFav,
+        id,
+      });
+      router.push('/users/favorite');
+    } else if(document.cookie.includes('__stripe_mid=')){
+      alert('ログインをしてください');
+      router.push('/login');
+    } else if (document.cookie !== '') {
+      await supabase.from('favorites').insert({
+        userId,
+        itemIdFav,
+        id,
+      });
+      router.push('/users/favorite');
+    } else {
+      alert('ログインをしてください');
+      router.push('/login');
+    }
+  }
 
   return (
     <>

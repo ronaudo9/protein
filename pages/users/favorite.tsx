@@ -12,10 +12,11 @@ import { supabase } from "../../utils/supabase";
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const cookies = req.cookies;
+  const cookie = Number(cookies.id);
   let { data }: any = await supabase
     .from('favorites')
     .select('*')
-    .eq('userId', cookies.id);
+    .eq('userId', cookie);
 
   let favs = data;
   let itemsArray = favs.map((fav: any) => {

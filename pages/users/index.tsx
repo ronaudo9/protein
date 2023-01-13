@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   // try {
     const users = await supabase.from("users").select("*").eq("id", cookie);
     const user = users.data![0];
-    console.log(user);
+
 
     // const res = await fetch(
     //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users/${cookies.id}`
@@ -75,7 +75,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const subscriptionArray: Item[] = [];
   const subscriptionArray2 = await supabase.from('subscription').select("*").eq("userId",cookie);
   const subscriptionArray3 = subscriptionArray2.data!;
- 
+
   try {
     // const regular = await fetch(
     //   `${process.env.NEXT_PUBLIC_PROTEIN_DATA}/subscription?userId=${cookies.id}`

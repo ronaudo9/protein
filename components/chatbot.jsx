@@ -120,9 +120,13 @@ export default function ChatBotComponent(props) {
   // cookie取得【始まり】
   useEffect(() => {
     const cookie = document.cookie;
-    const userId = cookie.slice(3);
+    let userId = '';
+    if(document.cookie.includes('; __stripe_mid=')){
+      userId = cookie.slice(3,4);
+    }else{
+      userId = cookie.slice(-1);
+   }
     const id = (Number(userId));
-    console.log(id)
     setUserId(id);
   }, []);
   // cookie取得【終わり】
@@ -134,7 +138,7 @@ export default function ChatBotComponent(props) {
         let { data } = await supabase.from("users").select().eq("id", userId);
         // const res = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users/${userId}`);
         // const user = await res.json();
-        // const user = data[0];  
+        // const user = data[0];
         setUserDB(data[0])
       }
     }
