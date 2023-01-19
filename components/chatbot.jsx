@@ -134,12 +134,21 @@ export default function ChatBotComponent(props) {
   // dbからuserId取得【始まり】
   useEffect(() => {
     async function fetchData() {
-      if (userId !== 0) {
+      if(document.cookie == '') {
+        setUserDB('')
+      }else if (document.cookie.includes(`; id=`)) {
         let { data } = await supabase.from("users").select().eq("id", userId);
-        // const res = await fetch(`${process.env.NEXT_PUBLIC_PROTEIN_DATA}/users/${userId}`);
-        // const user = await res.json();
-        // const user = data[0];
         setUserDB(data[0])
+      }else if (document.cookie.includes('; __stripe_mid=')) {
+        let { data } = await supabase.from("users").select().eq("id", userId);
+        setUserDB(data[0])
+      }else if (document.cookie.includes('__stripe_mid=')) {
+        setUserDB('')
+      }else if (document.cookie !== '') {
+        let { data } = await supabase.from("users").select().eq("id", userId);
+        setUserDB(data[0])
+      }else {
+        setUserDB('')
       }
     }
     fetchData();
@@ -161,7 +170,7 @@ export default function ChatBotComponent(props) {
 
   return (
     <>
-      {userId !== 0 ?
+      {userDB ?
         <div>
           {!waiting &&
             <ChatBot
