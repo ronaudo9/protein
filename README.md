@@ -35,7 +35,7 @@ yarn mock-api
 
 - テストログイン
 ```
-メールアドレス:test@test.com
+メールアドレス:test@example.com
 パスワード:rakutein
 ```
 
